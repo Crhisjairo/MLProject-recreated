@@ -351,6 +351,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1520072265}
+  - component: {fileID: 1520072267}
+  - component: {fileID: 1520072266}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -374,6 +376,76 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1520072266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520072264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 733cec942c285e0419bcf993b841665e, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2997b6e9-b1f5-4157-b32b-c022e2070e07
+    m_ActionName: InGame/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f1c2b585-f224-4347-8a12-05057c89450b
+    m_ActionName: InGame/Attack[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 90ebd69f-023b-40b6-bb91-5b156dc9d415
+    m_ActionName: InGame/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d95ae53b-6f54-4b58-b074-58fd4e2a0564
+    m_ActionName: InGame/Inventory[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 631ca686-a444-4135-93f1-fece2730986b
+    m_ActionName: InGame/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e4a423bf-c73a-4a9b-9620-b8bcb77a4879
+    m_ActionName: InGame/SwitchCharacters[/Keyboard/z,/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b7c5bdbc-50bc-46a8-b5d1-bd374e1b2754
+    m_ActionName: InGame/Run[/Keyboard/shift]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: InGame
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1520072267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520072264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071c3df0275fbd242bb39bb1de5b707e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1940535760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7969511218943354980, guid: 40079aa8e8149074fa66898e9c8cb850, type: 3}
