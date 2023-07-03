@@ -22,6 +22,7 @@ namespace _Scripts.SoundsManagers
 
         public void Play(string name, bool oneShoot = false)
         {
+            /**
             if (_sounds.Length == 1)
             {
                 if (oneShoot)
@@ -34,7 +35,7 @@ namespace _Scripts.SoundsManagers
                 }
             
                 return;
-            }
+            }**/
             
         
             Sound sound = Array.Find(_sounds, sound => sound.name == name);

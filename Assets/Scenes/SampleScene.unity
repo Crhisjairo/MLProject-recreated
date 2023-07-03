@@ -342,6 +342,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1170251585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3855892632631803790, guid: 40079aa8e8149074fa66898e9c8cb850, type: 3}
+  m_PrefabInstance: {fileID: 2135683005435455659}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1520072264
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1520072265}
+  - component: {fileID: 1520072268}
   - component: {fileID: 1520072267}
   - component: {fileID: 1520072266}
   m_Layer: 0
@@ -402,7 +408,19 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1520072267}
+        m_TargetAssemblyTypeName: _Scripts.Controllers.PlayerController, Assembly-CSharp
+        m_MethodName: Move
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 2997b6e9-b1f5-4157-b32b-c022e2070e07
     m_ActionName: InGame/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
@@ -429,6 +447,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b7c5bdbc-50bc-46a8-b5d1-bd374e1b2754
     m_ActionName: InGame/Run[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 15114ad2-14b8-44dc-b488-d80c82dd398e
+    m_ActionName: InDialog/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: InGame
@@ -446,6 +468,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 071c3df0275fbd242bb39bb1de5b707e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _charactersModels:
+  - {fileID: 1170251585}
+  _playerCharacters: []
+  currentCharacter: {fileID: 0}
+  movement: {x: 0, y: 0}
+  _frontDirection: {x: 0, y: -1}
+  attackRate: 2
+  attackRange: 0.25
+  distanceAttackRange: {x: 0, y: 0}
+  _enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  _nextAttackTime: 0
+  diagonalLimiter: 0.9
+--- !u!50 &1520072268
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520072264}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!4 &1940535760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7969511218943354980, guid: 40079aa8e8149074fa66898e9c8cb850, type: 3}
@@ -459,6 +522,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1520072265}
     m_Modifications:
+    - target: {fileID: 2912450935069531046, guid: 40079aa8e8149074fa66898e9c8cb850, type: 3}
+      propertyPath: m_Size.x
+      value: 0.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2912450935069531046, guid: 40079aa8e8149074fa66898e9c8cb850, type: 3}
+      propertyPath: m_Size.y
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983198669175861577, guid: 40079aa8e8149074fa66898e9c8cb850, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 78997e7b21b1ab949af647cd558c5b8c, type: 2}
     - target: {fileID: 3855892632631803790, guid: 40079aa8e8149074fa66898e9c8cb850, type: 3}
       propertyPath: m_Name
       value: Twilight
@@ -505,6 +580,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7969511218943354980, guid: 40079aa8e8149074fa66898e9c8cb850, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7969511218943354980, guid: 40079aa8e8149074fa66898e9c8cb850, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -52,6 +52,21 @@ namespace _Scripts.Characters
         {
             currentLife = maxLife;
         }
+
+        #region Getters
+
+        public float GetRunningSpeed()
+        {
+            return runningSpeed;
+        }
+
+        public float GetSpeed()
+        {
+            return speed;
+        }
+
+        #endregion
+       
         
     }
 }

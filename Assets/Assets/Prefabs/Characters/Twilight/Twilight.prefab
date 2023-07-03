@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2417173021339567856, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2417173021339567856, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: characterSpecs.characterName
       value: Twilight
       objectReference: {fileID: 0}
+    - target: {fileID: 4951365452995085792, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: _sounds.Array.data[0].name
+      value: UnicornAttackSfx
+      objectReference: {fileID: 0}
     - target: {fileID: 7456263908296455474, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -68,7 +72,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Twilight
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1513893993868143887, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

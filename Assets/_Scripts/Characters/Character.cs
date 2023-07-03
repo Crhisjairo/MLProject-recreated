@@ -1,4 +1,5 @@
 ﻿using System;
+using _Scripts.Enums;
 using _Scripts.SoundsManagers;
 using _Scripts.Utils;
 using UnityEngine;
@@ -6,7 +7,6 @@ using UnityEngine;
 namespace _Scripts.Characters
 {
     [RequireComponent(typeof(SpriteRenderer))]
-    [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CapsuleCollider2D))]
     
@@ -22,11 +22,12 @@ namespace _Scripts.Characters
 
         Animator _animator;
         SpriteRenderer _spriteRenderer;
-        Rigidbody2D _rb;
+        
+        Vector2 _frontDirection = Vector2.down;
 
         void Awake()
         {
-            GetComponents();
+            SetComponents();
         }
 
         public void ExtendsMaxLife()
@@ -58,12 +59,75 @@ namespace _Scripts.Characters
         {
             characterSpecs = specs;
         }
+
+        public void PlaySoundSfx(CharacterSfx sound)
+        {
+            soundEffectsEmitter.Play(sound.ToString(), true);
+        }
+
+        public void SetLookingDirection(Vector2 direction)
+        {
+            //Guardamos la direccion en la que miramos segun el axis
+            if (direction.x > 0.01f)
+            {
+                _frontDirection = Vector2.right;
+            }
+            if (direction.x < -0.01f)
+            {
+                _frontDirection = Vector2.left;
+            }
+            if (direction.y > 0.01f)
+            {
+                _frontDirection = Vector2.up;
+            }
+            if (direction.y < -0.01f)
+            {
+                _frontDirection = Vector2.down;
+            }
+        }
         
-        private void GetComponents()
+        //TODO maybe move that to SetLookingDirection
+        public void SetAnimationByIdleDirection(Vector2 direction)
+        {
+            float horizontalValue = 0, verticalValue = 0;
+
+            if (_frontDirection.x > 0.01f)
+            {
+                horizontalValue = 1;
+                verticalValue = 0;
+            }
+            if (_frontDirection.x < -0.01f)
+            {
+                horizontalValue = -1;
+                verticalValue = 0;
+            }
+            if (_frontDirection.y > 0.01f)
+            {
+                horizontalValue = 0;
+                verticalValue = 1;
+            }
+            if (_frontDirection.y < -0.01f)
+            {
+                horizontalValue = 0;
+                verticalValue = -1;
+            }
+            
+            _animator.SetFloat(CharacterAnimationValues.LastHorizontal.ToString(), horizontalValue);
+            _animator.SetFloat(CharacterAnimationValues.LastVertical.ToString(), verticalValue);
+        }
+
+        public void SetAnimationByMovingDirection(Vector2 movement)
+        {
+            //Animacion
+            _animator.SetFloat(CharacterAnimationValues.Horizontal.ToString(), movement.x);
+            _animator.SetFloat(CharacterAnimationValues.Vertical.ToString(), movement.y);
+            _animator.SetFloat(CharacterAnimationValues.Speed.ToString(), movement.sqrMagnitude); //La velocidad de movimiento
+        }
+        
+        private void SetComponents()
         {
             _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _rb = GetComponent<Rigidbody2D>();
 
             if (!TryGetComponent(out soundEffectsEmitter))
             {
@@ -71,5 +135,7 @@ namespace _Scripts.Characters
                 Debug.LogWarning(message);
             }
         }
+        
+        
     }
 }

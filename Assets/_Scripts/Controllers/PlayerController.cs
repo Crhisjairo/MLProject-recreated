@@ -3,24 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _Scripts.Characters;
-using _Scripts.Controllers.PlayerStates;
+using _Scripts.Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-
 namespace _Scripts.Controllers
 {
     public delegate void OnPauseHandler(bool isStopped);
- 
+
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(PlayerInput))]
     public class PlayerController : MonoBehaviour
     {
         public static PlayerController Instance { private set; get; }
         
-        public event OnPauseHandler OnPauseHandler;
+        private PlayerInput PlayerInput;
+        InputActionMap _lastActionMap, _currentActionMap;
         
-        [SerializeField] private PlayerInput PlayerInput;
-        public IPlayerState currentState;
         //[SerializeField] public HUDManager _hudManager;
         //[SerializeField] public InventoryManager _inventoryManager;
         //[SerializeField] public CameraManager cameraManager;
@@ -45,45 +45,50 @@ namespace _Scripts.Controllers
         
         public float diagonalLimiter = 0.9f; // 0.7 default
 
-        public bool IsInvulnerable { private set; get; }
-        public float _defaultInvulnerabilityTime = 0.7f;
-        public int characterIndex = 0;
-        public float currentSpeed;
+        private bool IsInvulnerable { set; get; }
+        private float _defaultInvulnerabilityTime = 0.7f;
+        private int characterIndex = 0;
+        private float currentSpeed;
 
-        public Rigidbody2D _currentRb;
-        [FormerlySerializedAs("_currentPlayerSpecs")] public CharacterSpecs currentCharacterSpecs;
-        public Animator _currentAnimator;
-        public ParticleSystem _currentParticleSystem;
-        public SpriteRenderer _currentSpriteRenderer;
+        private Rigidbody2D _rb;
+        private CharacterSpecs currentCharacterSpecs;
+        private Animator _currentAnimator;
+        private ParticleSystem _currentParticleSystem;
+        private SpriteRenderer _currentSpriteRenderer;
 
-    private void Awake()
-    {
-        if (Instance is null)
+        private void Awake()
         {
-            Instance = this;
-        }
-        else
-        {
-            throw new Exception("Cannot have two PlayerController instances.");
+            if (Instance is null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                throw new Exception("Cannot have two PlayerController instances.");
+            }
+
+            SetComponents();
+            
+            //Load character en funciôn de un save data. Por ahora, solo cargarê a Twi
+            foreach (var model in _charactersModels)
+            {
+                _playerCharacters.Add(model.GetComponent<Character>());
+                _playerCharactersGameObjects.Add(model);
+            }
+            
+            _currentCharacterGameObject = _playerCharactersGameObjects[characterIndex];
+            currentCharacter = _currentCharacterGameObject.GetComponent<Character>();
+            
+            SetCurrentCharacterComponents();
+            DisableOtherCharacters();
         }
 
-        PlayerInput = GetComponent<PlayerInput>();
-        
-        //Load character en funciôn de un save data. Por ahora, solo cargarê a Twi
-        foreach (var model in _charactersModels)
+        void SetComponents()
         {
-            _playerCharacters.Add(model.GetComponent<Character>());
-            _playerCharactersGameObjects.Add(model);
+            PlayerInput = GetComponent<PlayerInput>();
+            _rb = GetComponent<Rigidbody2D>();
         }
-        
-        _currentCharacterGameObject = _playerCharactersGameObjects[characterIndex];
-        currentCharacter = _currentCharacterGameObject.GetComponent<Character>();
-        
-        SetCurrentCharacterComponents();
-        DisableOtherCharacters();
-    }
-
-    void Start()
+        void Start()
     {
         MoveIndexCharacter(characterIndex);
         
@@ -93,7 +98,7 @@ namespace _Scripts.Controllers
     private void FixedUpdate()
     {
         //Movemos al personaje
-        _currentRb.MovePosition(_currentRb.position + movement * currentSpeed * Time.fixedDeltaTime);
+        _rb.MovePosition(_rb.position + movement * currentSpeed * Time.fixedDeltaTime);
     }
 
     public void SetCharactersSpecs(CharacterSpecs[] characterSpecs)
@@ -120,7 +125,7 @@ namespace _Scripts.Controllers
     private void SetCurrentCharacterComponents()
     {
         // _currentRb = currentCharacter.GetRigidBody();
-        // currentCharacterSpecs = currentCharacter.GetCharacterSpecs();
+        //currentCharacterSpecs = currentCharacter.GetCharacterSpecs();
         // _currentAnimator = currentCharacter.GetAnimator();
         // _currentParticleSystem = currentCharacter.GetParticleSystem();
         // _currentSpriteRenderer = currentCharacter.GetSpriteRenderer();
@@ -144,39 +149,158 @@ namespace _Scripts.Controllers
     
     public void Move(InputAction.CallbackContext inputContext)
     {
-        currentState.HandleDpadInput(inputContext);
+        Vector2 inputMovement = inputContext.ReadValue<Vector2>();
+        
+        movement.x = 0; 
+        movement.y = 0;
+            
+        if (inputMovement.x != 0 && inputMovement.y != 0) // Check for diagonal movement
+        {
+            // limit movement speed diagonally, so you move at 70% speed
+            inputMovement.x *= diagonalLimiter;
+            inputMovement.y *= diagonalLimiter;
+        }
+            
+        movement.x = inputMovement.x;
+        movement.y = inputMovement.y; 
+        
+        //Guardamos la direcciôn solo en el modo RPG
+        currentCharacter.SetLookingDirection(movement);
+        currentCharacter.SetAnimationByIdleDirection(movement);
+        currentCharacter.SetAnimationByMovingDirection(movement);
     }
     
     public void Run(InputAction.CallbackContext inputContext)
     {
-        currentState.HandleRunInput(inputContext);
+        if (!(inputContext.performed || inputContext.canceled))
+        {
+            return;
+        }
+        
+        bool running = inputContext.performed;
+            
+        //Antes de movernos, verificamos que no estemos en dialogo
+        if (running)
+        {
+            currentSpeed = currentCharacterSpecs.GetRunningSpeed();
+            _currentAnimator.SetBool(CharacterAnimationStates.Running.ToString(), true);
+        }
+        else
+        { 
+            currentSpeed = currentCharacterSpecs.GetSpeed();
+            _currentAnimator.SetBool(CharacterAnimationStates.Running.ToString(), false);
+        }
     }
     
     public void Attack(InputAction.CallbackContext context)
     {
-        currentState.HandleAttackInput(context);
+        if (!context.performed)
+            return;
+
+        if (Time.time >= _nextAttackTime)
+        {
+            //Animamos al personaje
+            _currentAnimator.SetTrigger("Attack");
+            
+            //Calculamos la direccion del ataque
+            //Creamos la direcciôn y la distance de ataque relativa al personaje
+            Vector2 attackOffset = CalculateAttackOffset();
+
+            //Ponemos las particulas en la misma posiciôn de ataque
+            _currentParticleSystem.gameObject.transform.position = new Vector3(attackOffset.x, attackOffset.y, -1);
+            _currentParticleSystem.Play();
+            
+            //Reproducimos el sonido
+            currentCharacter.PlaySoundSfx(CharacterSfx.UnicornAttackSfx);
+            
+            //Atacamos a los enemigos
+            AttackEnnemiesOnOverlapCircle(attackOffset);
+            
+            //Recalculamos el tiempo segun el attackRate
+            _nextAttackTime = Time.time + 1f / attackRate;
+        }
     }
 
     public void OpenInventory(InputAction.CallbackContext context)
     {
-        currentState.HandleInventoryInput(context);
+        if (!context.performed)
+            return;
+
+        // TODO change InputMap, pause game and open inventory
+        // _inventoryManager.ShowInventory(PlayerController.GameInPause);
     }
 
     public void PauseGame(InputAction.CallbackContext context)
     {
-        currentState.HandlePauseInput(context);
+        if (!context.performed)
+            return;
+            
+        TogglePauseGame();
+
+        //TODO Change InputMap and notify HUD
+            
     }
     
     public void ChangeCharacter(InputAction.CallbackContext context)
     {
-        currentState.HandleChangeCharacterInput(context);
+        if (!context.performed)
+            return;
+            
+        //Para cambiar de personaje
+        var sideToSwitch = context.ReadValue<float>();
+            
+        ChangeCharacterTo(sideToSwitch);
+    }
+    
+    public void CheckFrontInteraction(InputAction.CallbackContext inputContext)
+    {
+        if (!inputContext.performed)
+            return;
+
+        //Origen de donde parte el rayo
+        Vector2 origin = currentCharacter.transform.position;
+        float distance = 1.5f; //distancia maxima del rayo
+            
+        //TODO
+        Collider2D hit = Physics2D.OverlapCircle(origin, 1f, 3);
+
+        Debug.Log(hit.name);
+         
+        
+        if (hit)
+        {
+            //PlayerController.InteractWith(hit);
+        }
+        
+        Debug.DrawRay(origin, _frontDirection * distance, Color.red);
+    }
+    
+    public void InteractWith(RaycastHit2D hit)
+    {
+        if (hit.collider.gameObject.tag.Equals("NPC")  )
+        {
+            //Si es un NPC (que es un Interactuable), cambiamos de estado
+            //Agregar condiciones con tag para saber con quiên se debe interactuar
+            // IInteractuable interactuable = hit.collider.GetComponent<NPCController>();
+            // interactuable.Interact(this);
+        }
+        
+        if (hit.collider.CompareTag("Sign"))
+        {
+            //LLamamos al dialogueTrigger del letrero
+            // IInteractuable interactuable = hit.collider.GetComponent<Sign>();
+            // interactuable.Interact(this);
+        }
     }
 
     public void TogglePauseGame()
     {
+        //TODO Move this to GameManager
+        /**
         GameInPause = !GameInPause;
 
         Time.timeScale = GameInPause ? 0 : 1;
+        **/
     }
 
     public void ChangeCharacterTo(float input)
@@ -266,7 +390,7 @@ namespace _Scripts.Controllers
     
     public void performOnPause(bool isPaused)
     {
-        OnPauseHandler?.Invoke(isPaused);
+        // TODO Make with Observer Patterns
     }
 
     private void OnDisable()
@@ -276,60 +400,7 @@ namespace _Scripts.Controllers
 
     #region Calculations
 
-    public void SaveLookingDirection()
-    {
-        //Guardamos la direccion en la que miramos segun el axis
-        if (movement.x > 0.01f)
-        {
-            _frontDirection = Vector2.right;
-        }
-        if (movement.x < -0.01f)
-        {
-            _frontDirection = Vector2.left;
-        }
-        if (movement.y > 0.01f)
-        {
-            _frontDirection = Vector2.up;
-        }
-        if (movement.y < -0.01f)
-        {
-            _frontDirection = Vector2.down;
-        }
-    }
-
-    public void SetAnimationByIdleDirection()
-    {
-        if (_frontDirection.x > 0.01f)
-        {
-            _currentAnimator.SetFloat("LastHorizontal", 1);
-            _currentAnimator.SetFloat("LastVertical", 0);
-        }
-        if (_frontDirection.x < -0.01f)
-        {
-            _currentAnimator.SetFloat("LastHorizontal", -1);
-            _currentAnimator.SetFloat("LastVertical", 0);
-        }
-        if (_frontDirection.y > 0.01f)
-        {
-            _currentAnimator.SetFloat("LastVertical", 1);
-            _currentAnimator.SetFloat("LastHorizontal", 0);
-        }
-        if (_frontDirection.y < -0.01f)
-        {
-            _currentAnimator.SetFloat("LastVertical", -1);
-            _currentAnimator.SetFloat("LastHorizontal", 0);
-        }
-    }
-
-    public void SetAnimationByMovingDirection()
-    {
-        //Animacion
-        _currentAnimator.SetFloat("Horizontal", movement.x);
-        _currentAnimator.SetFloat("Vertical", movement.y);
-        _currentAnimator.SetFloat("Speed", movement.sqrMagnitude); //La velocidad de movimiento
-    }
-    
-    /// <summary>
+        /// <summary>
     /// Calcula la distancia entre el jugador y la zona de ataque en base a Distance Attack Range.
     /// Si el radio de ataque aumenta, la distancia de ataque tambiên deberîa aumentar
     /// </summary>
@@ -362,28 +433,7 @@ namespace _Scripts.Controllers
         return relDirection;
     }
     
-    public void CheckFrontInteraction(InputAction.CallbackContext inputContext)
-    {
-        currentState.HandleInteractInput(inputContext);
-    }
     
-    public void InteractWith(RaycastHit2D hit)
-    {
-        if (hit.collider.gameObject.tag.Equals("NPC")  )
-        {
-            //Si es un NPC (que es un Interactuable), cambiamos de estado
-            //Agregar condiciones con tag para saber con quiên se debe interactuar
-            // IInteractuable interactuable = hit.collider.GetComponent<NPCController>();
-            // interactuable.Interact(this);
-        }
-        
-        if (hit.collider.CompareTag("Sign"))
-        {
-            //LLamamos al dialogueTrigger del letrero
-            // IInteractuable interactuable = hit.collider.GetComponent<Sign>();
-            // interactuable.Interact(this);
-        }
-    }
     
     private IEnumerator StartInvulnerabilityTimer(float time)
     {

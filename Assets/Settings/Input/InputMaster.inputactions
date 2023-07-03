@@ -423,6 +423,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "InDialog",
+            "id": "655d7dc7-65d0-46b2-975a-d35c8e8f5979",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "15114ad2-14b8-44dc-b488-d80c82dd398e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "628f3b18-7b11-402c-b337-b7ea2d1eb570",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
