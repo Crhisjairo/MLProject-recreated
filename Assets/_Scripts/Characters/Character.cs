@@ -54,7 +54,32 @@ namespace _Scripts.Characters
             
             return true;
         }
+        
+        public void TakeDamage(int damage)
+        {
+            characterSpecs.TakeDamage(damage);
+        }
+        
+        public void TakeLife(int newLife)
+        {
+            characterSpecs.TakeLife(newLife);
+        }
 
+        public void AddCoins(int amount)
+        {
+            characterSpecs.AddCoins(amount);
+        }
+        
+        public float GetRunningSpeed()
+        {
+            return characterSpecs.GetRunningSpeed();
+        }
+
+        public float GetSpeed()
+        {
+            return characterSpecs.GetSpeed();
+        }
+        
         public void SetCharacterSpecs(CharacterSpecs specs)
         {
             characterSpecs = specs;

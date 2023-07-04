@@ -6,7 +6,6 @@ namespace _Scripts.Characters
     [Serializable]
     public class CharacterSpecs
     {
-        //TODO move this to PlayerController
         [SerializeField] private static int currentCoins = 0;
         
         public int Id = 0;
