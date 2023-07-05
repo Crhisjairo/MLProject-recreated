@@ -8,7 +8,6 @@ namespace _Scripts.Characters
 {
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(CapsuleCollider2D))]
     
     [System.Serializable]
     public abstract class Character: MonoBehaviour

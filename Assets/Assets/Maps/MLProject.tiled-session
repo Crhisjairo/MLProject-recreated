@@ -3,14 +3,15 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "MainVille/MainVille.tmx",
+    "activeFile": "TilesSet/bridge.tsx",
     "expandedProjectPaths": [
         "MainVilleZone2",
-        "TilesSet",
-        ".",
         "Underground_zone_2",
+        "TilesSet",
         "Underground",
-        "MainVille"
+        "MainVille",
+        "TestGroundRoom",
+        "."
     ],
     "exportAsImage.drawTileGrid": false,
     "exportAsImage.useCurrentScale": false,
@@ -128,8 +129,8 @@
             "scale": 0.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": -78,
-                "y": 38
+                "x": 0,
+                "y": 511
             }
         },
         "MainVille/MainVille.tmx#bridge": {
@@ -204,7 +205,7 @@
             "selectedLayer": 3,
             "viewCenter": {
                 "x": -2561.333333333333,
-                "y": -260
+                "y": -256
             }
         },
         "Underground_zone_2/Underground_zone_2.tmx": {
@@ -225,8 +226,10 @@
         }
     },
     "frame.defaultDuration": 120,
+    "last.exportedFilePath": "C:/Projects/Unity/2022.3.2f1/MLProject-recreated/Assets/Assets/Maps/TilesSet",
     "last.externalTilesetPath": "C:/Projects/Unity/2020.1.17f1/ML_Project/Assets/Tiled/Map/TilesSet",
     "last.imagePath": "C:/Projects/Unity/2020.1.17f1/ML_Project/Assets/Sprites/Map/Objects",
+    "lastUsedTilesetExportFilter": "Tous les Fichiers (*)",
     "map.fixedSize": false,
     "map.height": 19,
     "map.lastUsedFormat": "tmx",
@@ -238,18 +241,19 @@
     "openFiles": [
         "MainVille/MainVille.tmx",
         "Underground/Underground.tmx",
-        "Underground_zone_2/Underground_zone_2.tmx"
+        "Underground_zone_2/Underground_zone_2.tmx",
+        "TilesSet/bridge.tsx"
     ],
     "project": "MLProject.tiled-project",
     "recentFiles": [
-        "Underground_zone_2/Underground_zone_2.tmx",
-        "Underground/Underground.tmx",
         "MainVille/MainVille.tmx",
+        "Underground/Underground.tmx",
+        "Underground_zone_2/Underground_zone_2.tmx",
+        "TilesSet/bridge.tsx",
         "TilesSet/Twilight.tsx",
         "TilesSet/Outside Objects.tsx",
         "MainVilleZone2/MainVille_Zone2.tmx",
         "MainVille/Lamp_violet_single.tsx",
-        "TilesSet/bridge.tsx",
         "forestTiles.tsx",
         "MainVille/test1.tsx",
         "MainVille/Lamp1.tsx",

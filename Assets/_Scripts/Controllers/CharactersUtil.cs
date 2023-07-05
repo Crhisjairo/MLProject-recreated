@@ -10,173 +10,169 @@ using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers
 {
-    [Serializable]
-    public class CharactersUtil : MonoBehaviour
+    public class CharactersUtil
     {
-        [SerializeField] private GameObject[] _charactersModels;
-        
-        private List<GameObject> _charactersGameObjects = new List<GameObject>();
         public GameObject ActiveCharacterGameObject { private set; get; }
+        
         public Character ActiveCharacter { private set; get; }
+        public Animator ActiveAnimator { private set; get; }
+        public ParticleSystem ActiveParticleSystem { private set; get; }
+        public SpriteRenderer ActiveSpriteRenderer { private set; get; }
 
-        private int characterIndex = 0;
+        
+        List<GameObject> _charactersGameObjects = new List<GameObject>();
+        int _characterIndex = 0;
 
-
-        private void Awake()
+        public CharactersUtil(GameObject[] charactersModels, int characterIndex)
         {
-            _charactersGameObjects = new List<GameObject>(_charactersModels);
+            SetCharacterIndex(characterIndex);
+            _charactersGameObjects = new List<GameObject>(charactersModels); 
             
-            ActiveCharacterGameObject = _charactersGameObjects[characterIndex];
-            ActiveCharacter = ActiveCharacterGameObject.GetComponent<Character>();
-            
-            SetCurrentCharacterComponents();
+            SetActiveCharacter(characterIndex);
             DisableOtherCharacters();
         }
 
-        void Start()
+        void SetCharacterIndex(int index)
         {
-            MoveIndexCharacter(characterIndex);
+            _characterIndex = index is < 0 or > 5 ? 0 : index;
         }
 
-    
-
-    public CharacterSpecs[] GetCharacterSpecs()
-    {
-        //return _playerCharacters.Select(x => x.GetCharacterSpecs()).ToArray();
-        return null;
-
-    }
-
-    private void SetCurrentCharacterComponents()
-    {
-        // _currentRb = currentCharacter.GetRigidBody();
-        //currentCharacterSpecs = currentCharacter.GetCharacterSpecs();
-        // _currentAnimator = currentCharacter.GetAnimator();
-        // _currentParticleSystem = currentCharacter.GetParticleSystem();
-        // _currentSpriteRenderer = currentCharacter.GetSpriteRenderer();
-        
-        // currentSpeed = currentCharacter.GetCharacterSpecs().speed;
-    }
-    
-    private void DisableOtherCharacters()
-    {
-        //Solo dejamos el primer personaje activo
-        for (int i = 0; i < _charactersGameObjects.Count; i++)
+        void SetActiveCharacter(int characterIndex)
         {
-            if (i == characterIndex)
-            {
-                continue;
-            }
+            ActiveCharacterGameObject = _charactersGameObjects[characterIndex];
+            SetActiveCharacterComponents();
+        }
+
+        void SetActiveCharacterComponents()
+        {
+            ActiveCharacter = ActiveCharacterGameObject.GetComponent<Character>();
             
-            _charactersGameObjects[i].SetActive(false);
+            ActiveAnimator = ActiveCharacter.GetComponent<Animator>();
+            ActiveParticleSystem = ActiveCharacter.GetComponent<ParticleSystem>();
+            ActiveSpriteRenderer = ActiveCharacter.GetComponent<SpriteRenderer>();
         }
-    }
-    
 
-
-    public void ChangeCharacterTo(float input)
-    {
-        //Verificamos si hay solo un personaje, si hay un solo personaje, characterIndex siempre es 0
-        if (_charactersGameObjects.Count == 1)
+        /// <summary>
+        /// Disable all character but not the one that is currently as character start index.
+        /// </summary>
+        void DisableOtherCharacters()
         {
-            MoveIndexCharacter(0);
-            return;
+            for (var i = 0; i < _charactersGameObjects.Count; i++)
+            {
+                if (i == _characterIndex)
+                {
+                    continue;
+                }
+                
+                _charactersGameObjects[i].SetActive(false);
+            }
         }
         
-        if (input == -1) //Cambiamos a la izquierda
-        {
-            //Si sobre pasamos el index, reiniciamos
-            if (characterIndex >= _charactersGameObjects.Count - 1)
-            {
-                characterIndex = 0;
-            }
-            else //sino, sumamos
-            {
-                //Suma 1 al index del personaje actual
-                characterIndex++; 
-            }
-        }
 
-        if (input == 1) //Cambiamos a la derecha
+
+        public void ChangeCharacterTo(float input)
         {
-            //Si sobre pasamos el index, reiniciamos
-            if (characterIndex <= 0)
+            //Verificamos si hay solo un personaje, si hay un solo personaje, characterIndex siempre es 0
+            if (_charactersGameObjects.Count == 1)
             {
-                characterIndex = _charactersGameObjects.Count - 1;
-            }
-            else //sino, sumamos
-            {
-                //Suma 1 al index del personaje actual
-                characterIndex--; 
+                MoveIndexCharacter(0);
+                return;
             }
             
+            if (input == -1) //Cambiamos a la izquierda
+            {
+                //Si sobre pasamos el index, reiniciamos
+                if (_characterIndex >= _charactersGameObjects.Count - 1)
+                {
+                    _characterIndex = 0;
+                }
+                else //sino, sumamos
+                {
+                    //Suma 1 al index del personaje actual
+                    _characterIndex++; 
+                }
+            }
+
+            if (input == 1) //Cambiamos a la derecha
+            {
+                //Si sobre pasamos el index, reiniciamos
+                if (_characterIndex <= 0)
+                {
+                    _characterIndex = _charactersGameObjects.Count - 1;
+                }
+                else //sino, sumamos
+                {
+                    //Suma 1 al index del personaje actual
+                    _characterIndex--; 
+                }
+                
+            }
+            
+            MoveIndexCharacter(_characterIndex);
         }
         
-        MoveIndexCharacter(characterIndex);
-    }
-
-    private void MoveIndexCharacter(int index)
-    {
-        //Guarda la posicion del personaje actual
-        Transform charTrans = ActiveCharacter.transform;
-            
-        //Deshabilita el personaje actial
-        ActiveCharacterGameObject.SetActive(false);
-        //Cambia el personaje actual
-        ActiveCharacterGameObject = _charactersGameObjects[index];
-        //Habilita el nuevo personaje y le da su posicion
-        ActiveCharacterGameObject.SetActive(true);
-        ActiveCharacter = ActiveCharacterGameObject.GetComponent<Character>();
-
-        SetCurrentCharacterComponents();
-
-        ActiveCharacter.transform.SetPositionAndRotation(charTrans.position, charTrans.rotation);
-
-        //Le decimos a los suscriptores de actualizar el jugador
-        //En este caso a OnScreenControls, HUDManager o Flying Game Manager
-        //_hudManager.UpdateCharacterSpecsOnHUD();
-
-        // cameraManager.FollowAt(currentCharacter.transform);
-    }
-    
-    /**
-    public bool TryToAddItemToInventory(ItemData itemData)
-    {
-        //si no se pudo agregar, return
-        if (InventoryManager.Instance.AddItem(itemData))
+        public void MoveIndexCharacter(int index)
         {
-            return false;
+            //Guarda la posicion del personaje actual
+            Transform charTrans = ActiveCharacter.transform;
+                
+            //Deshabilita el personaje actial
+            ActiveCharacterGameObject.SetActive(false);
+            //Cambia el personaje actual
+            ActiveCharacterGameObject = _charactersGameObjects[index];
+            //Habilita el nuevo personaje y le da su posicion
+            ActiveCharacterGameObject.SetActive(true);
+            ActiveCharacter = ActiveCharacterGameObject.GetComponent<Character>();
+
+            // SetCurrentCharacterComponents();
+
+            ActiveCharacter.transform.SetPositionAndRotation(charTrans.position, charTrans.rotation);
+
+            //Le decimos a los suscriptores de actualizar el jugador
+            //En este caso a OnScreenControls, HUDManager o Flying Game Manager
+            //_hudManager.UpdateCharacterSpecsOnHUD();
+
+            // cameraManager.FollowAt(currentCharacter.transform);
         }
-     
-        _hudManager.UpdateItemsOnInventory();
-        return true;
-    }
-    **/
-    
-    
-    
-    public void performOnPause(bool isPaused)
-    {
-        // TODO Make with Observer Patterns
-    }
+        
+        /**
+        public bool TryToAddItemToInventory(ItemData itemData)
+        {
+            //si no se pudo agregar, return
+            if (InventoryManager.Instance.AddItem(itemData))
+            {
+                return false;
+            }
+         
+            _hudManager.UpdateItemsOnInventory();
+            return true;
+        }
+        **/
+        
+        
+        
+        public void performOnPause(bool isPaused)
+        {
+            // TODO Make with Observer Patterns
+        }
 
-    public void ChangeCharacter(InputAction.CallbackContext context)
-    {
-        if (!context.performed)
-            return;
-            
-        //Para cambiar de personaje
-        var sideToSwitch = context.ReadValue<float>();
-            
-        ChangeCharacterTo(sideToSwitch);
-    }
+        public void ChangeCharacter(InputAction.CallbackContext context)
+        {
+            if (!context.performed)
+                return;
+                
+            //Para cambiar de personaje
+            var sideToSwitch = context.ReadValue<float>();
+                
+            ChangeCharacterTo(sideToSwitch);
+        }
 
-    #region GettersAndSetters
+        #region GettersAndSetters
 
-    
-    
-    #endregion
+        
+        
+        #endregion
 
-    
+        
     }
 }

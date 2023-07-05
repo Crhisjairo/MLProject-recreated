@@ -12,33 +12,46 @@ namespace _Scripts.Controllers
     
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(PlayerInput))]
-    [RequireComponent(typeof(CharactersUtil))]
+    [RequireComponent(typeof(CapsuleCollider2D))]
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] public LayerMask _enemyLayers;
+        [SerializeField] private GameObject[] _charactersModels;
+        [SerializeField] int startingCharacterIndex = 0;
 
-        private bool IsInvulnerable { set; get; }
+        [SerializeField] private float _defaultInvulnerabilityTime = 0.7f;
 
-        private CharactersUtil _characterUtil;
+        public float attackRate = 2f; // TODO maybe move that to Character class
+        public float attackRange = 0.25f; // TODO maybe move that to Character class
+        public Vector2 distanceAttackRange; // TODO maybe move that to Character class
+        public float _nextAttackTime; // TODO maybe move that to Character class
         
-        private Rigidbody2D _rb;
-        private Animator _currentAnimator;
-        private ParticleSystem _currentParticleSystem;
-        private SpriteRenderer _currentSpriteRenderer;
+        bool IsInvulnerable { set; get; }
 
-        private float diagonalLimiter = 0.9f; // 0.7 default
-        private Vector2 movement;
-        private Vector2 _frontDirection = Vector2.down;
+        CharactersUtil _characterUtil;
 
-        public float attackRate = 2f;
-        public float attackRange = 0.25f;
-        public Vector2 distanceAttackRange;
-        public float _nextAttackTime;
+        Rigidbody2D _rb;
 
-
-        private float _defaultInvulnerabilityTime = 0.7f;
-        private float currentSpeed;
+        float diagonalLimiter = 0.9f; // 0.7 default
+        Vector2 movement;
+        Vector2 _frontDirection = Vector2.down;
         
+        float currentSpeed;
+        
+        void Awake()
+        {
+            SetComponents();
+        }
+        
+        void Start()
+        {
+            currentSpeed = _characterUtil.ActiveCharacter.GetSpeed();
+        }
+        
+        void FixedUpdate()
+        {
+            _rb.MovePosition(_rb.position + movement * (currentSpeed * Time.fixedDeltaTime));
+        }
         
         public void Move(InputAction.CallbackContext inputContext)
         {
@@ -47,9 +60,9 @@ namespace _Scripts.Controllers
             movement.x = 0; 
             movement.y = 0;
                 
-            if (inputMovement.x != 0 && inputMovement.y != 0) // Check for diagonal movement
+            // limit movement speed diagonally, so you move at 70% speed
+            if (inputMovement.x != 0 && inputMovement.y != 0) 
             {
-                // limit movement speed diagonally, so you move at 70% speed
                 inputMovement.x *= diagonalLimiter;
                 inputMovement.y *= diagonalLimiter;
             }
@@ -57,7 +70,6 @@ namespace _Scripts.Controllers
             movement.x = inputMovement.x;
             movement.y = inputMovement.y; 
             
-            //Guardamos la direcciôn solo en el modo RPG
             var activeCharacter = _characterUtil.ActiveCharacter;
             
             activeCharacter.SetLookingDirection(movement);
@@ -79,12 +91,12 @@ namespace _Scripts.Controllers
             if (running)
             {
                 currentSpeed = activeCharacter.GetRunningSpeed();
-                _currentAnimator.SetBool(CharacterAnimationStates.Running.ToString(), true);
+                _characterUtil.ActiveAnimator.SetBool(CharacterAnimationStates.Running.ToString(), true);
             }
             else
             { 
                 currentSpeed = activeCharacter.GetSpeed();
-                _currentAnimator.SetBool(CharacterAnimationStates.Running.ToString(), false);
+                _characterUtil.ActiveAnimator.SetBool(CharacterAnimationStates.Running.ToString(), false);
             }
         }
         
@@ -96,15 +108,15 @@ namespace _Scripts.Controllers
             if (Time.time >= _nextAttackTime)
             {
                 //Animamos al personaje
-                _currentAnimator.SetTrigger("Attack");
+                _characterUtil.ActiveAnimator.SetTrigger("Attack");
                 
                 //Calculamos la direccion del ataque
                 //Creamos la direcciôn y la distance de ataque relativa al personaje
                 Vector2 attackOffset = CalculateAttackOffset();
 
                 //Ponemos las particulas en la misma posiciôn de ataque
-                _currentParticleSystem.gameObject.transform.position = new Vector3(attackOffset.x, attackOffset.y, -1);
-                _currentParticleSystem.Play();
+                _characterUtil.ActiveParticleSystem.gameObject.transform.position = new Vector3(attackOffset.x, attackOffset.y, -1);
+                _characterUtil.ActiveParticleSystem.Play();
                 
                 //Reproducimos el sonido
                 _characterUtil.ActiveCharacter.PlaySoundSfx(CharacterSfx.UnicornAttackSfx);
@@ -137,7 +149,7 @@ namespace _Scripts.Controllers
             //Movemos la câmara
             ShakeCamera(1.5f, 0.1f);
             //Animamos al personaje
-            _currentAnimator.SetTrigger("Damaged");
+            _characterUtil.ActiveAnimator.SetTrigger("Damaged");
             //Activamos un countdown para la vulnerabilidad
             ActivateInvulnerability(_defaultInvulnerabilityTime);
             //Hacemos daño
@@ -159,8 +171,8 @@ namespace _Scripts.Controllers
 
         public void PlayAnimation(string animName)
         {
-            //_currentAnimator.Play(animName);
-            _currentAnimator.SetTrigger(animName);
+            //_characterUtil.ActiveAnimator.Play(animName);
+            _characterUtil.ActiveAnimator.SetTrigger(animName);
         }
         
         public void CheckFrontInteraction(InputAction.CallbackContext inputContext)
@@ -252,14 +264,14 @@ namespace _Scripts.Controllers
             IsInvulnerable = false;
             
             //Nos aseguramos de quedarnos blancos xd
-            _currentSpriteRenderer.material.color = Color.white;
+            _characterUtil.ActiveSpriteRenderer.material.color = Color.white;
             
             //GameManager.Instance.CanPlayerInteract = true;
         }
         
-        private IEnumerator StartFlashing()
+        IEnumerator StartFlashing()
         {
-            var spriteRenderer = _currentSpriteRenderer;
+            var spriteRenderer = _characterUtil.ActiveSpriteRenderer;
             
             while (true)
             {
@@ -271,7 +283,7 @@ namespace _Scripts.Controllers
             }
         }
         
-        private void ShakeCamera(float intensity, float time)
+        void ShakeCamera(float intensity, float time)
         {
             // CinemachineBasicMultiChannelPerlin cinema = GameManager.Instance.vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             // cinema.m_AmplitudeGain = intensity;
@@ -306,22 +318,11 @@ namespace _Scripts.Controllers
         }
 
     #endregion
-        
-        void Awake()
-        {
-            SetComponents();
 
-        }
-        
-        void FixedUpdate()
-        {
-            _rb.MovePosition(_rb.position + movement * currentSpeed * Time.fixedDeltaTime);
-        }
-        
         void SetComponents()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _characterUtil = GetComponent<CharactersUtil>();
+            _characterUtil = new CharactersUtil(_charactersModels, 0);
         }
 
         #region DebugRegion

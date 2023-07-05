@@ -3,6 +3,8 @@ using UnityEngine;
 
 namespace _Scripts.Characters
 {
+    
+    //TODO move this class to Character.
     [Serializable]
     public class CharacterSpecs
     {
