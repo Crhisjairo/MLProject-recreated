@@ -11,15 +11,14 @@ namespace _Scripts.Controllers
 {
     
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(CapsuleCollider2D))]
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] public LayerMask _enemyLayers;
-        [SerializeField] private GameObject[] _charactersModels;
+        [SerializeField] LayerMask _enemyLayers;
+        [SerializeField] GameObject[] _charactersModels;
         [SerializeField] int startingCharacterIndex = 0;
 
-        [SerializeField] private float _defaultInvulnerabilityTime = 0.7f;
+        [SerializeField] float _defaultInvulnerabilityTime = 0.7f;
 
         public float attackRate = 2f; // TODO maybe move that to Character class
         public float attackRange = 0.25f; // TODO maybe move that to Character class
@@ -55,7 +54,7 @@ namespace _Scripts.Controllers
         
         public void Move(InputAction.CallbackContext inputContext)
         {
-            Vector2 inputMovement = inputContext.ReadValue<Vector2>();
+            var inputMovement = inputContext.ReadValue<Vector2>();
             
             movement.x = 0; 
             movement.y = 0;
@@ -77,27 +76,22 @@ namespace _Scripts.Controllers
             activeCharacter.SetAnimationByMovingDirection(movement);
         }
         
-        public void Run(InputAction.CallbackContext inputContext)
+        public void StartRunning(InputAction.CallbackContext inputContext)
         {
-            if (!(inputContext.performed || inputContext.canceled))
-            {
+            if (!inputContext.performed)
                 return;
-            }
+            
+            currentSpeed = _characterUtil.ActiveCharacter.GetRunningSpeed();
+            _characterUtil.ActiveAnimator.SetBool(CharacterAnimationStates.Running.ToString(), true);
+        }
 
-            var activeCharacter = _characterUtil.ActiveCharacter;
-            bool running = inputContext.performed;
-                
-            //Antes de movernos, verificamos que no estemos en dialogo
-            if (running)
-            {
-                currentSpeed = activeCharacter.GetRunningSpeed();
-                _characterUtil.ActiveAnimator.SetBool(CharacterAnimationStates.Running.ToString(), true);
-            }
-            else
-            { 
-                currentSpeed = activeCharacter.GetSpeed();
-                _characterUtil.ActiveAnimator.SetBool(CharacterAnimationStates.Running.ToString(), false);
-            }
+        public void StopRunning(InputAction.CallbackContext inputContext)
+        {
+            if (!inputContext.canceled)
+                return;
+            
+            currentSpeed = _characterUtil.ActiveCharacter.GetSpeed();
+            _characterUtil.ActiveAnimator.SetBool(CharacterAnimationStates.Running.ToString(), false);
         }
         
         public void Attack(InputAction.CallbackContext context)
@@ -129,15 +123,6 @@ namespace _Scripts.Controllers
             }
         }
 
-        public void OpenInventory(InputAction.CallbackContext context)
-        {
-            if (!context.performed)
-                return;
-
-            // TODO change InputMap, pause game and open inventory
-            // _inventoryManager.ShowInventory(PlayerController.GameInPause);
-        }
-
         public void TakeDamage(int damageAmount)
         {
             //Verificamos que no seamos invulnerables
@@ -156,7 +141,6 @@ namespace _Scripts.Controllers
             _characterUtil.ActiveCharacter.TakeDamage(damageAmount); //Bajamos la vida del jugador
             // TODO Notify HUD
         }
-
         
         public void TakeLife(int lifeAmount)
         {
@@ -322,7 +306,7 @@ namespace _Scripts.Controllers
         void SetComponents()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _characterUtil = new CharactersUtil(_charactersModels, 0);
+            _characterUtil = new CharactersUtil(_charactersModels, startingCharacterIndex);
         }
 
         #region DebugRegion

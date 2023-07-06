@@ -15,35 +15,61 @@ namespace _Scripts.Characters
         public Sprite iconSprite;
         public Sprite characterSprite;
         
-        [SerializeField] private SoundEffectEmitter soundEffectsEmitter;
-        [SerializeField] private CharacterSpecs characterSpecs;
-        [SerializeField] private new ParticleSystem particleSystem;
-
+        [SerializeField] SoundEffectEmitter soundEffectsEmitter;
+        [SerializeField] new ParticleSystem particleSystem;
         Animator _animator;
         SpriteRenderer _spriteRenderer;
         
         Vector2 _frontDirection = Vector2.down;
+        
+        #region Character specs
+        
+        public static int CurrentCoins { private set; get; }
 
-        void Awake()
+        public string CharacterName { protected set; get; }
+        [SerializeField] int maxLife = 13;
+        [SerializeField] int currentLife = 3;
+        [SerializeField] float speed = 2f;
+        [SerializeField] float runningSpeed = 3f;
+        [SerializeField] int attackDamage = 1;
+
+        #endregion
+
+        protected virtual void Awake()
         {
             SetComponents();
         }
 
         public void ExtendsMaxLife()
         {
-            characterSpecs.ExtendsMaxLife();
-            characterSpecs.SetFullLife();
+            maxLife++;
+            SetFullLife();
             //TODO notify HUD
+        }
+        
+        public void AddCoins(int amount)
+        {
+            CurrentCoins += amount;
         }
 
         /**
-         * Returns true if player dead.
+         * Returns true if player is dead.
          */
         public bool TryTakeDamage(int damage)
         {
-            characterSpecs.TakeDamage(damage);
+            TakeDamage(damage);
 
-            return characterSpecs.HasNoLife();
+            return HasNoLife();
+        }
+        
+        public float GetRunningSpeed()
+        {
+            return runningSpeed;
+        }
+
+        public float GetSpeed()
+        {
+            return speed;
         }
         
         public bool AddSlotToInventory()
@@ -56,32 +82,24 @@ namespace _Scripts.Characters
         
         public void TakeDamage(int damage)
         {
-            characterSpecs.TakeDamage(damage);
+            currentLife -= damage;
         }
+
+        public bool HasNoLife() => currentLife <= 0;
         
         public void TakeLife(int newLife)
         {
-            characterSpecs.TakeLife(newLife);
+            if (currentLife >= maxLife)
+            {
+                return;
+            }
+        
+            currentLife += newLife;
         }
 
-        public void AddCoins(int amount)
+        private void SetFullLife()
         {
-            characterSpecs.AddCoins(amount);
-        }
-        
-        public float GetRunningSpeed()
-        {
-            return characterSpecs.GetRunningSpeed();
-        }
-
-        public float GetSpeed()
-        {
-            return characterSpecs.GetSpeed();
-        }
-        
-        public void SetCharacterSpecs(CharacterSpecs specs)
-        {
-            characterSpecs = specs;
+            currentLife = maxLife;
         }
 
         public void PlaySoundSfx(CharacterSfx sound)

@@ -23,12 +23,12 @@ namespace _Scripts.Controllers
         List<GameObject> _charactersGameObjects = new List<GameObject>();
         int _characterIndex = 0;
 
-        public CharactersUtil(GameObject[] charactersModels, int characterIndex)
+        public CharactersUtil(GameObject[] charactersModels, int startingCharacterIndex)
         {
-            SetCharacterIndex(characterIndex);
+            SetCharacterIndex(startingCharacterIndex);
             _charactersGameObjects = new List<GameObject>(charactersModels); 
             
-            SetActiveCharacter(characterIndex);
+            SetActiveCharacter(startingCharacterIndex);
             DisableOtherCharacters();
         }
 
