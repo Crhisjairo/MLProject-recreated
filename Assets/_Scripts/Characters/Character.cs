@@ -165,6 +165,11 @@ namespace _Scripts.Characters
             _animator.SetFloat(CharacterAnimationValues.Vertical.ToString(), movement.y);
             _animator.SetFloat(CharacterAnimationValues.Speed.ToString(), movement.sqrMagnitude); //La velocidad de movimiento
         }
+
+        public ParticleSystem GetParticleSystem()
+        {
+            return particleSystem;
+        }
         
         private void SetComponents()
         {

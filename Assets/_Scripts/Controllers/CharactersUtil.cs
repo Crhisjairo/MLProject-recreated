@@ -48,7 +48,7 @@ namespace _Scripts.Controllers
             ActiveCharacter = ActiveCharacterGameObject.GetComponent<Character>();
             
             ActiveAnimator = ActiveCharacter.GetComponent<Animator>();
-            ActiveParticleSystem = ActiveCharacter.GetComponent<ParticleSystem>();
+            ActiveParticleSystem = ActiveCharacter.GetParticleSystem();
             ActiveSpriteRenderer = ActiveCharacter.GetComponent<SpriteRenderer>();
         }
 

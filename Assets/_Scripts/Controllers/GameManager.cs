@@ -14,8 +14,6 @@ namespace _Scripts.Controllers
         PlayerInput _playerInput;
         InputActionMap _lastActionMap, _currentActionMap;
 
-        bool _gameInPause = false;
-
         void Awake()
         {
             SetComponents();
@@ -26,9 +24,7 @@ namespace _Scripts.Controllers
             if (!context.performed)
                 return;
             
-            _gameInPause = !_gameInPause;
-            
-            Time.timeScale = _gameInPause ? 0 : 1;
+            Time.timeScale = 0;
         }
 
         public void ResumeGame()
