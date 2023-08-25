@@ -27,7 +27,7 @@ namespace _Scripts.Controllers
         
         bool IsInvulnerable { set; get; }
 
-        CharactersUtil _characterUtil;
+        CharactersManager _characterManager;
 
         Rigidbody2D _rb;
 
@@ -44,7 +44,7 @@ namespace _Scripts.Controllers
         
         void Start()
         {
-            currentSpeed = _characterUtil.ActiveCharacter.GetSpeed();
+            currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
         }
         
         void FixedUpdate()
@@ -69,7 +69,7 @@ namespace _Scripts.Controllers
             movement.x = inputMovement.x;
             movement.y = inputMovement.y; 
             
-            var activeCharacter = _characterUtil.ActiveCharacter;
+            var activeCharacter = _characterManager.ActiveCharacter;
             
             activeCharacter.SetLookingDirection(movement);
             activeCharacter.SetAnimationByIdleDirection(movement);
@@ -81,8 +81,8 @@ namespace _Scripts.Controllers
             if (!inputContext.performed)
                 return;
             
-            currentSpeed = _characterUtil.ActiveCharacter.GetRunningSpeed();
-            _characterUtil.ActiveAnimator.SetBool(CharacterAnimationStates.Running.ToString(), true);
+            currentSpeed = _characterManager.ActiveCharacter.GetRunningSpeed();
+            _characterManager.ActiveAnimator.SetBool(CharacterAnimationStates.Running.ToString(), true);
         }
 
         public void StopRunning(InputAction.CallbackContext inputContext)
@@ -90,8 +90,8 @@ namespace _Scripts.Controllers
             if (!inputContext.canceled)
                 return;
             
-            currentSpeed = _characterUtil.ActiveCharacter.GetSpeed();
-            _characterUtil.ActiveAnimator.SetBool(CharacterAnimationStates.Running.ToString(), false);
+            currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
+            _characterManager.ActiveAnimator.SetBool(CharacterAnimationStates.Running.ToString(), false);
         }
         
         public void Attack(InputAction.CallbackContext context)
@@ -102,18 +102,18 @@ namespace _Scripts.Controllers
             if (Time.time >= _nextAttackTime)
             {
                 //Animamos al personaje
-                _characterUtil.ActiveAnimator.SetTrigger("Attack");
+                _characterManager.ActiveAnimator.SetTrigger("Attack");
                 
                 //Calculamos la direccion del ataque
                 //Creamos la direcciôn y la distance de ataque relativa al personaje
                 Vector2 attackOffset = CalculateAttackOffset();
 
                 //Ponemos las particulas en la misma posiciôn de ataque
-                _characterUtil.ActiveParticleSystem.gameObject.transform.position = new Vector3(attackOffset.x, attackOffset.y, -1);
-                _characterUtil.ActiveParticleSystem.Play();
+                _characterManager.ActiveParticleSystem.gameObject.transform.position = new Vector3(attackOffset.x, attackOffset.y, -1);
+                _characterManager.ActiveParticleSystem.Play();
                 
                 //Reproducimos el sonido
-                _characterUtil.ActiveCharacter.PlaySoundSfx(CharacterSfx.UnicornAttackSfx);
+                _characterManager.ActiveCharacter.PlaySoundSfx(CharacterSfx.UnicornAttackSfx);
                 
                 //Atacamos a los enemigos
                 AttackEnnemiesOnOverlapCircle(attackOffset);
@@ -134,29 +134,29 @@ namespace _Scripts.Controllers
             //Movemos la câmara
             ShakeCamera(1.5f, 0.1f);
             //Animamos al personaje
-            _characterUtil.ActiveAnimator.SetTrigger("Damaged");
+            _characterManager.ActiveAnimator.SetTrigger("Damaged");
             //Activamos un countdown para la vulnerabilidad
             ActivateInvulnerability(_defaultInvulnerabilityTime);
             //Hacemos daño
-            _characterUtil.ActiveCharacter.TakeDamage(damageAmount); //Bajamos la vida del jugador
+            _characterManager.ActiveCharacter.TakeDamage(damageAmount); //Bajamos la vida del jugador
             // TODO Notify HUD
         }
         
         public void TakeLife(int lifeAmount)
         {
-            _characterUtil.ActiveCharacter.TakeLife(lifeAmount); //Damos vida desde el otro script
+            _characterManager.ActiveCharacter.TakeLife(lifeAmount); //Damos vida desde el otro script
             // TODO Notify HUD
         }
         public void AddCoins(int amount)
         {
-            _characterUtil.ActiveCharacter.AddCoins(amount);
+            _characterManager.ActiveCharacter.AddCoins(amount);
             // TODO Notify HUD
         }
 
         public void PlayAnimation(string animName)
         {
             //_characterUtil.ActiveAnimator.Play(animName);
-            _characterUtil.ActiveAnimator.SetTrigger(animName);
+            _characterManager.ActiveAnimator.SetTrigger(animName);
         }
         
         public void CheckFrontInteraction(InputAction.CallbackContext inputContext)
@@ -165,7 +165,7 @@ namespace _Scripts.Controllers
                 return;
 
             //Origen de donde parte el rayo
-            Vector2 origin = _characterUtil.ActiveCharacter.transform.position;
+            Vector2 origin = _characterManager.ActiveCharacter.transform.position;
             float distance = 1.5f; //distancia maxima del rayo
                 
             //TODO
@@ -209,7 +209,7 @@ namespace _Scripts.Controllers
         /// <returns>Posicion del centro de ataque relativo al personaje</returns>
         public Vector2 CalculateAttackOffset()
         {
-            Vector3 position = _characterUtil.ActiveCharacter.transform.position;
+            Vector3 position = _characterManager.ActiveCharacter.transform.position;
             Vector2 relDirection =  _frontDirection.normalized + new Vector2(position.x, position.y);
 
             if (_frontDirection.x > 0.01) //Derecha
@@ -248,14 +248,14 @@ namespace _Scripts.Controllers
             IsInvulnerable = false;
             
             //Nos aseguramos de quedarnos blancos xd
-            _characterUtil.ActiveSpriteRenderer.material.color = Color.white;
+            _characterManager.ActiveSpriteRenderer.material.color = Color.white;
             
             //GameManager.Instance.CanPlayerInteract = true;
         }
         
         IEnumerator StartFlashing()
         {
-            var spriteRenderer = _characterUtil.ActiveSpriteRenderer;
+            var spriteRenderer = _characterManager.ActiveSpriteRenderer;
             
             while (true)
             {
@@ -306,7 +306,7 @@ namespace _Scripts.Controllers
         void SetComponents()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _characterUtil = new CharactersUtil(_charactersModels, startingCharacterIndex);
+            _characterManager = new CharactersManager(_charactersModels, startingCharacterIndex);
         }
 
         #region DebugRegion
@@ -317,7 +317,7 @@ namespace _Scripts.Controllers
         
             //Gizmos.DrawWireSphere(attackDistance, attackRange);
         
-            Gizmos.DrawWireSphere(_characterUtil.ActiveCharacter.transform.position, 1.5f);
+            Gizmos.DrawWireSphere(_characterManager.ActiveCharacter.transform.position, 1.5f);
         }
 
         #endregion

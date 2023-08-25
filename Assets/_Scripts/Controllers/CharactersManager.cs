@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers
 {
-    public class CharactersUtil
+    public class CharactersManager
     {
         public GameObject ActiveCharacterGameObject { private set; get; }
         
@@ -23,7 +23,7 @@ namespace _Scripts.Controllers
         List<GameObject> _charactersGameObjects = new List<GameObject>();
         int _characterIndex = 0;
 
-        public CharactersUtil(GameObject[] charactersModels, int startingCharacterIndex)
+        public CharactersManager(GameObject[] charactersModels, int startingCharacterIndex)
         {
             SetCharacterIndex(startingCharacterIndex);
             _charactersGameObjects = new List<GameObject>(charactersModels); 
