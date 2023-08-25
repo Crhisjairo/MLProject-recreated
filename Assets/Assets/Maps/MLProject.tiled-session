@@ -1,0 +1,272 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "MainVille/MainVille.tmx",
+    "expandedProjectPaths": [
+        ".",
+        "TilesSet",
+        "Underground",
+        "MainVilleZone2",
+        "Underground_zone_2",
+        "TestGroundRoom",
+        "MainVille"
+    ],
+    "exportAsImage.drawTileGrid": false,
+    "exportAsImage.useCurrentScale": false,
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "C:/Users/Crhistian C/Desktop/TilesBackground/BackgroundFenetrePrincipal.tmx": {
+            "scale": 1.428125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 287.7899343544858,
+                "y": 304.5951859956236
+            }
+        },
+        "C:/Users/Crhistian C/Desktop/TilesBackground/Cliff_tileset.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Crhistian C/Desktop/TilesBackground/PirateEtat1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Crhistian C/Desktop/TilesBackground/Sable.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Crhistian C/Desktop/TilesBackground/background.tmx": {
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 459,
+                "y": 2734
+            }
+        },
+        "C:/Users/Crhistian C/Desktop/TilesBackground/graphics-tiles-waterflow.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Crhistian C/Desktop/TilesBackground/ground_tiles.tsx": {
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Crhistian C/Desktop/TilesBackground/object- layer.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Crhistian C/Desktop/TilesBackground/sans titre.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1288,
+                "y": 1544
+            }
+        },
+        "C:/Users/Crhistian C/Documents/Projects/Unity/2020.1.17f1/MegaMango/Assets/SpritesOnTiled/Test.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Crhistian C/Documents/Projects/Unity/2020.1.17f1/MegaMango/Assets/SpritesOnTiled/bw5.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.5
+        },
+        "C:/Users/Crhistian C/Documents/Projects/Unity/2020.1.17f1/MegaMango/Assets/SpritesOnTiled/qmO7qEB.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "C:/Users/Crhistian C/Documents/Projects/Unity/2020.1.17f1/MegaMango/Assets/SpritesOnTiled/sans titre.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 566.6666666666666,
+                "y": 146.66666666666666
+            }
+        },
+        "C:/Users/Crhistian C/Documents/Projects/Unity/2020.1.17f1/MegaMango/Assets/SpritesOnTiled/sans titre.tmx#qmO7qEB": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        },
+        "C:/Users/Crhistian C/Documents/Projects/Unity/2020.1.17f1/MegaMango/Assets/SpritesOnTiled/snow.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "C:/Users/Crhistian C/Documents/Projects/Unity/2020.1.17f1/Tiled2UnityTest/Assets/SuperTiled2Unity/Import/ML Project/Tiled/ML Project/forestTiles.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Crhistian C/Documents/Projects/Unity/2020.1.17f1/Tiled2UnityTest/Assets/SuperTiled2Unity/Import/ML Project/Underground/Underground.tmx": {
+            "scale": 0.84794921875,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": -1.1793159046412711,
+                "y": 162.7455948404929
+            }
+        },
+        "C:/Users/Crhistian C/Documents/Projects/Unity/2020.1.17f1/Tiled2UnityTest/Assets/SuperTiled2Unity/Import/ML Project/forestTiles.tsx": {
+            "scaleInDock": 1
+        },
+        "ML Project Sprites.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 174.5,
+                "y": 281
+            }
+        },
+        "MainVille/Lamp1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 8
+        },
+        "MainVille/Lamp_violet_single.tsx": {
+            "scaleInDock": 5.5,
+            "scaleInEditor": 5.5
+        },
+        "MainVille/MainVille.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": -257.5757575757575,
+                "y": 227.27272727272725
+            }
+        },
+        "MainVille/MainVille.tmx#bridge": {
+            "scaleInDock": 1
+        },
+        "MainVille/lamp-1-post-1-tall-single.tsx": {
+            "scaleInDock": 5.5,
+            "scaleInEditor": 5.5
+        },
+        "MainVille/test1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 8
+        },
+        "MainVilleZone2/MainVille_Zone2.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 53,
+                "y": -18
+            }
+        },
+        "Mapa con Mango/Mapa con mango.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 269.5,
+                "y": 412
+            }
+        },
+        "MapaDePrueba.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 0.3333333333333286,
+                "y": -0.3333333333333428
+            }
+        },
+        "TestGroundRoom/TestGroundRoom.tmx": {
+            "scale": 1,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 28,
+                "y": 100.5
+            }
+        },
+        "TestRoom/TestRoom.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -16,
+                "y": 16.5
+            }
+        },
+        "TilesSet/Outside Objects.tsx": {
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "TilesSet/Twilight.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TilesSet/bridge.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "Twilight.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "Underground/Underground.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": -2561.333333333333,
+                "y": -256
+            }
+        },
+        "Underground_zone_2/Underground_zone_2.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 39.333333333333314,
+                "y": -511.33333333333326
+            }
+        },
+        "forestTiles.tsx": {
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "forest_tiles2.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        }
+    },
+    "frame.defaultDuration": 120,
+    "last.exportedFilePath": "C:/Projects/Unity/2022.3.2f1/MLProject-recreated/Assets/Assets/Maps/TilesSet",
+    "last.externalTilesetPath": "C:/Projects/Unity/2020.1.17f1/ML_Project/Assets/Tiled/Map/TilesSet",
+    "last.imagePath": "C:/Projects/Unity/2020.1.17f1/ML_Project/Assets/Sprites/Map/Objects",
+    "lastUsedTilesetExportFilter": "Tous les Fichiers (*)",
+    "map.fixedSize": false,
+    "map.height": 19,
+    "map.lastUsedFormat": "tmx",
+    "map.orientation": null,
+    "map.renderOrder": null,
+    "map.tileHeight": 32,
+    "map.tileWidth": 32,
+    "map.width": 19,
+    "openFiles": [
+        "MainVille/MainVille.tmx",
+        "Underground/Underground.tmx",
+        "Underground_zone_2/Underground_zone_2.tmx",
+        "TilesSet/bridge.tsx"
+    ],
+    "project": "MLProject.tiled-project",
+    "recentFiles": [
+        "TilesSet/bridge.tsx",
+        "Underground_zone_2/Underground_zone_2.tmx",
+        "Underground/Underground.tmx",
+        "MainVille/MainVille.tmx",
+        "TilesSet/Twilight.tsx",
+        "TilesSet/Outside Objects.tsx",
+        "MainVilleZone2/MainVille_Zone2.tmx",
+        "MainVille/Lamp_violet_single.tsx",
+        "forestTiles.tsx",
+        "MainVille/test1.tsx",
+        "MainVille/Lamp1.tsx",
+        "MainVille/lamp-1-post-1-tall-single.tsx"
+    ],
+    "resizeMap.removeObjects": false,
+    "tileset.lastUsedFilter": "Fichiers de jeu de tuiles Tiled (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 32,
+        "width": 32
+    },
+    "tileset.transparentColor": "#000000",
+    "tileset.type": 0,
+    "tileset.useTransparentColor": false
+}
