@@ -80,13 +80,21 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 642978686, guid: a54a0b2ea1a8d54458a0e2cc0879108f, type: 3}
+    - target: {fileID: 7666447753727091034, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8831563126979809562, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: m_Name
       value: Twilight
       objectReference: {fileID: 0}
     - target: {fileID: 8831563126979809562, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831563126979809562, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: m_TagString
-      value: CharacterModel
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1513893993868143887, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}

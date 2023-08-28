@@ -5,12 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Map
-  - CharacterModel
+  - NPC
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Map

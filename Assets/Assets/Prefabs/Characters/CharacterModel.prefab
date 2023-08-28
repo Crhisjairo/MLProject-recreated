@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2494609932412149386}
   - component: {fileID: 2498563264065257010}
   - component: {fileID: 7185734393477584783}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4900,9 +4900,9 @@ GameObject:
   - component: {fileID: 3340004413374677401}
   - component: {fileID: 4951365452995085792}
   - component: {fileID: 3531238930602149870}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CharacterModel
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

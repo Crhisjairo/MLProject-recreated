@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using _Scripts.Characters;
 using _Scripts.Enums;
+using _Scripts.Interactuable;
 using _Scripts.Utils;
 using UnityEditor.VersionControl;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace _Scripts.Controllers
 {
     
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(CapsuleCollider2D))]
+    [RequireComponent(typeof(PlayerInput))]
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] LayerMask _enemyLayers;
@@ -24,16 +25,17 @@ namespace _Scripts.Controllers
         public float attackRange = 0.25f; // TODO maybe move that to Character class
         public Vector2 distanceAttackRange; // TODO maybe move that to Character class
         public float _nextAttackTime; // TODO maybe move that to Character class
+        public float interactionDistance = 0.5f;
         
         bool IsInvulnerable { set; get; }
 
         CharactersManager _characterManager;
+        PlayerInput _playerInput;
 
         Rigidbody2D _rb;
 
         float diagonalLimiter = 0.9f; // 0.7 default
         Vector2 movement;
-        Vector2 _frontDirection = Vector2.down;
         
         float currentSpeed;
         
@@ -163,42 +165,19 @@ namespace _Scripts.Controllers
         {
             if (!inputContext.performed)
                 return;
-
-            //Origen de donde parte el rayo
-            Vector2 origin = _characterManager.ActiveCharacter.transform.position;
-            float distance = 1.5f; //distancia maxima del rayo
-                
-            //TODO
-            Collider2D hit = Physics2D.OverlapCircle(origin, 1f, 3);
-
-            Debug.Log(hit.name);
+            
+            Vector2 origin = transform.position;
+            Vector2 lookingDirection = _characterManager.ActiveCharacter.GetLookingDirection();
+            
+            // The ~ operator inverts a bitmask, so it detects collide against everything except layer "Player"
+            RaycastHit2D hit = Physics2D.Raycast(origin, lookingDirection, interactionDistance, ~LayerMask.GetMask("Player"));
             
             if (hit)
             {
-                //InteractWith(hit);
-            }
-            
-            Debug.DrawRay(origin, _frontDirection * distance, Color.red);
-        }
-        
-        public void InteractWith(RaycastHit2D hit)
-        {
-            if (hit.collider.gameObject.tag.Equals("NPC")  )
-            {
-                //Si es un NPC (que es un Interactuable), cambiamos de estado
-                //Agregar condiciones con tag para saber con quiên se debe interactuar
-                // IInteractuable interactuable = hit.collider.GetComponent<NPCController>();
-                // interactuable.Interact(this);
-            }
-            
-            if (hit.collider.CompareTag("Sign"))
-            {
-                //LLamamos al dialogueTrigger del letrero
-                // IInteractuable interactuable = hit.collider.GetComponent<Sign>();
-                // interactuable.Interact(this);
+                IInteractuable interactuable = hit.collider.gameObject.GetComponent<IInteractuable>();
+                interactuable.Interact(this);
             }
         }
-        
         
         #region Calculations
 
@@ -210,32 +189,32 @@ namespace _Scripts.Controllers
         public Vector2 CalculateAttackOffset()
         {
             Vector3 position = _characterManager.ActiveCharacter.transform.position;
-            Vector2 relDirection =  _frontDirection.normalized + new Vector2(position.x, position.y);
+            Vector2 lookingDirection = _characterManager.ActiveCharacter.GetLookingDirection();
+            
+            Vector2 relDirection =  lookingDirection.normalized + new Vector2(position.x, position.y);
 
-            if (_frontDirection.x > 0.01) //Derecha
+            if (lookingDirection.x > 0.01) //Derecha
             {
                 relDirection.x += distanceAttackRange.x;
             }
 
-            if (_frontDirection.x < -0.01) //Izquierda
+            if (lookingDirection.x < -0.01) //Izquierda
             {
                 relDirection.x -= distanceAttackRange.x;
             }
             
-            if (_frontDirection.y > 0.01) //Derecha
+            if (lookingDirection.y > 0.01) //Derecha
             {
                 relDirection.y += distanceAttackRange.y;
             }
 
-            if (_frontDirection.y < -0.01) //Izquierda
+            if (lookingDirection.y < -0.01) //Izquierda
             {
                 relDirection.y -= distanceAttackRange.y;
             }
 
             return relDirection;
         }
-        
-        
         
         private IEnumerator StartInvulnerabilityTimer(float time)
         {
@@ -307,17 +286,34 @@ namespace _Scripts.Controllers
         {
             _rb = GetComponent<Rigidbody2D>();
             _characterManager = new CharactersManager(_charactersModels, startingCharacterIndex);
+            _playerInput = GetComponent<PlayerInput>();
+        }
+        
+        public void ChangeActionMapTo(string inputMap)
+        {
+            _playerInput.SwitchCurrentActionMap(inputMap);
         }
 
         #region DebugRegion
 
         private void OnDrawGizmosSelected()
         {
-            Vector2 attackDistance = CalculateAttackOffset();
+            //Vector2 attackDistance = CalculateAttackOffset();
         
             //Gizmos.DrawWireSphere(attackDistance, attackRange);
         
-            Gizmos.DrawWireSphere(_characterManager.ActiveCharacter.transform.position, 1.5f);
+            //Gizmos.DrawWireSphere(_characterManager.ActiveCharacter.transform.position, 1.5f);
+            
+            // Interact ray
+            Vector2 origin = transform.position;
+            Vector2 lookingDirection = Vector2.down;
+
+            if (_characterManager is not null)
+            {
+                lookingDirection = _characterManager.ActiveCharacter.GetLookingDirection();
+            }
+            
+            Debug.DrawRay(origin, lookingDirection * interactionDistance, Color.red);
         }
 
         #endregion
