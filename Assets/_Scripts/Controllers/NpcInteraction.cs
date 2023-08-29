@@ -1,22 +1,25 @@
 using System;
+using _Scripts.DialogSystem;
 using _Scripts.Interactuable;
 using UnityEngine;
 namespace _Scripts.Controllers
 {
     
     [RequireComponent(typeof(BoxCollider2D))]
-    public class NPCController : MonoBehaviour, IInteractuable
+    public class NpcInteraction : MonoBehaviour, IInteractuable
     {
         public SpriteRenderer interactSprite;
         public string inDialogActionMapName = "InDialog";
 
         Animator _animator;
+        DialogTrigger _dialogueTrigger;
         bool _playerInRange = false;
 
         void Awake()
         {
             _animator = GetComponent<Animator>();
-            
+            _dialogueTrigger = GetComponent<DialogTrigger>();
+
             interactSprite.gameObject.SetActive(false);
         }
 
@@ -25,7 +28,10 @@ namespace _Scripts.Controllers
             if (!_playerInRange)
                 return;
             
-            //TODO Interact logic here
+            if (_dialogueTrigger is not null)
+            {
+                _dialogueTrigger.SetDialogByContext(interactor);
+            }
         }
 
         void OnTriggerEnter2D(Collider2D other)

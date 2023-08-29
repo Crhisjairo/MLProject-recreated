@@ -1570,8 +1570,8 @@ MonoBehaviour:
   startingCharacterIndex: 0
   _defaultInvulnerabilityTime: 0.7
   attackRate: 2
-  attackRange: 0.25
-  distanceAttackRange: {x: 0, y: 0}
+  attackRange: 1
+  distanceAttackRange: {x: -0.05, y: -0.05}
   _nextAttackTime: 0
   interactionDistance: 0.5
 --- !u!114 &1520072272
@@ -1825,8 +1825,8 @@ MonoBehaviour:
     m_ActionName: Menus/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 536926446}
-        m_TargetAssemblyTypeName: _Scripts.Controllers.GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1520072269}
+        m_TargetAssemblyTypeName: _Scripts.Controllers.PlayerController, Assembly-CSharp
         m_MethodName: ChangeActionMapTo
         m_Mode: 5
         m_Arguments:
@@ -1863,6 +1863,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9cb46b25-be09-4d9f-b209-e1f3ad9671c1
     m_ActionName: InMenu/Resume[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1520072269}
+        m_TargetAssemblyTypeName: _Scripts.Controllers.PlayerController, Assembly-CSharp
+        m_MethodName: CheckFrontInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 08f85d37-4b52-4dd5-b931-e1785ca980ed
+    m_ActionName: InDialog/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: InGame
@@ -1935,6 +1951,7 @@ GameObject:
   - component: {fileID: 1956943481}
   - component: {fileID: 1956943484}
   - component: {fileID: 1956943485}
+  - component: {fileID: 1956943486}
   m_Layer: 7
   m_Name: PinkyNPC
   m_TagString: NPC
@@ -2080,6 +2097,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactSprite: {fileID: 709256040}
   inDialogActionMapName: InDialog
+--- !u!114 &1956943486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956943480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cc63a2376042609a65971504d995ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogController: {fileID: 2055687590}
+  cam: {fileID: 201937054}
+  zoomAmountOnDialog: 2.5
+  speedZoom: 0.5
+  _startOnAwake: 0
+  _autoNextDialog: 0
+  _timeToWaitAutoNextDialog: 1
+  onlyInteractWithSpecifCharacter: 0
+  characterNameAbleToInteractWith: 
+  ActionMapToChangeOnDialog: InDialog
+  ActionMapToRestore: InGame
+  textTypingSpeed: 0.1
+  firstDialog:
+    title: Pinky
+    sentences:
+    - This is...
+    - first dialog.
+    spritesForSentences: []
+  defaultDialog:
+    title: Pinky
+    sentences:
+    - This is...
+    - Default dialog...
+    spritesForSentences: []
+  wrongCharacterDialog:
+    title: Pinky
+    sentences:
+    - This is wrong...
+    - Yes... wrong...
+    spritesForSentences: []
+--- !u!114 &2055687590 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6030632094681449055, guid: 8c710c0e656cf5d47b75e77a9173373b, type: 3}
+  m_PrefabInstance: {fileID: 2887214188939126375}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c8ce929b664046891d58b4f565523a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2135683005435455659
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ namespace _Scripts.Controllers
         [SerializeField] float _defaultInvulnerabilityTime = 0.7f;
 
         public float attackRate = 2f; // TODO maybe move that to Character class
-        public float attackRange = 0.25f; // TODO maybe move that to Character class
+        public float attackRange = 1f; // TODO maybe move that to Character class
         public Vector2 distanceAttackRange; // TODO maybe move that to Character class
         public float _nextAttackTime; // TODO maybe move that to Character class
         public float interactionDistance = 0.5f;
@@ -170,11 +170,11 @@ namespace _Scripts.Controllers
             Vector2 lookingDirection = _characterManager.ActiveCharacter.GetLookingDirection();
             
             // The ~ operator inverts a bitmask, so it detects collide against everything except layer "Player"
-            RaycastHit2D hit = Physics2D.Raycast(origin, lookingDirection, interactionDistance, ~LayerMask.GetMask("Player"));
+            Collider2D collider = Physics2D.OverlapCircle(origin, interactionDistance, ~LayerMask.GetMask("Player"));
             
-            if (hit)
+            if (collider)
             {
-                IInteractuable interactuable = hit.collider.gameObject.GetComponent<IInteractuable>();
+                IInteractuable interactuable = collider.gameObject.GetComponent<IInteractuable>();
                 interactuable.Interact(this);
             }
         }
@@ -188,8 +188,15 @@ namespace _Scripts.Controllers
         /// <returns>Posicion del centro de ataque relativo al personaje</returns>
         public Vector2 CalculateAttackOffset()
         {
-            Vector3 position = _characterManager.ActiveCharacter.transform.position;
-            Vector2 lookingDirection = _characterManager.ActiveCharacter.GetLookingDirection();
+            Vector3 position = transform.position;
+            
+            Vector2 lookingDirection = Vector2.down;
+
+            // This condition is added to draw gizmos on debug
+            if (_characterManager is not null)
+            {
+                lookingDirection = _characterManager.ActiveCharacter.GetLookingDirection();
+            }
             
             Vector2 relDirection =  lookingDirection.normalized + new Vector2(position.x, position.y);
 
@@ -280,6 +287,11 @@ namespace _Scripts.Controllers
             StartCoroutine(StartInvulnerabilityTimer(time));
         }
 
+        public string GetActiveCharacterName()
+        {
+            return _characterManager.ActiveCharacter.CharacterName;
+        }
+
     #endregion
 
         void SetComponents()
@@ -294,28 +306,30 @@ namespace _Scripts.Controllers
             _playerInput.SwitchCurrentActionMap(inputMap);
         }
 
-        #region DebugRegion
+        #region Debug
 
-        private void OnDrawGizmosSelected()
+        void OnDrawGizmosSelected()
         {
-            //Vector2 attackDistance = CalculateAttackOffset();
-        
-            //Gizmos.DrawWireSphere(attackDistance, attackRange);
-        
-            //Gizmos.DrawWireSphere(_characterManager.ActiveCharacter.transform.position, 1.5f);
-            
-            // Interact ray
-            Vector2 origin = transform.position;
-            Vector2 lookingDirection = Vector2.down;
-
-            if (_characterManager is not null)
-            {
-                lookingDirection = _characterManager.ActiveCharacter.GetLookingDirection();
-            }
-            
-            Debug.DrawRay(origin, lookingDirection * interactionDistance, Color.red);
+            DrawAttackSphereGizmo();
+            DrawInteractionSphereGizmo();
         }
 
+        void DrawAttackSphereGizmo()
+        {
+            Vector2 attackDistance = CalculateAttackOffset();
+        
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(attackDistance, attackRange);
+        }
+        
+        void DrawInteractionSphereGizmo()
+        {
+            Vector2 origin = transform.position;
+            
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(origin, interactionDistance);
+        }
+        
         #endregion
     }
 }
