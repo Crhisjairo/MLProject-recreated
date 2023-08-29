@@ -2111,7 +2111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogController: {fileID: 2055687590}
   cam: {fileID: 201937054}
-  zoomAmountOnDialog: 2.5
+  zoomAmountOnDialog: 0
   speedZoom: 0.5
   _startOnAwake: 0
   _autoNextDialog: 0
