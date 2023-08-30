@@ -5,6 +5,7 @@ namespace _Scripts.Enums
         Up,
         Down,
         Left,
-        Right
+        Right,
+        None
     }
 }

@@ -306,6 +306,37 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 755057740}
+--- !u!1 &436246471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 436246472}
+  m_Layer: 7
+  m_Name: Point (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &436246472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436246471}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.756, y: -1.044, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1655564560}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,10 +1950,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655564559}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.986, y: -2.738, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1682587616}
+  - {fileID: 436246472}
+  - {fileID: 2113413965}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1950,12 +1984,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682587615}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.986, y: -7.058, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: -0.7972, y: -1.044, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1655564560}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1726141572 stripped
 GameObject:
@@ -2092,7 +2126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956943480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.986, y: -2.738, z: 0}
+  m_LocalPosition: {x: -3.986, y: 2.39, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2160,6 +2194,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactSprite: {fileID: 709256040}
   inDialogActionMapName: InDialog
+  lookAtPlayerWhenInteracting: 0
+  onAbleToInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1956943487}
+        m_TargetAssemblyTypeName: _Scripts.Controllers.NpcMovement, Assembly-CSharp
+        m_MethodName: PauseMovement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onUnableToInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1956943487}
+        m_TargetAssemblyTypeName: _Scripts.Controllers.NpcMovement, Assembly-CSharp
+        m_MethodName: ResumeMovement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1956943486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2174,7 +2239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogController: {fileID: 2055687590}
   cam: {fileID: 201937054}
-  zoomAmountOnDialog: 0
+  zoomAmountOnDialog: 2
   speedZoom: 0.5
   _startOnAwake: 0
   _autoNextDialog: 0
@@ -2183,18 +2248,18 @@ MonoBehaviour:
   characterNameAbleToInteractWith: 
   ActionMapToChangeOnDialog: InDialog
   ActionMapToRestore: InGame
-  textTypingSpeed: 0.1
+  textTypingDelay: 0.01
   firstDialog:
     title: Pinky
     sentences:
-    - This is...
-    - first dialog.
+    - "Esc\xFAchame, Twilight..."
+    - "Puedo... hacer... \xA1zoom!"
     spritesForSentences: []
   defaultDialog:
     title: Pinky
     sentences:
-    - This is...
-    - Default dialog...
+    - "\xBFLo ves?"
+    - "\xA1Est\xE1s cerca mio!"
     spritesForSentences: []
   wrongCharacterDialog:
     title: Pinky
@@ -2214,13 +2279,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a87fd0c2b2c4d8ca54584a3b09e1e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveBetweenPoints: 1
-  PointsToMove:
+  moveBetweenPoints: 1
+  pointsToMove:
   - {fileID: 1682587616}
-  Speed: -0.52
-  TimeToWaitBeforeNextPoint: 1
-  LookAtFixedDirection: 0
-  LookingDirection: 1
+  - {fileID: 436246472}
+  - {fileID: 2113413965}
+  speed: -5
+  timeToWaitBeforeNextPoint: 2
+  lookAtFixedDirection: 0
+  fixedLookingDirection: 0
+  loopMovement: 1
+  animator: {fileID: 5317324}
 --- !u!114 &2055687590 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6030632094681449055, guid: 8c710c0e656cf5d47b75e77a9173373b, type: 3}
@@ -2232,6 +2301,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c8ce929b664046891d58b4f565523a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2113413964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2113413965}
+  m_Layer: 7
+  m_Name: Point (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2113413965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113413964}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.756, y: 0.461, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1655564560}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2135683005435455659
 PrefabInstance:
   m_ObjectHideFlags: 0

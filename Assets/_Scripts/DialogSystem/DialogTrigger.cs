@@ -29,7 +29,7 @@ namespace _Scripts.DialogSystem
         public string ActionMapToRestore = "InGame";
         
         [Range(0f, 0.3f)]
-        public float textTypingSpeed = 0.1f;
+        public float textTypingDelay = 0.1f;
         
         public Dialogs firstDialog;
         public Dialogs defaultDialog;
@@ -48,7 +48,7 @@ namespace _Scripts.DialogSystem
             if (_startOnAwake)
             {
                 _autoNextDialog = _startOnAwake;
-                dialogController.SetDialogue(defaultDialog, textTypingSpeed);
+                dialogController.SetDialogue(defaultDialog, textTypingDelay);
                 StartCoroutine(StartIntervalDialogue());
             }
         }
@@ -69,7 +69,7 @@ namespace _Scripts.DialogSystem
             //Si se trata de un dialogo de intervalos, solo se muestra el dialogue, no se usa defaultDialogue
             if (_autoNextDialog)
             {
-                dialogController.SetDialogue(firstDialog, textTypingSpeed);
+                dialogController.SetDialogue(firstDialog, textTypingDelay);
                 StartCoroutine(StartIntervalDialogue());
                 return;
             }
@@ -81,18 +81,18 @@ namespace _Scripts.DialogSystem
                 //Si es el mal personaje que estâ interactuando
                 if (isWrongCharacter)
                 {
-                    dialogController.SetDialogue(wrongCharacterDialog, textTypingSpeed);
+                    dialogController.SetDialogue(wrongCharacterDialog, textTypingDelay);
                 } 
                 //Si no hay frases de default, se pone el dialogo normal
                 else if (_isFirstInteraction && firstDialog.sentences.Length > 0)
                 {
-                    dialogController.SetDialogue(firstDialog, textTypingSpeed);
+                    dialogController.SetDialogue(firstDialog, textTypingDelay);
                     _isFirstInteraction = false;
                 }
                 //Si no es la primera interacciôn y hay frases de default, se muestra solo el defaultDialogue
                 else if (defaultDialog.sentences.Length > 0) 
                 {
-                    dialogController.SetDialogue(defaultDialog, textTypingSpeed);
+                    dialogController.SetDialogue(defaultDialog, textTypingDelay);
                 }
                 
                 _isDialogueTriggered = true;

@@ -2,6 +2,8 @@ using System;
 using _Scripts.DialogSystem;
 using _Scripts.Interfaces;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 namespace _Scripts.Controllers
 {
     
@@ -11,10 +13,15 @@ namespace _Scripts.Controllers
         public SpriteRenderer interactSprite;
         public string inDialogActionMapName = "InDialog";
 
-        Animator _animator;
-        DialogTrigger _dialogueTrigger;
-        bool _playerInRange = false;
+        public bool lookAtPlayerWhenInteracting;
+        
+        private Animator _animator;
+        private DialogTrigger _dialogueTrigger;
+        private bool _playerInRange = false;
 
+        [SerializeField] private UnityEvent onAbleToInteract; 
+        [SerializeField] private UnityEvent onUnableToInteract;    
+        
         void Awake()
         {
             _animator = GetComponent<Animator>();
@@ -40,6 +47,8 @@ namespace _Scripts.Controllers
             {
                 interactSprite.gameObject.SetActive(true);
                 _playerInRange = true;
+                
+                onAbleToInteract?.Invoke();
             }
         }
         
@@ -49,6 +58,8 @@ namespace _Scripts.Controllers
             {
                 interactSprite.gameObject.SetActive(false);
                 _playerInRange = false;
+                
+                onUnableToInteract?.Invoke();
             }
         }
     }

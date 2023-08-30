@@ -73,10 +73,6 @@ namespace _Scripts.DialogSystem
                 return;
             }
 
-            //Impedimos que el personaje se mueva
-            //GameManager.Instance.CanPlayerMove = false;
-            //GameManager.Instance.CanPlayerOpenInventory = false;
-            
             currentSentence = sentencesSorted.Dequeue();
             if (spritesSorted.Count != 0)
             {

@@ -5,23 +5,27 @@ using _Scripts.Enums;
 using _Scripts.Utils;
 using SuperTiled2Unity;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers
 {
+    [RequireComponent(typeof(Rigidbody2D))]
     public class NpcMovement : MonoBehaviour
     {
-        public bool MoveBetweenPoints;
-        public Transform[] PointsToMove;
+        public bool moveBetweenPoints;
+        public Transform[] pointsToMove;
 
-        [Range(-1f, -10f)] public float Speed = 0.5f;
+        [Range(-1f, -10f)] public float speed = 0.5f;
 
-        public float TimeToWaitBeforeNextPoint = 2;
+        public float timeToWaitBeforeNextPoint = 2;
 
-        public bool LookAtFixedDirection = false;
-        public LookingDirection LookingDirection = LookingDirection.Down;
+        public bool lookAtFixedDirection = false;
+        public LookingDirection fixedLookingDirection = LookingDirection.Down;
 
+        public bool loopMovement = false;
+        
         private Rigidbody2D _rb;
-        private Animator _animator;
+        [SerializeField] private Animator animator;
 
         private float _currentTime;
         private bool _moving;
@@ -30,7 +34,7 @@ namespace _Scripts.Controllers
         private int _nextPointIndex = 1;
         
         private Vector2 _startPos, _endPos;
-        private Vector2 _velocity;
+        private Vector2 _calculatedVelocity;
 
         private void Awake()
         {
@@ -39,7 +43,7 @@ namespace _Scripts.Controllers
 
         private void Start()
         {
-            if (!MoveBetweenPoints) return;
+            if (!moveBetweenPoints) return;
             
             PreparePointsToMoveList();
             StartAutoMoving();
@@ -47,15 +51,16 @@ namespace _Scripts.Controllers
 
         private void StartAutoMoving()
         {
-            if (PointsToMove.IsEmpty())
+            if (pointsToMove.IsEmpty())
             {
                 var message = string.Format(ConsoleMessages.NoPointsAssignedToNpc, name);
                 Debug.LogWarning(message);
                 return;
             }
 
-            DefineNewVelocity();
             _moving = true;
+            
+            NextMove();
         }
         
         private void Update()
@@ -63,44 +68,135 @@ namespace _Scripts.Controllers
             if (!_moving) return;
 
             Vector2 currentPos = transform.position;
-            Vector2 nextPos = _pointsToMoveList[_nextPointIndex];
-            
-            Debug.Log((currentPos - nextPos).sqrMagnitude < 0.01f);
+            var nextPos = _pointsToMoveList[_nextPointIndex];
 
             if ((currentPos - nextPos).sqrMagnitude < 0.01f)
             {
-                Debug.Log("Llegamos al punto! Definimos nueva velocidad");
-
                 _nextPointIndex++;
-                _nextPointIndex = Mathf.Clamp(_nextPointIndex, 0, _pointsToMoveList.Count);
+
+                if (_nextPointIndex > _pointsToMoveList.Count - 1)
+                {
+                    if (!loopMovement)
+                    {
+                        PauseMovement();
+                        Debug.Log("no loopeamos. Paramos!");
+                        return;
+                    }
+                    
+                    _nextPointIndex = 0;
+                }
                 
-                DefineNewVelocity();
+                NextMove();
             }
         }
+        
+        private void SetSpeedAnimationValue(bool isActive)
+        {
+            float value = 0;
 
-        private void DefineNewVelocity()
+            if (isActive)
+                value = 1;
+            
+            animator.SetFloat(CharacterAnimationValues.Speed.ToString(), value);
+        }
+
+        private Vector2 CalculateNextDirectionNormalized()
         {
             Vector2 currentPos = transform.position;
             Vector2 nextPos = _pointsToMoveList[_nextPointIndex];
-                
-            var newVelocity = (currentPos - nextPos).normalized * Speed;
-            _rb.velocity = newVelocity;
+
+           return (currentPos - nextPos).normalized;
+        }
+        
+        private void SetVelocity(Vector2 directionNormalized)
+        {
+            _calculatedVelocity = directionNormalized * speed;
+            
+            _rb.velocity = _calculatedVelocity;
         }
 
+        private void SetLookingDirection(Vector2 directionNormalized = new Vector2(), 
+            LookingDirection defaultLookingDirection = LookingDirection.None)
+        {
+            float horizontalValue = 0, verticalValue = 0;
+            
+            if (directionNormalized.x > 0.05 || defaultLookingDirection == LookingDirection.Left)
+            {
+                horizontalValue = -1;
+                verticalValue = 0;
+            }
+        
+            if (directionNormalized.x < -0.05 || defaultLookingDirection == LookingDirection.Right)
+            {
+                horizontalValue = 1;
+                verticalValue = 0;
+            }
+            
+            if (directionNormalized.y > 0.05 || defaultLookingDirection == LookingDirection.Down)
+            {
+                horizontalValue = 0;
+                verticalValue = -1;
+            }
+            
+            if (directionNormalized.y < -0.05 || defaultLookingDirection == LookingDirection.Up)
+            {
+                horizontalValue = 0;
+                verticalValue = 1; 
+            }
+            
+            animator.SetFloat(CharacterAnimationValues.LastHorizontal.ToString(), horizontalValue);
+            animator.SetFloat(CharacterAnimationValues.LastVertical.ToString(), verticalValue);
+        }
+        
+        public void PauseMovement()
+        {
+            _moving = false;
+            _rb.velocity = new Vector2();
+            
+            SetSpeedAnimationValue(_moving);
+        }
+
+        public void ResumeMovement()
+        {
+            _moving = true;
+
+            NextMove();
+        }
+
+        /// <summary>
+        /// Make the next NPC move applying its own rigidbody velocity and animation.
+        ///
+        /// Just calle once, not every frame.
+        /// </summary>
+        private void NextMove()
+        {
+            var directionNormalized = CalculateNextDirectionNormalized();
+            
+            SetVelocity(directionNormalized);
+
+            if (!lookAtFixedDirection)
+                SetLookingDirection(directionNormalized: directionNormalized);
+            else
+                SetLookingDirection(defaultLookingDirection: fixedLookingDirection);
+
+
+            SetSpeedAnimationValue(true);
+        }
+        
         private void PreparePointsToMoveList()
         {
             _pointsToMoveList.Add(transform.position);
 
-            foreach (var transform in PointsToMove)
+            foreach (var transform in pointsToMove)
             {
                 _pointsToMoveList.Add(transform.position);
+                Debug.Log(transform);
             }
         }
 
         private void SetComponents()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>();
 
             _pointsToMoveList = new List<Vector2>();
         }
