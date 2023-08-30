@@ -2254,13 +2254,17 @@ MonoBehaviour:
     sentences:
     - "Esc\xFAchame, Twilight..."
     - "Puedo... hacer... \xA1zoom!"
-    spritesForSentences: []
+    spritesForSentences:
+    - {fileID: 113252637, guid: 4eb51419e7583654ebb37dc6abb11c12, type: 3}
+    - {fileID: 1096328786, guid: 4eb51419e7583654ebb37dc6abb11c12, type: 3}
   defaultDialog:
     title: Pinky
     sentences:
     - "\xBFLo ves?"
     - "\xA1Est\xE1s cerca mio!"
-    spritesForSentences: []
+    spritesForSentences:
+    - {fileID: 1084557355, guid: 4eb51419e7583654ebb37dc6abb11c12, type: 3}
+    - {fileID: -286476638, guid: 4eb51419e7583654ebb37dc6abb11c12, type: 3}
   wrongCharacterDialog:
     title: Pinky
     sentences:
@@ -2496,6 +2500,10 @@ PrefabInstance:
     - target: {fileID: 3581888208864079442, guid: 8c710c0e656cf5d47b75e77a9173373b, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475290989647865764, guid: 8c710c0e656cf5d47b75e77a9173373b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
