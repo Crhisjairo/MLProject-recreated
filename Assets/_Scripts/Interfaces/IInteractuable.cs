@@ -1,6 +1,6 @@
 using _Scripts.Controllers;
 
-namespace _Scripts.Interactuable
+namespace _Scripts.Interfaces
 {
     public interface IInteractuable
     {

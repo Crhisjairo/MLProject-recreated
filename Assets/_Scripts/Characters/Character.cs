@@ -18,11 +18,11 @@ namespace _Scripts.Characters
         [SerializeField] SoundEffectEmitter soundEffectsEmitter;
         [SerializeField] new ParticleSystem particleSystem;
         
-        Animator _animator;
-        SpriteRenderer _spriteRenderer;
-        CapsuleCollider2D _capsuleCollider;
+        private Animator _animator;
+        private SpriteRenderer _spriteRenderer;
+        private CapsuleCollider2D _capsuleCollider;
         
-        Vector2 _lookingDirection = Vector2.down;
+        private Vector2 _lookingDirection = Vector2.down;
         
         #region Character specs
         
@@ -165,12 +165,9 @@ namespace _Scripts.Characters
             _animator.SetFloat(CharacterAnimationValues.LastVertical.ToString(), verticalValue);
         }
 
-        public void SetAnimationByMovingDirection(Vector2 movement)
+        public void SetSpeedAnimationValueByMovement(Vector2 movement)
         {
-            //Animacion
-            _animator.SetFloat(CharacterAnimationValues.Horizontal.ToString(), movement.x);
-            _animator.SetFloat(CharacterAnimationValues.Vertical.ToString(), movement.y);
-            _animator.SetFloat(CharacterAnimationValues.Speed.ToString(), movement.sqrMagnitude); //La velocidad de movimiento
+            _animator.SetFloat(CharacterAnimationValues.Speed.ToString(), movement.sqrMagnitude);
         }
 
         public ParticleSystem GetParticleSystem()

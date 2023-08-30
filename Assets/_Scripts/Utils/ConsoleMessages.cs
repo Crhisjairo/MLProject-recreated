@@ -6,5 +6,8 @@ namespace _Scripts.Utils
                                                         "Initializing without {0} component.";
 
         public const string SingletonError = "Cannot have two {0} instances.";
+        public const string NoPointsAssignedToNpc = "No points was assigned to NPC {0} and \"Move Between Points\" " +
+                                                    "is checked. Please, add points where to move NPC or disable " +
+                                                    "\"Move Between Point\". ";
     }
 }

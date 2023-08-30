@@ -1,6 +1,6 @@
 using System;
 using _Scripts.DialogSystem;
-using _Scripts.Interactuable;
+using _Scripts.Interfaces;
 using UnityEngine;
 namespace _Scripts.Controllers
 {

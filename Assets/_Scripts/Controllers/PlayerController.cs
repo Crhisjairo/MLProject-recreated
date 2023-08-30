@@ -1,10 +1,7 @@
-using System;
 using System.Collections;
-using _Scripts.Characters;
 using _Scripts.Enums;
-using _Scripts.Interactuable;
-using _Scripts.Utils;
-using UnityEditor.VersionControl;
+using _Scripts.Interfaces;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -75,7 +72,8 @@ namespace _Scripts.Controllers
             
             activeCharacter.SetLookingDirection(movement);
             activeCharacter.SetAnimationByIdleDirection(movement);
-            activeCharacter.SetAnimationByMovingDirection(movement);
+            
+            activeCharacter.SetSpeedAnimationValueByMovement(movement);
         }
         
         public void StartRunning(InputAction.CallbackContext inputContext)
