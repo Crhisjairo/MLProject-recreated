@@ -17,10 +17,12 @@ namespace _Scripts.Characters
         
         [SerializeField] SoundEffectEmitter soundEffectsEmitter;
         [SerializeField] new ParticleSystem particleSystem;
-        Animator _animator;
-        SpriteRenderer _spriteRenderer;
         
-        Vector2 _frontDirection = Vector2.down;
+        private Animator _animator;
+        private SpriteRenderer _spriteRenderer;
+        private CapsuleCollider2D _capsuleCollider;
+        
+        private Vector2 _lookingDirection = Vector2.down;
         
         #region Character specs
         
@@ -112,20 +114,25 @@ namespace _Scripts.Characters
             //Guardamos la direccion en la que miramos segun el axis
             if (direction.x > 0.01f)
             {
-                _frontDirection = Vector2.right;
+                _lookingDirection = Vector2.right;
             }
             if (direction.x < -0.01f)
             {
-                _frontDirection = Vector2.left;
+                _lookingDirection = Vector2.left;
             }
             if (direction.y > 0.01f)
             {
-                _frontDirection = Vector2.up;
+                _lookingDirection = Vector2.up;
             }
             if (direction.y < -0.01f)
             {
-                _frontDirection = Vector2.down;
+                _lookingDirection = Vector2.down;
             }
+        }
+
+        public Vector2 GetLookingDirection()
+        {
+            return _lookingDirection;
         }
         
         //TODO maybe move that to SetLookingDirection
@@ -133,22 +140,22 @@ namespace _Scripts.Characters
         {
             float horizontalValue = 0, verticalValue = 0;
 
-            if (_frontDirection.x > 0.01f)
+            if (_lookingDirection.x > 0.01f)
             {
                 horizontalValue = 1;
                 verticalValue = 0;
             }
-            if (_frontDirection.x < -0.01f)
+            if (_lookingDirection.x < -0.01f)
             {
                 horizontalValue = -1;
                 verticalValue = 0;
             }
-            if (_frontDirection.y > 0.01f)
+            if (_lookingDirection.y > 0.01f)
             {
                 horizontalValue = 0;
                 verticalValue = 1;
             }
-            if (_frontDirection.y < -0.01f)
+            if (_lookingDirection.y < -0.01f)
             {
                 horizontalValue = 0;
                 verticalValue = -1;
@@ -158,23 +165,26 @@ namespace _Scripts.Characters
             _animator.SetFloat(CharacterAnimationValues.LastVertical.ToString(), verticalValue);
         }
 
-        public void SetAnimationByMovingDirection(Vector2 movement)
+        public void SetSpeedAnimationValueByMovement(Vector2 movement)
         {
-            //Animacion
-            _animator.SetFloat(CharacterAnimationValues.Horizontal.ToString(), movement.x);
-            _animator.SetFloat(CharacterAnimationValues.Vertical.ToString(), movement.y);
-            _animator.SetFloat(CharacterAnimationValues.Speed.ToString(), movement.sqrMagnitude); //La velocidad de movimiento
+            _animator.SetFloat(CharacterAnimationValues.Speed.ToString(), movement.sqrMagnitude);
         }
 
         public ParticleSystem GetParticleSystem()
         {
             return particleSystem;
         }
+
+        public void SetColliderActive(bool isActive)
+        {
+            _capsuleCollider.enabled = isActive;
+        }
         
         private void SetComponents()
         {
             _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
+            _capsuleCollider = GetComponent<CapsuleCollider2D>();
 
             if (!TryGetComponent(out soundEffectsEmitter))
             {

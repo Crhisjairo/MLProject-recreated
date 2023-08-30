@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
-using _Scripts.Characters;
 using _Scripts.Enums;
-using _Scripts.Utils;
-using UnityEditor.VersionControl;
+using _Scripts.Interfaces;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +9,7 @@ namespace _Scripts.Controllers
 {
     
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(CapsuleCollider2D))]
+    [RequireComponent(typeof(PlayerInput))]
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] LayerMask _enemyLayers;
@@ -21,19 +19,20 @@ namespace _Scripts.Controllers
         [SerializeField] float _defaultInvulnerabilityTime = 0.7f;
 
         public float attackRate = 2f; // TODO maybe move that to Character class
-        public float attackRange = 0.25f; // TODO maybe move that to Character class
+        public float attackRange = 1f; // TODO maybe move that to Character class
         public Vector2 distanceAttackRange; // TODO maybe move that to Character class
         public float _nextAttackTime; // TODO maybe move that to Character class
+        public float interactionDistance = 0.5f;
         
         bool IsInvulnerable { set; get; }
 
         CharactersManager _characterManager;
+        PlayerInput _playerInput;
 
         Rigidbody2D _rb;
 
         float diagonalLimiter = 0.9f; // 0.7 default
         Vector2 movement;
-        Vector2 _frontDirection = Vector2.down;
         
         float currentSpeed;
         
@@ -73,7 +72,8 @@ namespace _Scripts.Controllers
             
             activeCharacter.SetLookingDirection(movement);
             activeCharacter.SetAnimationByIdleDirection(movement);
-            activeCharacter.SetAnimationByMovingDirection(movement);
+            
+            activeCharacter.SetSpeedAnimationValueByMovement(movement);
         }
         
         public void StartRunning(InputAction.CallbackContext inputContext)
@@ -163,42 +163,19 @@ namespace _Scripts.Controllers
         {
             if (!inputContext.performed)
                 return;
-
-            //Origen de donde parte el rayo
-            Vector2 origin = _characterManager.ActiveCharacter.transform.position;
-            float distance = 1.5f; //distancia maxima del rayo
-                
-            //TODO
-            Collider2D hit = Physics2D.OverlapCircle(origin, 1f, 3);
-
-            Debug.Log(hit.name);
             
-            if (hit)
-            {
-                //InteractWith(hit);
-            }
+            Vector2 origin = transform.position;
+            Vector2 lookingDirection = _characterManager.ActiveCharacter.GetLookingDirection();
             
-            Debug.DrawRay(origin, _frontDirection * distance, Color.red);
-        }
-        
-        public void InteractWith(RaycastHit2D hit)
-        {
-            if (hit.collider.gameObject.tag.Equals("NPC")  )
-            {
-                //Si es un NPC (que es un Interactuable), cambiamos de estado
-                //Agregar condiciones con tag para saber con quiên se debe interactuar
-                // IInteractuable interactuable = hit.collider.GetComponent<NPCController>();
-                // interactuable.Interact(this);
-            }
+            // The ~ operator inverts a bitmask, so it detects collide against everything except layer "Player"
+            Collider2D collider = Physics2D.OverlapCircle(origin, interactionDistance, ~LayerMask.GetMask("Player"));
             
-            if (hit.collider.CompareTag("Sign"))
+            if (collider)
             {
-                //LLamamos al dialogueTrigger del letrero
-                // IInteractuable interactuable = hit.collider.GetComponent<Sign>();
-                // interactuable.Interact(this);
+                IInteractuable interactuable = collider.gameObject.GetComponent<IInteractuable>();
+                interactuable.Interact(this);
             }
         }
-        
         
         #region Calculations
 
@@ -209,33 +186,40 @@ namespace _Scripts.Controllers
         /// <returns>Posicion del centro de ataque relativo al personaje</returns>
         public Vector2 CalculateAttackOffset()
         {
-            Vector3 position = _characterManager.ActiveCharacter.transform.position;
-            Vector2 relDirection =  _frontDirection.normalized + new Vector2(position.x, position.y);
+            Vector3 position = transform.position;
+            
+            Vector2 lookingDirection = Vector2.down;
 
-            if (_frontDirection.x > 0.01) //Derecha
+            // This condition is added to draw gizmos on debug
+            if (_characterManager is not null)
+            {
+                lookingDirection = _characterManager.ActiveCharacter.GetLookingDirection();
+            }
+            
+            Vector2 relDirection =  lookingDirection.normalized + new Vector2(position.x, position.y);
+
+            if (lookingDirection.x > 0.01) //Derecha
             {
                 relDirection.x += distanceAttackRange.x;
             }
 
-            if (_frontDirection.x < -0.01) //Izquierda
+            if (lookingDirection.x < -0.01) //Izquierda
             {
                 relDirection.x -= distanceAttackRange.x;
             }
             
-            if (_frontDirection.y > 0.01) //Derecha
+            if (lookingDirection.y > 0.01) //Derecha
             {
                 relDirection.y += distanceAttackRange.y;
             }
 
-            if (_frontDirection.y < -0.01) //Izquierda
+            if (lookingDirection.y < -0.01) //Izquierda
             {
                 relDirection.y -= distanceAttackRange.y;
             }
 
             return relDirection;
         }
-        
-        
         
         private IEnumerator StartInvulnerabilityTimer(float time)
         {
@@ -301,25 +285,49 @@ namespace _Scripts.Controllers
             StartCoroutine(StartInvulnerabilityTimer(time));
         }
 
+        public string GetActiveCharacterName()
+        {
+            return _characterManager.ActiveCharacter.CharacterName;
+        }
+
     #endregion
 
         void SetComponents()
         {
             _rb = GetComponent<Rigidbody2D>();
             _characterManager = new CharactersManager(_charactersModels, startingCharacterIndex);
+            _playerInput = GetComponent<PlayerInput>();
+        }
+        
+        public void ChangeActionMapTo(string inputMap)
+        {
+            _playerInput.SwitchCurrentActionMap(inputMap);
         }
 
-        #region DebugRegion
+        #region Debug
 
-        private void OnDrawGizmosSelected()
+        void OnDrawGizmosSelected()
+        {
+            DrawAttackSphereGizmo();
+            DrawInteractionSphereGizmo();
+        }
+
+        void DrawAttackSphereGizmo()
         {
             Vector2 attackDistance = CalculateAttackOffset();
         
-            //Gizmos.DrawWireSphere(attackDistance, attackRange);
-        
-            Gizmos.DrawWireSphere(_characterManager.ActiveCharacter.transform.position, 1.5f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(attackDistance, attackRange);
         }
-
+        
+        void DrawInteractionSphereGizmo()
+        {
+            Vector2 origin = transform.position;
+            
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(origin, interactionDistance);
+        }
+        
         #endregion
     }
 }
