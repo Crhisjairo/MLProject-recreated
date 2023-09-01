@@ -12,21 +12,22 @@ namespace _Scripts.Characters
     [System.Serializable]
     public abstract class Character: MonoBehaviour
     {
+        public static int CurrentCoins { private set; get; }
+        
         public Sprite iconSprite;
         public Sprite characterSprite;
-        
+
         [SerializeField] SoundEffectEmitter soundEffectsEmitter;
         [SerializeField] new ParticleSystem particleSystem;
-        
+
         private Animator _animator;
         private SpriteRenderer _spriteRenderer;
         private CapsuleCollider2D _capsuleCollider;
-        
+
         private Vector2 _lookingDirection = Vector2.down;
-        
+
+
         #region Character specs
-        
-        public static int CurrentCoins { private set; get; }
 
         public string CharacterName { protected set; get; }
         [SerializeField] int maxLife = 13;
@@ -84,6 +85,11 @@ namespace _Scripts.Characters
         
         public void TakeDamage(int damage)
         {
+            if (currentLife <= 0)
+            {
+                return;
+            }
+            
             currentLife -= damage;
         }
 
@@ -99,6 +105,21 @@ namespace _Scripts.Characters
             currentLife += newLife;
         }
 
+        public void AddToMaxLife(int amount)
+        {
+            maxLife += amount;
+        }
+        
+        public int GetCurrenLife()
+        {
+            return currentLife;
+        }
+
+        public int GetMaxLife()
+        {
+            return maxLife;
+        }
+        
         private void SetFullLife()
         {
             currentLife = maxLife;

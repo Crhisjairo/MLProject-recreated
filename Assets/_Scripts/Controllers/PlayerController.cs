@@ -1,8 +1,10 @@
 using System.Collections;
+using _Scripts.Characters;
 using _Scripts.Enums;
 using _Scripts.Interfaces;
 
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace _Scripts.Controllers
@@ -23,18 +25,51 @@ namespace _Scripts.Controllers
         public Vector2 distanceAttackRange; // TODO maybe move that to Character class
         public float _nextAttackTime; // TODO maybe move that to Character class
         public float interactionDistance = 0.5f;
+
+        /// <summary>
+        /// It pass the current amount of the maximum life.
+        ///
+        /// Ex: maxLife = 12
+        /// </summary>
+        public UnityEvent<int> onMaxLifeUpdate;
+
+        /// <summary>
+        /// It pass the current amount of life when life getted.
+        ///
+        /// Ex: life = 5
+        /// </summary>
+        public UnityEvent<int> onLifeGetted;
         
-        bool IsInvulnerable { set; get; }
+        /// <summary>
+        /// It pass the current amount of life when damage taken.
+        ///
+        /// Ex: life = 4
+        /// </summary>
+        public UnityEvent<int> onDamageTaken;
 
-        CharactersManager _characterManager;
-        PlayerInput _playerInput;
-
-        Rigidbody2D _rb;
-
-        float diagonalLimiter = 0.9f; // 0.7 default
-        Vector2 movement;
+        /// <summary>
+        /// It pass the current amount of coins.
+        ///
+        /// Ex: coins = 10
+        /// </summary>
+        public UnityEvent<int> onCoinsUpdate;
         
-        float currentSpeed;
+        /// <summary>
+        /// It pass the current active character.
+        /// </summary>
+        public UnityEvent<Character> onCharacterChange;
+
+        private bool IsInvulnerable { set; get; }
+
+        private CharactersManager _characterManager;
+        private PlayerInput _playerInput;
+
+        private Rigidbody2D _rb;
+
+        private float diagonalLimiter = 0.9f; // 0.7 default
+        private Vector2 movement;
+        
+        private float currentSpeed;
         
         void Awake()
         {
@@ -44,11 +79,24 @@ namespace _Scripts.Controllers
         void Start()
         {
             currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
+            
+           UpdaterAllPlayerUI();
         }
         
         void FixedUpdate()
         {
             _rb.MovePosition(_rb.position + movement * (currentSpeed * Time.fixedDeltaTime));
+        }
+
+        /// <summary>
+        /// This method must be called JUST WHEN NECESSARY, because it updates all player UI elements.
+        /// </summary>
+        public void UpdaterAllPlayerUI()
+        {
+            onMaxLifeUpdate?.Invoke(_characterManager.ActiveCharacter.GetMaxLife());
+            onLifeGetted?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
+            onCoinsUpdate?.Invoke(Character.CurrentCoins);
+            onCharacterChange?.Invoke(_characterManager.ActiveCharacter);
         }
         
         public void Move(InputAction.CallbackContext inputContext)
@@ -131,26 +179,36 @@ namespace _Scripts.Controllers
                 return;
             }
             
-            //Movemos la câmara
             ShakeCamera(1.5f, 0.1f);
-            //Animamos al personaje
-            _characterManager.ActiveAnimator.SetTrigger("Damaged");
-            //Activamos un countdown para la vulnerabilidad
+            
+            _characterManager.ActiveAnimator.SetTrigger(CharacterAnimationStates.Damaged.ToString());
+            
             ActivateInvulnerability(_defaultInvulnerabilityTime);
-            //Hacemos daño
-            _characterManager.ActiveCharacter.TakeDamage(damageAmount); //Bajamos la vida del jugador
-            // TODO Notify HUD
+            
+            _characterManager.ActiveCharacter.TakeDamage(damageAmount);
+            
+            onDamageTaken?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
         }
         
         public void TakeLife(int lifeAmount)
         {
-            _characterManager.ActiveCharacter.TakeLife(lifeAmount); //Damos vida desde el otro script
-            // TODO Notify HUD
+            _characterManager.ActiveCharacter.TakeLife(lifeAmount);
+            
+            onLifeGetted?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
         }
+
+        public void TakeExtraHeart(int amount)
+        {
+            _characterManager.ActiveCharacter.AddToMaxLife(amount);
+            
+            onMaxLifeUpdate?.Invoke(_characterManager.ActiveCharacter.GetMaxLife());
+        }
+        
         public void AddCoins(int amount)
         {
             _characterManager.ActiveCharacter.AddCoins(amount);
-            // TODO Notify HUD
+            
+            onCoinsUpdate?.Invoke(Character.CurrentCoins);
         }
 
         public void PlayAnimation(string animName)
