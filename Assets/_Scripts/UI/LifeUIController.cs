@@ -43,16 +43,18 @@ namespace _Scripts.UI
             {
                 _heartImages[i].enabled = false;
             }
+            
+            //TODO Set custom animation here
         }
 
-        public void SetFilledHeartsTo(int amount)
+        private void SetFilledHeartsTo(int amount)
         {
             if (amount < 0)
             {
                 Debug.LogError(ConsoleMessages.LifeLowerThanZeroUI);
                 amount = 0;
             }
-
+            
             for (int i = 0; i < amount; i++)
             {
                 _heartImages[i].sprite = filledHeartSprite;
@@ -62,6 +64,18 @@ namespace _Scripts.UI
             {
                 _heartImages[i].sprite = emptyHeartSprite;
             }
+        }
+
+        public void AddHeart(int amount)
+        {
+            SetFilledHeartsTo(amount);
+            //TODO custom animations here
+        }
+
+        public void RemoveHeart(int amount)
+        {
+            SetFilledHeartsTo(amount);
+            //TODO custom animations here
         }
     }
 }

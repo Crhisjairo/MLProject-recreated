@@ -15,6 +15,10 @@ namespace _Scripts.UI
         private Vector3 _startAnimOffset = new Vector3(240, 0, 0);
 
         private Vector2 _startAnimPosition, _endAnimPosition;
+
+        private bool _isPlayingAnimator = false;
+
+        private Coroutine _startAnimationCoroutine;
         
         private void Start()
         {
@@ -28,14 +32,25 @@ namespace _Scripts.UI
 
         public void SetCoinsAmountTo(int amount)
         {
-            StartCoroutine(StartAnimation());
+            if (!_isPlayingAnimator)
+            {
+                _startAnimationCoroutine = StartCoroutine(StartAnimation());
+            }
+            else
+            {
+                StopCoroutine(_startAnimationCoroutine);
+                _startAnimationCoroutine = StartCoroutine(StartAnimation());
+            }
+            
             
             coinsAmountText.SetText(amount.ToString());
         }
 
         private IEnumerator StartAnimation()
         {
+            _isPlayingAnimator = true;
             animator.enabled = true;
+            
             LeanTween.moveX(gameObject, _endAnimPosition.x, animationTime).setEaseInOutBack();
             
             yield return new WaitForSeconds(onScreenTime);
@@ -44,6 +59,7 @@ namespace _Scripts.UI
             
             yield return new WaitForSeconds(animationTime);
 
+            _isPlayingAnimator = false;
             animator.enabled = false;
         }
     }

@@ -34,11 +34,18 @@ namespace _Scripts.Controllers
         public UnityEvent<int> onMaxLifeUpdate;
 
         /// <summary>
-        /// It pass the current amount of life.
+        /// It pass the current amount of life when life getted.
         ///
         /// Ex: life = 5
         /// </summary>
-        public UnityEvent<int> onLifeUpdate;
+        public UnityEvent<int> onLifeGetted;
+        
+        /// <summary>
+        /// It pass the current amount of life when damage taken.
+        ///
+        /// Ex: life = 4
+        /// </summary>
+        public UnityEvent<int> onDamageTaken;
 
         /// <summary>
         /// It pass the current amount of coins.
@@ -87,7 +94,7 @@ namespace _Scripts.Controllers
         public void UpdaterAllPlayerUI()
         {
             onMaxLifeUpdate?.Invoke(_characterManager.ActiveCharacter.GetMaxLife());
-            onLifeUpdate?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
+            onLifeGetted?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
             onCoinsUpdate?.Invoke(Character.CurrentCoins);
             onCharacterChange?.Invoke(_characterManager.ActiveCharacter);
         }
@@ -180,14 +187,14 @@ namespace _Scripts.Controllers
             
             _characterManager.ActiveCharacter.TakeDamage(damageAmount);
             
-            onLifeUpdate?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
+            onDamageTaken?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
         }
         
         public void TakeLife(int lifeAmount)
         {
             _characterManager.ActiveCharacter.TakeLife(lifeAmount);
             
-            onLifeUpdate?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
+            onLifeGetted?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
         }
 
         public void TakeExtraHeart(int amount)

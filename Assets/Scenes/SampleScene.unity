@@ -2659,13 +2659,52 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onLifeUpdate:
+  onLifeGetted:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1682845670}
         m_TargetAssemblyTypeName: _Scripts.UI.LifeUIController, Assembly-CSharp
-        m_MethodName: SetFilledHeartsTo
+        m_MethodName: AddHeart
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 220305387}
+        m_TargetAssemblyTypeName: _Scripts.UI.CharacterIconUIController, Assembly-CSharp
+        m_MethodName: PlayLifeTakeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1682845670}
+        m_TargetAssemblyTypeName: _Scripts.UI.LifeUIController, Assembly-CSharp
+        m_MethodName: RemoveHeart
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 220305387}
+        m_TargetAssemblyTypeName: _Scripts.UI.CharacterIconUIController, Assembly-CSharp
+        m_MethodName: PlayDamageAnimation
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4065,6 +4104,18 @@ PrefabInstance:
     - target: {fileID: 6536618503885255399, guid: 8c710c0e656cf5d47b75e77a9173373b, type: 3}
       propertyPath: m_PreserveAspect
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566675535304807754, guid: 8c710c0e656cf5d47b75e77a9173373b, type: 3}
+      propertyPath: animationTime
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566675535304807754, guid: 8c710c0e656cf5d47b75e77a9173373b, type: 3}
+      propertyPath: cameraShake.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566675535304807754, guid: 8c710c0e656cf5d47b75e77a9173373b, type: 3}
+      propertyPath: cameraShake.y
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 6919107684339760635, guid: 8c710c0e656cf5d47b75e77a9173373b, type: 3}
       propertyPath: currentAmount
