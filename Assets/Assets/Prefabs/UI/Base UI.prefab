@@ -68,7 +68,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -86,6 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3451572305135006952}
   - component: {fileID: 3810835109259910261}
+  - component: {fileID: 5980605089070615532}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -139,6 +140,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &5980605089070615532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251572315657665683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9063a0691bd5422d8e8d66b6dce804cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifesGameObject: {fileID: 3923431296231656061}
+  emptyHeart: {fileID: 21300000, guid: d63713939e9ba974698c37cb9ac6ab98, type: 3}
+  filledHeart: {fileID: 21300000, guid: 61fb9ecce04358246901dadbdfbd2230, type: 3}
 --- !u!1 &1131841443860200451
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +223,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -473,7 +489,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -652,7 +668,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1103,7 +1119,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1121,6 +1137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 453571102863436296}
   - component: {fileID: 7065290527767309864}
+  - component: {fileID: 6919107684339760635}
   m_Layer: 5
   m_Name: Life
   m_TagString: Untagged
@@ -1187,6 +1204,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &6919107684339760635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3923431296231656061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93de019f410a46519d107f78db0c7caf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4275890263547804936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,7 +1419,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1504,7 +1533,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1580,7 +1609,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1886,7 +1915,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1962,7 +1991,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2038,7 +2067,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2114,7 +2143,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2190,7 +2219,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
