@@ -149,24 +149,16 @@ namespace _Scripts.Controllers
 
             if (Time.time >= _nextAttackTime)
             {
-                //Animamos al personaje
                 _characterManager.ActiveAnimator.SetTrigger("Attack");
                 
-                //Calculamos la direccion del ataque
-                //Creamos la direcciôn y la distance de ataque relativa al personaje
                 Vector2 attackOffset = CalculateAttackOffset();
 
-                //Ponemos las particulas en la misma posiciôn de ataque
                 _characterManager.ActiveParticleSystem.gameObject.transform.position = new Vector3(attackOffset.x, attackOffset.y, -1);
                 _characterManager.ActiveParticleSystem.Play();
-                
-                //Reproducimos el sonido
                 _characterManager.ActiveCharacter.PlaySoundSfx(CharacterSfx.UnicornAttackSfx);
                 
-                //Atacamos a los enemigos
                 AttackEnnemiesOnOverlapCircle(attackOffset);
                 
-                //Recalculamos el tiempo segun el attackRate
                 _nextAttackTime = Time.time + 1f / attackRate;
             }
         }
@@ -325,14 +317,13 @@ namespace _Scripts.Controllers
         
         public void AttackEnnemiesOnOverlapCircle(Vector2 attackOffset)
         {
-            Collider2D[] hitEnnemies = Physics2D.OverlapCircleAll(attackOffset, attackRange, _enemyLayers);
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackOffset, attackRange, _enemyLayers);
             
-            //Hacemos dano a los enemigos
-            foreach (var enemyCollider in hitEnnemies)
+            foreach (var enemyCollider in hitEnemies)
             {
                 if (!enemyCollider.isTrigger)
                 {
-                    //Debug.Log("Enemy hit: " + enemyCollider.name);
+                    Debug.Log("Enemy hit: " + enemyCollider.name);
                     // enemyCollider.GetComponent<Enemy>().OnEnemyAttacked(currentCharacterSpecs.attackDamage);
                 }
             }
