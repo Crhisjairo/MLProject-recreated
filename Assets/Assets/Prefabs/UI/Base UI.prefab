@@ -86,7 +86,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3451572305135006952}
   - component: {fileID: 3810835109259910261}
-  - component: {fileID: 5980605089070615532}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -140,21 +139,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &5980605089070615532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 251572315657665683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9063a0691bd5422d8e8d66b6dce804cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifesGameObject: {fileID: 3923431296231656061}
-  emptyHeart: {fileID: 21300000, guid: d63713939e9ba974698c37cb9ac6ab98, type: 3}
-  filledHeart: {fileID: 21300000, guid: 61fb9ecce04358246901dadbdfbd2230, type: 3}
 --- !u!1 &1131841443860200451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,6 +1200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93de019f410a46519d107f78db0c7caf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emptyHeartSprite: {fileID: 1685189014, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
+  filledHeartSprite: {fileID: 701481286, guid: 0fc904915ed7ebc44b66b8b69683c919, type: 3}
 --- !u!1 &4275890263547804936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,6 +1422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3408193412563322385}
+  - component: {fileID: 6017788765334049085}
   m_Layer: 5
   m_Name: Coins
   m_TagString: Untagged
@@ -1465,6 +1452,22 @@ RectTransform:
   m_AnchoredPosition: {x: 78.2, y: -137}
   m_SizeDelta: {x: 100, y: 27.7183}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6017788765334049085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556762188453126136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d01085f23734a73af029ba2d2a40c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinsAmountText: {fileID: 4497794513807548745}
+  animator: {fileID: 5568039026366583729}
+  animationTime: 0.5
+  onScreenTime: 6
 --- !u!1 &6132110592214012580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,6 +1707,7 @@ GameObject:
   - component: {fileID: 1902984987696748718}
   - component: {fileID: 1850723975676006579}
   - component: {fileID: 6712775973942752338}
+  - component: {fileID: 6566675535304807754}
   m_Layer: 5
   m_Name: Sprite
   m_TagString: Untagged
@@ -1769,6 +1773,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6566675535304807754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7267826256419625230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405a33bc651f4752b8785607f40d12ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 6712775973942752338}
 --- !u!1 &8602325657254208162
 GameObject:
   m_ObjectHideFlags: 0

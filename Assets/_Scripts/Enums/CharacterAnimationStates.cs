@@ -2,7 +2,8 @@ namespace _Scripts.Enums
 {
     public enum CharacterAnimationStates
     {
-        Iddle,
+        Idle,
         Running,
+        Damaged
     }
 }

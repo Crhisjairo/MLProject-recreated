@@ -9,5 +9,11 @@ namespace _Scripts.Utils
         public const string NoPointsAssignedToNpc = "No points was assigned to NPC {0} and \"Move Between Points\" " +
                                                     "is checked. Please, add points where to move NPC or disable " +
                                                     "\"Move Between Point\". ";
+
+        public const string LifeLowerThanZeroUI = "Life amount cannot be lower than 0 on UI.";
+        public const string MaxLifeMoreThanMaxHeartsOnUI = "Max life amount cannot be more than max UI elements " +
+                                                           "created for lifes.\nThis behaviour will be change to" +
+                                                           " auto create hearts GameObjets by max life amount.";
+
     }
 }

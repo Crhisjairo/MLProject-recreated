@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 namespace _Scripts.UI
@@ -23,26 +24,42 @@ namespace _Scripts.UI
             {
                 _heartImages.Add(child.gameObject.GetComponent<Image>());
             }
-            
         }
 
-        public void SetFilledHearts(int amount)
+        public void SetMaxHeartsTo(int amount)
+        {
+            if (amount > _heartImages.Count)
+            {
+                Debug.LogError(ConsoleMessages.MaxLifeMoreThanMaxHeartsOnUI);
+                return;
+            }
+            
+            for (int i = 0; i < amount; i++)
+            {
+                _heartImages[i].enabled = true;
+            }
+            
+            for (int i = amount; i < _heartImages.Count; i++)
+            {
+                _heartImages[i].enabled = false;
+            }
+        }
+
+        public void SetFilledHeartsTo(int amount)
         {
             if (amount < 0)
             {
-                Debug.LogError("Life amount cannot be lower than 0.");
+                Debug.LogError(ConsoleMessages.LifeLowerThanZeroUI);
                 amount = 0;
             }
 
             for (int i = 0; i < amount; i++)
             {
-                Debug.Log("icitte");
                 _heartImages[i].sprite = filledHeartSprite;
             }
 
             for (int i = amount; i < _heartImages.Count; i++)
             {
-                Debug.Log("En el segundo");
                 _heartImages[i].sprite = emptyHeartSprite;
             }
         }
