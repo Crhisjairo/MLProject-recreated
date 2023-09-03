@@ -70,6 +70,11 @@ namespace _Scripts.Characters
             return runningSpeed;
         }
 
+        public int GetAttackDamage()
+        {
+            return attackDamage;
+        }
+
         public float GetSpeed()
         {
             return speed;

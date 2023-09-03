@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   name: Squid
+  life: 5
   damage: 1
   forceImpulse: 400

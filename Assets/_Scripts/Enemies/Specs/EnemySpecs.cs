@@ -7,9 +7,16 @@ namespace _Scripts.Enemies.Specs
     {
         public int id;
         
-        public string name;
+        public new string name;
+
+        public int life = 5;
         
         public int damage;
         public float forceImpulse;
+
+        public EnemySpecs GetCopy()
+        {
+            return (EnemySpecs) this.MemberwiseClone();
+        }
     }
 }

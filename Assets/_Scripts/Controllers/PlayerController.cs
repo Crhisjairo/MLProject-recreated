@@ -163,8 +163,10 @@ namespace _Scripts.Controllers
             }
         }
 
-        public void TakeDamage(int damageAmount)
+        public void ReceiveDamage(Vector2 impulse, int damageAmount)
         {
+            // apply the impulse to the rigid body for an amount of time.
+            
             //Verificamos que no seamos invulnerables
             if (IsInvulnerable)
             {
@@ -319,12 +321,21 @@ namespace _Scripts.Controllers
         {
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackOffset, attackRange, _enemyLayers);
             
-            foreach (var enemyCollider in hitEnemies)
+            foreach (var collider in hitEnemies)
             {
-                if (!enemyCollider.isTrigger)
+                if (!collider.isTrigger)
                 {
-                    Debug.Log("Enemy hit: " + enemyCollider.name);
-                    // enemyCollider.GetComponent<Enemy>().OnEnemyAttacked(currentCharacterSpecs.attackDamage);
+                    Debug.Log("Enemy hit: " + collider.name);
+                    Component component;
+
+                    if (collider.TryGetComponent(typeof(IAttackable), out component))
+                    {
+                        var attackable = component as IAttackable;
+                        int attackDamage = _characterManager.ActiveCharacter.GetAttackDamage();
+                        
+                        // TODO: calculates enemies impulse HERE.
+                        attackable?.ReceiveDamage(new Vector2(), attackDamage);
+                    }
                 }
             }
         }
@@ -355,6 +366,14 @@ namespace _Scripts.Controllers
 
         #region Debug
 
+        /// <summary>
+        /// ONLY FOR DEBUG.
+        /// </summary>
+        public void ReceiveDamageWithoutImpulseDebug(int damageAmount)
+        {
+            ReceiveDamage(new Vector2(), damageAmount);
+        }
+        
         void OnDrawGizmosSelected()
         {
             DrawAttackSphereGizmo();
