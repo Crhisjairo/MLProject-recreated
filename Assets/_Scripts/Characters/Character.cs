@@ -25,16 +25,16 @@ namespace _Scripts.Characters
         private CapsuleCollider2D _capsuleCollider;
 
         private Vector2 _lookingDirection = Vector2.down;
-
-
+        
         #region Character specs
-
+        
         public string CharacterName { protected set; get; }
         [SerializeField] int maxLife = 13;
         [SerializeField] int currentLife = 3;
         [SerializeField] float speed = 2f;
         [SerializeField] float runningSpeed = 3f;
         [SerializeField] int attackDamage = 1;
+        [SerializeField] float forceImpulse = 400;
 
         #endregion
 
@@ -123,6 +123,11 @@ namespace _Scripts.Characters
         public int GetMaxLife()
         {
             return maxLife;
+        }
+
+        public float GetForceImpulse()
+        {
+            return forceImpulse;
         }
         
         private void SetFullLife()

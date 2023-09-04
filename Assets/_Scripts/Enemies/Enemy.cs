@@ -19,14 +19,19 @@ namespace _Scripts.Enemies
 
         protected SpriteRenderer EnemySpriteRenderer;
         protected Rigidbody2D Rb;
+        protected BoxCollider2D BoxCollider2D;
         
         private bool _isVulnerable;
+        
+        protected Vector2 _impulseDirection;
+        protected bool _inImpulse = false;
+        private const float ImpulseTime = .15f;
 
         protected virtual void Awake()
         {
             SetComponents();
         }
-
+        
         public abstract void OnPauseAction();
 
         public abstract void OnResumeAction();
@@ -35,15 +40,17 @@ namespace _Scripts.Enemies
         {
             Rb = GetComponent<Rigidbody2D>();
             EnemySpriteRenderer = GetComponent<SpriteRenderer>();
+            BoxCollider2D = GetComponent<BoxCollider2D>();
 
             specs = modelSpecs.GetCopy();
         }
         
-        public virtual void ReceiveDamage(Vector2 impulse, int damageAmount)
+        public virtual void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
         {
             specs.life -= damageAmount;
             
             StartCoroutine(FlashSprite());
+            StartCoroutine(ActivateImpulseCounter(impulseDirection));
         }
 
         public bool IsVulnerable()
@@ -58,6 +65,8 @@ namespace _Scripts.Enemies
         
         public void OnDead()
         {
+            _inImpulse = false;
+            
             StartCoroutine(AutoDestroy());
         }
 
@@ -69,7 +78,8 @@ namespace _Scripts.Enemies
         private IEnumerator AutoDestroy()
         {
             EnemySpriteRenderer.material.color = Color.red;
-                
+            BoxCollider2D.enabled = false;
+
             //TODO: Add dead sound effect here.
             
             yield return new WaitForSeconds(autoDestroyTime);
@@ -89,10 +99,16 @@ namespace _Scripts.Enemies
                 yield return new WaitForSeconds(0.09f);
             }
         }
-
-        private void PushPlayer(PlayerController playerController)
+        
+        private IEnumerator ActivateImpulseCounter(Vector2 impulseDirection)
         {
-            // Calculates the impulse to send to the player.
+            _inImpulse = true;
+            _impulseDirection = impulseDirection;
+            
+            yield return new WaitForSeconds(ImpulseTime);
+            
+            _inImpulse = false;
+            _impulseDirection = new Vector2(0,0);
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -100,15 +116,16 @@ namespace _Scripts.Enemies
             if (other.collider.CompareTag(Tags.Player.ToString()))
             {
                 //TODO: play attacking animation when player collides
-                PushPlayer(
-                    other.collider.GetComponent<PlayerController>()
-                    );
-            }
-        }
+                PlayerController playerController = other.collider.GetComponentInParent<PlayerController>();
+                
+                //Vector opuesto para el jugador
+                Vector2 playerImpulseDir = playerController.transform.position - transform.position;
+                playerImpulseDir = playerImpulseDir.normalized * specs.forceImpulse;
 
-        public float GetImpulseForce()
-        {
-            return specs.forceImpulse;
+                Debug.Log(playerImpulseDir);
+            
+                playerController.ReceiveDamage(playerImpulseDir, specs.damage);
+            }
         }
     }
 }
