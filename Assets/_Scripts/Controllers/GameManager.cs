@@ -12,8 +12,10 @@ namespace _Scripts.Controllers
     {
         public void PauseGameWithKey(InputAction.CallbackContext context)
         {
-            if (!context.performed)
+            if (!context.started)
                 return;
+            
+            Debug.Log(Time.timeScale);
             
             Time.timeScale = 0;
         }

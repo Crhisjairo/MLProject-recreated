@@ -8,7 +8,7 @@ namespace _Scripts.Controllers
 {
     
     [RequireComponent(typeof(BoxCollider2D))]
-    public class NpcInteraction : MonoBehaviour, IInteractuable
+    public class NpcInteraction : MonoBehaviour, IInteractable
     {
         public SpriteRenderer interactSprite;
         public string inDialogActionMapName = "InDialog";

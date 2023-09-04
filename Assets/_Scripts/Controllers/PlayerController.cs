@@ -6,6 +6,7 @@ using _Scripts.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers
 {
@@ -14,7 +15,9 @@ namespace _Scripts.Controllers
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] LayerMask _enemyLayers;
+        [SerializeField] LayerMask enemyLayers;
+        [SerializeField] LayerMask interactorsLayers;
+        
         [SerializeField] GameObject[] _charactersModels;
         [SerializeField] int startingCharacterIndex = 0;
 
@@ -66,10 +69,15 @@ namespace _Scripts.Controllers
 
         private Rigidbody2D _rb;
 
-        private float diagonalLimiter = 0.9f; // 0.7 default
+        private const float diagonalLimiter = 0.9f; // 0.7 default
         private Vector2 movement;
+        private Vector2 _impulseDirection;
         
         private float currentSpeed;
+
+        private bool _inImpulse = false;
+        private const float ImpulseTime = .15f;
+        
         
         void Awake()
         {
@@ -86,6 +94,11 @@ namespace _Scripts.Controllers
         void FixedUpdate()
         {
             _rb.MovePosition(_rb.position + movement * (currentSpeed * Time.fixedDeltaTime));
+
+            if (_inImpulse)
+            {
+                _rb.AddForce(_impulseDirection, ForceMode2D.Force);
+            }
         }
 
         /// <summary>
@@ -149,37 +162,33 @@ namespace _Scripts.Controllers
 
             if (Time.time >= _nextAttackTime)
             {
-                //Animamos al personaje
                 _characterManager.ActiveAnimator.SetTrigger("Attack");
                 
-                //Calculamos la direccion del ataque
-                //Creamos la direcciôn y la distance de ataque relativa al personaje
                 Vector2 attackOffset = CalculateAttackOffset();
 
-                //Ponemos las particulas en la misma posiciôn de ataque
                 _characterManager.ActiveParticleSystem.gameObject.transform.position = new Vector3(attackOffset.x, attackOffset.y, -1);
                 _characterManager.ActiveParticleSystem.Play();
-                
-                //Reproducimos el sonido
                 _characterManager.ActiveCharacter.PlaySoundSfx(CharacterSfx.UnicornAttackSfx);
                 
-                //Atacamos a los enemigos
                 AttackEnnemiesOnOverlapCircle(attackOffset);
                 
-                //Recalculamos el tiempo segun el attackRate
                 _nextAttackTime = Time.time + 1f / attackRate;
             }
         }
 
-        public void TakeDamage(int damageAmount)
+        public void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
         {
+            // apply the impulse to the rigid body for an amount of time.
+            
             //Verificamos que no seamos invulnerables
             if (IsInvulnerable)
             {
                 return;
             }
+
+            StartCoroutine(ActivateImpulseCounter(impulseDirection));
             
-            ShakeCamera(1.5f, 0.1f);
+            //TODO: create a CameraController to ShakeCamera(1.5f, 0.1f); onDamageTaken
             
             _characterManager.ActiveAnimator.SetTrigger(CharacterAnimationStates.Damaged.ToString());
             
@@ -188,6 +197,18 @@ namespace _Scripts.Controllers
             _characterManager.ActiveCharacter.TakeDamage(damageAmount);
             
             onDamageTaken?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
+        }
+
+        private IEnumerator ActivateImpulseCounter(Vector2 impulseDirection)
+        {
+            _inImpulse = true;
+            _impulseDirection = impulseDirection;
+            
+            yield return new WaitForSeconds(ImpulseTime);
+            
+            _inImpulse = false;
+            
+            _impulseDirection = new Vector2(0,0);
         }
         
         public void TakeLife(int lifeAmount)
@@ -226,12 +247,19 @@ namespace _Scripts.Controllers
             Vector2 lookingDirection = _characterManager.ActiveCharacter.GetLookingDirection();
             
             // The ~ operator inverts a bitmask, so it detects collide against everything except layer "Player"
-            Collider2D collider = Physics2D.OverlapCircle(origin, interactionDistance, ~LayerMask.GetMask("Player"));
+            Collider2D collider = Physics2D.OverlapCircle(origin, interactionDistance, interactorsLayers);
+
+            Component interactuableComponent;
             
             if (collider)
             {
-                IInteractuable interactuable = collider.gameObject.GetComponent<IInteractuable>();
-                interactuable.Interact(this);
+                collider.gameObject.TryGetComponent(typeof(IInteractable), out interactuableComponent);
+
+                if (interactuableComponent)
+                {
+                    var interactable = (IInteractable) interactuableComponent ;
+                    interactable.Interact(this);
+                }
             }
         }
         
@@ -325,15 +353,27 @@ namespace _Scripts.Controllers
         
         public void AttackEnnemiesOnOverlapCircle(Vector2 attackOffset)
         {
-            Collider2D[] hitEnnemies = Physics2D.OverlapCircleAll(attackOffset, attackRange, _enemyLayers);
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackOffset, attackRange, enemyLayers);
             
-            //Hacemos dano a los enemigos
-            foreach (var enemyCollider in hitEnnemies)
+            foreach (var enemyCollider in hitEnemies)
             {
                 if (!enemyCollider.isTrigger)
                 {
-                    //Debug.Log("Enemy hit: " + enemyCollider.name);
-                    // enemyCollider.GetComponent<Enemy>().OnEnemyAttacked(currentCharacterSpecs.attackDamage);
+                    Debug.Log("Enemy hit: " + enemyCollider.name);
+
+                    if (enemyCollider.TryGetComponent(typeof(IAttackable), out var component))
+                    {
+                        var attackable = component as IAttackable;
+                        int attackDamage = _characterManager.ActiveCharacter.GetAttackDamage();
+                        
+                        // Vector opuesto para el enemigo
+                        Vector2 enemyImpulseDir = enemyCollider.transform.position - transform.position;
+                        enemyImpulseDir = enemyImpulseDir.normalized * _characterManager.ActiveCharacter.GetForceImpulse();
+                        
+                        Debug.Log(enemyImpulseDir);
+                        
+                        attackable?.ReceiveDamage(enemyImpulseDir, attackDamage);
+                    }
                 }
             }
         }
@@ -364,6 +404,14 @@ namespace _Scripts.Controllers
 
         #region Debug
 
+        /// <summary>
+        /// ONLY FOR DEBUG.
+        /// </summary>
+        public void ReceiveDamageWithoutImpulseDebug(int damageAmount)
+        {
+            ReceiveDamage(new Vector2(), damageAmount);
+        }
+        
         void OnDrawGizmosSelected()
         {
             DrawAttackSphereGizmo();
