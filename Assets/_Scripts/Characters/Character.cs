@@ -27,14 +27,14 @@ namespace _Scripts.Characters
         private Vector2 _lookingDirection = Vector2.down;
         
         #region Character specs
-        
+
         public string CharacterName { protected set; get; }
         [SerializeField] int maxLife = 13;
         [SerializeField] int currentLife = 3;
         [SerializeField] float speed = 2f;
         [SerializeField] float runningSpeed = 3f;
         [SerializeField] int attackDamage = 1;
-        [SerializeField] float forceImpulse = 400;
+        [SerializeField] float forceImpulse = 500;
 
         #endregion
 
@@ -43,11 +43,11 @@ namespace _Scripts.Characters
             SetComponents();
         }
 
-        public void ExtendsMaxLife()
+        public void AddExtraHeartSlot()
         {
             maxLife++;
+            
             SetFullLife();
-            //TODO notify HUD
         }
         
         public void AddCoins(int amount)
@@ -100,14 +100,14 @@ namespace _Scripts.Characters
 
         public bool HasNoLife() => currentLife <= 0;
         
-        public void TakeLife(int newLife)
+        public void TakeLife(int amount)
         {
+            currentLife += amount;
+            
             if (currentLife >= maxLife)
             {
-                return;
+                currentLife = maxLife;
             }
-        
-            currentLife += newLife;
         }
 
         public void AddToMaxLife(int amount)

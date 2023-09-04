@@ -67,8 +67,6 @@ namespace _Scripts.Controllers
                 _charactersGameObjects[i].SetActive(false);
             }
         }
-        
-
 
         public void ChangeCharacterTo(float input)
         {

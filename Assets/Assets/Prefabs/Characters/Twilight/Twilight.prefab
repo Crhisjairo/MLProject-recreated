@@ -53,6 +53,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: maxLife
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: currentLife
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: forceImpulse
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: characterSpecs.maxLife
       value: 0
       objectReference: {fileID: 0}

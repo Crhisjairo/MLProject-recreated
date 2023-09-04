@@ -25,9 +25,6 @@ namespace _Scripts.DialogSystem
         public bool onlyInteractWithSpecifCharacter = false;
         public string characterNameAbleToInteractWith;
 
-        public string ActionMapToChangeOnDialog = "InDialog";
-        public string ActionMapToRestore = "InGame";
-        
         [Range(0f, 0.3f)]
         public float textTypingDelay = 0.1f;
         
@@ -61,8 +58,6 @@ namespace _Scripts.DialogSystem
         /// <param name="interactor">Nombre del personaje con el que se interactua.</param>
         public void SetDialogByContext(PlayerController interactor)
         {
-            interactor.ChangeActionMapTo(ActionMapToChangeOnDialog);
-            
             var interactorName = interactor.GetActiveCharacterName();
             var isWrongCharacter = interactorName.Equals(characterNameAbleToInteractWith);
         
@@ -103,7 +98,6 @@ namespace _Scripts.DialogSystem
             if (dialogController.IsEnded)
             {
                 cam.m_Lens.OrthographicSize += zoomAmountOnDialog;
-                interactor.ChangeActionMapTo(ActionMapToRestore);
                 _isDialogueTriggered = false;
             }
         

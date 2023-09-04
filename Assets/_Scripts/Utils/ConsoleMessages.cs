@@ -14,6 +14,6 @@ namespace _Scripts.Utils
         public const string MaxLifeMoreThanMaxHeartsOnUI = "Max life amount cannot be more than max UI elements " +
                                                            "created for lifes.\nThis behaviour will be change to" +
                                                            " auto create hearts GameObjets by max life amount.";
-
+        
     }
 }
