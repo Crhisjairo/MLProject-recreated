@@ -56,17 +56,17 @@ namespace _Scripts.Enemies
 
         private void SetSliderValues()
         {
-            lifeSlider.maxValue = specs.life;
+            lifeSlider.maxValue = CurrentSpecs.life;
             lifeSlider.minValue = MinLifeSliderValue;
       
-            lifeSlider.value = specs.life;
+            lifeSlider.value = CurrentSpecs.life;
         }
 
         public override void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
         {
             base.ReceiveDamage(impulseDirection, damageAmount);
             
-            lifeSlider.value = specs.life;
+            lifeSlider.value = CurrentSpecs.life;
 
             if (IsDead())
             {

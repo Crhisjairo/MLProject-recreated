@@ -136,6 +136,16 @@ namespace _Scripts.Controllers
             
             activeCharacter.SetSpeedAnimationValueByMovement(movement);
         }
+
+        /// <summary>
+        /// Check if item can be added to inventory. If not, the item will not be added.
+        /// </summary>
+        /// <param name="item">Item to add to inventory.</param>
+        /// <returns>If item was added successfully</returns>
+        public bool TryToAddItemToInventory(GameObject item)
+        {
+            return true;
+        }
         
         public void StartRunning(InputAction.CallbackContext inputContext)
         {
@@ -218,11 +228,16 @@ namespace _Scripts.Controllers
             onLifeGetted?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
         }
 
-        public void TakeExtraHeart(int amount)
+        public void TakeExtraHeartSlot()
         {
-            _characterManager.ActiveCharacter.AddToMaxLife(amount);
+            _characterManager.ActiveCharacter.AddExtraHeartSlot();
             
             onMaxLifeUpdate?.Invoke(_characterManager.ActiveCharacter.GetMaxLife());
+        }
+
+        public void AddHeart(int amount)
+        {
+            _characterManager.ActiveCharacter.TakeLife(amount);
         }
         
         public void AddCoins(int amount)
@@ -262,6 +277,8 @@ namespace _Scripts.Controllers
                 }
             }
         }
+        
+        
         
         #region Calculations
 

@@ -14,9 +14,12 @@ namespace _Scripts.Controllers
         {
             if (!context.started)
                 return;
-            
-            Debug.Log(Time.timeScale);
-            
+
+            PauseGame();
+        }
+        
+        public void PauseGame()
+        {
             Time.timeScale = 0;
         }
 

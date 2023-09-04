@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 namespace _Scripts.DialogSystem
 {
@@ -15,6 +17,8 @@ namespace _Scripts.DialogSystem
 
         public Sprite defaultSprite;
         public bool IsEnded { private set; get; }
+
+        public UnityEvent onDialogStarted, onDialogEnded;
 
         Queue<string> sentencesSorted;
         Queue<Sprite> spritesSorted;
@@ -34,6 +38,8 @@ namespace _Scripts.DialogSystem
         
         public void SetDialogue(Dialogs dialogueSentences, float typingSpeed) 
         {
+            onDialogStarted?.Invoke();
+            
             _typingSpeed = typingSpeed;
             
             //Damos nombre al cuadro de texto
@@ -104,7 +110,7 @@ namespace _Scripts.DialogSystem
                         yield break;
                     }
 
-                    yield return new WaitForSeconds(_typingSpeed);
+                    yield return new WaitForSecondsRealtime(_typingSpeed);
                 }    
             }
         }
@@ -119,6 +125,8 @@ namespace _Scripts.DialogSystem
             //ocultamos el cuadro de dialogo
             dialogCanvas.enabled = false;
             IsEnded = true;
+            
+            onDialogEnded?.Invoke();
             
             //Permitimos mover al personaje
             //GameManager.Instance.CanPlayerMove = true;

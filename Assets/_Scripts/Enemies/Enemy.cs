@@ -5,14 +5,17 @@ using _Scripts.Enemies.Specs;
 using _Scripts.Enums;
 using _Scripts.Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Scripts.Enemies
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Enemy: MonoBehaviour, IAttackable
     {
-        [SerializeField] private EnemySpecs modelSpecs;
-        protected EnemySpecs specs;
+        [SerializeField] private EnemyDefaultSpecs modelDefaultSpecs;
+        protected EnemyDefaultSpecs CurrentSpecs;
+
+        private int worldId = 0; // TODO: used to know if item must be spawned or nor when load save data.
         
         [SerializeField] private Color flashingColor = Color.red;
         public float autoDestroyTime = 1f;
@@ -42,12 +45,12 @@ namespace _Scripts.Enemies
             EnemySpriteRenderer = GetComponent<SpriteRenderer>();
             BoxCollider2D = GetComponent<BoxCollider2D>();
 
-            specs = modelSpecs.GetCopy();
+            CurrentSpecs = modelDefaultSpecs.GetCopy();
         }
         
         public virtual void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
         {
-            specs.life -= damageAmount;
+            CurrentSpecs.life -= damageAmount;
             
             StartCoroutine(FlashSprite());
             StartCoroutine(ActivateImpulseCounter(impulseDirection));
@@ -72,7 +75,7 @@ namespace _Scripts.Enemies
 
         public bool IsDead()
         {
-            return specs.life <= 0;
+            return CurrentSpecs.life <= 0;
         }
         
         private IEnumerator AutoDestroy()
@@ -120,11 +123,11 @@ namespace _Scripts.Enemies
                 
                 //Vector opuesto para el jugador
                 Vector2 playerImpulseDir = playerController.transform.position - transform.position;
-                playerImpulseDir = playerImpulseDir.normalized * specs.forceImpulse;
+                playerImpulseDir = playerImpulseDir.normalized * CurrentSpecs.forceImpulse;
 
                 Debug.Log(playerImpulseDir);
             
-                playerController.ReceiveDamage(playerImpulseDir, specs.damage);
+                playerController.ReceiveDamage(playerImpulseDir, CurrentSpecs.damage);
             }
         }
     }

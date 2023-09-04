@@ -3,8 +3,9 @@ using UnityEngine;
 namespace _Scripts.Enemies.Specs
 {
     [CreateAssetMenu(fileName = "DefaultEnemySpecs", menuName = "EnemySpecs/DefaultEnemySpecs", order = 0)]
-    public class EnemySpecs : ScriptableObject
+    public class EnemyDefaultSpecs : ScriptableObject
     {
+        //TODO: change that by a unique ID for each Item when SaveData Manager is created.
         public int id;
         
         public new string name = "Default Enemy Specs";
@@ -14,9 +15,9 @@ namespace _Scripts.Enemies.Specs
         public int damage;
         public float forceImpulse;
 
-        public EnemySpecs GetCopy()
+        public EnemyDefaultSpecs GetCopy()
         {
-            return (EnemySpecs) this.MemberwiseClone();
+            return (EnemyDefaultSpecs) this.MemberwiseClone();
         }
     }
 }
