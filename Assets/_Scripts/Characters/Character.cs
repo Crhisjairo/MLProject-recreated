@@ -192,13 +192,13 @@ namespace _Scripts.Characters
                 verticalValue = -1;
             }
             
-            _animator.SetFloat(CharacterAnimationValues.LastHorizontal.ToString(), horizontalValue);
-            _animator.SetFloat(CharacterAnimationValues.LastVertical.ToString(), verticalValue);
+            _animator.SetFloat(CharacterAnimationParameters.LastHorizontal.ToString(), horizontalValue);
+            _animator.SetFloat(CharacterAnimationParameters.LastVertical.ToString(), verticalValue);
         }
 
         public void SetSpeedAnimationValueByMovement(Vector2 movement)
         {
-            _animator.SetFloat(CharacterAnimationValues.Speed.ToString(), movement.sqrMagnitude);
+            _animator.SetFloat(CharacterAnimationParameters.Speed.ToString(), movement.sqrMagnitude);
         }
 
         public ParticleSystem GetParticleSystem()

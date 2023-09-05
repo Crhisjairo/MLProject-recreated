@@ -10,6 +10,13 @@ namespace _Scripts.Controllers
     /// </summary>
     public class GameManager : MonoBehaviour
     {
+        
+        
+        private void Start()
+        {
+            //Load player data
+        }
+
         public void PauseGameWithKey(InputAction.CallbackContext context)
         {
             if (!context.started)
@@ -26,6 +33,11 @@ namespace _Scripts.Controllers
         public void ResumeGame()
         {
             Time.timeScale = 1;
+        }
+
+        public void ExitGame()
+        {
+            Application.Quit();
         }
     }
 }

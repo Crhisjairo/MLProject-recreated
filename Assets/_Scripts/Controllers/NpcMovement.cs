@@ -97,7 +97,7 @@ namespace _Scripts.Controllers
             if (isActive)
                 value = 1;
             
-            animator.SetFloat(CharacterAnimationValues.Speed.ToString(), value);
+            animator.SetFloat(CharacterAnimationParameters.Speed.ToString(), value);
         }
 
         private Vector2 CalculateNextDirectionNormalized()
@@ -144,8 +144,8 @@ namespace _Scripts.Controllers
                 verticalValue = 1; 
             }
             
-            animator.SetFloat(CharacterAnimationValues.LastHorizontal.ToString(), horizontalValue);
-            animator.SetFloat(CharacterAnimationValues.LastVertical.ToString(), verticalValue);
+            animator.SetFloat(CharacterAnimationParameters.LastHorizontal.ToString(), horizontalValue);
+            animator.SetFloat(CharacterAnimationParameters.LastVertical.ToString(), verticalValue);
         }
         
         public void PauseMovement()

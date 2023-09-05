@@ -1,6 +1,6 @@
 namespace _Scripts.Enums
 {
-    public enum CharacterAnimationValues
+    public enum CharacterAnimationParameters
     {
         LastHorizontal,
         LastVertical,
