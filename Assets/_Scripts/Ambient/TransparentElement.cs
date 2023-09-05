@@ -32,7 +32,10 @@ namespace _Scripts.Ambient
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.CompareTag(Tags.Player.ToString()))
+            if(col.isTrigger)
+                return;
+            
+            if (col.CompareTag(Tags.Player.ToString()) || col.CompareTag(Tags.Enemy.ToString()))
             {
                 var finalColor = _spriteRenderer.color;
                 finalColor.a -= fadeAmount;
@@ -46,7 +49,10 @@ namespace _Scripts.Ambient
         
         private void OnTriggerExit2D(Collider2D col)
         {
-            if (col.CompareTag(Tags.Player.ToString()))
+            if(col.isTrigger)
+                return;
+            
+            if (col.CompareTag(Tags.Player.ToString()) || col.CompareTag(Tags.Enemy.ToString()))
             {
                 var startColor = _spriteRenderer.color;
                 startColor.a += fadeAmount;
