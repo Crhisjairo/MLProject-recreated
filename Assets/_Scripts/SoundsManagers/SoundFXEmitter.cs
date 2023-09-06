@@ -1,10 +1,11 @@
 using System;
+using _Scripts.Utils;
 using UnityEngine;
 using UnityEngine.Audio;
 
 namespace _Scripts.SoundsManagers
 {
-    public class SoundEffectEmitter : MonoBehaviour
+    public class SoundFXEmitter : MonoBehaviour
     {
         [SerializeField] private AudioMixerGroup _mixerGroup;
         [SerializeField] private Sound[] _sounds;
@@ -22,27 +23,12 @@ namespace _Scripts.SoundsManagers
 
         public void Play(string name, bool oneShoot = false)
         {
-            /**
-            if (_sounds.Length == 1)
-            {
-                if (oneShoot)
-                {
-                    _sounds[0].Source.PlayOneShot(_sounds[0].clip);
-                }
-                else
-                {
-                    _sounds[0].Source.Play();
-                }
-            
-                return;
-            }**/
-            
-        
             Sound sound = Array.Find(_sounds, sound => sound.name == name);
 
             if (sound is null)
             {
-                Debug.LogWarning("Sound " + name + " no fue encontrado.");
+                Debug.LogWarning(ConsoleMessages.SoundNameNotFound);
+                return;
             }
 
             if (oneShoot)
@@ -54,6 +40,13 @@ namespace _Scripts.SoundsManagers
                 sound.Source.Play();
             }
         
+        }
+
+        public void PlayFirst()
+        {
+            Sound sound = _sounds[0];
+            
+            sound.Source.PlayOneShot(sound.clip);
         }
     }
 }
