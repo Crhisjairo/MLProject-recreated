@@ -3627,18 +3627,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1183792618}
     m_Modifications:
-    - target: {fileID: 139054, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 150610, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 169368, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 191326, guid: b046278bb9b6e104790392b566667ba5, type: 3}
       propertyPath: m_Name
       value: RainPrefab2D
@@ -3692,76 +3680,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 519420031}
     - target: {fileID: 11475408, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: EnableWind
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11475408, guid: b046278bb9b6e104790392b566667ba5, type: 3}
       propertyPath: RainIntensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11475408, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: RainMistThreshold
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11475408, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: CollisionMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11475408, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: RainHeightMultiplier
-      value: 0.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 11475408, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: CollisionLifeTimeRain
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11475408, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: RainMistCollisionMultiplier
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19804216, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: InitialModule.gravitySource
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19837776, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19901972, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19901972, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1602188017
-      objectReference: {fileID: 0}
-    - target: {fileID: 19901972, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19943526, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19943526, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1602188017
-      objectReference: {fileID: 0}
-    - target: {fileID: 19943526, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19962092, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19962092, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1602188017
-      objectReference: {fileID: 0}
-    - target: {fileID: 19962092, guid: b046278bb9b6e104790392b566667ba5, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
