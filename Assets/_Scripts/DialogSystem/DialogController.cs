@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.SoundsManagers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,13 +9,18 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 namespace _Scripts.DialogSystem
 {
+    [RequireComponent(typeof(SoundEmitter))]
     public class DialogController : MonoBehaviour
     {
         [SerializeField] private Canvas dialogCanvas;
         [SerializeField] private TextMeshProUGUI dialogTitle;
         [SerializeField] private TextMeshProUGUI dialog;
         [SerializeField] private Image dialogImage;
+        
+        private SoundEmitter _soundEmitter;
 
+        public bool RandomizeCharacterPitch = true;
+        
         public Sprite defaultSprite;
         public bool IsEnded { private set; get; }
 
@@ -34,6 +40,7 @@ namespace _Scripts.DialogSystem
             sentencesSorted = new Queue<string>();
             spritesSorted = new Queue<Sprite>();
             dialogCanvas.enabled = false; //Desactivamos el canvas grande
+            _soundEmitter = GetComponent<SoundEmitter>();
         }
         
         public void SetDialogue(Dialogs dialogueSentences, float typingSpeed) 
@@ -63,6 +70,16 @@ namespace _Scripts.DialogSystem
             }
         }
 
+        public void SetTalkingAudio(Sound soundFx)
+        {
+            _soundEmitter.SetFirstSound(soundFx);
+        }
+
+        public void SetRandomizePitch(bool isRandomized)
+        {
+            RandomizeCharacterPitch = isRandomized;
+        }
+        
         public void DisplayNextSentence()
         {
             if (IsTyping)
@@ -104,6 +121,13 @@ namespace _Scripts.DialogSystem
                 {
                     dialog.text = sentence.Substring(0, i);
 
+                    if (RandomizeCharacterPitch)
+                    {
+                        _soundEmitter.RandomizePitchFirstAudio();
+                    }
+                    
+                    _soundEmitter.PlayFirstOneShot();
+                    
                     if (i == sentence.Length)
                     {
                         IsTyping = false;

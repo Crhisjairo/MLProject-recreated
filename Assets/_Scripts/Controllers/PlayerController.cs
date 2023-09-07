@@ -2,7 +2,7 @@ using System.Collections;
 using _Scripts.Characters;
 using _Scripts.Enums;
 using _Scripts.Interfaces;
-
+using _Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -403,6 +403,12 @@ namespace _Scripts.Controllers
         public string GetActiveCharacterName()
         {
             return _characterManager.ActiveCharacter.CharacterName;
+        }
+
+        public Sound GetActiveCharacterTalkingSound()
+        {
+            
+            return _characterManager.ActiveCharacter.GetTalkingSound();
         }
 
     #endregion

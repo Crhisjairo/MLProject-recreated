@@ -60,11 +60,15 @@ namespace _Scripts.DialogSystem
         {
             var interactorName = interactor.GetActiveCharacterName();
             var isWrongCharacter = interactorName.Equals(characterNameAbleToInteractWith);
+            
+            dialogController.SetTalkingAudio(interactor.GetActiveCharacterTalkingSound());
         
             //Si se trata de un dialogo de intervalos, solo se muestra el dialogue, no se usa defaultDialogue
             if (_autoNextDialog)
             {
                 dialogController.SetDialogue(firstDialog, textTypingDelay);
+                dialogController.SetRandomizePitch(true);
+                
                 StartCoroutine(StartIntervalDialogue());
                 return;
             }
@@ -77,17 +81,22 @@ namespace _Scripts.DialogSystem
                 if (isWrongCharacter)
                 {
                     dialogController.SetDialogue(wrongCharacterDialog, textTypingDelay);
+                    dialogController.SetRandomizePitch(false);
                 } 
                 //Si no hay frases de default, se pone el dialogo normal
                 else if (_isFirstInteraction && firstDialog.sentences.Length > 0)
                 {
                     dialogController.SetDialogue(firstDialog, textTypingDelay);
+                    dialogController.SetRandomizePitch(true);
+                    
                     _isFirstInteraction = false;
                 }
                 //Si no es la primera interacciôn y hay frases de default, se muestra solo el defaultDialogue
                 else if (defaultDialog.sentences.Length > 0) 
                 {
                     dialogController.SetDialogue(defaultDialog, textTypingDelay);
+                    dialogController.SetRandomizePitch(true);
+                    
                 }
                 
                 _isDialogueTriggered = true;
