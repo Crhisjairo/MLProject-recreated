@@ -17,7 +17,7 @@ namespace _Scripts.Characters
         public Sprite iconSprite;
         public Sprite characterSprite;
 
-        [SerializeField] SoundEffectEmitter soundEffectsEmitter;
+        [SerializeField] SoundFXEmitter soundFxEmitter;
         [SerializeField] new ParticleSystem particleSystem;
 
         private Animator _animator;
@@ -137,7 +137,7 @@ namespace _Scripts.Characters
 
         public void PlaySoundSfx(CharacterSfx sound)
         {
-            soundEffectsEmitter.Play(sound.ToString(), true);
+            soundFxEmitter.Play(sound.ToString(), true);
         }
 
         public void SetLookingDirection(Vector2 direction)
@@ -217,9 +217,9 @@ namespace _Scripts.Characters
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _capsuleCollider = GetComponent<CapsuleCollider2D>();
 
-            if (!TryGetComponent(out soundEffectsEmitter))
+            if (!TryGetComponent(out soundFxEmitter))
             {
-                String message = string.Format(ConsoleMessages.OptionalComponentNotFound, typeof(SoundEffectEmitter), name);
+                String message = string.Format(ConsoleMessages.OptionalComponentNotFound, typeof(SoundFXEmitter), name);
                 Debug.LogWarning(message);
             }
         }
