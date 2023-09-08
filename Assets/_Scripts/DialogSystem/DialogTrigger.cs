@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _Scripts.Controllers;
+using _Scripts.SoundsManagers;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -14,6 +15,9 @@ namespace _Scripts.DialogSystem
     {
         [SerializeField] DialogController dialogController;
         [SerializeField] CinemachineVirtualCamera cam;
+        [SerializeField] private Sound talkingAudio;
+        [SerializeField] private bool randomizeTalkingPitch; 
+        
         public float zoomAmountOnDialog = 0;
         public float speedZoom = 0.5f;
         
@@ -61,13 +65,12 @@ namespace _Scripts.DialogSystem
             var interactorName = interactor.GetActiveCharacterName();
             var isWrongCharacter = interactorName.Equals(characterNameAbleToInteractWith);
             
-            dialogController.SetTalkingAudio(interactor.GetActiveCharacterTalkingSound());
+            dialogController.SetTalkingAudio(talkingAudio, randomizeTalkingPitch);
         
             //Si se trata de un dialogo de intervalos, solo se muestra el dialogue, no se usa defaultDialogue
             if (_autoNextDialog)
             {
                 dialogController.SetDialogue(firstDialog, textTypingDelay);
-                dialogController.SetRandomizePitch(true);
                 
                 StartCoroutine(StartIntervalDialogue());
                 return;
@@ -81,13 +84,11 @@ namespace _Scripts.DialogSystem
                 if (isWrongCharacter)
                 {
                     dialogController.SetDialogue(wrongCharacterDialog, textTypingDelay);
-                    dialogController.SetRandomizePitch(false);
                 } 
                 //Si no hay frases de default, se pone el dialogo normal
                 else if (_isFirstInteraction && firstDialog.sentences.Length > 0)
                 {
                     dialogController.SetDialogue(firstDialog, textTypingDelay);
-                    dialogController.SetRandomizePitch(true);
                     
                     _isFirstInteraction = false;
                 }
@@ -95,8 +96,6 @@ namespace _Scripts.DialogSystem
                 else if (defaultDialog.sentences.Length > 0) 
                 {
                     dialogController.SetDialogue(defaultDialog, textTypingDelay);
-                    dialogController.SetRandomizePitch(true);
-                    
                 }
                 
                 _isDialogueTriggered = true;

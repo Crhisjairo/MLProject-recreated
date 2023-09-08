@@ -15,6 +15,11 @@ namespace _Scripts.SoundsManagers
         
         private void Awake()
         {
+            SetAudios();
+        }
+
+        private void SetAudios()
+        {
             if (_sounds.Length == 0)
                 return;
 
@@ -28,17 +33,6 @@ namespace _Scripts.SoundsManagers
                 _currentAudioSource = _sounds[0].Source;
                 _currentAudioSource.Play();
             }
-        }
-
-        public void SetFirstSound(Sound sound)
-        {
-            _sounds[0] = sound;
-            
-        }
-
-        public void RandomizePitchFirstAudio()
-        {
-            _sounds[0].pitch = Random.Range(_sounds[0].pitch - 0.2f, _sounds[0].pitch + 0.2f);
         }
 
         public void PlayOneShot(string name)
@@ -57,16 +51,12 @@ namespace _Scripts.SoundsManagers
         public void PlayFirstOneShot()
         {
             Sound sound = _sounds[0];
+
+            if (sound.Source is null)
+                return;
+            
             
             sound.Source.PlayOneShot(sound.clip);
-        }
-
-        public void PlayFirst()
-        {
-            Sound sound = _sounds[0];
-
-            _currentAudioSource = sound.Source;
-            sound.Source.Play();
         }
     }
 }

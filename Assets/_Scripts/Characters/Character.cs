@@ -19,7 +19,6 @@ namespace _Scripts.Characters
 
         [SerializeField] SoundEmitter soundEmitter;
         [SerializeField] new ParticleSystem particleSystem;
-        [SerializeField] private Sound talkingSound;
 
         private Animator _animator;
         private SpriteRenderer _spriteRenderer;
@@ -136,7 +135,7 @@ namespace _Scripts.Characters
             currentLife = maxLife;
         }
 
-        public void PlaySoundSfx(CharacterSfx sound)
+        public void PlaySoundSfx(SoundsFX sound)
         {
             soundEmitter.PlayOneShot(sound.ToString());
         }
@@ -205,11 +204,6 @@ namespace _Scripts.Characters
         public ParticleSystem GetParticleSystem()
         {
             return particleSystem;
-        }
-
-        public Sound GetTalkingSound()
-        {
-            return talkingSound;
         }
 
         public void SetColliderActive(bool isActive)

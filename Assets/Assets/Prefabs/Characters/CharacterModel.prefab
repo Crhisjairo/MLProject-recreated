@@ -5046,8 +5046,8 @@ MonoBehaviour:
   _mixerGroup: {fileID: -6192578760746128693, guid: ff64427cd949f1a4ba99787cd4904e06, type: 2}
   _sounds:
   - clip: {fileID: 8300000, guid: 1831ccea4f2a66a4da56a64b1b2a17c8, type: 3}
-    name: unicorn_attack_sfx
-    volume: 0.3
+    name: Attack
+    volume: 0.8
     pitch: 1.7
     loop: 0
     playOnAwake: 0
@@ -5065,10 +5065,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconSprite: {fileID: 21300000, guid: 73d73deb6abe41d4d934b5edd6ceb38f, type: 3}
   characterSprite: {fileID: 21300000, guid: 2079b521f6966604cb2baed545e2ba47, type: 3}
-  soundEffectsEmitter: {fileID: 4951365452995085792}
+  soundEmitter: {fileID: 0}
   particleSystem: {fileID: 2498563264065257010}
   maxLife: 13
   currentLife: 3
   speed: 2
   runningSpeed: 3
   attackDamage: 1
+  forceImpulse: 500

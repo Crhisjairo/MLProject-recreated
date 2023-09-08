@@ -7,17 +7,22 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 namespace _Scripts.DialogSystem
 {
-    [RequireComponent(typeof(SoundEmitter))]
+    [RequireComponent(typeof(AudioSource))]
     public class DialogController : MonoBehaviour
     {
         [SerializeField] private Canvas dialogCanvas;
         [SerializeField] private TextMeshProUGUI dialogTitle;
         [SerializeField] private TextMeshProUGUI dialog;
         [SerializeField] private Image dialogImage;
+        [SerializeField] private GameObject nextDialogSpriteGameObject;
+
+        private Animator _nextDialogAnimator;
+        private Image _nextDialogSpriteRenderer;
         
-        private SoundEmitter _soundEmitter;
+        private AudioSource _audioSource;
 
         public bool RandomizeCharacterPitch = true;
         
@@ -40,9 +45,23 @@ namespace _Scripts.DialogSystem
             sentencesSorted = new Queue<string>();
             spritesSorted = new Queue<Sprite>();
             dialogCanvas.enabled = false; //Desactivamos el canvas grande
-            _soundEmitter = GetComponent<SoundEmitter>();
+            _audioSource = GetComponent<AudioSource>();
+
+            _nextDialogAnimator = nextDialogSpriteGameObject.GetComponent<Animator>();
+            _nextDialogSpriteRenderer = nextDialogSpriteGameObject.GetComponent<Image>();
         }
-        
+
+        private void Start()
+        {
+            ActivateNextDialogSprite(false);
+        }
+
+        private void ActivateNextDialogSprite(bool isActive)
+        {
+            _nextDialogAnimator.enabled = isActive;
+            _nextDialogSpriteRenderer.enabled = isActive;
+        }
+
         public void SetDialogue(Dialogs dialogueSentences, float typingSpeed) 
         {
             onDialogStarted?.Invoke();
@@ -70,14 +89,12 @@ namespace _Scripts.DialogSystem
             }
         }
 
-        public void SetTalkingAudio(Sound soundFx)
+        public void SetTalkingAudio(Sound soundFx, bool randomizePitch = false)
         {
-            _soundEmitter.SetFirstSound(soundFx);
-        }
+            _audioSource.clip = soundFx.clip;
+            _audioSource.pitch = soundFx.pitch;
 
-        public void SetRandomizePitch(bool isRandomized)
-        {
-            RandomizeCharacterPitch = isRandomized;
+            RandomizeCharacterPitch = randomizePitch;
         }
         
         public void DisplayNextSentence()
@@ -86,6 +103,7 @@ namespace _Scripts.DialogSystem
             {
                 StopCoroutine(_typingCoroutine);
                 dialog.text = currentSentence;
+                ActivateNextDialogSprite(true);
                 IsTyping = false;
                 return;
             }
@@ -114,23 +132,25 @@ namespace _Scripts.DialogSystem
         {
             IsTyping = true;
             dialogImage.sprite = defaultSprite;
+            ActivateNextDialogSprite(false);
             
             while (true)
             {
                 for (int i = 0; i <= sentence.Length; i++)
                 {
-                    dialog.text = sentence.Substring(0, i);
-
-                    if (RandomizeCharacterPitch)
+                    if (i % 2 == 0)
                     {
-                        _soundEmitter.RandomizePitchFirstAudio();
+                        PlayTalkingAudio();
                     }
                     
-                    _soundEmitter.PlayFirstOneShot();
                     
+                    dialog.text = sentence.Substring(0, i);
+
                     if (i == sentence.Length)
                     {
                         IsTyping = false;
+                        ActivateNextDialogSprite(true);
+                        
                         yield break;
                     }
 
@@ -139,9 +159,27 @@ namespace _Scripts.DialogSystem
             }
         }
 
+        private void PlayTalkingAudio()
+        {
+            if(_audioSource.clip is null)
+                return;
+            
+            if (RandomizeCharacterPitch)
+                RandomizePitchTalkingAudio();
+                    
+            _audioSource.PlayOneShot(_audioSource.clip);
+        }
+
+        private void RandomizePitchTalkingAudio()
+        {
+            var pitch = _audioSource.pitch;
+            
+            _audioSource.pitch = Random.Range(pitch - 0.01f, pitch + 0.01f);
+        }
+
         void EndDialogue()
         {
-            //Debug.Log("Dialog finished|||");
+            ActivateNextDialogSprite(false);
             
             //limpiamos lastSentence
             currentSentence = String.Empty;

@@ -178,7 +178,7 @@ namespace _Scripts.Controllers
 
                 _characterManager.ActiveParticleSystem.gameObject.transform.position = new Vector3(attackOffset.x, attackOffset.y, -1);
                 _characterManager.ActiveParticleSystem.Play();
-                _characterManager.ActiveCharacter.PlaySoundSfx(CharacterSfx.UnicornAttackSfx);
+                _characterManager.ActiveCharacter.PlaySoundSfx(SoundsFX.Attack);
                 
                 AttackEnnemiesOnOverlapCircle(attackOffset);
                 
@@ -196,6 +196,8 @@ namespace _Scripts.Controllers
                 return;
             }
 
+            _characterManager.ActiveCharacter.PlaySoundSfx(SoundsFX.Damaged);
+            
             StartCoroutine(ActivateImpulseCounter(impulseDirection));
             
             //TODO: create a CameraController to ShakeCamera(1.5f, 0.1f); onDamageTaken
@@ -403,12 +405,6 @@ namespace _Scripts.Controllers
         public string GetActiveCharacterName()
         {
             return _characterManager.ActiveCharacter.CharacterName;
-        }
-
-        public Sound GetActiveCharacterTalkingSound()
-        {
-            
-            return _characterManager.ActiveCharacter.GetTalkingSound();
         }
 
     #endregion
