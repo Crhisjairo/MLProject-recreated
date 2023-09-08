@@ -4,5 +4,6 @@ namespace _Scripts.Enums
     {
         Player,
         Enemy,
+        NPC
     }
 }

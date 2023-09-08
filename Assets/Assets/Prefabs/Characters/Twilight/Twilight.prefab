@@ -53,6 +53,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: maxLife
       value: 5
       objectReference: {fileID: 0}
@@ -65,16 +69,16 @@ PrefabInstance:
       value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: runningSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: characterSpecs.maxLife
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: characterSpecs.characterName
       value: Twilight
-      objectReference: {fileID: 0}
-    - target: {fileID: 4951365452995085792, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
-      propertyPath: _sounds.Array.data[0].name
-      value: UnicornAttackSfx
       objectReference: {fileID: 0}
     - target: {fileID: 7382685490365112285, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: m_Controller

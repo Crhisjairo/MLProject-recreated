@@ -484,6 +484,7 @@ GameObject:
   - component: {fileID: 1619166006367728434}
   - component: {fileID: 8883663206528330188}
   - component: {fileID: 6535758805965892358}
+  - component: {fileID: 4530239469214297606}
   m_Layer: 8
   m_Name: Squid
   m_TagString: Enemy
@@ -506,7 +507,7 @@ Transform:
   - {fileID: 4723093816160724230}
   - {fileID: 1233443591420913943}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3883522017903526659
 SpriteRenderer:
@@ -686,3 +687,29 @@ MonoBehaviour:
   exclamationSpriteRenderer: {fileID: 6548272686154022173}
   movementSpeed: 2
   nextDirectionTime: 1
+--- !u!114 &4530239469214297606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9167668916615454215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1803fe9e371d21a468dac034957ec841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mixerGroup: {fileID: -6192578760746128693, guid: ff64427cd949f1a4ba99787cd4904e06, type: 2}
+  _sounds:
+  - clip: {fileID: 8300000, guid: 84e7ffa2d928a7b49bf33bf628b25e87, type: 3}
+    name: Damaged
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: dfd26e61a4aab084f80c29cbcd523c22, type: 3}
+    name: Died
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0

@@ -4,16 +4,19 @@ using _Scripts.Controllers;
 using _Scripts.Enemies.Specs;
 using _Scripts.Enums;
 using _Scripts.Interfaces;
+using _Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace _Scripts.Enemies
 {
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(SoundEmitter))]
     public abstract class Enemy: MonoBehaviour, IAttackable
     {
         [SerializeField] private EnemyDefaultSpecs modelDefaultSpecs;
         protected EnemyDefaultSpecs CurrentSpecs;
+        protected SoundEmitter SoundEmitter;
 
         private int worldId = 0; // TODO: used to know if item must be spawned or nor when load save data.
         
@@ -44,6 +47,7 @@ namespace _Scripts.Enemies
             Rb = GetComponent<Rigidbody2D>();
             EnemySpriteRenderer = GetComponent<SpriteRenderer>();
             BoxCollider2D = GetComponent<BoxCollider2D>();
+            SoundEmitter = GetComponent<SoundEmitter>();
 
             CurrentSpecs = modelDefaultSpecs.GetCopy();
         }
@@ -51,11 +55,17 @@ namespace _Scripts.Enemies
         public virtual void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
         {
             CurrentSpecs.life -= damageAmount;
+            PlaySoundSfx(SoundsFX.Damaged);
             
             StartCoroutine(FlashSprite());
             StartCoroutine(ActivateImpulseCounter(impulseDirection));
         }
 
+        protected void PlaySoundSfx(SoundsFX sound)
+        {
+            SoundEmitter.PlayOneShot(sound.ToString());
+        }
+        
         public bool IsVulnerable()
         {
             return _isVulnerable;
@@ -69,6 +79,7 @@ namespace _Scripts.Enemies
         public void OnDead()
         {
             _inImpulse = false;
+            PlaySoundSfx(SoundsFX.Died);
             
             StartCoroutine(AutoDestroy());
         }
