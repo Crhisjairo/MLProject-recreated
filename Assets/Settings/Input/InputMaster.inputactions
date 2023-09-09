@@ -1242,6 +1242,45 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "InCinematic",
+            "id": "7fbff732-1383-4a58-9251-3d547b99b815",
+            "actions": [
+                {
+                    "name": "Skip",
+                    "type": "Button",
+                    "id": "5f0cbca0-b236-48a7-92cc-99e8271b4e30",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ebe00e62-f329-4d90-a10f-678419820a6a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5e9d7c91-96ce-49c3-9196-22541f8debc0",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

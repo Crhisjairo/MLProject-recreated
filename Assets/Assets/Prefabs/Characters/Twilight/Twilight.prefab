@@ -80,6 +80,26 @@ PrefabInstance:
       propertyPath: characterSpecs.characterName
       value: Twilight
       objectReference: {fileID: 0}
+    - target: {fileID: 4951365452995085792, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: _sounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4951365452995085792, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: _sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d735c48182416ba4ab39bf1757009016, type: 3}
+    - target: {fileID: 4951365452995085792, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: _sounds.Array.data[1].name
+      value: Damaged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4951365452995085792, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: _sounds.Array.data[1].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4951365452995085792, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
+      propertyPath: _sounds.Array.data[1].volume
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 7382685490365112285, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: m_Controller
       value: 

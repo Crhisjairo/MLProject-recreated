@@ -12,6 +12,7 @@ namespace _Scripts.Controllers
     public class ScreenLoader : MonoBehaviour
     {
         [SerializeField] private Animator spinnerAnimator;
+        [SerializeField] private Animator transitionAnimator;
 
         [SerializeField] private float waitTimeBeforeLoading = 0;
         [SerializeField] private float waitTimeAfterLoading = 0;
@@ -27,6 +28,9 @@ namespace _Scripts.Controllers
 
         private void Start()
         {
+            spinnerAnimator.enabled = false;
+            transitionAnimator.enabled = false;
+            
             DontDestroyOnLoad(gameObject);
         }
 
@@ -64,6 +68,7 @@ namespace _Scripts.Controllers
         private void StartLoadScreenAnimations()
         {
             spinnerAnimator.enabled = true;
+            transitionAnimator.enabled = true;
             
             _loadingScreenAnimator.Play(TransitionsAnimations.FadeIn.ToString());
         }
@@ -71,6 +76,7 @@ namespace _Scripts.Controllers
         private void FinishLoadScreenAnimations()
         {
             spinnerAnimator.enabled = false;
+            transitionAnimator.enabled = false;
         }
         
         private void OnCompleteLoading(AsyncOperation loading)

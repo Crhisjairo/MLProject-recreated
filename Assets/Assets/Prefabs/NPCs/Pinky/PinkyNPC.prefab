@@ -37,7 +37,7 @@ Transform:
   - {fileID: 6734753753189426235}
   - {fileID: 6374248080280454868}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1476633491388791739
 Rigidbody2D:

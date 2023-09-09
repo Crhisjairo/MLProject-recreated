@@ -111,8 +111,8 @@ namespace _Scripts.Enemies
             {
                 exclamationSpriteRenderer.enabled = true;
                    
-                //Paramos de movernos aleatoriamente
-                StopCoroutine(_nextRandomMovementCoroutine); 
+                if(_nextRandomMovementCoroutine is not null)
+                    StopCoroutine(_nextRandomMovementCoroutine); 
             }
         }
         

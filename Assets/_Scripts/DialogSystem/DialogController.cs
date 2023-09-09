@@ -62,7 +62,7 @@ namespace _Scripts.DialogSystem
             _nextDialogSpriteRenderer.enabled = isActive;
         }
 
-        public void SetDialogue(Dialogs dialogueSentences, float typingSpeed) 
+        public void SetDialogue(Dialog dialogueSentences, float typingSpeed) 
         {
             onDialogStarted?.Invoke();
             

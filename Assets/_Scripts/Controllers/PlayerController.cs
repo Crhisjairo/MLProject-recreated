@@ -267,6 +267,8 @@ namespace _Scripts.Controllers
             Collider2D collider = Physics2D.OverlapCircle(origin, interactionDistance, interactorsLayers);
 
             Component interactuableComponent;
+
+            Debug.Log(collider.name);
             
             if (collider)
             {
