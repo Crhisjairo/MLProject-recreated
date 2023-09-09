@@ -3,15 +3,15 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "MainVille/MainVille.tmx",
+    "activeFile": "MainVille/Tutorial.tmx",
     "expandedProjectPaths": [
-        ".",
-        "TilesSet",
         "Underground",
-        "MainVilleZone2",
         "Underground_zone_2",
-        "TestGroundRoom",
-        "MainVille"
+        "MainVilleZone2",
+        "MainVille",
+        "TilesSet",
+        ".",
+        "TestGroundRoom"
     ],
     "exportAsImage.drawTileGrid": false,
     "exportAsImage.useCurrentScale": false,
@@ -126,15 +126,26 @@
             "scaleInEditor": 5.5
         },
         "MainVille/MainVille.tmx": {
-            "scale": 0.33,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": -257.5757575757575,
-                "y": 227.27272727272725
+                "x": -498.75,
+                "y": 414
             }
         },
         "MainVille/MainVille.tmx#bridge": {
             "scaleInDock": 1
+        },
+        "MainVille/Tutorial.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 1516.6666666666667,
+                "y": -5184.848484848485
+            }
         },
         "MainVille/lamp-1-post-1-tall-single.tsx": {
             "scaleInDock": 5.5,
@@ -185,8 +196,8 @@
             }
         },
         "TilesSet/Outside Objects.tsx": {
-            "scaleInDock": 0.5,
-            "scaleInEditor": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 3
         },
         "TilesSet/Twilight.tsx": {
             "scaleInDock": 1,
@@ -204,20 +215,20 @@
             "scale": 0.75,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": -2561.333333333333,
-                "y": -256
+                "x": -2562,
+                "y": -258.66666666666663
             }
         },
         "Underground_zone_2/Underground_zone_2.tmx": {
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 39.333333333333314,
-                "y": -511.33333333333326
+                "x": 38,
+                "y": -520
             }
         },
         "forestTiles.tsx": {
-            "scaleInDock": 0.5,
+            "scaleInDock": 0.75,
             "scaleInEditor": 1
         },
         "forest_tiles2.tsx": {
@@ -242,22 +253,24 @@
         "MainVille/MainVille.tmx",
         "Underground/Underground.tmx",
         "Underground_zone_2/Underground_zone_2.tmx",
-        "TilesSet/bridge.tsx"
+        "forestTiles.tsx",
+        "TilesSet/Outside Objects.tsx",
+        "MainVille/Tutorial.tmx"
     ],
     "project": "MLProject.tiled-project",
     "recentFiles": [
-        "TilesSet/bridge.tsx",
-        "Underground_zone_2/Underground_zone_2.tmx",
-        "Underground/Underground.tmx",
         "MainVille/MainVille.tmx",
-        "TilesSet/Twilight.tsx",
+        "Underground/Underground.tmx",
+        "Underground_zone_2/Underground_zone_2.tmx",
+        "forestTiles.tsx",
         "TilesSet/Outside Objects.tsx",
+        "MainVille/Tutorial.tmx",
+        "TilesSet/Twilight.tsx",
+        "TilesSet/bridge.tsx",
         "MainVilleZone2/MainVille_Zone2.tmx",
         "MainVille/Lamp_violet_single.tsx",
-        "forestTiles.tsx",
         "MainVille/test1.tsx",
-        "MainVille/Lamp1.tsx",
-        "MainVille/lamp-1-post-1-tall-single.tsx"
+        "MainVille/Lamp1.tsx"
     ],
     "resizeMap.removeObjects": false,
     "tileset.lastUsedFilter": "Fichiers de jeu de tuiles Tiled (*.tsx *.xml)",
