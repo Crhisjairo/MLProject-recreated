@@ -140,6 +140,14 @@ namespace _Scripts.Characters
             soundEmitter.PlayOneShot(sound.ToString());
         }
 
+        public void ResetLastLookingDirection()
+        {
+            _lookingDirection = new Vector2();
+            
+            _animator.SetFloat(CharacterAnimationParameters.LastHorizontal.ToString(), 0);
+            _animator.SetFloat(CharacterAnimationParameters.LastVertical.ToString(), 0);
+        }
+        
         public void SetLookingDirection(Vector2 direction)
         {
             //Guardamos la direccion en la que miramos segun el axis

@@ -38,7 +38,7 @@ RectTransform:
   - {fileID: 8350440693565758448}
   - {fileID: 8280700935449296474}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinnerAnimator: {fileID: 5685535821369927207}
+  transitionAnimator: {fileID: 1126042258267734594}
   waitTimeBeforeLoading: 2
   waitTimeAfterLoading: 3
   loadingSlider: {fileID: 2755518371353113926}

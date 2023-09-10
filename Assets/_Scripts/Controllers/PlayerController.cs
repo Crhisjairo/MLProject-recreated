@@ -268,8 +268,6 @@ namespace _Scripts.Controllers
 
             Component interactuableComponent;
 
-            Debug.Log(collider.name);
-            
             if (collider)
             {
                 collider.gameObject.TryGetComponent(typeof(IInteractable), out interactuableComponent);
