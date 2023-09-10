@@ -5,13 +5,13 @@
     },
     "activeFile": "MainVille/Tutorial.tmx",
     "expandedProjectPaths": [
-        "Underground",
         "Underground_zone_2",
-        "MainVilleZone2",
-        "MainVille",
+        "TestGroundRoom",
         "TilesSet",
+        "Underground",
+        "MainVilleZone2",
         ".",
-        "TestGroundRoom"
+        "MainVille"
     ],
     "exportAsImage.drawTileGrid": false,
     "exportAsImage.useCurrentScale": false,
@@ -140,11 +140,11 @@
             "scaleInDock": 1
         },
         "MainVille/Tutorial.tmx": {
-            "scale": 0.33,
+            "scale": 0.25,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1516.6666666666667,
-                "y": -5184.848484848485
+                "x": 1034,
+                "y": -3076
             }
         },
         "MainVille/lamp-1-post-1-tall-single.tsx": {
@@ -196,7 +196,7 @@
             }
         },
         "TilesSet/Outside Objects.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 3
         },
         "TilesSet/Twilight.tsx": {
