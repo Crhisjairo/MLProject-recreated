@@ -133,7 +133,7 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 0,
-                "y": 511.75
+                "y": 511.5
             }
         },
         "MainVille/MainVille.tmx#bridge": {
@@ -216,7 +216,7 @@
             "selectedLayer": 3,
             "viewCenter": {
                 "x": -2560,
-                "y": -255.33333333333331
+                "y": -256
             }
         },
         "Underground_zone_2/Underground_zone_2.tmx": {
@@ -224,7 +224,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 38.666666666666686,
-                "y": -511.33333333333326
+                "y": -511.99999999999994
             }
         },
         "forestTiles.tsx": {
