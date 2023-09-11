@@ -132,19 +132,19 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 0,
-                "y": 511.5
+                "x": -0.25,
+                "y": 511
             }
         },
         "MainVille/MainVille.tmx#bridge": {
             "scaleInDock": 1
         },
         "MainVille/Tutorial.tmx": {
-            "scale": 0.25,
-            "selectedLayer": 4,
+            "scale": 2,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 1218,
-                "y": -1480
+                "x": 34.75,
+                "y": -80
             }
         },
         "MainVille/lamp-1-post-1-tall-single.tsx": {
@@ -215,16 +215,16 @@
             "scale": 0.75,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": -2560,
-                "y": -256
+                "x": -2560.6666666666665,
+                "y": -257.33333333333326
             }
         },
         "Underground_zone_2/Underground_zone_2.tmx": {
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 38.666666666666686,
-                "y": -511.99999999999994
+                "x": 2.6666666666666288,
+                "y": -514.6666666666666
             }
         },
         "forestTiles.tsx": {
@@ -239,7 +239,7 @@
     "frame.defaultDuration": 120,
     "last.exportedFilePath": "C:/Projects/Unity/2022.3.2f1/MLProject-recreated/Assets/Assets/Maps/TilesSet",
     "last.externalTilesetPath": "C:/Projects/Unity/2020.1.17f1/ML_Project/Assets/Tiled/Map/TilesSet",
-    "last.imagePath": "C:/Projects/Unity/2020.1.17f1/ML_Project/Assets/Sprites/Map/Objects",
+    "last.imagePath": "C:/Projects/Unity/2022.3.2f1/MLProject-recreated/Assets/Assets/Maps/Sprites/Map/Objects",
     "lastUsedTilesetExportFilter": "Tous les Fichiers (*)",
     "map.fixedSize": false,
     "map.height": 19,
@@ -281,5 +281,5 @@
     },
     "tileset.transparentColor": "#000000",
     "tileset.type": 0,
-    "tileset.useTransparentColor": false
+    "tileset.useTransparentColor": true
 }

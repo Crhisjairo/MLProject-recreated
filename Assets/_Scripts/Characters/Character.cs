@@ -3,6 +3,7 @@ using _Scripts.Enums;
 using _Scripts.SoundsManagers;
 using _Scripts.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Scripts.Characters
 {
@@ -17,7 +18,8 @@ namespace _Scripts.Characters
         public Sprite iconSprite;
         public Sprite characterSprite;
 
-        [SerializeField] SoundEmitter soundEmitter;
+        [FormerlySerializedAs("soundEmitter")]
+        [SerializeField] SoundFXEmitter soundFXEmitter;
         [SerializeField] new ParticleSystem particleSystem;
 
         private Animator _animator;
@@ -137,7 +139,7 @@ namespace _Scripts.Characters
 
         public void PlaySoundSfx(SoundsFX sound)
         {
-            soundEmitter.PlayOneShot(sound.ToString());
+            soundFXEmitter.PlayOneShot(sound.ToString());
         }
 
         public void ResetLastLookingDirection()
@@ -225,9 +227,9 @@ namespace _Scripts.Characters
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _capsuleCollider = GetComponent<CapsuleCollider2D>();
 
-            if (!TryGetComponent(out soundEmitter))
+            if (!TryGetComponent(out soundFXEmitter))
             {
-                String message = string.Format(ConsoleMessages.OptionalComponentNotFound, typeof(SoundEmitter), name);
+                String message = string.Format(ConsoleMessages.OptionalComponentNotFound, typeof(SoundFXEmitter), name);
                 Debug.LogWarning(message);
             }
         }

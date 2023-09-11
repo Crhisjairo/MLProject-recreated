@@ -11,12 +11,12 @@ using UnityEngine.Serialization;
 namespace _Scripts.Enemies
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(SoundEmitter))]
+    [RequireComponent(typeof(SoundFXEmitter))]
     public abstract class Enemy: MonoBehaviour, IAttackable
     {
         [SerializeField] private EnemyDefaultSpecs modelDefaultSpecs;
         protected EnemyDefaultSpecs CurrentSpecs;
-        protected SoundEmitter SoundEmitter;
+        protected SoundFXEmitter SoundFXEmitter;
 
         private int worldId = 0; // TODO: used to know if item must be spawned or nor when load save data.
         
@@ -47,7 +47,7 @@ namespace _Scripts.Enemies
             Rb = GetComponent<Rigidbody2D>();
             EnemySpriteRenderer = GetComponent<SpriteRenderer>();
             BoxCollider2D = GetComponent<BoxCollider2D>();
-            SoundEmitter = GetComponent<SoundEmitter>();
+            SoundFXEmitter = GetComponent<SoundFXEmitter>();
 
             CurrentSpecs = modelDefaultSpecs.GetCopy();
         }
@@ -63,7 +63,7 @@ namespace _Scripts.Enemies
 
         protected void PlaySoundSfx(SoundsFX sound)
         {
-            SoundEmitter.PlayOneShot(sound.ToString());
+            SoundFXEmitter.PlayOneShot(sound.ToString());
         }
         
         public bool IsVulnerable()

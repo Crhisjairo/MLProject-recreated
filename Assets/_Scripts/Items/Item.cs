@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 namespace _Scripts.Items
 {
-    [RequireComponent(typeof(SoundEmitter))]
+    [RequireComponent(typeof(SoundFXEmitter))]
     public class Item : MonoBehaviour
     {
         [SerializeField] private ItemDefaultSpecs defaultSpecs;
@@ -20,13 +20,13 @@ namespace _Scripts.Items
         
         private int worldId = 0; // TODO: used to know if item must be spawned or nor when load save data.
 
-        private SoundEmitter _soundEmitter;
+        private SoundFXEmitter _soundFXEmitter;
 
         public bool isGrabable = false;
 
         private void Awake()
         {
-            _soundEmitter = GetComponent<SoundEmitter>();
+            _soundFXEmitter = GetComponent<SoundFXEmitter>();
         }
 
         private void GiveItemToPlayerInventory(PlayerController playerController)
@@ -52,7 +52,7 @@ namespace _Scripts.Items
                 else
                 {
                     defaultSpecs.TakeEffect(playerController);
-                    _soundEmitter.PlayOneShot(SoundsFX.Taken.ToString());
+                    _soundFXEmitter.PlayOneShot(SoundsFX.Taken.ToString());
 
                     StartCoroutine(DestroyItemAfterTime());
                 }
