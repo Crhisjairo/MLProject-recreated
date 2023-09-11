@@ -5,13 +5,13 @@
     },
     "activeFile": "MainVille/Tutorial.tmx",
     "expandedProjectPaths": [
+        "Underground",
+        "TilesSet",
         "TestGroundRoom",
         "MainVille",
-        "Underground",
-        "Underground_zone_2",
         "MainVilleZone2",
-        "TilesSet",
-        "."
+        ".",
+        "Underground_zone_2"
     ],
     "exportAsImage.drawTileGrid": false,
     "exportAsImage.useCurrentScale": false,
@@ -132,8 +132,8 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": -0.25,
-                "y": 511
+                "x": 0,
+                "y": 511.75
             }
         },
         "MainVille/MainVille.tmx#bridge": {
@@ -143,11 +143,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 0.5,
-            "selectedLayer": 4,
+            "scale": 0.33,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 606,
-                "y": -1406
+                "x": 1584.848484848485,
+                "y": -4710.606060606061
             }
         },
         "MainVille/lamp-1-post-1-tall-single.tsx": {
@@ -218,8 +218,8 @@
             "scale": 0.75,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": -2560.6666666666665,
-                "y": -257.33333333333326
+                "x": -2560,
+                "y": -255.33333333333326
             }
         },
         "Underground/rocks.tsx": {
@@ -230,8 +230,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2.6666666666666288,
-                "y": -514.6666666666666
+                "x": 0,
+                "y": -495.33333333333326
             }
         },
         "forestTiles.tsx": {
