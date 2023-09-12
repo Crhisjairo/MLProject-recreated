@@ -21,6 +21,6 @@ namespace _Scripts.Utils
                                                 "music name is correct.";
         public const string MoreOnceMusicPlayeOnAwake = "More than one musics was marked as Playe On Awake.\n" +
                                                         "Only the last one is player on awake.";
-
+        public const string WrongComponentTypeAttached = "Component {0} is not type of {1}.";
     }
 }

@@ -16,14 +16,14 @@ namespace _Scripts.Enemies
         [SerializeField] private float movementSpeed = 2;
 
         [SerializeField] private float nextDirectionTime = 1f;
+
+        [SerializeField] private bool randomMove = true;
         
         private CircleCollider2D _rangeCollider;
         
         private Vector2 _startPoint, _nextDirection;
 
         private const int MinLifeSliderValue = 0;
-
-        private bool _isMoving = true;
 
         private Coroutine _nextRandomMovementCoroutine;
         
@@ -32,14 +32,15 @@ namespace _Scripts.Enemies
             base.Awake();
             
             SetComponents();
+            
+            SetSliderValues();
+            exclamationSpriteRenderer.enabled = false;
         }
 
         private void Start()
         {
-            SetSliderValues();
-            
-            exclamationSpriteRenderer.enabled = false;
-            _nextRandomMovementCoroutine = StartCoroutine(CalculateNextRandomMovementCoroutine());
+            if (randomMove)
+                _nextRandomMovementCoroutine = StartCoroutine(CalculateNextRandomMovementCoroutine());
         }
 
         private void FixedUpdate()
@@ -49,7 +50,6 @@ namespace _Scripts.Enemies
                 Rb.AddForce(_impulseDirection, ForceMode2D.Force);
             }
             
-            if (!_isMoving) return;
 
             Rb.MovePosition(Rb.position + _nextDirection * (movementSpeed * Time.fixedDeltaTime));
         }
@@ -70,7 +70,7 @@ namespace _Scripts.Enemies
 
             if (IsDead())
             {
-                _isMoving = false;
+                movementSpeed = 0;
                 
                 OnDead();
             }
@@ -132,9 +132,12 @@ namespace _Scripts.Enemies
         {
             if (other.CompareTag(Tags.Player.ToString()))
             {
+                _nextDirection = new Vector2();
+                
                 exclamationSpriteRenderer.enabled = false;
                 //Volvemos a movernos aleatoriamente ignorando al jugador
-                _nextRandomMovementCoroutine = StartCoroutine(CalculateNextRandomMovementCoroutine());
+                if (randomMove)
+                    _nextRandomMovementCoroutine = StartCoroutine(CalculateNextRandomMovementCoroutine());
             }
         }
         

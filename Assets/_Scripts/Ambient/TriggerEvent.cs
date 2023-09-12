@@ -10,9 +10,10 @@ namespace _Scripts.Ambient
 { 
     public class TriggerEvent : MonoBehaviour
     {
-        [SerializeField] private EdgeCollider2D edgeColliderToDisable;
-        [SerializeField] private BoxCollider2D boxColliderToDisable;
-
+        [SerializeField] private Collider2D[] collidersToDisable;
+        [SerializeField] private bool enableTriggerColliders = false;
+        
+        
         public Tags tagToCheckCollisions;
         
         public UnityEvent onEntityCollides;
@@ -21,12 +22,16 @@ namespace _Scripts.Ambient
         {
             if (other.CompareTag(tagToCheckCollisions.ToString()))
             {
-                onEntityCollides?.Invoke();
+                if(other.isTrigger && !enableTriggerColliders)
+                    return;
                 
-                if(edgeColliderToDisable)
-                    edgeColliderToDisable.enabled = false;
-                if(boxColliderToDisable)
-                    boxColliderToDisable.enabled = false;
+                onEntityCollides?.Invoke();
+
+                foreach (var colliderToDisable in collidersToDisable)
+                {
+                    colliderToDisable.enabled = false;
+                }
+                
             }
         }
     }

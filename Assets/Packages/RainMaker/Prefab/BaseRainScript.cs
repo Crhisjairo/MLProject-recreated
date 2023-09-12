@@ -22,6 +22,9 @@ namespace DigitalRuby.RainMaker
         [Tooltip("AudoMixer used for the rain sound")]
         public AudioMixerGroup RainSoundAudioMixer;
 
+        [Range(0.0f, 1.0f)]
+        public float SpatialBlend;
+        
         [Tooltip("Intensity of rain (0-1)")]
         [Range(0.0f, 1.0f)]
         public float RainIntensity;
@@ -43,7 +46,7 @@ namespace DigitalRuby.RainMaker
 
         protected virtual void Start()
         {
-            audioSourceRainLight = new LoopingAudioSource(this, RainSoundLight, RainSoundAudioMixer);
+            audioSourceRainLight = new LoopingAudioSource(this, RainSoundLight, RainSoundAudioMixer, SpatialBlend);
             audioSourceRainLight.Play(1.0f);
 
             
@@ -97,7 +100,7 @@ namespace DigitalRuby.RainMaker
         public AudioSource AudioSource { get; private set; }
         public float TargetVolume { get; private set; }
 
-        public LoopingAudioSource(MonoBehaviour script, AudioClip clip, AudioMixerGroup mixer)
+        public LoopingAudioSource(MonoBehaviour script, AudioClip clip, AudioMixerGroup mixer, float spatialBlend)
         {
             AudioSource = script.gameObject.AddComponent<AudioSource>();
 
@@ -106,6 +109,7 @@ namespace DigitalRuby.RainMaker
                 AudioSource.outputAudioMixerGroup = mixer;
             }
 
+            AudioSource.spatialBlend = spatialBlend;
             AudioSource.loop = true;
             AudioSource.clip = clip;
             AudioSource.playOnAwake = false;

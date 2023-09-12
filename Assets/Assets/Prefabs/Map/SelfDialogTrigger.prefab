@@ -88,8 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5e0b7d58b51c34faba564d695a8ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgeColliderToDisable: {fileID: 0}
-  boxColliderToDisable: {fileID: 0}
+  collidersToDisable:
+  - {fileID: 7356132580310487890}
   tagToCheckCollisions: 0
   onEntityCollides:
     m_PersistentCalls:

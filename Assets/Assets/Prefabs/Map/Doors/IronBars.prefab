@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3276670525846332427}
   - component: {fileID: 6173847014146401194}
   - component: {fileID: 6139764937878493420}
+  - component: {fileID: 6933115825879913495}
   m_Layer: 0
   m_Name: IronBars
   m_TagString: Untagged
@@ -225,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 6546086158218628121}
+  soundFXEmitter: {fileID: 6933115825879913495}
   colliders:
   - {fileID: 1346792160748638758}
   - {fileID: 5298746946314694997}
@@ -233,3 +235,24 @@ MonoBehaviour:
   nameOnCloseAnimTrigger: 3
   waitTimeBeforeStartAnimation: 0
   waitTimeBeforeDisableAnimator: 2
+  doorActivators: []
+--- !u!114 &6933115825879913495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639243236323428274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1803fe9e371d21a468dac034957ec841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mixerGroup: {fileID: -6192578760746128693, guid: ff64427cd949f1a4ba99787cd4904e06, type: 2}
+  _sounds:
+  - clip: {fileID: 8300000, guid: 7d366e94cea6d4746bba269263ac1288, type: 3}
+    name: open-door
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    playOnAwake: 0

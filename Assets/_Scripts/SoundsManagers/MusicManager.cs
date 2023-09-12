@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using _Scripts.Utils;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -10,10 +11,15 @@ namespace _Scripts.SoundsManagers
         [SerializeField] private AudioMixerGroup mixerGroup;
         [SerializeField] private Sound[] musics;
 
+        [SerializeField] private bool useFadeOnStop;
+        public float fadeDuration;
+        
         private bool _musicPlayerOnAwake;
         
         private AudioSource _currentAudioSource;
 
+        private const float MinVolume = 0f;
+        
         private void Start()
         {
             SetMusicsAudioSources();
@@ -69,7 +75,25 @@ namespace _Scripts.SoundsManagers
         
         public void StopMusic()
         {
+            if(useFadeOnStop)
+                StartCoroutine(StartFade(fadeDuration, MinVolume));
+            else
+                _currentAudioSource.Stop();
+        }
+        
+        public IEnumerator StartFade(float duration, float targetVolume)
+        {
+            float currentTime = 0;
+            float start = _currentAudioSource.volume;
+            while (currentTime < duration)
+            {
+                currentTime += Time.deltaTime;
+                _currentAudioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+                yield return null;
+            }
             _currentAudioSource.Stop();
+            
+            yield break;
         }
     }
 }

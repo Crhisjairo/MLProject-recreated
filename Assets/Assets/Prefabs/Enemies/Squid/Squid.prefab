@@ -507,7 +507,7 @@ Transform:
   - {fileID: 4723093816160724230}
   - {fileID: 1233443591420913943}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3883522017903526659
 SpriteRenderer:
@@ -687,6 +687,7 @@ MonoBehaviour:
   exclamationSpriteRenderer: {fileID: 6548272686154022173}
   movementSpeed: 2
   nextDirectionTime: 1
+  randomMove: 1
 --- !u!114 &4530239469214297606
 MonoBehaviour:
   m_ObjectHideFlags: 0

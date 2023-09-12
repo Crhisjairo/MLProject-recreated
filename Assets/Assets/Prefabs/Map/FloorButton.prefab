@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 139081646487522179}
   - component: {fileID: 5979510212571584667}
   - component: {fileID: 6972271639459238651}
-  - component: {fileID: 9142811066601209619}
-  m_Layer: 0
+  - component: {fileID: 9019251619288284758}
+  m_Layer: 6
   m_Name: FloorButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 923858913093945145}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 28.222898, y: 63.3229, z: 1.5740356}
   m_LocalScale: {x: 5.7741203, y: 5.7741203, z: 5.7741203}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5979510212571584667
 SpriteRenderer:
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.24, y: 0.24}
   m_EdgeRadius: 0
---- !u!114 &9142811066601209619
+--- !u!114 &9019251619288284758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,24 +140,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 923858913093945145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d5e0b7d58b51c34faba564d695a8ad1, type: 3}
+  m_Script: {fileID: 11500000, guid: b4940d7f33484975b00f0e0436398851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgeColliderToDisable: {fileID: 0}
-  boxColliderToDisable: {fileID: 6972271639459238651}
+  collidersToDisable:
+  - {fileID: 6972271639459238651}
+  enableTriggerColliders: 0
   tagToCheckCollisions: 0
   onEntityCollides:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5979510212571584667}
-        m_TargetAssemblyTypeName: UnityEngine.SpriteRenderer, UnityEngine
-        m_MethodName: set_sprite
-        m_Mode: 2
+      - m_Target: {fileID: 9019251619288284758}
+        m_TargetAssemblyTypeName: _Scripts.Ambient.ButtonOnFloor, Assembly-CSharp
+        m_MethodName: SetIsActive
+        m_Mode: 6
         m_Arguments:
-          m_ObjectArgument: {fileID: 836498007, guid: 186c24f5782c60744953f72e5b3f1bf5, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+  isActive: 0
+  activeSprite: {fileID: 836498007, guid: 186c24f5782c60744953f72e5b3f1bf5, type: 3}
+  inactiveSprite: {fileID: 1866005273, guid: 186c24f5782c60744953f72e5b3f1bf5, type: 3}
