@@ -37,7 +37,7 @@ Transform:
   - {fileID: 6734753753189426235}
   - {fileID: 6374248080280454868}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1476633491388791739
 Rigidbody2D:
@@ -161,6 +161,7 @@ MonoBehaviour:
   interactSprite: {fileID: 9208148057658058861}
   inDialogActionMapName: InDialog
   lookAtPlayerWhenInteracting: 0
+  _dialogueTrigger: {fileID: 8757844482995188051}
   onAbleToInteract:
     m_PersistentCalls:
       m_Calls:
@@ -210,6 +211,7 @@ MonoBehaviour:
     name: 
     volume: 1
     pitch: 1.3
+    spatialBlend: 0
     loop: 0
     playOnAwake: 0
   randomizeTalkingPitch: 1
@@ -221,28 +223,25 @@ MonoBehaviour:
   onlyInteractWithSpecifCharacter: 0
   characterNameAbleToInteractWith: 
   textTypingDelay: 0.035
-  firstDialog:
-    title: Pinky
-    sentences:
-    - "Esc\xFAchame, Twilight..."
-    - "Puedo... hacer... \xA1zoom!"
-    spritesForSentences:
-    - {fileID: 113252637, guid: 4eb51419e7583654ebb37dc6abb11c12, type: 3}
-    - {fileID: 1096328786, guid: 4eb51419e7583654ebb37dc6abb11c12, type: 3}
-  defaultDialog:
-    title: Pinky
-    sentences:
-    - "\xBFLo ves?"
-    - "\xA1Est\xE1s cerca mio!"
-    spritesForSentences:
-    - {fileID: 1084557355, guid: 4eb51419e7583654ebb37dc6abb11c12, type: 3}
-    - {fileID: -286476638, guid: 4eb51419e7583654ebb37dc6abb11c12, type: 3}
-  wrongCharacterDialog:
-    title: Pinky
-    sentences:
-    - This is wrong...
-    - Yes... wrong...
-    spritesForSentences: []
+  dialogs:
+    firstDialog:
+      titles:
+      - Titles fin first
+      sentences:
+      - First sentence
+      spritesForSentences:
+      - {fileID: 1163042659, guid: 4eb51419e7583654ebb37dc6abb11c12, type: 3}
+    defaultDialog:
+      titles:
+      - Default title
+      sentences:
+      - Default sentence
+      spritesForSentences:
+      - {fileID: -809157043, guid: 4eb51419e7583654ebb37dc6abb11c12, type: 3}
+    wrongCharacterDialog:
+      titles: []
+      sentences: []
+      spritesForSentences: []
 --- !u!114 &1179114584959212227
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -126,6 +126,7 @@ MonoBehaviour:
     name: 
     volume: 1
     pitch: 1
+    spatialBlend: 0
     loop: 0
     playOnAwake: 0
   randomizeTalkingPitch: 1
@@ -139,15 +140,15 @@ MonoBehaviour:
   textTypingDelay: 0.1
   dialogs:
     firstDialog:
-      title: 
+      titles: []
       sentences: []
       spritesForSentences: []
     defaultDialog:
-      title: 
+      titles: []
       sentences: []
       spritesForSentences: []
     wrongCharacterDialog:
-      title: 
+      titles: []
       sentences: []
       spritesForSentences: []
 --- !u!1 &7666447753727091034
@@ -5114,7 +5115,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 58162645
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 2135364658, guid: a54a0b2ea1a8d54458a0e2cc0879108f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5200,6 +5201,7 @@ MonoBehaviour:
     name: Attack
     volume: 0.8
     pitch: 1.7
+    spatialBlend: 0
     loop: 0
     playOnAwake: 0
 --- !u!114 &3531238930602149870
@@ -5216,7 +5218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconSprite: {fileID: 21300000, guid: 73d73deb6abe41d4d934b5edd6ceb38f, type: 3}
   characterSprite: {fileID: 21300000, guid: 2079b521f6966604cb2baed545e2ba47, type: 3}
-  soundEmitter: {fileID: 0}
+  soundFXEmitter: {fileID: 0}
   particleSystem: {fileID: 2498563264065257010}
   maxLife: 13
   currentLife: 3

@@ -526,6 +526,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onPlayerIdle:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerMoved:
+    m_PersistentCalls:
+      m_Calls: []
+  _playerModel:
+    isAbleToRun: 0
+    isAbleToAttack: 0
+    isAbleToOpenInventory: 0
 --- !u!1001 &3659122758476816592
 PrefabInstance:
   m_ObjectHideFlags: 0
