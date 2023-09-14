@@ -368,8 +368,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 58162645
-  m_SortingOrder: 1
+  m_SortingLayerID: -1602188017
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &5278843517184531624
 MonoBehaviour:
@@ -706,11 +706,13 @@ MonoBehaviour:
     name: Damaged
     volume: 1
     pitch: 1
+    spatialBlend: 0
     loop: 0
     playOnAwake: 0
   - clip: {fileID: 8300000, guid: dfd26e61a4aab084f80c29cbcd523c22, type: 3}
     name: Died
     volume: 1
     pitch: 1
+    spatialBlend: 0
     loop: 0
     playOnAwake: 0

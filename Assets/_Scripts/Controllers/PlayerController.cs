@@ -63,6 +63,8 @@ namespace _Scripts.Controllers
         /// </summary>
         public UnityEvent<Character> onCharacterChange;
 
+        public UnityEvent onPlayerDied;
+
         public UnityEvent onPlayerIdle;
         public UnityEvent onPlayerMoved;
         
@@ -219,6 +221,14 @@ namespace _Scripts.Controllers
             _characterManager.ActiveCharacter.TakeDamage(damageAmount);
             
             onDamageTaken?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
+
+            //TODO: Temporal. Add a die screen
+            if (_characterManager.ActiveCharacter.GetCurrenLife() <= 0)
+            {
+                onPlayerDied?.Invoke();
+                PlayAnimation(CharacterAnimationStates.Tired.ToString());
+                _playerInput.SwitchCurrentActionMap(PlayerActionMaps.InCinematic.ToString());
+            }
         }
 
         private IEnumerator ActivateImpulseCounter(Vector2 impulseDirection)

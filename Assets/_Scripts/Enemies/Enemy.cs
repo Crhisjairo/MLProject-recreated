@@ -141,5 +141,23 @@ namespace _Scripts.Enemies
                 playerController.ReceiveDamage(playerImpulseDir, CurrentSpecs.damage);
             }
         }
+        
+        //TODO: Optimize this fonction
+        private void OnCollisionStay2D(Collision2D other)
+        {
+            if (other.collider.CompareTag(Tags.Player.ToString()))
+            {
+                //TODO: play attacking animation when player collides
+                PlayerController playerController = other.collider.GetComponentInParent<PlayerController>();
+                
+                //Vector opuesto para el jugador
+                Vector2 playerImpulseDir = playerController.transform.position - transform.position;
+                playerImpulseDir = playerImpulseDir.normalized * CurrentSpecs.forceImpulse;
+
+                Debug.Log(playerImpulseDir);
+            
+                playerController.ReceiveDamage(playerImpulseDir, CurrentSpecs.damage);
+            }
+        }
     }
 }

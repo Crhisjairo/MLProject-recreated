@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 namespace _Scripts.Enemies
 {
-    public class EnemyManager : MonoBehaviour
+    public class EnemiesManager : MonoBehaviour
     {
         [SerializeField] private Enemy[] enemies;
 

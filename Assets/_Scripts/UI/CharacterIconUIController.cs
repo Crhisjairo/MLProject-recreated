@@ -1,3 +1,4 @@
+using System;
 using _Scripts.Characters;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,14 +13,19 @@ namespace _Scripts.UI
         [SerializeField] private float animationTime = 0.05f;
 
         private Vector3 _initialPos, _finalPos, _finalPosInversed;
-        
+
+        private void Start()
+        {
+            
+            _initialPos = image.gameObject.transform.position;
+            _finalPos = _initialPos + cameraShake;
+            _finalPosInversed = _initialPos - cameraShake;
+        }
+
         public void UpdateCharacterIconUI(Character activeCharacter)
         {
             image.sprite = activeCharacter.iconSprite;
 
-            _initialPos = image.gameObject.transform.position;
-            _finalPos = _initialPos + cameraShake;
-            _finalPosInversed = _initialPos - cameraShake;
         }
 
         //TODO: may produce a bug on UI when called for the first time the game loads (in editor).
