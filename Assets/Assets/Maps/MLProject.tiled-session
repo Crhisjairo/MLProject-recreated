@@ -3,15 +3,15 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "MainVille/Tutorial.tmx",
+    "activeFile": "MainVille/MainVille.tmx",
     "expandedProjectPaths": [
-        "MainVilleZone2",
-        "TestGroundRoom",
-        ".",
+        "TilesSet",
         "Underground_zone_2",
+        "MainVilleZone2",
         "MainVille",
+        "TestGroundRoom",
         "Underground",
-        "TilesSet"
+        "."
     ],
     "exportAsImage.drawTileGrid": false,
     "exportAsImage.useCurrentScale": false,
@@ -129,11 +129,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 2,
-            "selectedLayer": 4,
+            "scale": 0.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 0,
-                "y": 511.75
+                "x": -156,
+                "y": 370
             }
         },
         "MainVille/MainVille.tmx#bridge": {
@@ -267,13 +267,13 @@
     ],
     "project": "MLProject.tiled-project",
     "recentFiles": [
-        "MainVille/MainVille.tmx",
-        "Underground/Underground.tmx",
-        "Underground_zone_2/Underground_zone_2.tmx",
         "Underground/rocks.tsx",
         "TilesSet/Outside Objects.tsx",
         "forestTiles.tsx",
         "MainVille/Tutorial.tmx",
+        "Underground_zone_2/Underground_zone_2.tmx",
+        "Underground/Underground.tmx",
+        "MainVille/MainVille.tmx",
         "TilesSet/Twilight.tsx",
         "TilesSet/bridge.tsx",
         "MainVilleZone2/MainVille_Zone2.tmx",
