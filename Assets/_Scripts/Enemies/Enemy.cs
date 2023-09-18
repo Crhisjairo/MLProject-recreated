@@ -23,10 +23,11 @@ namespace _Scripts.Enemies
         [SerializeField] private Color flashingColor = Color.red;
         public float autoDestroyTime = 1f;
 
-        protected SpriteRenderer EnemySpriteRenderer;
+        [SerializeField] protected SpriteRenderer EnemySpriteRenderer;
+        [SerializeField] protected Animator EnemyAnimator;
         protected Rigidbody2D Rb;
         protected BoxCollider2D BoxCollider2D;
-        
+
         private bool _isVulnerable;
         
         protected Vector2 _impulseDirection;
@@ -45,7 +46,6 @@ namespace _Scripts.Enemies
         private void SetComponents()
         {
             Rb = GetComponent<Rigidbody2D>();
-            EnemySpriteRenderer = GetComponent<SpriteRenderer>();
             BoxCollider2D = GetComponent<BoxCollider2D>();
             SoundFXEmitter = GetComponent<SoundFXEmitter>();
 

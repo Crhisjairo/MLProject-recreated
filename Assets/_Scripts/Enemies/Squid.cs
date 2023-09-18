@@ -12,7 +12,9 @@ namespace _Scripts.Enemies
     {
         [SerializeField] private Slider lifeSlider;
         [SerializeField] private SpriteRenderer exclamationSpriteRenderer;
+        [SerializeField] private Animator exclamationAnimator;
 
+        [SerializeField] private float animationMinSpeed = 1f, animationMaxSpeed = 2f;
         [SerializeField] private float movementSpeed = 2;
 
         [SerializeField] private float nextDirectionTime = 1f;
@@ -34,7 +36,10 @@ namespace _Scripts.Enemies
             SetComponents();
             
             SetSliderValues();
+            
+            EnemyAnimator.speed = animationMinSpeed;
             exclamationSpriteRenderer.enabled = false;
+            exclamationAnimator.enabled = false;
         }
 
         private void Start()
@@ -109,7 +114,10 @@ namespace _Scripts.Enemies
         {
             if (other.CompareTag(Tags.Player.ToString()))
             {
+
+                EnemyAnimator.speed = animationMaxSpeed;
                 exclamationSpriteRenderer.enabled = true;
+                exclamationAnimator.enabled = true;
                    
                 if(_nextRandomMovementCoroutine is not null)
                     StopCoroutine(_nextRandomMovementCoroutine); 
@@ -133,10 +141,12 @@ namespace _Scripts.Enemies
             if (other.CompareTag(Tags.Player.ToString()))
             {
                 _nextDirection = new Vector2();
-                
+
+                EnemyAnimator.speed = animationMinSpeed;
                 exclamationSpriteRenderer.enabled = false;
+                exclamationAnimator.enabled = false;
                 //Volvemos a movernos aleatoriamente ignorando al jugador
-                if (randomMove)
+                if (randomMove && gameObject.activeInHierarchy)
                     _nextRandomMovementCoroutine = StartCoroutine(CalculateNextRandomMovementCoroutine());
             }
         }
