@@ -2,6 +2,7 @@ using System.Collections;
 using _Scripts.Characters;
 using _Scripts.Enums;
 using _Scripts.Interfaces;
+using _Scripts.Models;
 using _Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Events;
@@ -62,6 +63,11 @@ namespace _Scripts.Controllers
         /// </summary>
         public UnityEvent<Character> onCharacterChange;
 
+        public UnityEvent onPlayerDied;
+
+        public UnityEvent onPlayerIdle;
+        public UnityEvent onPlayerMoved;
+        
         private bool IsInvulnerable { set; get; }
 
         private CharactersManager _characterManager;
@@ -77,10 +83,16 @@ namespace _Scripts.Controllers
 
         private bool _inImpulse = false;
         private const float ImpulseTime = .15f;
-        
+
+        /// <summary>
+        /// Just for develop.
+        /// </summary>
+        [SerializeField] private PlayerModel _playerModel;
         
         void Awake()
         {
+            //TODO: Load PlayerModel Here. Just for now, _playerModel is Serializable in inspector
+
             SetComponents();
         }
         
@@ -149,7 +161,7 @@ namespace _Scripts.Controllers
         
         public void StartRunning(InputAction.CallbackContext inputContext)
         {
-            if (!inputContext.performed)
+            if (!inputContext.performed || !_playerModel.isAbleToRun)
                 return;
             
             currentSpeed = _characterManager.ActiveCharacter.GetRunningSpeed();
@@ -158,7 +170,7 @@ namespace _Scripts.Controllers
 
         public void StopRunning(InputAction.CallbackContext inputContext)
         {
-            if (!inputContext.canceled)
+            if (!inputContext.canceled || !_playerModel.isAbleToRun)
                 return;
             
             currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
@@ -167,7 +179,7 @@ namespace _Scripts.Controllers
         
         public void Attack(InputAction.CallbackContext context)
         {
-            if (!context.performed)
+            if (!context.performed || !_playerModel.isAbleToAttack)
                 return;
 
             if (Time.time >= _nextAttackTime)
@@ -209,6 +221,14 @@ namespace _Scripts.Controllers
             _characterManager.ActiveCharacter.TakeDamage(damageAmount);
             
             onDamageTaken?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
+
+            //TODO: Temporal. Add a die screen
+            if (_characterManager.ActiveCharacter.GetCurrenLife() <= 0)
+            {
+                onPlayerDied?.Invoke();
+                PlayAnimation(CharacterAnimationStates.Tired.ToString());
+                _playerInput.SwitchCurrentActionMap(PlayerActionMaps.InCinematic.ToString());
+            }
         }
 
         private IEnumerator ActivateImpulseCounter(Vector2 impulseDirection)
@@ -267,7 +287,7 @@ namespace _Scripts.Controllers
             Collider2D collider = Physics2D.OverlapCircle(origin, interactionDistance, interactorsLayers);
 
             Component interactuableComponent;
-            
+
             if (collider)
             {
                 collider.gameObject.TryGetComponent(typeof(IInteractable), out interactuableComponent);
@@ -279,8 +299,6 @@ namespace _Scripts.Controllers
                 }
             }
         }
-        
-        
         
         #region Calculations
 
@@ -407,6 +425,22 @@ namespace _Scripts.Controllers
             return _characterManager.ActiveCharacter.CharacterName;
         }
 
+        public void SetIsAbleToRun(bool canRun)
+        {
+            _playerModel.isAbleToRun = canRun;
+        }
+
+        
+        public void SetIsAbleToAttack(bool canAttack)
+        {
+            _playerModel.isAbleToRun = canAttack;
+        }
+        
+        public void SetIsAbleToOpenInventory(bool canOpenInventory)
+        {
+            _playerModel.isAbleToRun = canOpenInventory;
+        }
+        
     #endregion
 
         void SetComponents()

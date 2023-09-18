@@ -31,19 +31,24 @@ namespace _Scripts.DialogSystem
 
         public UnityEvent onDialogStarted, onDialogEnded;
 
+        Queue<string> titlesSorted;
         Queue<string> sentencesSorted;
         Queue<Sprite> spritesSorted;
 
         bool IsTyping { set; get; }
         float _typingSpeed;
+        private string currentTitle;
         string currentSentence;
         
         Coroutine _typingCoroutine;
         
         void Awake()
         {
+            titlesSorted = new Queue<string>();
             sentencesSorted = new Queue<string>();
             spritesSorted = new Queue<Sprite>();
+            
+            
             dialogCanvas.enabled = false; //Desactivamos el canvas grande
             _audioSource = GetComponent<AudioSource>();
 
@@ -62,18 +67,26 @@ namespace _Scripts.DialogSystem
             _nextDialogSpriteRenderer.enabled = isActive;
         }
 
-        public void SetDialogue(Dialogs dialogueSentences, float typingSpeed) 
+        public void SetDialogue(Dialog dialogueSentences, float typingSpeed) 
         {
             onDialogStarted?.Invoke();
             
             _typingSpeed = typingSpeed;
             
-            //Damos nombre al cuadro de texto
-            dialogTitle.text = dialogueSentences.title;
             IsEnded = false;
+            
+            titlesSorted.Clear();
             sentencesSorted.Clear(); //limpiamos las frases que estan en el DialogueManager.
             spritesSorted.Clear();
 
+            if (dialogueSentences.titles != null)
+            {
+                foreach (var title in dialogueSentences.titles)
+                {
+                    titlesSorted.Enqueue(title);
+                }
+            }
+            
             foreach (var sentence in dialogueSentences.sentences)
             {
                 sentencesSorted.Enqueue(sentence);
@@ -85,7 +98,6 @@ namespace _Scripts.DialogSystem
                 {
                     spritesSorted.Enqueue(sprite);
                 }
-
             }
         }
 
@@ -114,7 +126,13 @@ namespace _Scripts.DialogSystem
                 return;
             }
 
+            if (titlesSorted.Count != 0)
+            {
+                currentTitle = titlesSorted.Dequeue();
+            }
+            
             currentSentence = sentencesSorted.Dequeue();
+            
             if (spritesSorted.Count != 0)
             {
                 defaultSprite = spritesSorted.Dequeue();
@@ -131,6 +149,7 @@ namespace _Scripts.DialogSystem
         IEnumerator TypingEffect(string sentence)
         {
             IsTyping = true;
+            dialogTitle.text = currentTitle;
             dialogImage.sprite = defaultSprite;
             ActivateNextDialogSprite(false);
             

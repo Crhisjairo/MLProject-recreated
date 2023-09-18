@@ -12,18 +12,20 @@ namespace _Scripts.Enemies
     {
         [SerializeField] private Slider lifeSlider;
         [SerializeField] private SpriteRenderer exclamationSpriteRenderer;
+        [SerializeField] private Animator exclamationAnimator;
 
+        [SerializeField] private float animationMinSpeed = 1f, animationMaxSpeed = 2f;
         [SerializeField] private float movementSpeed = 2;
 
         [SerializeField] private float nextDirectionTime = 1f;
+
+        [SerializeField] private bool randomMove = true;
         
         private CircleCollider2D _rangeCollider;
         
         private Vector2 _startPoint, _nextDirection;
 
         private const int MinLifeSliderValue = 0;
-
-        private bool _isMoving = true;
 
         private Coroutine _nextRandomMovementCoroutine;
         
@@ -32,14 +34,18 @@ namespace _Scripts.Enemies
             base.Awake();
             
             SetComponents();
+            
+            SetSliderValues();
+            
+            EnemyAnimator.speed = animationMinSpeed;
+            exclamationSpriteRenderer.enabled = false;
+            exclamationAnimator.enabled = false;
         }
 
         private void Start()
         {
-            SetSliderValues();
-            
-            exclamationSpriteRenderer.enabled = false;
-            _nextRandomMovementCoroutine = StartCoroutine(CalculateNextRandomMovementCoroutine());
+            if (randomMove)
+                _nextRandomMovementCoroutine = StartCoroutine(CalculateNextRandomMovementCoroutine());
         }
 
         private void FixedUpdate()
@@ -49,7 +55,6 @@ namespace _Scripts.Enemies
                 Rb.AddForce(_impulseDirection, ForceMode2D.Force);
             }
             
-            if (!_isMoving) return;
 
             Rb.MovePosition(Rb.position + _nextDirection * (movementSpeed * Time.fixedDeltaTime));
         }
@@ -70,7 +75,7 @@ namespace _Scripts.Enemies
 
             if (IsDead())
             {
-                _isMoving = false;
+                movementSpeed = 0;
                 
                 OnDead();
             }
@@ -109,10 +114,13 @@ namespace _Scripts.Enemies
         {
             if (other.CompareTag(Tags.Player.ToString()))
             {
+
+                EnemyAnimator.speed = animationMaxSpeed;
                 exclamationSpriteRenderer.enabled = true;
+                exclamationAnimator.enabled = true;
                    
-                //Paramos de movernos aleatoriamente
-                StopCoroutine(_nextRandomMovementCoroutine); 
+                if(_nextRandomMovementCoroutine is not null)
+                    StopCoroutine(_nextRandomMovementCoroutine); 
             }
         }
         
@@ -132,9 +140,14 @@ namespace _Scripts.Enemies
         {
             if (other.CompareTag(Tags.Player.ToString()))
             {
+                _nextDirection = new Vector2();
+
+                EnemyAnimator.speed = animationMinSpeed;
                 exclamationSpriteRenderer.enabled = false;
+                exclamationAnimator.enabled = false;
                 //Volvemos a movernos aleatoriamente ignorando al jugador
-                _nextRandomMovementCoroutine = StartCoroutine(CalculateNextRandomMovementCoroutine());
+                if (randomMove && gameObject.activeInHierarchy)
+                    _nextRandomMovementCoroutine = StartCoroutine(CalculateNextRandomMovementCoroutine());
             }
         }
         

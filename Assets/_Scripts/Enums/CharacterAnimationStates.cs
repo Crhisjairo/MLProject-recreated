@@ -4,6 +4,7 @@ namespace _Scripts.Enums
     {
         Idle,
         Running,
-        Damaged
+        Damaged,
+        Tired
     }
 }

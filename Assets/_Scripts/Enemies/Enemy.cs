@@ -11,22 +11,23 @@ using UnityEngine.Serialization;
 namespace _Scripts.Enemies
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(SoundEmitter))]
+    [RequireComponent(typeof(SoundFXEmitter))]
     public abstract class Enemy: MonoBehaviour, IAttackable
     {
         [SerializeField] private EnemyDefaultSpecs modelDefaultSpecs;
         protected EnemyDefaultSpecs CurrentSpecs;
-        protected SoundEmitter SoundEmitter;
+        protected SoundFXEmitter SoundFXEmitter;
 
         private int worldId = 0; // TODO: used to know if item must be spawned or nor when load save data.
         
         [SerializeField] private Color flashingColor = Color.red;
         public float autoDestroyTime = 1f;
 
-        protected SpriteRenderer EnemySpriteRenderer;
+        [SerializeField] protected SpriteRenderer EnemySpriteRenderer;
+        [SerializeField] protected Animator EnemyAnimator;
         protected Rigidbody2D Rb;
         protected BoxCollider2D BoxCollider2D;
-        
+
         private bool _isVulnerable;
         
         protected Vector2 _impulseDirection;
@@ -45,9 +46,8 @@ namespace _Scripts.Enemies
         private void SetComponents()
         {
             Rb = GetComponent<Rigidbody2D>();
-            EnemySpriteRenderer = GetComponent<SpriteRenderer>();
             BoxCollider2D = GetComponent<BoxCollider2D>();
-            SoundEmitter = GetComponent<SoundEmitter>();
+            SoundFXEmitter = GetComponent<SoundFXEmitter>();
 
             CurrentSpecs = modelDefaultSpecs.GetCopy();
         }
@@ -63,7 +63,7 @@ namespace _Scripts.Enemies
 
         protected void PlaySoundSfx(SoundsFX sound)
         {
-            SoundEmitter.PlayOneShot(sound.ToString());
+            SoundFXEmitter.PlayOneShot(sound.ToString());
         }
         
         public bool IsVulnerable()
@@ -126,6 +126,24 @@ namespace _Scripts.Enemies
         }
 
         private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.collider.CompareTag(Tags.Player.ToString()))
+            {
+                //TODO: play attacking animation when player collides
+                PlayerController playerController = other.collider.GetComponentInParent<PlayerController>();
+                
+                //Vector opuesto para el jugador
+                Vector2 playerImpulseDir = playerController.transform.position - transform.position;
+                playerImpulseDir = playerImpulseDir.normalized * CurrentSpecs.forceImpulse;
+
+                Debug.Log(playerImpulseDir);
+            
+                playerController.ReceiveDamage(playerImpulseDir, CurrentSpecs.damage);
+            }
+        }
+        
+        //TODO: Optimize this fonction
+        private void OnCollisionStay2D(Collision2D other)
         {
             if (other.collider.CompareTag(Tags.Player.ToString()))
             {

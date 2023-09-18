@@ -31,10 +31,8 @@ namespace _Scripts.DialogSystem
 
         [Range(0f, 0.3f)]
         public float textTypingDelay = 0.1f;
-        
-        public Dialogs firstDialog;
-        public Dialogs defaultDialog;
-        public Dialogs wrongCharacterDialog;
+
+        public DialogsWrapper dialogs;
         
         bool _isFirstInteraction = true;
         bool _isDialogueTriggered;
@@ -49,18 +47,28 @@ namespace _Scripts.DialogSystem
             if (_startOnAwake)
             {
                 _autoNextDialog = _startOnAwake;
-                dialogController.SetDialogue(defaultDialog, textTypingDelay);
+                dialogController.SetDialogue(dialogs.defaultDialog, textTypingDelay);
                 StartCoroutine(StartIntervalDialogue());
             }
         }
-        
+
+        public void SetDialogs(DialogModifier dialogsModifier)
+        {
+            dialogs.firstDialog = dialogsModifier.dialogsWrapper.firstDialog;
+            dialogs.defaultDialog = dialogsModifier.dialogsWrapper.defaultDialog;
+            dialogs.wrongCharacterDialog = dialogsModifier.dialogsWrapper.wrongCharacterDialog;
+
+            _autoNextDialog = dialogsModifier.autoNextDialog;
+            _timeToWaitAutoNextDialog = dialogsModifier.timeToWaitAutoNextDialog;
+        }
+
         /// <summary>
         /// Muestra el siguiente dialogo correspondiente en función si el personaje es correcto o no.
         /// Se debería crear un método en especifico para mostrar el dialogo incorrecto. Usar este método
         /// temporalmente.
         /// </summary>
         /// <param name="interactor">Nombre del personaje con el que se interactua.</param>
-        public void SetDialogByContext(PlayerController interactor)
+        public void SendDialogByContext(PlayerController interactor)
         {
             var interactorName = interactor.GetActiveCharacterName();
             var isWrongCharacter = interactorName.Equals(characterNameAbleToInteractWith);
@@ -70,7 +78,7 @@ namespace _Scripts.DialogSystem
             //Si se trata de un dialogo de intervalos, solo se muestra el dialogue, no se usa defaultDialogue
             if (_autoNextDialog)
             {
-                dialogController.SetDialogue(firstDialog, textTypingDelay);
+                dialogController.SetDialogue(dialogs.firstDialog, textTypingDelay);
                 
                 StartCoroutine(StartIntervalDialogue());
                 return;
@@ -83,19 +91,19 @@ namespace _Scripts.DialogSystem
                 //Si es el mal personaje que estâ interactuando
                 if (isWrongCharacter)
                 {
-                    dialogController.SetDialogue(wrongCharacterDialog, textTypingDelay);
+                    dialogController.SetDialogue(dialogs.wrongCharacterDialog, textTypingDelay);
                 } 
                 //Si no hay frases de default, se pone el dialogo normal
-                else if (_isFirstInteraction && firstDialog.sentences.Length > 0)
+                else if (_isFirstInteraction && dialogs.firstDialog.sentences.Length > 0)
                 {
-                    dialogController.SetDialogue(firstDialog, textTypingDelay);
+                    dialogController.SetDialogue(dialogs.firstDialog, textTypingDelay);
                     
                     _isFirstInteraction = false;
                 }
                 //Si no es la primera interacciôn y hay frases de default, se muestra solo el defaultDialogue
-                else if (defaultDialog.sentences.Length > 0) 
+                else if (dialogs.defaultDialog.sentences.Length > 0) 
                 {
-                    dialogController.SetDialogue(defaultDialog, textTypingDelay);
+                    dialogController.SetDialogue(dialogs.defaultDialog, textTypingDelay);
                 }
                 
                 _isDialogueTriggered = true;

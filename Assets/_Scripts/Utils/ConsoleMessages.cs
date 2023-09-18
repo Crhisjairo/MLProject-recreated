@@ -17,6 +17,10 @@ namespace _Scripts.Utils
 
         public const string SoundNameNotFound = "Sound {0} was not found.\nPlease make sure that the " +
                                                 "sound name is correct.";
-
+        public const string MusicNameNotFound = "Music {0} was not found.\nPlease make sure that the " +
+                                                "music name is correct.";
+        public const string MoreOnceMusicPlayeOnAwake = "More than one musics was marked as Playe On Awake.\n" +
+                                                        "Only the last one is player on awake.";
+        public const string WrongComponentTypeAttached = "Component {0} is not type of {1}.";
     }
 }
