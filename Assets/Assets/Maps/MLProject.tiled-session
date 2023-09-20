@@ -132,8 +132,8 @@
             "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": -156,
-                "y": 370
+                "x": 0,
+                "y": 511
             }
         },
         "MainVille/MainVille.tmx#bridge": {
@@ -146,8 +146,8 @@
             "scale": 0.125,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 2200,
-                "y": -3704
+                "x": 816,
+                "y": -2556
             }
         },
         "MainVille/lamp-1-post-1-tall-single.tsx": {
@@ -218,8 +218,8 @@
             "scale": 0.25,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": -628,
-                "y": 728
+                "x": -2560,
+                "y": -254
             }
         },
         "Underground/rocks.tsx": {
@@ -230,8 +230,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 37.33333333333326,
-                "y": -513.3333333333333
+                "x": 38.666666666666686,
+                "y": -511.3333333333333
             }
         },
         "forestTiles.tsx": {
