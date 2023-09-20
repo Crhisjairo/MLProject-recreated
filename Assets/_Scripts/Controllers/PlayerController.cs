@@ -75,7 +75,7 @@ namespace _Scripts.Controllers
 
         private Rigidbody2D _rb;
 
-        private const float diagonalLimiter = 0.9f; // 0.7 default
+        private const float diagonalLimiter = 0.99f; // 0.7 default
         private Vector2 movement;
         private Vector2 _impulseDirection;
         
