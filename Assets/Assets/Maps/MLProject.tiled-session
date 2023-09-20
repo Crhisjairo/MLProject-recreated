@@ -5,12 +5,12 @@
     },
     "activeFile": "MainVille/MainVille.tmx",
     "expandedProjectPaths": [
-        "TilesSet",
-        "Underground_zone_2",
         "MainVilleZone2",
-        "MainVille",
-        "TestGroundRoom",
+        "Underground_zone_2",
         "Underground",
+        "TestGroundRoom",
+        "TilesSet",
+        "MainVille",
         "."
     ],
     "exportAsImage.drawTileGrid": false,
@@ -129,11 +129,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.5,
-            "selectedLayer": 1,
+            "scale": 0.75,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 0,
-                "y": 511
+                "x": -1.3333333333333712,
+                "y": 113.33333333333337
             }
         },
         "MainVille/MainVille.tmx#bridge": {
