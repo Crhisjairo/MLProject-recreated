@@ -433,12 +433,12 @@ namespace _Scripts.Controllers
         
         public void SetIsAbleToAttack(bool canAttack)
         {
-            _playerModel.isAbleToRun = canAttack;
+            _playerModel.isAbleToAttack = canAttack;
         }
         
         public void SetIsAbleToOpenInventory(bool canOpenInventory)
         {
-            _playerModel.isAbleToRun = canOpenInventory;
+            _playerModel.isAbleToOpenInventory = canOpenInventory;
         }
         
     #endregion
