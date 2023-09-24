@@ -1,9 +1,10 @@
-using UnityEngine.Serialization;
-namespace _Scripts.Models
+namespace _Scripts.GameManagerSystem.Models
 {
     [System.Serializable]
-    public class PlayerModel
+    public class PlayerSaveData
     {
+        public string saveDataName = "DefaultSaveName";
+        
         public bool isAbleToRun = false;
         public bool isAbleToAttack = false;
         public bool isAbleToOpenInventory = false;

@@ -4,7 +4,6 @@ using _Scripts.Enums;
 using _Scripts.GameManagerSystem;
 using _Scripts.GameManagerSystem.Models;
 using _Scripts.Interfaces;
-using _Scripts.Models;
 using _Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Events;
@@ -92,7 +91,7 @@ namespace _Scripts.Controllers
         /// <summary>
         /// Just for develop.
         /// </summary>
-        [SerializeField] private PlayerModel _playerModel;
+        [SerializeField] private PlayerSaveData currentPlayerSaveData;
         
         void Awake()
         {
@@ -101,11 +100,11 @@ namespace _Scripts.Controllers
         
         void Start()
         {
-            //TODO: Load PlayerModel Here. Just for now, _playerModel is Serializable in inspector
             if (useSaveData)
             {
-                _playerModel = GameManager.Instance.GetSaveData().PlayerModel;
+                currentPlayerSaveData = SaveDataSystem.Instance.GetPlayerSaveDataSelected();
 
+                //TODO: Set all values given by the save data system!
                 //TODO: Characters models can be edited from here.
                 Character character = _charactersModels[0].GetComponent<Character>();
                 
@@ -174,7 +173,7 @@ namespace _Scripts.Controllers
         
         public void StartRunning(InputAction.CallbackContext inputContext)
         {
-            if (!inputContext.performed || !_playerModel.isAbleToRun)
+            if (!inputContext.performed || !currentPlayerSaveData.isAbleToRun)
                 return;
             
             currentSpeed = _characterManager.ActiveCharacter.GetRunningSpeed();
@@ -183,7 +182,7 @@ namespace _Scripts.Controllers
 
         public void StopRunning(InputAction.CallbackContext inputContext)
         {
-            if (!inputContext.canceled || !_playerModel.isAbleToRun)
+            if (!inputContext.canceled || !currentPlayerSaveData.isAbleToRun)
                 return;
             
             currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
@@ -192,7 +191,7 @@ namespace _Scripts.Controllers
         
         public void Attack(InputAction.CallbackContext context)
         {
-            if (!context.performed || !_playerModel.isAbleToAttack)
+            if (!context.performed || !currentPlayerSaveData.isAbleToAttack)
                 return;
 
             if (Time.time >= _nextAttackTime)
@@ -313,11 +312,6 @@ namespace _Scripts.Controllers
             }
         }
 
-        public void SetGameSaveData(SaveDataWrapper data)
-        {
-            _playerModel = data.PlayerModel;
-        }
-        
         #region Calculations
 
             /// <summary>
@@ -445,18 +439,18 @@ namespace _Scripts.Controllers
 
         public void SetIsAbleToRun(bool canRun)
         {
-            _playerModel.isAbleToRun = canRun;
+            currentPlayerSaveData.isAbleToRun = canRun;
         }
 
         
         public void SetIsAbleToAttack(bool canAttack)
         {
-            _playerModel.isAbleToAttack = canAttack;
+            currentPlayerSaveData.isAbleToAttack = canAttack;
         }
         
         public void SetIsAbleToOpenInventory(bool canOpenInventory)
         {
-            _playerModel.isAbleToOpenInventory = canOpenInventory;
+            currentPlayerSaveData.isAbleToOpenInventory = canOpenInventory;
         }
         
     #endregion
