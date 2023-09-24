@@ -26,7 +26,7 @@ namespace _Scripts.Ambient
             {
                 Vector2 entityPosition = (Vector2) transform.position + spawnOffSet;
                 
-                var entity = Instantiate(modelToSpawn, entityPosition, transform.rotation);
+                var entity = Instantiate(modelToSpawn, entityPosition, transform.rotation, transform);
                 
                 entity.SetActive(false);
                 

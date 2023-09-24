@@ -13,6 +13,7 @@ namespace _Scripts.Enemies
         [SerializeField] private Slider lifeSlider;
         [SerializeField] private SpriteRenderer exclamationSpriteRenderer;
         [SerializeField] private Animator exclamationAnimator;
+        [SerializeField] private Animator enemyAnimator;
 
         [SerializeField] private float animationMinSpeed = 1f, animationMaxSpeed = 2f;
         [SerializeField] private float movementSpeed = 2;
@@ -37,7 +38,7 @@ namespace _Scripts.Enemies
             
             SetSliderValues();
             
-            EnemyAnimator.speed = animationMinSpeed;
+            enemyAnimator.speed = animationMinSpeed;
             exclamationSpriteRenderer.enabled = false;
             exclamationAnimator.enabled = false;
         }
@@ -61,17 +62,17 @@ namespace _Scripts.Enemies
 
         private void SetSliderValues()
         {
-            lifeSlider.maxValue = CurrentSpecs.life;
+            lifeSlider.maxValue = baseSpecs.life;
             lifeSlider.minValue = MinLifeSliderValue;
       
-            lifeSlider.value = CurrentSpecs.life;
+            lifeSlider.value = baseSpecs.life;
         }
 
         public override void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
         {
             base.ReceiveDamage(impulseDirection, damageAmount);
             
-            lifeSlider.value = CurrentSpecs.life;
+            lifeSlider.value = baseSpecs.life;
 
             if (IsDead())
             {
@@ -115,7 +116,7 @@ namespace _Scripts.Enemies
             if (other.CompareTag(Tags.Player.ToString()))
             {
 
-                EnemyAnimator.speed = animationMaxSpeed;
+                enemyAnimator.speed = animationMaxSpeed;
                 exclamationSpriteRenderer.enabled = true;
                 exclamationAnimator.enabled = true;
                    
@@ -142,7 +143,7 @@ namespace _Scripts.Enemies
             {
                 _nextDirection = new Vector2();
 
-                EnemyAnimator.speed = animationMinSpeed;
+                enemyAnimator.speed = animationMinSpeed;
                 exclamationSpriteRenderer.enabled = false;
                 exclamationAnimator.enabled = false;
                 //Volvemos a movernos aleatoriamente ignorando al jugador

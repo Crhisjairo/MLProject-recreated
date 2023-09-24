@@ -5,13 +5,13 @@
     },
     "activeFile": "MainVille/MainVille.tmx",
     "expandedProjectPaths": [
-        "TestGroundRoom",
-        "TilesSet",
-        "MainVille",
         "Underground",
-        "Underground_zone_2",
+        ".",
         "MainVilleZone2",
-        "."
+        "TilesSet",
+        "Underground_zone_2",
+        "MainVille",
+        "TestGroundRoom"
     ],
     "exportAsImage.drawTileGrid": false,
     "exportAsImage.useCurrentScale": false,
@@ -132,7 +132,7 @@
             "scale": 0.75,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 81.33333333333326,
+                "x": -116,
                 "y": 32
             }
         },

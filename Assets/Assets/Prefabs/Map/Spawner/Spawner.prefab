@@ -11,8 +11,12 @@ GameObject:
   - component: {fileID: 7591091780079604442}
   - component: {fileID: 9219191912833363897}
   - component: {fileID: 3682153447837369119}
+  - component: {fileID: 1131835014479911600}
+  - component: {fileID: 3750769151750445376}
   - component: {fileID: 7550742973302314430}
   - component: {fileID: 3619211079033182249}
+  - component: {fileID: 8209998953370771329}
+  - component: {fileID: 7652658517653856270}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -33,7 +37,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9219191912833363897
 SpriteRenderer:
@@ -73,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1951246939
-  m_SortingLayer: 1
+  m_SortingLayerID: 58162645
+  m_SortingLayer: 2
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 39d7509ebb2d6c142b391353239dfd00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -132,6 +136,78 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.31, y: 0.15679914}
   m_EdgeRadius: 0
+--- !u!61 &1131835014479911600
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4462090927143489584}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.003431648, y: 0.07893127}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.31, y: 0.64}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.24822831, y: 0.48213744}
+  m_EdgeRadius: 0
+--- !u!50 &3750769151750445376
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4462090927143489584}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &7550742973302314430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,3 +241,54 @@ MonoBehaviour:
   fadeAmount: 0.5
   playerSortingLayer: GameElements
   sortOrderToForeground: 9
+--- !u!114 &8209998953370771329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4462090927143489584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4482681958d84dfb985c3c08045a12b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpecs:
+    id: 0
+    name: Default Enemy Name
+    life: 10
+    damage: 0
+    forceImpulse: 0
+  flashingColor: {r: 1, g: 0, b: 0, a: 1}
+  autoDestroyTime: 1
+  EnemySpriteRenderer: {fileID: 9219191912833363897}
+  currentLife: 10
+  waitTimeBeforeDestruct: 1
+--- !u!114 &7652658517653856270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4462090927143489584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1803fe9e371d21a468dac034957ec841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mixerGroup: {fileID: -6192578760746128693, guid: ff64427cd949f1a4ba99787cd4904e06, type: 2}
+  _sounds:
+  - clip: {fileID: 8300000, guid: 84e7ffa2d928a7b49bf33bf628b25e87, type: 3}
+    name: Damaged
+    volume: 0
+    pitch: 0
+    spatialBlend: 0
+    loop: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: dfd26e61a4aab084f80c29cbcd523c22, type: 3}
+    name: Died
+    volume: 0
+    pitch: 0
+    spatialBlend: 0
+    loop: 0
+    playOnAwake: 0

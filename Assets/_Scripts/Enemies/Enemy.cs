@@ -14,8 +14,7 @@ namespace _Scripts.Enemies
     [RequireComponent(typeof(SoundFXEmitter))]
     public abstract class Enemy: MonoBehaviour, IAttackable
     {
-        [SerializeField] private EnemyDefaultSpecs modelDefaultSpecs;
-        protected EnemyDefaultSpecs CurrentSpecs;
+        [SerializeField] protected BaseEnemySpecs baseSpecs;
         protected SoundFXEmitter SoundFXEmitter;
 
         private int worldId = 0; // TODO: used to know if item must be spawned or nor when load save data.
@@ -24,7 +23,6 @@ namespace _Scripts.Enemies
         public float autoDestroyTime = 1f;
 
         [SerializeField] protected SpriteRenderer EnemySpriteRenderer;
-        [SerializeField] protected Animator EnemyAnimator;
         protected Rigidbody2D Rb;
         protected BoxCollider2D BoxCollider2D;
 
@@ -48,13 +46,11 @@ namespace _Scripts.Enemies
             Rb = GetComponent<Rigidbody2D>();
             BoxCollider2D = GetComponent<BoxCollider2D>();
             SoundFXEmitter = GetComponent<SoundFXEmitter>();
-
-            CurrentSpecs = modelDefaultSpecs.GetCopy();
         }
         
         public virtual void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
         {
-            CurrentSpecs.life -= damageAmount;
+            baseSpecs.life -= damageAmount;
             PlaySoundSfx(SoundsFX.Damaged);
             
             StartCoroutine(FlashSprite());
@@ -86,7 +82,7 @@ namespace _Scripts.Enemies
 
         public bool IsDead()
         {
-            return CurrentSpecs.life <= 0;
+            return baseSpecs.life <= 0;
         }
         
         private IEnumerator AutoDestroy()
@@ -134,11 +130,11 @@ namespace _Scripts.Enemies
                 
                 //Vector opuesto para el jugador
                 Vector2 playerImpulseDir = playerController.transform.position - transform.position;
-                playerImpulseDir = playerImpulseDir.normalized * CurrentSpecs.forceImpulse;
+                playerImpulseDir = playerImpulseDir.normalized * baseSpecs.forceImpulse;
 
                 Debug.Log(playerImpulseDir);
             
-                playerController.ReceiveDamage(playerImpulseDir, CurrentSpecs.damage);
+                playerController.ReceiveDamage(playerImpulseDir, baseSpecs.damage);
             }
         }
         
@@ -152,11 +148,11 @@ namespace _Scripts.Enemies
                 
                 //Vector opuesto para el jugador
                 Vector2 playerImpulseDir = playerController.transform.position - transform.position;
-                playerImpulseDir = playerImpulseDir.normalized * CurrentSpecs.forceImpulse;
+                playerImpulseDir = playerImpulseDir.normalized * baseSpecs.forceImpulse;
 
                 Debug.Log(playerImpulseDir);
             
-                playerController.ReceiveDamage(playerImpulseDir, CurrentSpecs.damage);
+                playerController.ReceiveDamage(playerImpulseDir, baseSpecs.damage);
             }
         }
     }

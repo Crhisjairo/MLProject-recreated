@@ -67,9 +67,12 @@ namespace _Scripts.DialogSystem
             _nextDialogSpriteRenderer.enabled = isActive;
         }
 
-        public void SetDialogue(Dialog dialogueSentences, float typingSpeed) 
+        public void SetDialogue(Dialog dialogueSentences, float typingSpeed, bool showIndicator) 
         {
             onDialogStarted?.Invoke();
+            
+            if(!showIndicator)
+                nextDialogSpriteGameObject.SetActive(false);
             
             _typingSpeed = typingSpeed;
             
