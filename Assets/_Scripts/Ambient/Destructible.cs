@@ -1,48 +1,27 @@
 using System.Collections;
+using _Scripts.Enemies;
 using _Scripts.Interfaces;
 using UnityEngine;
 namespace _Scripts.Ambient
 {
-    public class Destructible : MonoBehaviour, IAttackable
+    public class Destructible : Enemy
     {
-        [SerializeField] private int currentLife = 10;
-        [SerializeField] private float waitTimeBeforeDestruct = 1f;
-
-        private bool _isVulnerable;
-
-        public void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
+        public override void OnPauseAction()
         {
-            currentLife -= damageAmount;
+            throw new System.NotImplementedException();
+        }
+        public override void OnResumeAction()
+        {
+            throw new System.NotImplementedException();
+        }
+        public override void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
+        {
+            base.ReceiveDamage(impulseDirection, damageAmount);
+            
             if (IsDead())
             {
                 OnDead();
             }
-        }
-
-        public bool IsVulnerable()
-        {
-            return _isVulnerable;
-        }
-        
-        public void SetIsVulnerable(bool isVulnerable)
-        {
-            _isVulnerable = isVulnerable;
-        }
-        
-        public bool IsDead()
-        {
-            return currentLife <= 0;
-        }
-        
-        public void OnDead()
-        {
-            StartCoroutine(StartDie());
-        }
-        
-        private IEnumerator StartDie()
-        {
-            yield return new WaitForSeconds(waitTimeBeforeDestruct);
-            Destroy(gameObject);
         }
     }
 }
