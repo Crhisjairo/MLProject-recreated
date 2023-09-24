@@ -1,4 +1,4 @@
-namespace _Scripts.Models
+namespace _Scripts.GameManagerSystem.Models
 {
     public class GameSettingsModel
     {

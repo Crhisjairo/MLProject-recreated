@@ -1,6 +1,8 @@
 using System.Collections;
 using _Scripts.Characters;
 using _Scripts.Enums;
+using _Scripts.GameManagerSystem;
+using _Scripts.GameManagerSystem.Models;
 using _Scripts.Interfaces;
 using _Scripts.Models;
 using _Scripts.SoundsManagers;
@@ -68,6 +70,9 @@ namespace _Scripts.Controllers
         public UnityEvent onPlayerIdle;
         public UnityEvent onPlayerMoved;
         
+        [Tooltip("Set to false to use unity's inspector values. Let to true when build.")]
+        public bool useSaveData = true;
+        
         private bool IsInvulnerable { set; get; }
 
         private CharactersManager _characterManager;
@@ -91,16 +96,24 @@ namespace _Scripts.Controllers
         
         void Awake()
         {
-            //TODO: Load PlayerModel Here. Just for now, _playerModel is Serializable in inspector
-
             SetComponents();
         }
         
         void Start()
         {
+            //TODO: Load PlayerModel Here. Just for now, _playerModel is Serializable in inspector
+            if (useSaveData)
+            {
+                _playerModel = GameManager.Instance.GetSaveData().PlayerModel;
+
+                //TODO: Characters models can be edited from here.
+                Character character = _charactersModels[0].GetComponent<Character>();
+                
+            }
+
             currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
             
-           UpdaterAllPlayerUI();
+            UpdaterAllPlayerUI();
         }
         
         void FixedUpdate()
@@ -299,6 +312,11 @@ namespace _Scripts.Controllers
                 }
             }
         }
+
+        public void SetGameSaveData(SaveDataWrapper data)
+        {
+            _playerModel = data.PlayerModel;
+        }
         
         #region Calculations
 
@@ -446,7 +464,7 @@ namespace _Scripts.Controllers
         void SetComponents()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _characterManager = new CharactersManager(_charactersModels, startingCharacterIndex);
+            _characterManager = new CharactersManager(_charactersModels, startingCharacterIndex); // TODO: maybe move this line on Start method.
             _playerInput = GetComponent<PlayerInput>();
         }
         
