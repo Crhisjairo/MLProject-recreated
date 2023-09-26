@@ -17,6 +17,9 @@ namespace _Scripts.GameManagerSystem
         private const int MaxSavesDataSlots = 3;
 
         private int _saveDataSlotSelected = 0;
+        private string _selectedSlotName = string.Empty;
+        
+        private const int MaxSlotNameSize = 14;
         
         private void Awake()
         {
@@ -64,31 +67,60 @@ namespace _Scripts.GameManagerSystem
                 //TODO: parse json to PlayerSaveData
                 if(ReadFile(path, out json))
                 {
-                    var message = $"Successfully loaded {i} data!";
+                    _playerSavesData[i] = JsonUtility.FromJson<PlayerSaveData>(json);
+                  
+                    //When JSON is empty, it considers like it is a new gamefile
                     
+                    var message = $"Successfully loaded {i} data!";
                     Debug.Log(message);
+                    
                 }
             }
         }
-        
+
         public PlayerSaveData GetPlayerSaveDataSelected()
         {
             return _playerSavesData[_saveDataSlotSelected];
         }
-        
-        public bool SaveGameData(PlayerSaveData data, int slot)
+
+        public void CreateNewGameSaveFile()
         {
-            string fileName = string.Format(SaveFileName, slot);
+            var newSaveData = new PlayerSaveData();
+
+            newSaveData.isNew = false;
+            newSaveData.slotName = _selectedSlotName;
+
+            
+            Debug.Log($"Creating new game at {_saveDataSlotSelected} with name {newSaveData.slotName}!");
+            
+            _playerSavesData[_saveDataSlotSelected] = newSaveData;
+        }
+
+        public void SetSelectedSlotName(string slotName)
+        {
+            if (slotName.Length > MaxSlotNameSize)
+            {
+                slotName = slotName.Substring(0, MaxSlotNameSize);
+            }
+            
+            _selectedSlotName = slotName;
+        }
+        
+        public bool SaveGameData(PlayerSaveData newData)
+        {
+            string fileName = string.Format(SaveFileName, _saveDataSlotSelected);
             string path = Path.Combine(Application.persistentDataPath, fileName);
 
+            _playerSavesData[_saveDataSlotSelected] = newData;
+            var dataToSave = _playerSavesData[_saveDataSlotSelected];
+            
             // TODO: serialization here Data to JSON
-           var json = "{}";
+           var json = JsonUtility.ToJson(dataToSave);
 
            if (WriteFile(path, json))
            {
-               Debug.Log("Successfully saved data!");
+               Debug.Log("Successfully saved data!\n" + json);
            }
-
 
            return true;
         }
@@ -97,10 +129,15 @@ namespace _Scripts.GameManagerSystem
         {
             _saveDataSlotSelected = slotSelected;
         }
-        
-        public void UpdatePlayerModelSaveData(PlayerSaveData playerSaveData, int slot)
+
+        public void LoadScreenSelectedSlot()
         {
-            _playerSavesData[slot] = playerSaveData;
+            Debug.Log($"Loading screen from slot {_saveDataSlotSelected} with name {_playerSavesData[_saveDataSlotSelected].slotName} !");
+        }
+
+        public PlayerSaveData[] GetPlayerSaveDatas()
+        {
+            return _playerSavesData;
         }
         
         public void UpdateGameSettingModelSaveData(GameSettingsData gameSettingsData)
@@ -130,10 +167,18 @@ namespace _Scripts.GameManagerSystem
                 {
                     Debug.LogError("Unknown error when loading: " + e);
                 }
+
+                
                 
                 return false;
             }
 
+            if (json == string.Empty)
+            {
+                Debug.LogWarning("Save data file is empty or corrupted!" + path);
+                return false;
+            }
+                
             return true;
         }
 

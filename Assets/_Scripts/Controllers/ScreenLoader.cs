@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _Scripts.Enums;
+using _Scripts.GameManagerSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -18,6 +19,7 @@ namespace _Scripts.Controllers
         [SerializeField] private float waitTimeAfterLoading = 0;
 
         [SerializeField] private Slider loadingSlider;
+        [SerializeField] private SaveGameTrigger saveGameTrigger;
 
         private Animator _loadingScreenAnimator;
 
@@ -40,6 +42,13 @@ namespace _Scripts.Controllers
         }
 
         public void StartLoadScreen(string sceneToLoad)
+        {
+            // TODO: add saving animations
+            StartCoroutine(LoadScreenAsync(sceneToLoad));
+            saveGameTrigger.SaveGame();
+        }
+
+        public void StartLoadScreenWithoutSaving(string sceneToLoad)
         {
             StartCoroutine(LoadScreenAsync(sceneToLoad));
         }
