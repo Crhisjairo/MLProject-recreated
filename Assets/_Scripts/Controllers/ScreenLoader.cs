@@ -17,12 +17,15 @@ namespace _Scripts.Controllers
 
         [SerializeField] private float waitTimeBeforeLoading = 0;
         [SerializeField] private float waitTimeAfterLoading = 0;
+        [SerializeField] private float waitTimeForSaving = 5f;
 
         [SerializeField] private Slider loadingSlider;
-        [SerializeField] private SaveGameTrigger saveGameTrigger;
+        [SerializeField] private SaveDataTrigger saveDataTrigger;
 
         private Animator _loadingScreenAnimator;
 
+        private Coroutine loadingScreenRoutine;
+        
         private void Awake()
         {
             SetComponents();
@@ -44,16 +47,23 @@ namespace _Scripts.Controllers
         public void StartLoadScreen(string sceneToLoad)
         {
             // TODO: add saving animations
-            StartCoroutine(LoadScreenAsync(sceneToLoad));
-            saveGameTrigger.SaveGame();
+            if(loadingScreenRoutine is null)
+                loadingScreenRoutine = StartCoroutine(LoadScreenAsync(sceneToLoad,TriggerSaveGame));
+            
+        }
+
+        private void TriggerSaveGame()
+        {
+            saveDataTrigger.SaveGame();
         }
 
         public void StartLoadScreenWithoutSaving(string sceneToLoad)
         {
-            StartCoroutine(LoadScreenAsync(sceneToLoad));
+            if(loadingScreenRoutine is null)
+                loadingScreenRoutine = StartCoroutine(LoadScreenAsync(sceneToLoad));
         }
 
-        private IEnumerator LoadScreenAsync(string sceneToLoad)
+        private IEnumerator LoadScreenAsync(string sceneToLoad, Action onRoutineStarts = null)
         {
             StartLoadScreenAnimations();
             
@@ -68,10 +78,14 @@ namespace _Scripts.Controllers
                 
                 yield return null;
             }
-
+            
             yield return new WaitForSecondsRealtime(waitTimeAfterLoading);                                        
             
             FinishLoadScreenAnimations();
+            onRoutineStarts?.Invoke();
+            
+            yield return new WaitForSecondsRealtime(waitTimeForSaving);    
+            
             Destroy(gameObject);
         }
         private void StartLoadScreenAnimations()

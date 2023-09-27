@@ -6,18 +6,22 @@ namespace _Scripts.GameManagerSystem.SlotsManager
 {
     public class GameDataSlotsManager : MonoBehaviour
     {
+        private SaveDataSystem saveDataSystem;
+        
         public Slot[] slots;
 
         public bool disableEmptySlots = true;
         
         private void Start()
         {
+            saveDataSystem = SaveDataSystem.Instance;
+
             SetSlotsData();
         }
 
         private void SetSlotsData()
         {
-            PlayerSaveData[] saveDatas = SaveDataSystem.Instance.GetPlayerSaveDatas();
+            PlayerSaveData[] saveDatas = saveDataSystem.GetPlayerSaveDatas();
             
             for (int i = 0; i < slots.Length; i++)
             {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using _Scripts.Characters;
 using _Scripts.Enums;
@@ -8,6 +9,7 @@ using _Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers
@@ -88,10 +90,11 @@ namespace _Scripts.Controllers
         private bool _inImpulse = false;
         private const float ImpulseTime = .15f;
 
-        /// <summary>
-        /// Just for develop.
-        /// </summary>
-        [SerializeField] private PlayerSaveData currentPlayerSaveData;
+        [SerializeField] private bool isAbleToRun = false;
+        [SerializeField] private bool isAbleToAttack = false;
+        [SerializeField] private bool isAbleToOpenInventory = false;
+
+        private SaveDataSystem _saveDataSystem;
         
         void Awake()
         {
@@ -100,15 +103,9 @@ namespace _Scripts.Controllers
         
         void Start()
         {
-            if (useSaveData)
-            {
-                currentPlayerSaveData = SaveDataSystem.Instance.GetPlayerSaveDataSelected();
-
-                //TODO: Set all values given by the save data system!
-                //TODO: Characters models can be edited from here.
-                Character character = _charactersModels[0].GetComponent<Character>();
-                
-            }
+            _saveDataSystem = SaveDataSystem.Instance;
+            
+            LoadSavedPlayerData();
 
             currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
             
@@ -125,6 +122,40 @@ namespace _Scripts.Controllers
             }
         }
 
+        private void LoadSavedPlayerData()
+        {
+            if (!useSaveData)
+                return;
+            
+            var loadedData = _saveDataSystem.GetPlayerSaveDataSelected();
+
+            isAbleToRun = loadedData.isAbleToRun;
+            isAbleToAttack = loadedData.isAbleToAttack;
+            isAbleToOpenInventory = loadedData.isAbleToOpenInventory;
+            
+            //TODO: Set all values given by the save data system!
+            
+            _characterManager.LoadCharacterSaveDatas(loadedData.CharacterSaveData);
+            _characterManager.CurrentCoins = loadedData.coinsAmount;
+
+        }
+
+        public PlayerSaveData BuildPlayerSaveData()
+        {
+            var saveData = _saveDataSystem.GetPlayerSaveDataSelected();
+
+            saveData.isAbleToRun = isAbleToRun;
+            saveData.isAbleToAttack = isAbleToAttack;
+            saveData.isAbleToOpenInventory = isAbleToOpenInventory;
+            
+            // NOTE: Player position is not saved.
+            
+            saveData.CharacterSaveData = _characterManager.BuildCharacterSaveDatas();
+            saveData.coinsAmount = _characterManager.CurrentCoins;
+            
+            return saveData;
+        }
+
         /// <summary>
         /// This method must be called JUST WHEN NECESSARY, because it updates all player UI elements.
         /// </summary>
@@ -132,7 +163,7 @@ namespace _Scripts.Controllers
         {
             onMaxLifeUpdate?.Invoke(_characterManager.ActiveCharacter.GetMaxLife());
             onLifeGetted?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
-            onCoinsUpdate?.Invoke(Character.CurrentCoins);
+            onCoinsUpdate?.Invoke(_characterManager.CurrentCoins);
             onCharacterChange?.Invoke(_characterManager.ActiveCharacter);
         }
         
@@ -173,7 +204,7 @@ namespace _Scripts.Controllers
         
         public void StartRunning(InputAction.CallbackContext inputContext)
         {
-            if (!inputContext.performed || !currentPlayerSaveData.isAbleToRun)
+            if (!inputContext.performed || !isAbleToRun)
                 return;
             
             currentSpeed = _characterManager.ActiveCharacter.GetRunningSpeed();
@@ -182,7 +213,7 @@ namespace _Scripts.Controllers
 
         public void StopRunning(InputAction.CallbackContext inputContext)
         {
-            if (!inputContext.canceled || !currentPlayerSaveData.isAbleToRun)
+            if (!inputContext.canceled || !isAbleToRun)
                 return;
             
             currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
@@ -191,7 +222,7 @@ namespace _Scripts.Controllers
         
         public void Attack(InputAction.CallbackContext context)
         {
-            if (!context.performed || !currentPlayerSaveData.isAbleToAttack)
+            if (!context.performed || !isAbleToAttack)
                 return;
 
             if (Time.time >= _nextAttackTime)
@@ -276,9 +307,9 @@ namespace _Scripts.Controllers
         
         public void AddCoins(int amount)
         {
-            _characterManager.ActiveCharacter.AddCoins(amount);
+            _characterManager.AddCoins(amount);
             
-            onCoinsUpdate?.Invoke(Character.CurrentCoins);
+            onCoinsUpdate?.Invoke(_characterManager.CurrentCoins);
         }
 
         public void PlayAnimation(string animName)
@@ -434,23 +465,23 @@ namespace _Scripts.Controllers
 
         public string GetActiveCharacterName()
         {
-            return _characterManager.ActiveCharacter.CharacterName;
+            return _characterManager.ActiveCharacter.GetCharacterName().ToString();
         }
 
         public void SetIsAbleToRun(bool canRun)
         {
-            currentPlayerSaveData.isAbleToRun = canRun;
+            isAbleToRun = canRun;
         }
 
         
         public void SetIsAbleToAttack(bool canAttack)
         {
-            currentPlayerSaveData.isAbleToAttack = canAttack;
+            isAbleToAttack = canAttack;
         }
         
         public void SetIsAbleToOpenInventory(bool canOpenInventory)
         {
-            currentPlayerSaveData.isAbleToOpenInventory = canOpenInventory;
+            isAbleToOpenInventory = canOpenInventory;
         }
         
     #endregion

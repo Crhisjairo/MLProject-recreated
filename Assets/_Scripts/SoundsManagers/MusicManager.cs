@@ -83,6 +83,9 @@ namespace _Scripts.SoundsManagers
         
         public IEnumerator StartFade(float duration, float targetVolume)
         {
+            if(!_currentAudioSource)
+                yield break;
+            
             float currentTime = 0;
             float start = _currentAudioSource.volume;
             while (currentTime < duration)

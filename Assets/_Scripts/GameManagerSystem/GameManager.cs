@@ -1,9 +1,11 @@
 using System;
+using _Scripts.Enums;
 using _Scripts.GameManagerSystem.Models;
 using _Scripts.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace _Scripts.GameManagerSystem
 {
@@ -13,7 +15,7 @@ namespace _Scripts.GameManagerSystem
     /// </summary>
     public class GameManager : MonoBehaviour
     {
-        public static GameManager Instance { get; private set; }
+        [SerializeField] private string zoneName;
 
         public void PauseGameWithKey(InputAction.CallbackContext context)
         {
@@ -37,7 +39,26 @@ namespace _Scripts.GameManagerSystem
         {
             Application.Quit();
         }
-        
+
+        public string GetZoneName()
+        {
+            return zoneName;
+        }
+
+        public void SetZoneName(string newZoneName)
+        {
+            zoneName = newZoneName;
+        }
+
+        public ScenesNames GetCurrentSceneName()
+        {
+            // Parsing the scene name
+            string currentSceneName = SceneManager.GetActiveScene().name;
+
+            Enum.TryParse(currentSceneName, out ScenesNames currentScene);
+            
+            return currentScene;
+        }
         
     }
 }

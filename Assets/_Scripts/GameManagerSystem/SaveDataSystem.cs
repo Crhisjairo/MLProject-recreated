@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using _Scripts.Controllers;
 using _Scripts.GameManagerSystem.Models;
 using _Scripts.Utils;
 using UnityEngine;
@@ -7,8 +8,6 @@ namespace _Scripts.GameManagerSystem
 {
     public class SaveDataSystem : MonoBehaviour
     {
-        public static SaveDataSystem Instance { get; private set; }
-
         private GameSettingsData _gameSettings;
         
         private PlayerSaveData[] _playerSavesData;
@@ -21,14 +20,25 @@ namespace _Scripts.GameManagerSystem
         
         private const int MaxSlotNameSize = 14;
         
+        public static SaveDataSystem Instance;
+        
         private void Awake()
         {
+            DontDestroyOnLoad (this);
+		    
             CreateSingleton();
-            DontDestroyOnLoad(gameObject);
-            
-            SetComponents();
+        }
 
-            LoadSavesData();
+        private void CreateSingleton()
+        {
+            if (Instance == null) {
+                Instance = this;
+                
+                SetComponents();
+                LoadSavesData();
+            } else {
+                Destroy(gameObject);
+            }
         }
 
         private void SetComponents()
@@ -39,19 +49,6 @@ namespace _Scripts.GameManagerSystem
             for (int i = 0; i < _playerSavesData.Length; i++)
             {
                 _playerSavesData[i] = new PlayerSaveData();
-            }
-        }
-
-        private void CreateSingleton()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                var message = string.Format(ConsoleMessages.SingletonError, typeof(SaveDataSystem));
-                Debug.LogWarning(message);
             }
         }
         
@@ -90,7 +87,6 @@ namespace _Scripts.GameManagerSystem
             newSaveData.isNew = false;
             newSaveData.slotName = _selectedSlotName;
 
-            
             Debug.Log($"Creating new game at {_saveDataSlotSelected} with name {newSaveData.slotName}!");
             
             _playerSavesData[_saveDataSlotSelected] = newSaveData;
@@ -105,7 +101,7 @@ namespace _Scripts.GameManagerSystem
             
             _selectedSlotName = slotName;
         }
-        
+
         public bool SaveGameData(PlayerSaveData newData)
         {
             string fileName = string.Format(SaveFileName, _saveDataSlotSelected);
