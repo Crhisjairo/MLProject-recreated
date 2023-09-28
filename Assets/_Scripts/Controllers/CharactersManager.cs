@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _Scripts.Characters;
 using _Scripts.Enums;
+using _Scripts.GameManagerSystem.Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -18,11 +19,12 @@ namespace _Scripts.Controllers
         public Animator ActiveAnimator { private set; get; }
         public ParticleSystem ActiveParticleSystem { private set; get; }
         public SpriteRenderer ActiveSpriteRenderer { private set; get; }
-
         
         List<GameObject> _charactersGameObjects = new List<GameObject>();
         int _characterIndex = 0;
 
+        public int CurrentCoins { set; get; }
+        
         public CharactersManager(GameObject[] charactersModels, int startingCharacterIndex)
         {
             SetCharacterIndex(startingCharacterIndex);
@@ -32,6 +34,11 @@ namespace _Scripts.Controllers
             DisableOtherCharacters();
         }
 
+        public void AddCoins(int amount)
+        {
+            CurrentCoins += amount;
+        }
+        
         void SetCharacterIndex(int index)
         {
             _characterIndex = index is < 0 or > 5 ? 0 : index;
@@ -164,13 +171,25 @@ namespace _Scripts.Controllers
                 
             ChangeCharacterTo(sideToSwitch);
         }
-
-        #region GettersAndSetters
-
         
-        
-        #endregion
+        //TODO: just building one character save data: Twilight. Others characters must be implemented first.
+        public CharacterSaveData[] BuildCharacterSaveDatas()
+        {
+            var datas = new CharacterSaveData[1];
 
-        
+            // NOTE: Just getting the data from the active character. This must be changed when others characters
+            // are implemented.
+            datas[0] = ActiveCharacter.BuildCharacterSaveData();
+            
+            return datas;
+        }
+       
+        //TODO: just loading one character loadData: Twilight. Others characters must be implemented first.
+        public void LoadCharacterSaveDatas(CharacterSaveData[] loadData)
+        {
+            var data = loadData[0];
+            
+            ActiveCharacter.LoadCharacterSaveData(data);
+        }
     }
 }

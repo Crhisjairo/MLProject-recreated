@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 8560395321211513687}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4690189008973104413
 SpriteRenderer:
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1951246939
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: -6136198190554652223, guid: 3c06c6afc5b96304789c947b6c4b529b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -220,6 +220,7 @@ MonoBehaviour:
     name: 
     volume: 1
     pitch: 1
+    spatialBlend: 0
     loop: 0
     playOnAwake: 0
   randomizeTalkingPitch: 0
@@ -317,7 +318,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1951246939
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: -1509967147, guid: 24739cb3cd1fb8e45b3eab1c000eb7a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

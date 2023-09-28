@@ -163,7 +163,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 58162645
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -1509967147, guid: 24739cb3cd1fb8e45b3eab1c000eb7a4, type: 3}
   m_Color: {r: 1, g: 0.3066038, b: 0.36312026, a: 1}
   m_FlipX: 0
@@ -721,7 +721,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.85
+  m_Radius: 1.2
 --- !u!114 &6535758805965892358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -734,14 +734,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f6c05a9a9145aa95a0550d699176e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modelDefaultSpecs: {fileID: 11400000, guid: 6483fed52677b59418ab52dfe8862353, type: 2}
+  baseSpecs:
+    id: 0
+    name: Default Enemy Name
+    life: 5
+    damage: 1
+    forceImpulse: 500
   flashingColor: {r: 1, g: 0, b: 0, a: 1}
   autoDestroyTime: 1
   EnemySpriteRenderer: {fileID: 8098722509816068004}
-  EnemyAnimator: {fileID: 4671282688131646154}
   lifeSlider: {fileID: 508946761322586385}
   exclamationSpriteRenderer: {fileID: 6548272686154022173}
   exclamationAnimator: {fileID: 2831040109983490416}
+  enemyAnimator: {fileID: 4671282688131646154}
   animationMinSpeed: 1
   animationMaxSpeed: 2
   movementSpeed: 2

@@ -12,6 +12,8 @@ namespace _Scripts.Ambient
 
         [SerializeField] private string playerSortingLayer = "GameElements";
         [SerializeField] private int sortOrderToForeground = 9;
+
+        private int _entitiesOnCollider;
         
         private SpriteRenderer _spriteRenderer;
         private string _defaultSortingLayerName;
@@ -35,7 +37,8 @@ namespace _Scripts.Ambient
             if(col.isTrigger)
                 return;
             
-            if (col.CompareTag(Tags.Player.ToString()) || col.CompareTag(Tags.Enemy.ToString()))
+            // Only change alpha value when the first entity collides.
+            if (_entitiesOnCollider == 0)
             {
                 var finalColor = _spriteRenderer.color;
                 finalColor.a -= fadeAmount;
@@ -45,14 +48,18 @@ namespace _Scripts.Ambient
                 _spriteRenderer.sortingLayerName = playerSortingLayer.ToString();
                 _spriteRenderer.sortingOrder = sortOrderToForeground;
             }
+
+            _entitiesOnCollider++;
         }
         
         private void OnTriggerExit2D(Collider2D col)
         {
             if(col.isTrigger)
                 return;
+
+            _entitiesOnCollider--;
             
-            if (col.CompareTag(Tags.Player.ToString()) || col.CompareTag(Tags.Enemy.ToString()))
+            if (_entitiesOnCollider == 0)
             {
                 var startColor = _spriteRenderer.color;
                 startColor.a += fadeAmount;

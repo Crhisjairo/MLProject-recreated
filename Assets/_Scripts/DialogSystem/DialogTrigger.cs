@@ -47,7 +47,8 @@ namespace _Scripts.DialogSystem
             if (_startOnAwake)
             {
                 _autoNextDialog = _startOnAwake;
-                dialogController.SetDialogue(dialogs.defaultDialog, textTypingDelay);
+                dialogController.SetDialogue(dialogs.defaultDialog, textTypingDelay, false);
+                dialogController.SetTalkingAudio(talkingAudio, randomizeTalkingPitch);
                 StartCoroutine(StartIntervalDialogue());
             }
         }
@@ -78,7 +79,7 @@ namespace _Scripts.DialogSystem
             //Si se trata de un dialogo de intervalos, solo se muestra el dialogue, no se usa defaultDialogue
             if (_autoNextDialog)
             {
-                dialogController.SetDialogue(dialogs.firstDialog, textTypingDelay);
+                dialogController.SetDialogue(dialogs.firstDialog, textTypingDelay, false);
                 
                 StartCoroutine(StartIntervalDialogue());
                 return;
@@ -91,19 +92,19 @@ namespace _Scripts.DialogSystem
                 //Si es el mal personaje que estâ interactuando
                 if (isWrongCharacter)
                 {
-                    dialogController.SetDialogue(dialogs.wrongCharacterDialog, textTypingDelay);
+                    dialogController.SetDialogue(dialogs.wrongCharacterDialog, textTypingDelay, true);
                 } 
                 //Si no hay frases de default, se pone el dialogo normal
                 else if (_isFirstInteraction && dialogs.firstDialog.sentences.Length > 0)
                 {
-                    dialogController.SetDialogue(dialogs.firstDialog, textTypingDelay);
+                    dialogController.SetDialogue(dialogs.firstDialog, textTypingDelay, true);
                     
                     _isFirstInteraction = false;
                 }
                 //Si no es la primera interacciôn y hay frases de default, se muestra solo el defaultDialogue
                 else if (dialogs.defaultDialog.sentences.Length > 0) 
                 {
-                    dialogController.SetDialogue(dialogs.defaultDialog, textTypingDelay);
+                    dialogController.SetDialogue(dialogs.defaultDialog, textTypingDelay, true);
                 }
                 
                 _isDialogueTriggered = true;
@@ -124,7 +125,7 @@ namespace _Scripts.DialogSystem
             while (true)
             {
                 dialogController.DisplayNextSentence();
-                yield return new WaitForSeconds(_timeToWaitAutoNextDialog);
+                yield return new WaitForSecondsRealtime(_timeToWaitAutoNextDialog);
 
                 if (dialogController.IsEnded)
                 {

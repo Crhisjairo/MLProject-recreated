@@ -5,7 +5,6 @@ namespace _Scripts.Characters
         protected override void Awake()
         {
             base.Awake();
-            CharacterName = "Twilight";
         }
     }
 }

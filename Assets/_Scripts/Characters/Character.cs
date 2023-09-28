@@ -1,5 +1,7 @@
 ﻿using System;
+using _Scripts.Controllers;
 using _Scripts.Enums;
+using _Scripts.GameManagerSystem.Models;
 using _Scripts.SoundsManagers;
 using _Scripts.Utils;
 using UnityEngine;
@@ -13,7 +15,7 @@ namespace _Scripts.Characters
     [System.Serializable]
     public abstract class Character: MonoBehaviour
     {
-        public static int CurrentCoins { private set; get; }
+        public CharacterNames CharacterName;
         
         public Sprite iconSprite;
         public Sprite characterSprite;
@@ -30,7 +32,7 @@ namespace _Scripts.Characters
         
         #region Character specs
 
-        public string CharacterName { protected set; get; }
+        [SerializeField] private CharacterNames characterName;
         [SerializeField] int maxLife = 13;
         [SerializeField] int currentLife = 3;
         [SerializeField] float speed = 2f;
@@ -51,10 +53,10 @@ namespace _Scripts.Characters
             
             SetFullLife();
         }
-        
-        public void AddCoins(int amount)
+
+        public CharacterNames GetCharacterName()
         {
-            CurrentCoins += amount;
+            return characterName;
         }
 
         /**
@@ -233,7 +235,32 @@ namespace _Scripts.Characters
                 Debug.LogWarning(message);
             }
         }
-        
-        
+
+
+        public CharacterSaveData BuildCharacterSaveData()
+        {
+            var data = new CharacterSaveData
+            {
+                characterName = CharacterName,
+                
+                maxLife = maxLife,
+                currentLife = currentLife,
+                speed = speed,
+                runningSpeed = runningSpeed,
+                attackDamage = attackDamage,
+                forceImpulse = forceImpulse
+            };
+
+            return data;
+        }
+        public void LoadCharacterSaveData(CharacterSaveData data)
+        {
+            maxLife = data.maxLife;
+            currentLife = data.currentLife;
+            speed = data.speed;
+            runningSpeed = data.runningSpeed;
+            attackDamage = data.attackDamage;
+            forceImpulse = data.forceImpulse;
+        }
     }
 }

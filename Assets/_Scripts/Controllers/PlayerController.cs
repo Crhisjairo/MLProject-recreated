@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using _Scripts.Characters;
 using _Scripts.Enums;
+using _Scripts.GameManagerSystem;
+using _Scripts.GameManagerSystem.Models;
 using _Scripts.Interfaces;
-using _Scripts.Models;
 using _Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers
@@ -68,6 +71,9 @@ namespace _Scripts.Controllers
         public UnityEvent onPlayerIdle;
         public UnityEvent onPlayerMoved;
         
+        [Tooltip("Set to false to use unity's inspector values.")]
+        public bool useSaveData = true;
+        
         private bool IsInvulnerable { set; get; }
 
         private CharactersManager _characterManager;
@@ -75,7 +81,7 @@ namespace _Scripts.Controllers
 
         private Rigidbody2D _rb;
 
-        private const float diagonalLimiter = 0.9f; // 0.7 default
+        private const float diagonalLimiter = 0.99f; // 0.7 default
         private Vector2 movement;
         private Vector2 _impulseDirection;
         
@@ -84,23 +90,26 @@ namespace _Scripts.Controllers
         private bool _inImpulse = false;
         private const float ImpulseTime = .15f;
 
-        /// <summary>
-        /// Just for develop.
-        /// </summary>
-        [SerializeField] private PlayerModel _playerModel;
+        [SerializeField] private bool isAbleToRun = false;
+        [SerializeField] private bool isAbleToAttack = false;
+        [SerializeField] private bool isAbleToOpenInventory = false;
+
+        private SaveDataSystem _saveDataSystem;
         
         void Awake()
         {
-            //TODO: Load PlayerModel Here. Just for now, _playerModel is Serializable in inspector
-
             SetComponents();
         }
         
         void Start()
         {
+            _saveDataSystem = SaveDataSystem.Instance;
+            
+            LoadSavedPlayerData();
+
             currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
             
-           UpdaterAllPlayerUI();
+            UpdaterAllPlayerUI();
         }
         
         void FixedUpdate()
@@ -113,6 +122,52 @@ namespace _Scripts.Controllers
             }
         }
 
+        private void LoadSavedPlayerData()
+        {
+            if (!useSaveData)
+                return;
+            
+            var loadedData = _saveDataSystem.GetPlayerSaveDataSelected();
+
+            isAbleToRun = loadedData.isAbleToRun;
+            isAbleToAttack = loadedData.isAbleToAttack;
+            isAbleToOpenInventory = loadedData.isAbleToOpenInventory;
+
+            if (!loadedData.isAutoSaved)
+            {
+                var newPos = new Vector3(
+                    loadedData.lastPlayerPosition.x, loadedData.lastPlayerPosition.y, transform.position.z
+                    );
+                
+                transform.position = newPos;
+            }
+            
+            //TODO: Set all values given by the save data system!
+            
+            _characterManager.LoadCharacterSaveDatas(loadedData.CharacterSaveData);
+            _characterManager.CurrentCoins = loadedData.coinsAmount;
+
+        }
+
+        public PlayerSaveData BuildPlayerSaveData(bool includePlayerPosition)
+        {
+            var saveData = _saveDataSystem.GetPlayerSaveDataSelected();
+
+            saveData.isAbleToRun = isAbleToRun;
+            saveData.isAbleToAttack = isAbleToAttack;
+            saveData.isAbleToOpenInventory = isAbleToOpenInventory;
+            
+            // NOTE: Player position is not saved.
+            saveData.lastPlayerPosition = includePlayerPosition 
+                ? new PlayerPosition(transform.position.x, transform.position.y) 
+                : null;
+
+            saveData.CharacterSaveData = _characterManager.BuildCharacterSaveDatas();
+            saveData.coinsAmount = _characterManager.CurrentCoins;
+            
+            return saveData;
+        }
+
         /// <summary>
         /// This method must be called JUST WHEN NECESSARY, because it updates all player UI elements.
         /// </summary>
@@ -120,7 +175,7 @@ namespace _Scripts.Controllers
         {
             onMaxLifeUpdate?.Invoke(_characterManager.ActiveCharacter.GetMaxLife());
             onLifeGetted?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
-            onCoinsUpdate?.Invoke(Character.CurrentCoins);
+            onCoinsUpdate?.Invoke(_characterManager.CurrentCoins);
             onCharacterChange?.Invoke(_characterManager.ActiveCharacter);
         }
         
@@ -161,7 +216,7 @@ namespace _Scripts.Controllers
         
         public void StartRunning(InputAction.CallbackContext inputContext)
         {
-            if (!inputContext.performed || !_playerModel.isAbleToRun)
+            if (!inputContext.performed || !isAbleToRun)
                 return;
             
             currentSpeed = _characterManager.ActiveCharacter.GetRunningSpeed();
@@ -170,7 +225,7 @@ namespace _Scripts.Controllers
 
         public void StopRunning(InputAction.CallbackContext inputContext)
         {
-            if (!inputContext.canceled || !_playerModel.isAbleToRun)
+            if (!inputContext.canceled || !isAbleToRun)
                 return;
             
             currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
@@ -179,7 +234,7 @@ namespace _Scripts.Controllers
         
         public void Attack(InputAction.CallbackContext context)
         {
-            if (!context.performed || !_playerModel.isAbleToAttack)
+            if (!context.performed || !isAbleToAttack)
                 return;
 
             if (Time.time >= _nextAttackTime)
@@ -264,9 +319,9 @@ namespace _Scripts.Controllers
         
         public void AddCoins(int amount)
         {
-            _characterManager.ActiveCharacter.AddCoins(amount);
+            _characterManager.AddCoins(amount);
             
-            onCoinsUpdate?.Invoke(Character.CurrentCoins);
+            onCoinsUpdate?.Invoke(_characterManager.CurrentCoins);
         }
 
         public void PlayAnimation(string animName)
@@ -299,7 +354,7 @@ namespace _Scripts.Controllers
                 }
             }
         }
-        
+
         #region Calculations
 
             /// <summary>
@@ -422,23 +477,23 @@ namespace _Scripts.Controllers
 
         public string GetActiveCharacterName()
         {
-            return _characterManager.ActiveCharacter.CharacterName;
+            return _characterManager.ActiveCharacter.GetCharacterName().ToString();
         }
 
         public void SetIsAbleToRun(bool canRun)
         {
-            _playerModel.isAbleToRun = canRun;
+            isAbleToRun = canRun;
         }
 
         
         public void SetIsAbleToAttack(bool canAttack)
         {
-            _playerModel.isAbleToRun = canAttack;
+            isAbleToAttack = canAttack;
         }
         
         public void SetIsAbleToOpenInventory(bool canOpenInventory)
         {
-            _playerModel.isAbleToRun = canOpenInventory;
+            isAbleToOpenInventory = canOpenInventory;
         }
         
     #endregion
@@ -446,7 +501,7 @@ namespace _Scripts.Controllers
         void SetComponents()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _characterManager = new CharactersManager(_charactersModels, startingCharacterIndex);
+            _characterManager = new CharactersManager(_charactersModels, startingCharacterIndex); // TODO: maybe move this line on Start method.
             _playerInput = GetComponent<PlayerInput>();
         }
         
