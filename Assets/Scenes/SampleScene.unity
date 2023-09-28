@@ -5149,6 +5149,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1003258474}
     m_Modifications:
+    - target: {fileID: 1021177730621891262, guid: 7c8a1f49f8dc0624f9bb273328736e86, type: 3}
+      propertyPath: m_Size.x
+      value: 0.902666
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021177730621891262, guid: 7c8a1f49f8dc0624f9bb273328736e86, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.20133299
+      objectReference: {fileID: 0}
     - target: {fileID: 2018768743364275726, guid: 7c8a1f49f8dc0624f9bb273328736e86, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -17,8 +17,8 @@ namespace _Scripts.GameManagerSystem.SlotsManager
         [SerializeField] private TextMeshProUGUI zoneName;
         [SerializeField] private TextMeshProUGUI coinsAmount;
 
-        [SerializeField] private GameObject[] charactersToUnlockGo;
-
+        [SerializeField] private CharacterSlotWrapper[] characterWrappers;
+        
         public void SetSlotName(string slotName)
         {
             this.slotName.text = slotName;
@@ -41,29 +41,16 @@ namespace _Scripts.GameManagerSystem.SlotsManager
 
         public void SetUnlockedCharacters(CharacterSaveData[] saveDatas)
         {
-            CharacterNames[] charactersNames = saveDatas
-                .Select(data => data.characterName)
-                .ToArray();
-
-            foreach (var character in charactersToUnlockGo)
+            saveDatas.ToList().ForEach(data =>
             {
-                Enum.TryParse(character.name, out CharacterNames goName);
-
-                var currentData = saveDatas.FirstOrDefault(x=> x.characterName == goName);
+                CharacterNames charName = data.characterName;
                 
-                if (charactersNames.Contains(goName))
+                characterWrappers.ToList().ForEach(wrapper =>
                 {
-                    //TODO: optimise xddd
-                    var lifeText = character
-                        .GetComponentInChildren<Transform>()
-                        .GetChild(0)
-                        .GetChild(1).gameObject
-                        .GetComponent<TextMeshProUGUI>();
-                    
-                    character.SetActive(true);
-                    lifeText.text = currentData?.currentLife.ToString();
-                }
-            }
+                    if (wrapper.CharacterName.Equals(charName))
+                        wrapper.Show(data.currentLife);
+                });
+            });
         }
         
         public string GetSlotName()
