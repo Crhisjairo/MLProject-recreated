@@ -3381,7 +3381,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3161007682080970857, guid: ba06f8303389d3d4faf7ebf6f6f99647, type: 3}
       propertyPath: m_Name
-      value: SaveDataSystem
+      value: DEBUGSaveDataSystem
       objectReference: {fileID: 0}
     - target: {fileID: 6453205937629910108, guid: ba06f8303389d3d4faf7ebf6f6f99647, type: 3}
       propertyPath: m_RootOrder
@@ -6849,6 +6849,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: TwilightCutieMark
       objectReference: {fileID: 0}
+    - target: {fileID: 8408923161110467230, guid: 7bd3c3950efff7e44b9d314c87759e95, type: 3}
+      propertyPath: onItemGrabed.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408923161110467230, guid: 7bd3c3950efff7e44b9d314c87759e95, type: 3}
+      propertyPath: onItemGrabed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408923161110467230, guid: 7bd3c3950efff7e44b9d314c87759e95, type: 3}
+      propertyPath: onItemGrabed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4943457849037061865}
+    - target: {fileID: 8408923161110467230, guid: 7bd3c3950efff7e44b9d314c87759e95, type: 3}
+      propertyPath: onItemGrabed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408923161110467230, guid: 7bd3c3950efff7e44b9d314c87759e95, type: 3}
+      propertyPath: onItemGrabed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408923161110467230, guid: 7bd3c3950efff7e44b9d314c87759e95, type: 3}
+      propertyPath: onItemGrabed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: _Scripts.GameManagerSystem.SaveDataTrigger, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408923161110467230, guid: 7bd3c3950efff7e44b9d314c87759e95, type: 3}
+      propertyPath: onItemGrabed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7686,6 +7714,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5459e2a114f967f459711547ec9c5d52, type: 3}
+--- !u!114 &4943457849037061865 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2983029794383516259, guid: 5459e2a114f967f459711547ec9c5d52, type: 3}
+  m_PrefabInstance: {fileID: 4943457849037061864}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f6d175f26bf450094a716d409d3d7e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4943457849037061866 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2780921807834317910, guid: 5459e2a114f967f459711547ec9c5d52, type: 3}

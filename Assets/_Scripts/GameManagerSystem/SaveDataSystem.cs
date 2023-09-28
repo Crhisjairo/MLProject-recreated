@@ -126,10 +126,7 @@ namespace _Scripts.GameManagerSystem
             _saveDataSlotSelected = slotSelected;
         }
 
-        public void LoadScreenSelectedSlot()
-        {
-            Debug.Log($"Loading screen from slot {_saveDataSlotSelected} with name {_playerSavesData[_saveDataSlotSelected].slotName} !");
-        }
+        
 
         public PlayerSaveData[] GetPlayerSaveDatas()
         {

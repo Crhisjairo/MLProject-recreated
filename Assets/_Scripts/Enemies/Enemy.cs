@@ -17,7 +17,7 @@ namespace _Scripts.Enemies
         [SerializeField] protected BaseEnemySpecs baseSpecs;
         protected SoundFXEmitter SoundFXEmitter;
 
-        private int worldId = 0; // TODO: used to know if item must be spawned or nor when load save data.
+        // TODO: used to know if item must be spawned or nor when load save data.
         
         [SerializeField] private Color flashingColor = Color.red;
         public float autoDestroyTime = 1f;

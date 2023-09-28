@@ -427,7 +427,6 @@ GameObject:
   - component: {fileID: 24005077}
   - component: {fileID: 24005080}
   - component: {fileID: 24005079}
-  - component: {fileID: 24005078}
   m_Layer: 5
   m_Name: AppleSprite
   m_TagString: Untagged
@@ -455,27 +454,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &24005078
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 24005076}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &24005079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,7 +503,7 @@ GameObject:
   - component: {fileID: 31678109}
   - component: {fileID: 31678110}
   m_Layer: 5
-  m_Name: Apple
+  m_Name: Applejack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -666,7 +644,6 @@ GameObject:
   - component: {fileID: 40653916}
   - component: {fileID: 40653919}
   - component: {fileID: 40653918}
-  - component: {fileID: 40653917}
   m_Layer: 5
   m_Name: RariSprite
   m_TagString: Untagged
@@ -694,27 +671,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &40653917
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40653915}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &40653918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1244,7 +1200,6 @@ GameObject:
   - component: {fileID: 74434217}
   - component: {fileID: 74434220}
   - component: {fileID: 74434219}
-  - component: {fileID: 74434218}
   m_Layer: 5
   m_Name: AppleSprite
   m_TagString: Untagged
@@ -1272,27 +1227,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &74434218
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 74434216}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &74434219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2212,7 +2146,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 30
     m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 0
@@ -2337,7 +2271,7 @@ GameObject:
   - component: {fileID: 115709155}
   - component: {fileID: 115709156}
   m_Layer: 5
-  m_Name: Pinky
+  m_Name: PinkyPie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3022,7 +2956,7 @@ GameObject:
   - component: {fileID: 174620613}
   - component: {fileID: 174620614}
   m_Layer: 5
-  m_Name: Flutter
+  m_Name: Fluttershy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3291,7 +3225,7 @@ GameObject:
   - component: {fileID: 206840709}
   - component: {fileID: 206840710}
   m_Layer: 5
-  m_Name: Flutter
+  m_Name: Fluttershy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3434,7 +3368,6 @@ GameObject:
   - component: {fileID: 223126712}
   - component: {fileID: 223126715}
   - component: {fileID: 223126714}
-  - component: {fileID: 223126713}
   m_Layer: 5
   m_Name: FlutterSprite
   m_TagString: Untagged
@@ -3462,27 +3395,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &223126713
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223126711}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &223126714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3743,7 +3655,7 @@ GameObject:
   - component: {fileID: 239122185}
   - component: {fileID: 239122186}
   m_Layer: 5
-  m_Name: Twi
+  m_Name: Twilight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4349,7 +4261,7 @@ GameObject:
   - component: {fileID: 258336663}
   - component: {fileID: 258336664}
   m_Layer: 5
-  m_Name: Twi
+  m_Name: Twilight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4479,7 +4391,6 @@ GameObject:
   - component: {fileID: 279828702}
   - component: {fileID: 279828705}
   - component: {fileID: 279828704}
-  - component: {fileID: 279828703}
   m_Layer: 5
   m_Name: AppleSprite
   m_TagString: Untagged
@@ -4507,27 +4418,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &279828703
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 279828701}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &279828704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4722,7 +4612,6 @@ GameObject:
   - component: {fileID: 302208444}
   - component: {fileID: 302208447}
   - component: {fileID: 302208446}
-  - component: {fileID: 302208445}
   m_Layer: 5
   m_Name: PinkySprite
   m_TagString: Untagged
@@ -4750,27 +4639,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &302208445
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302208443}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &302208446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4820,7 +4688,6 @@ GameObject:
   - component: {fileID: 302752465}
   - component: {fileID: 302752468}
   - component: {fileID: 302752467}
-  - component: {fileID: 302752466}
   m_Layer: 5
   m_Name: FlutterSprite
   m_TagString: Untagged
@@ -4848,27 +4715,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &302752466
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302752464}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &302752467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4983,7 +4829,6 @@ GameObject:
   - component: {fileID: 315349378}
   - component: {fileID: 315349381}
   - component: {fileID: 315349380}
-  - component: {fileID: 315349379}
   m_Layer: 5
   m_Name: PinkySprite
   m_TagString: Untagged
@@ -5011,27 +4856,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &315349379
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 315349377}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &315349380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5150,7 +4974,7 @@ GameObject:
   - component: {fileID: 327601845}
   - component: {fileID: 327601846}
   m_Layer: 5
-  m_Name: Twi
+  m_Name: Twilight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5428,7 +5252,6 @@ GameObject:
   - component: {fileID: 349298298}
   - component: {fileID: 349298301}
   - component: {fileID: 349298300}
-  - component: {fileID: 349298299}
   m_Layer: 5
   m_Name: RbSprite
   m_TagString: Untagged
@@ -5456,27 +5279,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &349298299
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349298297}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &349298300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5526,7 +5328,6 @@ GameObject:
   - component: {fileID: 356160906}
   - component: {fileID: 356160909}
   - component: {fileID: 356160908}
-  - component: {fileID: 356160907}
   m_Layer: 5
   m_Name: PinkySprite
   m_TagString: Untagged
@@ -5554,27 +5355,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &356160907
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 356160905}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &356160908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7355,7 +7135,6 @@ GameObject:
   - component: {fileID: 450399104}
   - component: {fileID: 450399107}
   - component: {fileID: 450399106}
-  - component: {fileID: 450399105}
   m_Layer: 5
   m_Name: AppleSprite
   m_TagString: Untagged
@@ -7383,27 +7162,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &450399105
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450399103}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &450399106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7795,7 +7553,6 @@ GameObject:
   - component: {fileID: 479805482}
   - component: {fileID: 479805485}
   - component: {fileID: 479805484}
-  - component: {fileID: 479805483}
   m_Layer: 5
   m_Name: TwiSprite
   m_TagString: Untagged
@@ -7823,27 +7580,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &479805483
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479805481}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &479805484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8668,7 +8404,7 @@ GameObject:
   - component: {fileID: 558114261}
   - component: {fileID: 558114262}
   m_Layer: 5
-  m_Name: Apple
+  m_Name: Applejack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9004,7 +8740,6 @@ GameObject:
   - component: {fileID: 582192591}
   - component: {fileID: 582192594}
   - component: {fileID: 582192593}
-  - component: {fileID: 582192592}
   m_Layer: 5
   m_Name: RbSprite
   m_TagString: Untagged
@@ -9032,27 +8767,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &582192592
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 582192590}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &582192593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9382,7 +9096,6 @@ GameObject:
   - component: {fileID: 610308832}
   - component: {fileID: 610308835}
   - component: {fileID: 610308834}
-  - component: {fileID: 610308833}
   m_Layer: 5
   m_Name: RariSprite
   m_TagString: Untagged
@@ -9410,27 +9123,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &610308833
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 610308831}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &610308834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10362,7 +10054,6 @@ GameObject:
   - component: {fileID: 695487467}
   - component: {fileID: 695487470}
   - component: {fileID: 695487469}
-  - component: {fileID: 695487468}
   m_Layer: 5
   m_Name: AppleSprite
   m_TagString: Untagged
@@ -10390,27 +10081,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &695487468
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695487466}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &695487469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10460,7 +10130,6 @@ GameObject:
   - component: {fileID: 703804182}
   - component: {fileID: 703804185}
   - component: {fileID: 703804184}
-  - component: {fileID: 703804183}
   m_Layer: 5
   m_Name: FlutterSprite
   m_TagString: Untagged
@@ -10488,27 +10157,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &703804183
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703804181}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &703804184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10634,7 +10282,7 @@ GameObject:
   - component: {fileID: 718167048}
   - component: {fileID: 718167049}
   m_Layer: 5
-  m_Name: Apple
+  m_Name: Applejack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11214,7 +10862,7 @@ GameObject:
   - component: {fileID: 784246966}
   - component: {fileID: 784246967}
   m_Layer: 5
-  m_Name: Apple
+  m_Name: Applejack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11279,7 +10927,6 @@ GameObject:
   - component: {fileID: 792894350}
   - component: {fileID: 792894353}
   - component: {fileID: 792894352}
-  - component: {fileID: 792894351}
   m_Layer: 5
   m_Name: PinkySprite
   m_TagString: Untagged
@@ -11307,27 +10954,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &792894351
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792894349}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &792894352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11490,11 +11116,12 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 108235377}
         m_TargetAssemblyTypeName: _Scripts.UI.ConfirmDialog, Assembly-CSharp
-        m_MethodName: SetStringParameters
-        m_Mode: 5
+        m_MethodName: SetSlotParameters
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 803213992}
+          m_ObjectArgumentAssemblyTypeName: _Scripts.GameManagerSystem.SlotsManager.Slot,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 2
@@ -11734,7 +11361,6 @@ GameObject:
   - component: {fileID: 824816415}
   - component: {fileID: 824816418}
   - component: {fileID: 824816417}
-  - component: {fileID: 824816416}
   m_Layer: 5
   m_Name: RbSprite
   m_TagString: Untagged
@@ -11762,27 +11388,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &824816416
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 824816414}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &824816417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12862,7 +12467,6 @@ GameObject:
   - component: {fileID: 929061798}
   - component: {fileID: 929061801}
   - component: {fileID: 929061800}
-  - component: {fileID: 929061799}
   m_Layer: 5
   m_Name: FlutterSprite
   m_TagString: Untagged
@@ -12890,27 +12494,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &929061799
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929061797}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &929061800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13050,7 +12633,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 920.3598, y: 108.59}
+  m_SizeDelta: {x: 920.3598, y: 92.782}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &938416761
 MonoBehaviour:
@@ -13072,7 +12655,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xBFEst\xE1s seguro de cargar la partida {0}?"
+  m_text: "\xBFEst\xE1s seguro de cargar la partida <color=purple>SlotName</color>?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b6cf36f76c472ac42956c6bc521d5099, type: 2}
   m_sharedMaterial: {fileID: -3298288764233385063, guid: b6cf36f76c472ac42956c6bc521d5099, type: 2}
@@ -14722,7 +14305,7 @@ GameObject:
   - component: {fileID: 1051593688}
   - component: {fileID: 1051593689}
   m_Layer: 5
-  m_Name: Rainbow
+  m_Name: RainbowDash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14852,7 +14435,7 @@ GameObject:
   - component: {fileID: 1065265896}
   - component: {fileID: 1065265897}
   m_Layer: 5
-  m_Name: Rainbow
+  m_Name: RainbowDash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16335,7 +15918,6 @@ GameObject:
   - component: {fileID: 1111203486}
   - component: {fileID: 1111203489}
   - component: {fileID: 1111203488}
-  - component: {fileID: 1111203487}
   m_Layer: 5
   m_Name: RbSprite
   m_TagString: Untagged
@@ -16363,27 +15945,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1111203487
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111203485}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1111203488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16683,7 +16244,7 @@ GameObject:
   - component: {fileID: 1137819521}
   - component: {fileID: 1137819522}
   m_Layer: 5
-  m_Name: Apple
+  m_Name: Applejack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16912,7 +16473,7 @@ GameObject:
   - component: {fileID: 1156941829}
   - component: {fileID: 1156941830}
   m_Layer: 5
-  m_Name: Twi
+  m_Name: Twilight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16977,7 +16538,6 @@ GameObject:
   - component: {fileID: 1157502497}
   - component: {fileID: 1157502500}
   - component: {fileID: 1157502499}
-  - component: {fileID: 1157502498}
   m_Layer: 5
   m_Name: RbSprite
   m_TagString: Untagged
@@ -17005,27 +16565,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1157502498
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1157502496}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1157502499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17210,7 +16749,7 @@ GameObject:
   - component: {fileID: 1161857291}
   - component: {fileID: 1161857292}
   m_Layer: 5
-  m_Name: Apple
+  m_Name: Applejack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17417,7 +16956,7 @@ GameObject:
   - component: {fileID: 1172527860}
   - component: {fileID: 1172527861}
   m_Layer: 5
-  m_Name: Rainbow
+  m_Name: RainbowDash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17973,7 +17512,6 @@ GameObject:
   - component: {fileID: 1241038015}
   - component: {fileID: 1241038018}
   - component: {fileID: 1241038017}
-  - component: {fileID: 1241038016}
   m_Layer: 5
   m_Name: AppleSprite
   m_TagString: Untagged
@@ -18001,27 +17539,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1241038016
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241038014}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1241038017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19350,7 +18867,6 @@ GameObject:
   - component: {fileID: 1309019873}
   - component: {fileID: 1309019876}
   - component: {fileID: 1309019875}
-  - component: {fileID: 1309019874}
   m_Layer: 5
   m_Name: RariSprite
   m_TagString: Untagged
@@ -19378,27 +18894,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1309019874
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309019872}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1309019875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19653,7 +19148,6 @@ GameObject:
   - component: {fileID: 1339009022}
   - component: {fileID: 1339009025}
   - component: {fileID: 1339009024}
-  - component: {fileID: 1339009023}
   m_Layer: 5
   m_Name: RariSprite
   m_TagString: Untagged
@@ -19681,27 +19175,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1339009023
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339009021}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1339009024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19751,7 +19224,7 @@ GameObject:
   - component: {fileID: 1339167150}
   - component: {fileID: 1339167151}
   m_Layer: 5
-  m_Name: Flutter
+  m_Name: Fluttershy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19816,7 +19289,7 @@ GameObject:
   - component: {fileID: 1339539330}
   - component: {fileID: 1339539331}
   m_Layer: 5
-  m_Name: Pinky
+  m_Name: PinkyPie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20468,7 +19941,7 @@ GameObject:
   - component: {fileID: 1381712945}
   - component: {fileID: 1381712946}
   m_Layer: 5
-  m_Name: Rainbow
+  m_Name: RainbowDash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20646,7 +20119,7 @@ GameObject:
   - component: {fileID: 1382726797}
   - component: {fileID: 1382726798}
   m_Layer: 5
-  m_Name: Pinky
+  m_Name: PinkyPie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21186,7 +20659,7 @@ GameObject:
   - component: {fileID: 1421964737}
   - component: {fileID: 1421964738}
   m_Layer: 5
-  m_Name: Rainbow
+  m_Name: RainbowDash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21472,7 +20945,6 @@ GameObject:
   - component: {fileID: 1432071779}
   - component: {fileID: 1432071782}
   - component: {fileID: 1432071781}
-  - component: {fileID: 1432071780}
   m_Layer: 5
   m_Name: TwiSprite
   m_TagString: Untagged
@@ -21500,27 +20972,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1432071780
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432071778}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1432071781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21570,7 +21021,7 @@ GameObject:
   - component: {fileID: 1456676020}
   - component: {fileID: 1456676021}
   m_Layer: 5
-  m_Name: Flutter
+  m_Name: Fluttershy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22243,7 +21694,7 @@ GameObject:
   - component: {fileID: 1486443046}
   - component: {fileID: 1486443047}
   m_Layer: 5
-  m_Name: Pinky
+  m_Name: PinkyPie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24020,7 +23471,6 @@ GameObject:
   - component: {fileID: 1606612288}
   - component: {fileID: 1606612291}
   - component: {fileID: 1606612290}
-  - component: {fileID: 1606612289}
   m_Layer: 5
   m_Name: TwiSprite
   m_TagString: Untagged
@@ -24048,27 +23498,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1606612289
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606612287}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1606612290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24644,7 +24073,7 @@ GameObject:
   - component: {fileID: 1689538221}
   - component: {fileID: 1689538222}
   m_Layer: 5
-  m_Name: Pinky
+  m_Name: PinkyPie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24917,9 +24346,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1768602455}
-        m_TargetAssemblyTypeName: _Scripts.GameManagerSystem.SaveDataSystem, Assembly-CSharp
-        m_MethodName: LoadScreenSelectedSlot
+      - m_Target: {fileID: 2004263073}
+        m_TargetAssemblyTypeName: _Scripts.Controllers.ScreenLoader, Assembly-CSharp
+        m_MethodName: LoadScreenFromSelectedSlot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25108,7 +24537,7 @@ GameObject:
   - component: {fileID: 1726860230}
   - component: {fileID: 1726860231}
   m_Layer: 5
-  m_Name: Twi
+  m_Name: Twilight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25647,7 +25076,6 @@ GameObject:
   - component: {fileID: 1745719481}
   - component: {fileID: 1745719484}
   - component: {fileID: 1745719483}
-  - component: {fileID: 1745719482}
   m_Layer: 5
   m_Name: FlutterSprite
   m_TagString: Untagged
@@ -25675,27 +25103,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1745719482
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745719480}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1745719483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25956,7 +25363,6 @@ GameObject:
   - component: {fileID: 1756069077}
   - component: {fileID: 1756069080}
   - component: {fileID: 1756069079}
-  - component: {fileID: 1756069078}
   m_Layer: 5
   m_Name: TwiSprite
   m_TagString: Untagged
@@ -25984,27 +25390,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1756069078
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756069076}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1756069079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26224,7 +25609,6 @@ GameObject:
   - component: {fileID: 1783437052}
   - component: {fileID: 1783437055}
   - component: {fileID: 1783437054}
-  - component: {fileID: 1783437053}
   m_Layer: 5
   m_Name: RariSprite
   m_TagString: Untagged
@@ -26252,27 +25636,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1783437053
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1783437051}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1783437054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26406,7 +25769,6 @@ GameObject:
   - component: {fileID: 1800199088}
   - component: {fileID: 1800199091}
   - component: {fileID: 1800199090}
-  - component: {fileID: 1800199089}
   m_Layer: 5
   m_Name: TwiSprite
   m_TagString: Untagged
@@ -26434,27 +25796,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1800199089
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800199087}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1800199090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26759,11 +26100,12 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 108235377}
         m_TargetAssemblyTypeName: _Scripts.UI.ConfirmDialog, Assembly-CSharp
-        m_MethodName: SetStringParameters
-        m_Mode: 5
+        m_MethodName: SetSlotParameters
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1808004259}
+          m_ObjectArgumentAssemblyTypeName: _Scripts.GameManagerSystem.SlotsManager.Slot,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 1
@@ -26958,11 +26300,12 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 108235377}
         m_TargetAssemblyTypeName: _Scripts.UI.ConfirmDialog, Assembly-CSharp
-        m_MethodName: SetStringParameters
-        m_Mode: 5
+        m_MethodName: SetSlotParameters
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1808307970}
+          m_ObjectArgumentAssemblyTypeName: _Scripts.GameManagerSystem.SlotsManager.Slot,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 0
@@ -27090,7 +26433,6 @@ GameObject:
   - component: {fileID: 1808386780}
   - component: {fileID: 1808386783}
   - component: {fileID: 1808386782}
-  - component: {fileID: 1808386781}
   m_Layer: 5
   m_Name: PinkySprite
   m_TagString: Untagged
@@ -27118,27 +26460,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1808386781
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808386779}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1808386782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27253,7 +26574,7 @@ GameObject:
   - component: {fileID: 1822171005}
   - component: {fileID: 1822171006}
   m_Layer: 5
-  m_Name: Flutter
+  m_Name: Fluttershy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27489,7 +26810,6 @@ GameObject:
   - component: {fileID: 1844602762}
   - component: {fileID: 1844602765}
   - component: {fileID: 1844602764}
-  - component: {fileID: 1844602763}
   m_Layer: 5
   m_Name: RbSprite
   m_TagString: Untagged
@@ -27517,27 +26837,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1844602763
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844602761}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1844602764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27587,7 +26886,7 @@ GameObject:
   - component: {fileID: 1851456318}
   - component: {fileID: 1851456319}
   m_Layer: 5
-  m_Name: Twi
+  m_Name: Twilight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28073,7 +27372,7 @@ GameObject:
   - component: {fileID: 1901840952}
   - component: {fileID: 1901840953}
   m_Layer: 5
-  m_Name: Flutter
+  m_Name: Fluttershy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28164,7 +27463,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 108.2965}
+  m_SizeDelta: {x: 0, y: 112.7817}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1901854999
 MonoBehaviour:
@@ -28181,9 +27480,9 @@ MonoBehaviour:
   m_Padding:
     m_Left: 35
     m_Right: 35
-    m_Top: 0
+    m_Top: 20
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 1
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -28344,7 +27643,7 @@ GameObject:
   - component: {fileID: 1919793258}
   - component: {fileID: 1919793259}
   m_Layer: 5
-  m_Name: Rainbow
+  m_Name: RainbowDash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28685,7 +27984,6 @@ GameObject:
   - component: {fileID: 1941859371}
   - component: {fileID: 1941859374}
   - component: {fileID: 1941859373}
-  - component: {fileID: 1941859372}
   m_Layer: 5
   m_Name: TwiSprite
   m_TagString: Untagged
@@ -28713,27 +28011,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1941859372
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1941859370}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1941859373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28924,7 +28201,7 @@ GameObject:
   - component: {fileID: 1954906451}
   - component: {fileID: 1954906452}
   m_Layer: 5
-  m_Name: Pinky
+  m_Name: PinkyPie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30116,7 +29393,6 @@ GameObject:
   - component: {fileID: 2036737776}
   - component: {fileID: 2036737779}
   - component: {fileID: 2036737778}
-  - component: {fileID: 2036737777}
   m_Layer: 5
   m_Name: RariSprite
   m_TagString: Untagged
@@ -30144,27 +29420,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &2036737777
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2036737775}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2036737778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30349,7 +29604,6 @@ GameObject:
   - component: {fileID: 2043088080}
   - component: {fileID: 2043088083}
   - component: {fileID: 2043088082}
-  - component: {fileID: 2043088081}
   m_Layer: 5
   m_Name: FlutterSprite
   m_TagString: Untagged
@@ -30377,27 +29631,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &2043088081
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2043088079}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2043088082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30575,7 +29808,6 @@ GameObject:
   - component: {fileID: 2064923224}
   - component: {fileID: 2064923227}
   - component: {fileID: 2064923226}
-  - component: {fileID: 2064923225}
   m_Layer: 5
   m_Name: PinkySprite
   m_TagString: Untagged
@@ -30603,27 +29835,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.324041, y: -63.984344}
   m_SizeDelta: {x: 56.648083, y: 63.6703}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &2064923225
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2064923223}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf651cd483b07af4d925d85bcc240670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2064923226
 MonoBehaviour:
   m_ObjectHideFlags: 0

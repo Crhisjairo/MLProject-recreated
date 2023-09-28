@@ -5,6 +5,7 @@ using _Scripts.Enums;
 using _Scripts.Items.Specs;
 using _Scripts.SoundsManagers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 namespace _Scripts.Items
 {
@@ -18,9 +19,11 @@ namespace _Scripts.Items
         
         [SerializeField] private float timeBeforeDestroy = 1f;
         
-        private int worldId = 0; // TODO: used to know if item must be spawned or nor when load save data.
+        // TODO: used to know if item must be spawned or nor when load save data.
 
         private SoundFXEmitter _soundFXEmitter;
+
+        public UnityEvent onItemGrabed;
 
         public bool isGrabable = false;
 
@@ -33,6 +36,8 @@ namespace _Scripts.Items
         {
             if (playerController.TryToAddItemToInventory(gameObject))
             {
+                onItemGrabed?.Invoke();
+                
                 Debug.Log("Item added to player: " + playerController.GetActiveCharacterName());
                 Debug.Log("NOT IMPLEMENTED YET!");
                 //TODO: Look if the object exists after Destroy.
@@ -51,6 +56,8 @@ namespace _Scripts.Items
                     GiveItemToPlayerInventory(playerController);
                 else
                 {
+                    onItemGrabed?.Invoke();
+                    
                     defaultSpecs.TakeEffect(playerController);
                     _soundFXEmitter.PlayOneShot(SoundsFX.Taken.ToString());
 

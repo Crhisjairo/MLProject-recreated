@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using _Scripts.Enums;
 using _Scripts.GameManagerSystem.Models;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -36,6 +39,8 @@ namespace _Scripts.GameManagerSystem.SlotsManager
                     slots[i].SetSlotName(currentSaveData.slotName);
                     slots[i].SetZoneName(currentSaveData.zoneName);
                     slots[i].SetCoinsAmount(currentSaveData.coinsAmount);
+
+                    slots[i].SetUnlockedCharacters(currentSaveData.CharacterSaveData);
                 }
             }
         }

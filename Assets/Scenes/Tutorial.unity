@@ -978,6 +978,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9acf7df5166740538853323627353678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &151332167 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2983029794383516259, guid: 5459e2a114f967f459711547ec9c5d52, type: 3}
+  m_PrefabInstance: {fileID: 151332165}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f6d175f26bf450094a716d409d3d7e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &209139437 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 923858913093945145, guid: 268917bc95165ff45b89ee45facef766, type: 3}
@@ -2361,7 +2372,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3161007682080970857, guid: ba06f8303389d3d4faf7ebf6f6f99647, type: 3}
       propertyPath: m_Name
-      value: SaveDataSystem2
+      value: DEBUGSaveDataSystem
       objectReference: {fileID: 0}
     - target: {fileID: 6453205937629910108, guid: ba06f8303389d3d4faf7ebf6f6f99647, type: 3}
       propertyPath: m_RootOrder
@@ -3817,7 +3828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2162947441863369233, guid: fad7f37b0973c3341b9785e8d9fcf8dd, type: 3}
       propertyPath: onEntityCollides.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2162947441863369233, guid: fad7f37b0973c3341b9785e8d9fcf8dd, type: 3}
       propertyPath: onEntityCollides.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3826,7 +3837,7 @@ PrefabInstance:
     - target: {fileID: 2162947441863369233, guid: fad7f37b0973c3341b9785e8d9fcf8dd, type: 3}
       propertyPath: onEntityCollides.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 545242618}
+      objectReference: {fileID: 151332167}
     - target: {fileID: 2162947441863369233, guid: fad7f37b0973c3341b9785e8d9fcf8dd, type: 3}
       propertyPath: onEntityCollides.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -3849,7 +3860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2162947441863369233, guid: fad7f37b0973c3341b9785e8d9fcf8dd, type: 3}
       propertyPath: onEntityCollides.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: _Scripts.GameManagerSystem.SaveDataSystem, Assembly-CSharp
+      value: _Scripts.GameManagerSystem.SaveDataTrigger, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2162947441863369233, guid: fad7f37b0973c3341b9785e8d9fcf8dd, type: 3}
       propertyPath: onEntityCollides.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
@@ -3857,7 +3868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2162947441863369233, guid: fad7f37b0973c3341b9785e8d9fcf8dd, type: 3}
       propertyPath: onEntityCollides.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2162947441863369233, guid: fad7f37b0973c3341b9785e8d9fcf8dd, type: 3}
       propertyPath: onEntityCollides.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument

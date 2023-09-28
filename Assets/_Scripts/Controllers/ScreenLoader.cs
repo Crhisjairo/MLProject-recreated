@@ -66,6 +66,15 @@ namespace _Scripts.Controllers
             if(loadingScreenRoutine is null)
                 loadingScreenRoutine = StartCoroutine(LoadScreenAsync(sceneToLoad));
         }
+        
+        public void LoadScreenFromSelectedSlot()
+        {
+            var saveData = SaveDataSystem.Instance.GetPlayerSaveDataSelected();
+            var sceneName = saveData.lastSceneName.ToString();
+
+            Debug.Log($"Loading screen from slot with name {saveData.slotName} !");
+            StartLoadScreenWithoutSaving(sceneName);
+        }
 
         private IEnumerator LoadScreenAsync(string sceneToLoad, Action onRoutineStarts = null)
         {

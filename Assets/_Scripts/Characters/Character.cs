@@ -15,6 +15,8 @@ namespace _Scripts.Characters
     [System.Serializable]
     public abstract class Character: MonoBehaviour
     {
+        public CharacterNames CharacterName;
+        
         public Sprite iconSprite;
         public Sprite characterSprite;
 
@@ -239,6 +241,8 @@ namespace _Scripts.Characters
         {
             var data = new CharacterSaveData
             {
+                characterName = CharacterName,
+                
                 maxLife = maxLife,
                 currentLife = currentLife,
                 speed = speed,

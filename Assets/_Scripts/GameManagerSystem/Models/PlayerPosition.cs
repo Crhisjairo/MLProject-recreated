@@ -6,5 +6,10 @@ namespace _Scripts.GameManagerSystem.Models
     {
         public float x;
         public float y;
+        public PlayerPosition(float positionX, float positionY)
+        {
+            x = positionX;
+            y = positionY;
+        }
     }
 }

@@ -18,19 +18,16 @@ namespace _Scripts.GameManagerSystem
 
         public void SaveGame(bool isAutoSave)
         {
+            // Last player position must just be included when an auto save is not triggered.
+            // Only includes last player position when is a manual save.
+            bool includePlayerPosition = !isAutoSave; 
+                
             //TODO: show save game icon
-            var data = playerController.BuildPlayerSaveData();
+            var data = playerController.BuildPlayerSaveData(includePlayerPosition);
 
-            if (isAutoSave)
-            {
-                
-            }
-            else
-            {
-                
-            }
+            data.isAutoSaved = isAutoSave;
 
-                data.lastSceneName = gameManager.GetCurrentSceneName();
+            data.lastSceneName = gameManager.GetCurrentSceneName();
             data.zoneName = gameManager.GetZoneName();
 
             _saveDataSystem.SaveGameData(data);

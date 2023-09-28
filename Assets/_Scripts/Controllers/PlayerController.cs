@@ -71,7 +71,7 @@ namespace _Scripts.Controllers
         public UnityEvent onPlayerIdle;
         public UnityEvent onPlayerMoved;
         
-        [Tooltip("Set to false to use unity's inspector values. Let to true when build.")]
+        [Tooltip("Set to false to use unity's inspector values.")]
         public bool useSaveData = true;
         
         private bool IsInvulnerable { set; get; }
@@ -132,6 +132,15 @@ namespace _Scripts.Controllers
             isAbleToRun = loadedData.isAbleToRun;
             isAbleToAttack = loadedData.isAbleToAttack;
             isAbleToOpenInventory = loadedData.isAbleToOpenInventory;
+
+            if (!loadedData.isAutoSaved)
+            {
+                var newPos = new Vector3(
+                    loadedData.lastPlayerPosition.x, loadedData.lastPlayerPosition.y, transform.position.z
+                    );
+                
+                transform.position = newPos;
+            }
             
             //TODO: Set all values given by the save data system!
             
@@ -140,7 +149,7 @@ namespace _Scripts.Controllers
 
         }
 
-        public PlayerSaveData BuildPlayerSaveData()
+        public PlayerSaveData BuildPlayerSaveData(bool includePlayerPosition)
         {
             var saveData = _saveDataSystem.GetPlayerSaveDataSelected();
 
@@ -149,7 +158,10 @@ namespace _Scripts.Controllers
             saveData.isAbleToOpenInventory = isAbleToOpenInventory;
             
             // NOTE: Player position is not saved.
-            
+            saveData.lastPlayerPosition = includePlayerPosition 
+                ? new PlayerPosition(transform.position.x, transform.position.y) 
+                : null;
+
             saveData.CharacterSaveData = _characterManager.BuildCharacterSaveDatas();
             saveData.coinsAmount = _characterManager.CurrentCoins;
             
