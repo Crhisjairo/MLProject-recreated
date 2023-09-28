@@ -47,16 +47,18 @@ namespace _Scripts.Controllers
         public void StartLoadScreen(string sceneToLoad)
         {
             // TODO: add saving animations
-            if(loadingScreenRoutine is null)
-                loadingScreenRoutine = StartCoroutine(LoadScreenAsync(sceneToLoad,TriggerSaveGame));
-            
+            if(loadingScreenRoutine is null){
+                loadingScreenRoutine = StartCoroutine(
+                    LoadScreenAsync(
+                        sceneToLoad, 
+                        () => {
+                            saveDataTrigger.SaveGame(true);
+                        }
+                    )
+                );
+            }
         }
-
-        private void TriggerSaveGame()
-        {
-            saveDataTrigger.SaveGame();
-        }
-
+        
         public void StartLoadScreenWithoutSaving(string sceneToLoad)
         {
             if(loadingScreenRoutine is null)

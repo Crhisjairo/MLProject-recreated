@@ -16,12 +16,21 @@ namespace _Scripts.GameManagerSystem
             _saveDataSystem = SaveDataSystem.Instance;
         }
 
-        public void SaveGame()
+        public void SaveGame(bool isAutoSave)
         {
             //TODO: show save game icon
             var data = playerController.BuildPlayerSaveData();
 
-            data.lastSceneName = gameManager.GetCurrentSceneName();
+            if (isAutoSave)
+            {
+                
+            }
+            else
+            {
+                
+            }
+
+                data.lastSceneName = gameManager.GetCurrentSceneName();
             data.zoneName = gameManager.GetZoneName();
 
             _saveDataSystem.SaveGameData(data);

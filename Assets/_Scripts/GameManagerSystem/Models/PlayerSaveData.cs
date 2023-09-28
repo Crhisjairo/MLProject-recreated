@@ -1,6 +1,7 @@
 using _Scripts.Enums;
 namespace _Scripts.GameManagerSystem.Models
 {
+    //TODO: Properties can be separate into many classes.
     [System.Serializable]
     public class PlayerSaveData
     {
@@ -11,6 +12,9 @@ namespace _Scripts.GameManagerSystem.Models
         public ScenesNames lastSceneName = ScenesNames.Tutorial;
         public string zoneName = "Rebirth Cave";
 
+        public bool isAutoSaved = false;
+        public PlayerPosition lastPlayerPosition;
+        
         // Player inventory and status
         public CharacterSaveData[] CharacterSaveData;
         
