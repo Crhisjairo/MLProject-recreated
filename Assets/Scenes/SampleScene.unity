@@ -3298,6 +3298,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6535758805965892358, guid: 02eef3e2545696a43b7bf17e62881f58, type: 3}
+      propertyPath: baseSpecs.life
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8284260563984148721, guid: 02eef3e2545696a43b7bf17e62881f58, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -3947,6 +3951,10 @@ PrefabInstance:
     - target: {fileID: 6535758805965892358, guid: 02eef3e2545696a43b7bf17e62881f58, type: 3}
       propertyPath: movementSpeed
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6535758805965892358, guid: 02eef3e2545696a43b7bf17e62881f58, type: 3}
+      propertyPath: baseSpecs.life
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6535758805965892358, guid: 02eef3e2545696a43b7bf17e62881f58, type: 3}
       propertyPath: animationMaxSpeed
