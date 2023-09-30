@@ -125,35 +125,31 @@ namespace _Scripts.Enemies
         {
             if (other.collider.CompareTag(Tags.Player.ToString()))
             {
-                //TODO: play attacking animation when player collides
-                PlayerController playerController = other.collider.GetComponentInParent<PlayerController>();
-                
-                //Vector opuesto para el jugador
-                Vector2 playerImpulseDir = playerController.transform.position - transform.position;
-                playerImpulseDir = playerImpulseDir.normalized * baseSpecs.forceImpulse;
-
-                Debug.Log(playerImpulseDir);
-            
-                playerController.ReceiveDamage(playerImpulseDir, baseSpecs.damage);
+                AttackEntityOnCollider(other.collider);
             }
         }
-        
+
         //TODO: Optimize this fonction
         private void OnCollisionStay2D(Collision2D other)
         {
             if (other.collider.CompareTag(Tags.Player.ToString()))
             {
-                //TODO: play attacking animation when player collides
-                PlayerController playerController = other.collider.GetComponentInParent<PlayerController>();
-                
-                //Vector opuesto para el jugador
-                Vector2 playerImpulseDir = playerController.transform.position - transform.position;
-                playerImpulseDir = playerImpulseDir.normalized * baseSpecs.forceImpulse;
-
-                Debug.Log(playerImpulseDir);
-            
-                playerController.ReceiveDamage(playerImpulseDir, baseSpecs.damage);
+                AttackEntityOnCollider(other.collider);
             }
+        }
+
+        protected virtual void AttackEntityOnCollider(Collider2D collider)
+        {
+            //TODO: play attacking animation when player collides
+            PlayerController playerController = collider.GetComponentInParent<PlayerController>();
+                
+            //Vector opuesto para el jugador
+            Vector2 playerImpulseDir = playerController.transform.position - transform.position;
+            playerImpulseDir = playerImpulseDir.normalized * baseSpecs.forceImpulse;
+
+            Debug.Log(playerImpulseDir);
+            
+            playerController.ReceiveDamage(playerImpulseDir, baseSpecs.damage);
         }
     }
 }

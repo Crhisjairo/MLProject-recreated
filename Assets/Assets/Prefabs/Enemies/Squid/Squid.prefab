@@ -743,7 +743,9 @@ MonoBehaviour:
   flashingColor: {r: 1, g: 0, b: 0, a: 1}
   autoDestroyTime: 1
   EnemySpriteRenderer: {fileID: 8098722509816068004}
+  lifeSliderCanvas: {fileID: 6649402591526527765}
   lifeSlider: {fileID: 508946761322586385}
+  waitTimeToHideLifeBar: 3
   exclamationSpriteRenderer: {fileID: 6548272686154022173}
   exclamationAnimator: {fileID: 2831040109983490416}
   enemyAnimator: {fileID: 4671282688131646154}

@@ -26,7 +26,7 @@ namespace _Scripts.Ambient
             {
                 Vector2 entityPosition = (Vector2) transform.position + spawnOffSet;
                 
-                var entity = Instantiate(modelToSpawn, entityPosition, transform.rotation, transform);
+                var entity = Instantiate(modelToSpawn, entityPosition, transform.rotation);
                 
                 entity.SetActive(false);
                 
@@ -38,7 +38,7 @@ namespace _Scripts.Ambient
         {
             if (spawnOneShot)
             {
-                SpawnOneShot();
+                SpawnAllOneShot();
             }
             else
             {
@@ -46,9 +46,8 @@ namespace _Scripts.Ambient
             }
         }
 
-        private void SpawnOneShot()
+        public void SpawnAllOneShot()
         {
-            
             while (_entities.Count > 0)
             {
                 var entity = _entities.Dequeue();

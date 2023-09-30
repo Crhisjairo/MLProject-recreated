@@ -1,6 +1,8 @@
 using System;
 using _Scripts.Interfaces;
+using _Scripts.SoundsManagers;
 using UnityEngine;
+using UnityEngine.Serialization;
 namespace _Scripts.Ambient
 {
     [RequireComponent(typeof(SpriteRenderer))]

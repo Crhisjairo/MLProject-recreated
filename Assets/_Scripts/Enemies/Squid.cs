@@ -10,7 +10,10 @@ namespace _Scripts.Enemies
     [RequireComponent(typeof(CircleCollider2D))]
     public class Squid : Enemy
     {
+        [SerializeField] private Canvas lifeSliderCanvas;
         [SerializeField] private Slider lifeSlider;
+        [SerializeField] private float waitTimeToHideLifeBar = 3f;
+        
         [SerializeField] private SpriteRenderer exclamationSpriteRenderer;
         [SerializeField] private Animator exclamationAnimator;
         [SerializeField] private Animator enemyAnimator;
@@ -21,7 +24,8 @@ namespace _Scripts.Enemies
         [SerializeField] private float nextDirectionTime = 1f;
 
         [SerializeField] private bool randomMove = true;
-        
+
+
         private CircleCollider2D _rangeCollider;
         
         private Vector2 _startPoint, _nextDirection;
@@ -37,7 +41,8 @@ namespace _Scripts.Enemies
             SetComponents();
             
             SetSliderValues();
-            
+
+            lifeSliderCanvas.enabled = false;
             enemyAnimator.speed = animationMinSpeed;
             exclamationSpriteRenderer.enabled = false;
             exclamationAnimator.enabled = false;
@@ -71,7 +76,8 @@ namespace _Scripts.Enemies
         public override void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
         {
             base.ReceiveDamage(impulseDirection, damageAmount);
-            
+
+            StartCoroutine(StartSliderLifeCounter());
             lifeSlider.value = baseSpecs.life;
 
             if (IsDead())
@@ -80,6 +86,15 @@ namespace _Scripts.Enemies
                 
                 OnDead();
             }
+        }
+
+        private IEnumerator StartSliderLifeCounter()
+        {
+            lifeSliderCanvas.enabled = true;
+
+            yield return new WaitForSeconds(waitTimeToHideLifeBar);
+            
+            lifeSliderCanvas.enabled = false;
         }
 
         public override void OnPauseAction()
