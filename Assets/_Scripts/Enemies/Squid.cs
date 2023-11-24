@@ -56,6 +56,9 @@ namespace _Scripts.Enemies
 
         private void FixedUpdate()
         {
+            if (IsMovementPaused)
+                return;
+            
             if (_inImpulse)
             {
                 Rb.AddForce(_impulseDirection, ForceMode2D.Force);
@@ -97,15 +100,6 @@ namespace _Scripts.Enemies
             lifeSliderCanvas.enabled = false;
         }
 
-        public override void OnPauseAction()
-        {
-            throw new NotImplementedException();
-        }
-        public override void OnResumeAction()
-        {
-            throw new NotImplementedException();
-        }
-        
         private IEnumerator CalculateNextRandomMovementCoroutine()
         {
             while (true)

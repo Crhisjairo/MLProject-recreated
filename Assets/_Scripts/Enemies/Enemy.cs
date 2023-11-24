@@ -12,7 +12,7 @@ namespace _Scripts.Enemies
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(SoundFXEmitter))]
-    public abstract class Enemy: MonoBehaviour, IAttackable
+    public abstract class Enemy: MonoBehaviour, IAttackable, IPausable
     {
         [SerializeField] protected BaseEnemySpecs baseSpecs;
         protected SoundFXEmitter SoundFXEmitter;
@@ -32,14 +32,22 @@ namespace _Scripts.Enemies
         protected bool _inImpulse = false;
         private const float ImpulseTime = .15f;
 
+        protected bool IsMovementPaused = false;
+
         protected virtual void Awake()
         {
             SetComponents();
         }
-        
-        public abstract void OnPauseAction();
 
-        public abstract void OnResumeAction();
+        public virtual void OnPauseAction()
+        {
+            IsMovementPaused = true;
+        }
+
+        public virtual void OnResumeAction()
+        {
+            IsMovementPaused = false;
+        }
         
         private void SetComponents()
         {
