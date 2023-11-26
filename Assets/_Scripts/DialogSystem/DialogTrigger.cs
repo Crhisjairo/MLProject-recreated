@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _Scripts.Controllers;
+using _Scripts.Enums;
 using _Scripts.SoundsManagers;
 using Cinemachine;
 using UnityEngine;
@@ -69,10 +70,12 @@ namespace _Scripts.DialogSystem
         /// temporalmente.
         /// </summary>
         /// <param name="interactor">Nombre del personaje con el que se interactua.</param>
-        public void SendDialogByContext(PlayerController interactor)
+        public void StartDialogByContext(PlayerController interactor)
         {
             var interactorName = interactor.GetActiveCharacterName();
             var isWrongCharacter = interactorName.Equals(characterNameAbleToInteractWith);
+            
+            //interactor.ChangeActionMapTo(PlayerActionMaps.InDialog);
             
             dialogController.SetTalkingAudio(talkingAudio, randomizeTalkingPitch);
         

@@ -38,7 +38,7 @@ namespace _Scripts.Ambient
             while (true)
             {
                ChangeLightIntensityRandom();
-                yield return new WaitForSeconds(flashSpeed);
+                yield return new WaitForSecondsRealtime(flashSpeed);
             }
         }
 

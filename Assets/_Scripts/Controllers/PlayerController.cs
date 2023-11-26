@@ -505,9 +505,11 @@ namespace _Scripts.Controllers
             _playerInput = GetComponent<PlayerInput>();
         }
         
-        public void ChangeActionMapTo(string inputMap)
+        public void ChangeActionMapTo(PlayerActionMaps inputMap)
         {
-            _playerInput.SwitchCurrentActionMap(inputMap);
+            var inputMapStr = inputMap.ToString();
+            
+            _playerInput.SwitchCurrentActionMap(inputMapStr);
         }
 
         #region Debug

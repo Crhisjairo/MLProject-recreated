@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.Enemies;
 using UnityEngine;
 namespace _Scripts.Ambient
 {
@@ -15,7 +16,7 @@ namespace _Scripts.Ambient
         [SerializeField] private int maxEntities = 5;
 
         [SerializeField] private Vector2 spawnOffSet = new Vector2();
-        
+
         private Queue<GameObject> _entities;
 
         private void Awake()
@@ -55,6 +56,11 @@ namespace _Scripts.Ambient
             }
         }
 
+        public GameObject[] GetEntitiesReferences()
+        {
+            return _entities.ToArray();
+        }
+        
         private IEnumerator StartSpawning()
         {
             while (_entities.Count > 0)
@@ -66,5 +72,6 @@ namespace _Scripts.Ambient
             
             yield break;
         }
+        
     }
 }

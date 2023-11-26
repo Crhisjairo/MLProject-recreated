@@ -35,7 +35,7 @@ namespace _Scripts.Controllers
             if (!_playerInRange)
                 return;
             
-            _dialogueTrigger.SendDialogByContext(interactor);
+            _dialogueTrigger.StartDialogByContext(interactor);
             
         }
 
