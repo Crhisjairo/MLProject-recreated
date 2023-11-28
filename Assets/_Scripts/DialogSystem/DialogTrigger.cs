@@ -3,8 +3,11 @@ using System.Collections;
 using _Scripts.Controllers;
 using _Scripts.Enums;
 using _Scripts.SoundsManagers;
+using _Scripts.Utils;
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace _Scripts.DialogSystem
@@ -14,77 +17,79 @@ namespace _Scripts.DialogSystem
     /// </summary>
     public class DialogTrigger : MonoBehaviour
     {
+        [Header("Controller references")]
         [SerializeField] DialogController dialogController;
         [SerializeField] CinemachineVirtualCamera cam;
-        [SerializeField] private Sound talkingAudio;
-        [SerializeField] private bool randomizeTalkingPitch; 
+        [Space(10)]
+        
+        
+        
+        [Header("Dialog attributes")]
+        public DialogsWrapper dialogs;
+
+        public bool _autoNextDialog;
+        public float _timeToWaitAutoNextDialog = 1f;
+        
+        public Sound talkingAudio;
+        public bool randomizeTalkingPitch; 
         
         public float zoomAmountOnDialog = 0;
         public float speedZoom = 0.5f;
         
-        public bool _startOnAwake;
-
-        public bool _autoNextDialog;
-        public float _timeToWaitAutoNextDialog = 1f;
-
-        public bool onlyInteractWithSpecifCharacter = false;
-        public string characterNameAbleToInteractWith;
-
         [Range(0f, 0.3f)]
         public float textTypingDelay = 0.1f;
-
-        public DialogsWrapper dialogs;
         
+        [Space(10)]
+        
+        [Header("Events")]
+        [SerializeField] private UnityEvent onAbleToInteract; 
+        [SerializeField] private UnityEvent onUnableToInteract;    
+        
+        [Space(10)]
+        
+        private PlayerActionMaps inDialogActionMapName = PlayerActionMaps.InDialog;
+
+        private SpriteRenderer interactSprite;
+        private Animator _animator;
+
         bool _isFirstInteraction = true;
         bool _isDialogueTriggered;
         bool _canInteract;
+        
+        bool _playerInRange = false;
 
-        float currentCamZoom = 0f;
+        float _currentCamZoom = 0f;
+
+        private void Awake()
+        {
+            interactSprite = GetComponent<SpriteRenderer>();
+            _animator = GetComponent<Animator>();
+
+            CheckForOptionalComponents();
+            
+            interactSprite?.gameObject.SetActive(false);
+        }
 
         void Start()
         {
-            currentCamZoom = cam.m_Lens.OrthographicSize;
-
-            if (_startOnAwake)
-            {
-                _autoNextDialog = _startOnAwake;
-                dialogController.SetDialogue(dialogs.defaultDialog, textTypingDelay, false);
-                dialogController.SetTalkingAudio(talkingAudio, randomizeTalkingPitch);
-                StartCoroutine(StartIntervalDialogue());
-            }
+            _currentCamZoom = cam.m_Lens.OrthographicSize;
         }
 
-        public void SetDialogs(DialogModifier dialogsModifier)
+        public void TryToStartDialogs(PlayerController interactor)
         {
-            dialogs.firstDialog = dialogsModifier.dialogsWrapper.firstDialog;
-            dialogs.defaultDialog = dialogsModifier.dialogsWrapper.defaultDialog;
-            dialogs.wrongCharacterDialog = dialogsModifier.dialogsWrapper.wrongCharacterDialog;
-
-            _autoNextDialog = dialogsModifier.autoNextDialog;
-            _timeToWaitAutoNextDialog = dialogsModifier.timeToWaitAutoNextDialog;
-        }
-
-        /// <summary>
-        /// Muestra el siguiente dialogo correspondiente en función si el personaje es correcto o no.
-        /// Se debería crear un método en especifico para mostrar el dialogo incorrecto. Usar este método
-        /// temporalmente.
-        /// </summary>
-        /// <param name="interactor">Nombre del personaje con el que se interactua.</param>
-        public void StartDialogByContext(PlayerController interactor)
-        {
-            var interactorName = interactor.GetActiveCharacterName();
-            var isWrongCharacter = interactorName.Equals(characterNameAbleToInteractWith);
+            if (!_playerInRange)
+                return;
             
-            //interactor.ChangeActionMapTo(PlayerActionMaps.InDialog);
+            var interactorName = interactor.GetActiveCharacterName();
             
             dialogController.SetTalkingAudio(talkingAudio, randomizeTalkingPitch);
         
-            //Si se trata de un dialogo de intervalos, solo se muestra el dialogue, no se usa defaultDialogue
+            //Si se trata de un dialogo de intervalos, solo se muestra el dialog, no se usa defaultDialogue
             if (_autoNextDialog)
             {
                 dialogController.SetDialogue(dialogs.firstDialog, textTypingDelay, false);
                 
-                StartCoroutine(StartIntervalDialogue());
+                //StartCoroutine(StartIntervalDialogue());
                 return;
             }
 
@@ -92,13 +97,9 @@ namespace _Scripts.DialogSystem
             if (!_isDialogueTriggered)
             {
                 cam.m_Lens.OrthographicSize -= zoomAmountOnDialog; 
-                //Si es el mal personaje que estâ interactuando
-                if (isWrongCharacter)
-                {
-                    dialogController.SetDialogue(dialogs.wrongCharacterDialog, textTypingDelay, true);
-                } 
+             
                 //Si no hay frases de default, se pone el dialogo normal
-                else if (_isFirstInteraction && dialogs.firstDialog.sentences.Length > 0)
+                if (_isFirstInteraction && dialogs.firstDialog.sentences.Length > 0)
                 {
                     dialogController.SetDialogue(dialogs.firstDialog, textTypingDelay, true);
                     
@@ -120,7 +121,16 @@ namespace _Scripts.DialogSystem
                 cam.m_Lens.OrthographicSize += zoomAmountOnDialog;
                 _isDialogueTriggered = false;
             }
+        }
         
+        public void SetDialogs(DialogModifier dialogsModifier)
+        {
+            dialogs.firstDialog = dialogsModifier.dialogsWrapper.firstDialog;
+            dialogs.defaultDialog = dialogsModifier.dialogsWrapper.defaultDialog;
+            dialogs.wrongCharacterDialog = dialogsModifier.dialogsWrapper.wrongCharacterDialog;
+
+            _autoNextDialog = dialogsModifier.autoNextDialog;
+            _timeToWaitAutoNextDialog = dialogsModifier.timeToWaitAutoNextDialog;
         }
         
         IEnumerator StartIntervalDialogue()
@@ -134,6 +144,47 @@ namespace _Scripts.DialogSystem
                 {
                     yield break;
                 }
+            }
+        }
+
+        private void CheckForOptionalComponents()
+        {
+            if (interactSprite is null)
+            {
+                string message = string.Format(ConsoleMessages.OptionalComponentNotFound,
+                    typeof(SpriteRenderer), gameObject.name);
+                
+                Debug.LogWarning(message);
+            }
+            if (_animator is null)
+            {
+                string message = string.Format(ConsoleMessages.OptionalComponentNotFound,
+                    typeof(Animator), gameObject.name);
+             
+                Debug.LogWarning(message);
+            }
+        }
+        
+        
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                interactSprite.gameObject.SetActive(true);
+                _playerInRange = true;
+                
+                onAbleToInteract?.Invoke();
+            }
+        }
+        
+        void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                interactSprite.gameObject.SetActive(false);
+                _playerInRange = false;
+                
+                onUnableToInteract?.Invoke();
             }
         }
         

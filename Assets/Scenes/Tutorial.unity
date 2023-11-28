@@ -4007,7 +4007,6 @@ GameObject:
   m_Component:
   - component: {fileID: 837052717}
   - component: {fileID: 837052716}
-  - component: {fileID: 837052715}
   - component: {fileID: 837052714}
   - component: {fileID: 837052719}
   - component: {fileID: 837052718}
@@ -4032,23 +4031,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogController: {fileID: 790377251}
   cam: {fileID: 1187297619}
-  talkingAudio:
-    clip: {fileID: 0}
-    name: 
-    volume: 1
-    pitch: 1
-    spatialBlend: 0
-    loop: 0
-    playOnAwake: 0
-  randomizeTalkingPitch: 0
-  zoomAmountOnDialog: 0
-  speedZoom: 0.5
-  _startOnAwake: 0
-  _autoNextDialog: 0
-  _timeToWaitAutoNextDialog: 1
-  onlyInteractWithSpecifCharacter: 0
-  characterNameAbleToInteractWith: 
-  textTypingDelay: 0.03
   dialogs:
     firstDialog:
       titles: []
@@ -4067,22 +4049,20 @@ MonoBehaviour:
       titles: []
       sentences: []
       spritesForSentences: []
---- !u!114 &837052715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 837052713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3ff14e5fb3242e5b63c09f40e23eb09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactSprite: {fileID: 967869572}
-  inDialogActionMapName: InDialog
-  lookAtPlayerWhenInteracting: 0
-  _dialogueTrigger: {fileID: 837052714}
+  _autoNextDialog: 0
+  _timeToWaitAutoNextDialog: 1
+  talkingAudio:
+    clip: {fileID: 0}
+    name: 
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    playOnAwake: 0
+  randomizeTalkingPitch: 0
+  zoomAmountOnDialog: 0
+  speedZoom: 0.5
+  textTypingDelay: 0.03
   onAbleToInteract:
     m_PersistentCalls:
       m_Calls: []

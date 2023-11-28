@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.Controllers;
+using _Scripts.Enums;
 using _Scripts.SoundsManagers;
 using TMPro;
 using UnityEngine;
@@ -19,6 +21,8 @@ namespace _Scripts.DialogSystem
         [SerializeField] private Image dialogImage;
         [SerializeField] private GameObject nextDialogSpriteGameObject;
 
+        [SerializeField] private PlayerController playerController;
+        
         private Animator _nextDialogAnimator;
         private Image _nextDialogSpriteRenderer;
         
@@ -67,27 +71,25 @@ namespace _Scripts.DialogSystem
             _nextDialogSpriteRenderer.enabled = isActive;
         }
 
-        public void SetDialogue(Dialog dialogueSentences, float typingSpeed, bool showIndicator) 
+        public void SetDialogue(Dialog dialogueSentences, float typingSpeed, bool autoDialog) 
         {
             onDialogStarted?.Invoke();
             
-            if(!showIndicator)
-                nextDialogSpriteGameObject.SetActive(false);
-            
             _typingSpeed = typingSpeed;
-            
             IsEnded = false;
             
+            playerController.ChangeActionMapTo(PlayerActionMaps.InDialog);
+            nextDialogSpriteGameObject.SetActive(false);
+            
+            // limpiamos las frases que estan en el DialogController.
             titlesSorted.Clear();
-            sentencesSorted.Clear(); //limpiamos las frases que estan en el DialogueManager.
+            sentencesSorted.Clear(); 
             spritesSorted.Clear();
 
             if (dialogueSentences.titles != null)
             {
                 foreach (var title in dialogueSentences.titles)
-                {
                     titlesSorted.Enqueue(title);
-                }
             }
             
             foreach (var sentence in dialogueSentences.sentences)
