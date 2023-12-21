@@ -7,7 +7,7 @@ namespace _Scripts.DialogSystem
     /// Represents dialogs for an NPC or Player.
     /// </summary>
     [System.Serializable]
-    public class DialogsWrapper
+    public class DialogsSet
     {
         public Dialog firstDialog;
         public Dialog defaultDialog;

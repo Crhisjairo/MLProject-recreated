@@ -347,6 +347,9 @@ namespace _Scripts.Controllers
             {
                 collider.gameObject.TryGetComponent(typeof(IInteractable), out interactuableComponent);
 
+                
+                Debug.Log(collider.gameObject.name);
+                
                 if (interactuableComponent)
                 {
                     var interactable = (IInteractable) interactuableComponent ;
@@ -504,12 +507,15 @@ namespace _Scripts.Controllers
             _characterManager = new CharactersManager(_charactersModels, startingCharacterIndex); // TODO: maybe move this line on Start method.
             _playerInput = GetComponent<PlayerInput>();
         }
+
+        public void ChangeActionMapToString(string actionMapStr)
+        {
+            _playerInput.SwitchCurrentActionMap(actionMapStr);
+        }
         
         public void ChangeActionMapTo(PlayerActionMaps inputMap)
         {
-            var inputMapStr = inputMap.ToString();
-            
-            _playerInput.SwitchCurrentActionMap(inputMapStr);
+            _playerInput.SwitchCurrentActionMap(inputMap.ToString());
         }
 
         #region Debug

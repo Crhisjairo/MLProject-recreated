@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5525304009709751539}
   - component: {fileID: 7356132580310487890}
   - component: {fileID: 1482359883283022248}
+  - component: {fileID: 8205598965965421333}
   - component: {fileID: 7393291066447483940}
   m_Layer: 7
   m_Name: SelfDialogTrigger
@@ -120,6 +121,65 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &8205598965965421333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4034942529517940753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cc63a2376042609a65971504d995ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogController: {fileID: 0}
+  cam: {fileID: 0}
+  dialogs:
+    firstDialog:
+      titles: []
+      sentences: []
+      spritesForSentences: []
+    defaultDialog:
+      titles: []
+      sentences:
+      - No puedo ver nada...
+      - y...
+      - ...me siento muy agotada.
+      - ...
+      - "No puedo usar mi m\xE1gia..."
+      spritesForSentences:
+      - {fileID: -1169794770, guid: a54a0b2ea1a8d54458a0e2cc0879108f, type: 3}
+      - {fileID: -1169794770, guid: a54a0b2ea1a8d54458a0e2cc0879108f, type: 3}
+      - {fileID: 460242331, guid: a54a0b2ea1a8d54458a0e2cc0879108f, type: 3}
+      - {fileID: 1062433894, guid: a54a0b2ea1a8d54458a0e2cc0879108f, type: 3}
+      - {fileID: -292757504, guid: a54a0b2ea1a8d54458a0e2cc0879108f, type: 3}
+    wrongCharacterDialog:
+      titles: []
+      sentences: []
+      spritesForSentences: []
+  _autoNextDialog: 0
+  _timeToWaitAutoNextDialog: 1
+  talkingAudio:
+    clip: {fileID: 0}
+    name: 
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    playOnAwake: 0
+  randomizeTalkingPitch: 0
+  zoomAmountOnDialog: 0
+  speedZoom: 0.5
+  textTypingDelay: 0.1
+  onAbleToInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnableToInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  interactSprite: {fileID: 0}
+  _animator: {fileID: 0}
 --- !u!114 &7393291066447483940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7752aff9f984d0c8240d6fe9c9b751f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogsWrapper:
+  dialogsSet:
     firstDialog:
       titles: []
       sentences: []

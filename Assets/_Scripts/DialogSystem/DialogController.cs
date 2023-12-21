@@ -7,6 +7,7 @@ using _Scripts.SoundsManagers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -62,10 +63,10 @@ namespace _Scripts.DialogSystem
 
         private void Start()
         {
-            ActivateNextDialogSprite(false);
+            IsActiveNextDialogSprite(false);
         }
 
-        private void ActivateNextDialogSprite(bool isActive)
+        private void IsActiveNextDialogSprite(bool isActive)
         {
             _nextDialogAnimator.enabled = isActive;
             _nextDialogSpriteRenderer.enabled = isActive;
@@ -79,7 +80,7 @@ namespace _Scripts.DialogSystem
             IsEnded = false;
             
             playerController.ChangeActionMapTo(PlayerActionMaps.InDialog);
-            nextDialogSpriteGameObject.SetActive(false);
+            IsActiveNextDialogSprite(false);
             
             // limpiamos las frases que estan en el DialogController.
             titlesSorted.Clear();
@@ -113,14 +114,27 @@ namespace _Scripts.DialogSystem
 
             RandomizeCharacterPitch = randomizePitch;
         }
+
+        public void StartDialogs()
+        {
+            DisplayNextSentence();
+        }
         
-        public void DisplayNextSentence()
+        public void DisplayNextSentenceInput(InputAction.CallbackContext inputContext)
+        {
+            if (!inputContext.performed)
+                return;
+            Debug.Log("Icitte");
+            DisplayNextSentence();
+        }
+        
+        private void DisplayNextSentence()
         {
             if (IsTyping)
             {
                 StopCoroutine(_typingCoroutine);
                 dialog.text = currentSentence;
-                ActivateNextDialogSprite(true);
+                IsActiveNextDialogSprite(true);
                 IsTyping = false;
                 return;
             }
@@ -156,7 +170,7 @@ namespace _Scripts.DialogSystem
             IsTyping = true;
             dialogTitle.text = currentTitle;
             dialogImage.sprite = defaultSprite;
-            ActivateNextDialogSprite(false);
+            IsActiveNextDialogSprite(false);
             
             while (true)
             {
@@ -167,13 +181,12 @@ namespace _Scripts.DialogSystem
                         PlayTalkingAudio();
                     }
                     
-                    
                     dialog.text = sentence.Substring(0, i);
 
                     if (i == sentence.Length)
                     {
                         IsTyping = false;
-                        ActivateNextDialogSprite(true);
+                        IsActiveNextDialogSprite(true);
                         
                         yield break;
                     }
@@ -203,7 +216,7 @@ namespace _Scripts.DialogSystem
 
         void EndDialogue()
         {
-            ActivateNextDialogSprite(false);
+            IsActiveNextDialogSprite(false);
             
             //limpiamos lastSentence
             currentSentence = String.Empty;

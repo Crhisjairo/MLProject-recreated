@@ -5,11 +5,10 @@ using _Scripts.Interfaces;
 using UnityEngine;
 namespace _Scripts.Ambient
 {
-    [RequireComponent(typeof(DialogTrigger))]
     public class Sign : MonoBehaviour, IInteractable
     {
         private DialogTrigger _dialogTrigger;
-        
+
         private void Awake()
         {
             _dialogTrigger = GetComponent<DialogTrigger>();

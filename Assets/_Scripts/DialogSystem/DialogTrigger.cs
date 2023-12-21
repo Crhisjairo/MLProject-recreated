@@ -25,9 +25,9 @@ namespace _Scripts.DialogSystem
         
         
         [Header("Dialog attributes")]
-        public DialogsWrapper dialogs;
+        public DialogsSet dialogs;
 
-        public bool _autoNextDialog;
+        public bool _autoNextDialog; // TODO: agregar un temporizador al autoNextDialog.
         public float _timeToWaitAutoNextDialog = 1f;
         
         public Sound talkingAudio;
@@ -49,8 +49,8 @@ namespace _Scripts.DialogSystem
         
         private PlayerActionMaps inDialogActionMapName = PlayerActionMaps.InDialog;
 
-        private SpriteRenderer interactSprite;
-        private Animator _animator;
+        [SerializeField] private SpriteRenderer interactSprite;
+        [SerializeField] private Animator _animator;
 
         bool _isFirstInteraction = true;
         bool _isDialogueTriggered;
@@ -62,12 +62,12 @@ namespace _Scripts.DialogSystem
 
         private void Awake()
         {
-            interactSprite = GetComponent<SpriteRenderer>();
-            _animator = GetComponent<Animator>();
-
             CheckForOptionalComponents();
-            
-            interactSprite?.gameObject.SetActive(false);
+
+            if (_animator != null)
+                _animator.enabled = false;
+            if(interactSprite != null)
+                interactSprite.enabled = false;
         }
 
         void Start()
@@ -75,6 +75,13 @@ namespace _Scripts.DialogSystem
             _currentCamZoom = cam.m_Lens.OrthographicSize;
         }
 
+        public void ForceStartDialogs(PlayerController interactor)
+        {
+            _playerInRange = true;
+            
+            TryToStartDialogs(interactor);
+        }
+        
         public void TryToStartDialogs(PlayerController interactor)
         {
             if (!_playerInRange)
@@ -83,8 +90,7 @@ namespace _Scripts.DialogSystem
             var interactorName = interactor.GetActiveCharacterName();
             
             dialogController.SetTalkingAudio(talkingAudio, randomizeTalkingPitch);
-        
-            //Si se trata de un dialogo de intervalos, solo se muestra el dialog, no se usa defaultDialogue
+            //Si se trata de un dialogo de intervalos, solo se muestra el first dialog, no se usa defaultDialogue
             if (_autoNextDialog)
             {
                 dialogController.SetDialogue(dialogs.firstDialog, textTypingDelay, false);
@@ -114,7 +120,7 @@ namespace _Scripts.DialogSystem
                 _isDialogueTriggered = true;
             }
 
-            dialogController.DisplayNextSentence();
+            dialogController.StartDialogs();
 
             if (dialogController.IsEnded)
             {
@@ -125,9 +131,9 @@ namespace _Scripts.DialogSystem
         
         public void SetDialogs(DialogModifier dialogsModifier)
         {
-            dialogs.firstDialog = dialogsModifier.dialogsWrapper.firstDialog;
-            dialogs.defaultDialog = dialogsModifier.dialogsWrapper.defaultDialog;
-            dialogs.wrongCharacterDialog = dialogsModifier.dialogsWrapper.wrongCharacterDialog;
+            dialogs.firstDialog = dialogsModifier.dialogsSet.firstDialog;
+            dialogs.defaultDialog = dialogsModifier.dialogsSet.defaultDialog;
+            dialogs.wrongCharacterDialog = dialogsModifier.dialogsSet.wrongCharacterDialog;
 
             _autoNextDialog = dialogsModifier.autoNextDialog;
             _timeToWaitAutoNextDialog = dialogsModifier.timeToWaitAutoNextDialog;
@@ -137,7 +143,7 @@ namespace _Scripts.DialogSystem
         {
             while (true)
             {
-                dialogController.DisplayNextSentence();
+                //dialogController.StartDialogs();
                 yield return new WaitForSecondsRealtime(_timeToWaitAutoNextDialog);
 
                 if (dialogController.IsEnded)
@@ -156,6 +162,7 @@ namespace _Scripts.DialogSystem
                 
                 Debug.LogWarning(message);
             }
+            
             if (_animator is null)
             {
                 string message = string.Format(ConsoleMessages.OptionalComponentNotFound,
@@ -170,7 +177,11 @@ namespace _Scripts.DialogSystem
         {
             if (other.CompareTag("Player"))
             {
-                interactSprite.gameObject.SetActive(true);
+                if(interactSprite != null)
+                    interactSprite.enabled = true;
+                if(_animator != null)
+                    _animator.enabled = true;
+                
                 _playerInRange = true;
                 
                 onAbleToInteract?.Invoke();
@@ -181,7 +192,11 @@ namespace _Scripts.DialogSystem
         {
             if (other.CompareTag("Player"))
             {
-                interactSprite.gameObject.SetActive(false);
+                if(interactSprite != null)
+                    interactSprite.enabled = false;
+                if(_animator != null)
+                    _animator.enabled = false;
+                
                 _playerInRange = false;
                 
                 onUnableToInteract?.Invoke();

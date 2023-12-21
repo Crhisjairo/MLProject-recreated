@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8408923161110467230}
   - component: {fileID: 7947244645043856544}
   - component: {fileID: 5371582919126857194}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TwilightCutieMark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8780825256799889888
 SpriteRenderer:
@@ -171,6 +171,9 @@ MonoBehaviour:
   spriteRendererToDisable: {fileID: 8780825256799889888}
   colliderToDisable: {fileID: 3056972142495046992}
   timeBeforeDestroy: 3
+  onItemGrabed:
+    m_PersistentCalls:
+      m_Calls: []
   isGrabable: 0
 --- !u!114 &7947244645043856544
 MonoBehaviour:
