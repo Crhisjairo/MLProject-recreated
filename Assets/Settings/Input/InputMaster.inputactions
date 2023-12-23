@@ -429,16 +429,7 @@
             "id": "655d7dc7-65d0-46b2-975a-d35c8e8f5979",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "15114ad2-14b8-44dc-b488-d80c82dd398e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Interact",
+                    "name": "NextSentence",
                     "type": "Button",
                     "id": "08f85d37-4b52-4dd5-b931-e1785ca980ed",
                     "expectedControlType": "Button",
@@ -450,23 +441,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "628f3b18-7b11-402c-b337-b7ea2d1eb570",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ed0aaded-1050-439f-aca0-d6a331565788",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Interact",
+                    "action": "NextSentence",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -477,7 +457,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Interact",
+                    "action": "NextSentence",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -488,7 +468,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Interact",
+                    "action": "NextSentence",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

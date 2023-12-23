@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2224387212717999240}
   - component: {fileID: 5156682918720468489}
   - component: {fileID: 3554128348065094580}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6347025627427934313
 SpriteRenderer:
@@ -170,6 +170,9 @@ MonoBehaviour:
   spriteRendererToDisable: {fileID: 6347025627427934313}
   colliderToDisable: {fileID: 2224387212717999240}
   timeBeforeDestroy: 1
+  onItemGrabed:
+    m_PersistentCalls:
+      m_Calls: []
   isGrabable: 0
 --- !u!114 &3554128348065094580
 MonoBehaviour:

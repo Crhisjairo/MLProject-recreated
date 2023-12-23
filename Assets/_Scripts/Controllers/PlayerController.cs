@@ -1,16 +1,13 @@
-using System;
 using System.Collections;
-using _Scripts.Characters;
+using _Scripts.Controllers.Characters;
+using _Scripts.Controllers.Interfaces;
+using _Scripts.Enemies.Interfaces;
 using _Scripts.Enums;
 using _Scripts.GameManagerSystem;
 using _Scripts.GameManagerSystem.Models;
-using _Scripts.Interfaces;
-using _Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers
 {
@@ -347,6 +344,9 @@ namespace _Scripts.Controllers
             {
                 collider.gameObject.TryGetComponent(typeof(IInteractable), out interactuableComponent);
 
+                
+                Debug.Log(collider.gameObject.name);
+                
                 if (interactuableComponent)
                 {
                     var interactable = (IInteractable) interactuableComponent ;
@@ -504,10 +504,15 @@ namespace _Scripts.Controllers
             _characterManager = new CharactersManager(_charactersModels, startingCharacterIndex); // TODO: maybe move this line on Start method.
             _playerInput = GetComponent<PlayerInput>();
         }
-        
-        public void ChangeActionMapTo(string inputMap)
+
+        public void ChangeActionMapToString(string actionMapStr)
         {
-            _playerInput.SwitchCurrentActionMap(inputMap);
+            _playerInput.SwitchCurrentActionMap(actionMapStr);
+        }
+        
+        public void ChangeActionMapTo(PlayerActionMaps inputMap)
+        {
+            _playerInput.SwitchCurrentActionMap(inputMap.ToString());
         }
 
         #region Debug

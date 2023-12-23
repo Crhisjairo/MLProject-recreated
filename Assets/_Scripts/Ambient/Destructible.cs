@@ -1,6 +1,5 @@
 using System.Collections;
 using _Scripts.Enemies;
-using _Scripts.Interfaces;
 using UnityEngine;
 namespace _Scripts.Ambient
 {

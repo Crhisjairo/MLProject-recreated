@@ -6,7 +6,6 @@ using _Scripts.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;
 using System.Linq;
-using _Scripts.Interfaces;
 using _Scripts.SoundsManagers;
 
 namespace _Scripts.Ambient

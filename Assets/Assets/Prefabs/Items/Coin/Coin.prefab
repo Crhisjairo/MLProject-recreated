@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8762304718165169145}
   - component: {fileID: 6821959828248033594}
   - component: {fileID: 1526426957727712445}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3103599830332095644
 SpriteRenderer:

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1476633491388791739}
   - component: {fileID: 8492969894338219963}
   - component: {fileID: 9068576244189846459}
-  - component: {fileID: 7429428918487876225}
   - component: {fileID: 8757844482995188051}
   - component: {fileID: 1179114584959212227}
   m_Layer: 7
@@ -146,52 +145,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.7}
   m_EdgeRadius: 0
---- !u!114 &7429428918487876225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3765578259197261636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3ff14e5fb3242e5b63c09f40e23eb09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactSprite: {fileID: 9208148057658058861}
-  inDialogActionMapName: InDialog
-  lookAtPlayerWhenInteracting: 0
-  _dialogueTrigger: {fileID: 8757844482995188051}
-  onAbleToInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1179114584959212227}
-        m_TargetAssemblyTypeName: _Scripts.Controllers.NpcMovement, Assembly-CSharp
-        m_MethodName: PauseMovement
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onUnableToInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1179114584959212227}
-        m_TargetAssemblyTypeName: _Scripts.Controllers.NpcMovement, Assembly-CSharp
-        m_MethodName: ResumeMovement
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &8757844482995188051
 MonoBehaviour:
   m_ObjectHideFlags: 0
