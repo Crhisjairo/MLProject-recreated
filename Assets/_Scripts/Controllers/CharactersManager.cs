@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using _Scripts.Characters;
+using _Scripts.Controllers.Characters;
 using _Scripts.Enums;
 using _Scripts.GameManagerSystem.Models;
 using UnityEngine;

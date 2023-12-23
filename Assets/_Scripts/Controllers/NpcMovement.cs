@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Scripts.Enums;
+using _Scripts.Shared.Enums;
+using _Scripts.Shared.Enums;
 using _Scripts.Utils;
-using SuperTiled2Unity;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -51,7 +52,7 @@ namespace _Scripts.Controllers
 
         private void StartAutoMoving()
         {
-            if (pointsToMove.IsEmpty())
+            if (pointsToMove.Length == 0)
             {
                 var message = string.Format(ConsoleMessages.NoPointsAssignedToNpc, name);
                 Debug.LogWarning(message);

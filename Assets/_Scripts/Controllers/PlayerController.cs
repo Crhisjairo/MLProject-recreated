@@ -1,16 +1,13 @@
-using System;
 using System.Collections;
-using _Scripts.Characters;
+using _Scripts.Controllers.Characters;
+using _Scripts.Controllers.Interfaces;
+using _Scripts.Enemies.Interfaces;
 using _Scripts.Enums;
 using _Scripts.GameManagerSystem;
 using _Scripts.GameManagerSystem.Models;
-using _Scripts.Interfaces;
-using _Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers
 {

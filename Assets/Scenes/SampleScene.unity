@@ -1265,13 +1265,13 @@ MonoBehaviour:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 522174063}
-          m_TargetAssemblyTypeName: _Scripts.DialogSystem.DialogTrigger, Assembly-CSharp
+          m_TargetAssemblyTypeName: _Scripts.DialogSystem.DialogTrigger, DialogSystem
           m_MethodName: ForceStartDialogs
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 1520072269}
             m_ObjectArgumentAssemblyTypeName: _Scripts.Controllers.PlayerController,
-              Assembly-CSharp
+              Controllers
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -3182,8 +3182,8 @@ MonoBehaviour:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1520072269}
-          m_TargetAssemblyTypeName: _Scripts.Controllers.PlayerController, Assembly-CSharp
-          m_MethodName: ChangeActionMapTo
+          m_TargetAssemblyTypeName: _Scripts.Controllers.PlayerController, Controllers
+          m_MethodName: ChangeActionMapToString
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3196,8 +3196,8 @@ MonoBehaviour:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1520072269}
-          m_TargetAssemblyTypeName: _Scripts.Controllers.PlayerController, Assembly-CSharp
-          m_MethodName: ChangeActionMapTo
+          m_TargetAssemblyTypeName: _Scripts.Controllers.PlayerController, Controllers
+          m_MethodName: ChangeActionMapToString
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -13055,11 +13055,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7690678689973221211, guid: 552bc84694f20384888bdc76c09165d1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.56700003
+      value: 13.433
       objectReference: {fileID: 0}
     - target: {fileID: 7690678689973221211, guid: 552bc84694f20384888bdc76c09165d1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.989
+      value: 5.5109997
       objectReference: {fileID: 0}
     - target: {fileID: 7690678689973221211, guid: 552bc84694f20384888bdc76c09165d1, type: 3}
       propertyPath: m_LocalPosition.z

@@ -1,7 +1,7 @@
 using System;
 using _Scripts.Controllers;
+using _Scripts.Controllers.Interfaces;
 using _Scripts.DialogSystem;
-using _Scripts.Interfaces;
 using UnityEngine;
 namespace _Scripts.Ambient
 {

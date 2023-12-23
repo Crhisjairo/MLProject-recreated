@@ -1,0 +1,22 @@
+{
+    "name": "Ambient",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8d9733108a73470193e38de7116837a7",
+        "GUID:909a4d9ddc094cc193d74542b1927613",
+        "GUID:27867ee645d44e56806e7d8ecc154420",
+        "GUID:517fa6349796431d9103f55009d5c18a",
+        "GUID:5dfe96ecd4da49a486ef7a3244aa8806",
+        "GUID:0949f5b28f29484ba6c55a86b3a29018",
+        "GUID:15fc0a57446b3144c949da3e2b9737a9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -5,10 +5,8 @@ using _Scripts.Enums;
 using _Scripts.SoundsManagers;
 using _Scripts.Utils;
 using Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace _Scripts.DialogSystem
 {
@@ -172,15 +170,11 @@ namespace _Scripts.DialogSystem
             }
         }
         
-        
         void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
             {
-                if(interactSprite != null)
-                    interactSprite.enabled = true;
-                if(_animator != null)
-                    _animator.enabled = true;
+                SetIsActiveInteractSprite(true);
                 
                 _playerInRange = true;
                 
@@ -192,15 +186,20 @@ namespace _Scripts.DialogSystem
         {
             if (other.CompareTag("Player"))
             {
-                if(interactSprite != null)
-                    interactSprite.enabled = false;
-                if(_animator != null)
-                    _animator.enabled = false;
+                SetIsActiveInteractSprite(false);
                 
                 _playerInRange = false;
                 
                 onUnableToInteract?.Invoke();
             }
+        }
+
+        private void SetIsActiveInteractSprite(bool isActive)
+        {
+            if(interactSprite != null)
+                interactSprite.enabled = isActive;
+            if(_animator != null)
+                _animator.enabled = isActive;
         }
         
     }
