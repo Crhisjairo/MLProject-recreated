@@ -709,6 +709,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IronBars
       objectReference: {fileID: 0}
+    - target: {fileID: 639243236323428274, guid: caa9cc5d284a53048957ceb9186dd6c6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6139764937878493420, guid: caa9cc5d284a53048957ceb9186dd6c6, type: 3}
       propertyPath: doorActivators.Array.size
       value: 3
@@ -943,6 +947,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3590488548754096974, guid: f57ab4f0f002d3d4c96f372889ff98ed, type: 3}
   m_PrefabInstance: {fileID: 411580521}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &428396026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4573711156293964816, guid: 7c8a1f49f8dc0624f9bb273328736e86, type: 3}
+  m_PrefabInstance: {fileID: 1789644833}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &436246471
 GameObject:
@@ -4489,6 +4498,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3590488548754096974, guid: f57ab4f0f002d3d4c96f372889ff98ed, type: 3}
   m_PrefabInstance: {fileID: 1254701081}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1274766012 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1930230169388633176, guid: 7c8a1f49f8dc0624f9bb273328736e86, type: 3}
+  m_PrefabInstance: {fileID: 1789644833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1274766013 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2178762171254681106, guid: 7c8a1f49f8dc0624f9bb273328736e86, type: 3}
+  m_PrefabInstance: {fileID: 1789644833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1326426995
 GameObject:
   m_ObjectHideFlags: 0
@@ -4547,7 +4566,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c8c162af3fac7f145b8d1295eff18b1c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10747,13 +10766,65 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4573711156293964816, guid: 7c8a1f49f8dc0624f9bb273328736e86, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1789644838}
   m_SourcePrefab: {fileID: 100100000, guid: 7c8a1f49f8dc0624f9bb273328736e86, type: 3}
 --- !u!4 &1789644834 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2018768743364275726, guid: 7c8a1f49f8dc0624f9bb273328736e86, type: 3}
   m_PrefabInstance: {fileID: 1789644833}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1789644838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428396026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cc63a2376042609a65971504d995ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogController: {fileID: 2055687590}
+  cam: {fileID: 201937054}
+  dialogs:
+    firstDialog:
+      titles: []
+      sentences: []
+      spritesForSentences: []
+    defaultDialog:
+      titles: []
+      sentences: []
+      spritesForSentences: []
+    wrongCharacterDialog:
+      titles: []
+      sentences: []
+      spritesForSentences: []
+  _autoNextDialog: 0
+  _timeToWaitAutoNextDialog: 1
+  talkingAudio:
+    clip: {fileID: 0}
+    name: 
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    playOnAwake: 0
+  randomizeTalkingPitch: 0
+  zoomAmountOnDialog: 0
+  speedZoom: 0.5
+  textTypingDelay: 0.1
+  onAbleToInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnableToInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  interactSprite: {fileID: 1274766013}
+  _animator: {fileID: 1274766012}
 --- !u!1001 &1793334881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11806,7 +11877,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 163093212282359469, guid: 68b1aee7188dc644bb8658c182612f76, type: 3}
       propertyPath: useSaveData
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163093212282359469, guid: 68b1aee7188dc644bb8658c182612f76, type: 3}
       propertyPath: _playerModel.isAbleToRun
@@ -11886,11 +11957,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2025453733933810883, guid: 68b1aee7188dc644bb8658c182612f76, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.27999878
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2025453733933810883, guid: 68b1aee7188dc644bb8658c182612f76, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.68
+      value: -23.58
       objectReference: {fileID: 0}
     - target: {fileID: 2025453733933810883, guid: 68b1aee7188dc644bb8658c182612f76, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12241,11 +12312,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 210920884671177942, guid: db8f7c1ecf9c0b44b938941006a1018b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.15582119
+      value: -0.12582241
       objectReference: {fileID: 0}
     - target: {fileID: 210920884671177942, guid: db8f7c1ecf9c0b44b938941006a1018b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -18.872696
+      value: -18.772696
       objectReference: {fileID: 0}
     - target: {fileID: 210920884671177942, guid: db8f7c1ecf9c0b44b938941006a1018b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12313,11 +12384,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376948468463980290, guid: db8f7c1ecf9c0b44b938941006a1018b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.15582119
+      value: -0.12582241
       objectReference: {fileID: 0}
     - target: {fileID: 8376948468463980290, guid: db8f7c1ecf9c0b44b938941006a1018b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -18.872696
+      value: -18.772696
       objectReference: {fileID: 0}
     - target: {fileID: 9083144022613255619, guid: db8f7c1ecf9c0b44b938941006a1018b, type: 3}
       propertyPath: orthographic size
