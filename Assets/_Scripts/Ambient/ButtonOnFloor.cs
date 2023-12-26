@@ -1,5 +1,4 @@
 using System;
-using _Scripts.Interfaces;
 using _Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Serialization;

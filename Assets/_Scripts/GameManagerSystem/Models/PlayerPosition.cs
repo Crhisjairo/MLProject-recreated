@@ -1,4 +1,4 @@
-using Unity.Burst.Intrinsics;
+
 namespace _Scripts.GameManagerSystem.Models
 {
     [System.Serializable]

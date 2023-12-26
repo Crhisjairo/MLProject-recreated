@@ -1,5 +1,4 @@
-using System;
-using _Scripts.Characters;
+using _Scripts.Controllers.Characters;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 4690189008973104413}
   - component: {fileID: 1749545878421990652}
   - component: {fileID: 1021177730621891262}
-  - component: {fileID: 2748078991119735608}
-  - component: {fileID: 8155372091525553264}
   m_Layer: 7
   m_Name: Sign
   m_TagString: NPC
@@ -35,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 8560395321211513687}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4690189008973104413
 SpriteRenderer:
@@ -179,72 +177,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &2748078991119735608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4573711156293964816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3ff14e5fb3242e5b63c09f40e23eb09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactSprite: {fileID: 2178762171254681106}
-  inDialogActionMapName: InDialog
-  lookAtPlayerWhenInteracting: 0
-  _dialogueTrigger: {fileID: 8155372091525553264}
-  onAbleToInteract:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnableToInteract:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &8155372091525553264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4573711156293964816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04cc63a2376042609a65971504d995ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogController: {fileID: 0}
-  cam: {fileID: 0}
-  talkingAudio:
-    clip: {fileID: 0}
-    name: 
-    volume: 1
-    pitch: 1
-    spatialBlend: 0
-    loop: 0
-    playOnAwake: 0
-  randomizeTalkingPitch: 0
-  zoomAmountOnDialog: 0
-  speedZoom: 0.5
-  _startOnAwake: 0
-  _autoNextDialog: 0
-  _timeToWaitAutoNextDialog: 1
-  onlyInteractWithSpecifCharacter: 0
-  characterNameAbleToInteractWith: 
-  textTypingDelay: 0.03
-  dialogs:
-    firstDialog:
-      titles: []
-      sentences: []
-      spritesForSentences: []
-    defaultDialog:
-      titles: []
-      sentences: []
-      spritesForSentences: []
-    wrongCharacterDialog:
-      titles: []
-      sentences: []
-      spritesForSentences: []
 --- !u!1 &5344310815830948882
 GameObject:
   m_ObjectHideFlags: 0

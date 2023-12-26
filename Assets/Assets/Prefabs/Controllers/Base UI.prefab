@@ -693,6 +693,7 @@ MonoBehaviour:
   dialog: {fileID: 6567429851687605251}
   dialogImage: {fileID: 1201841470980527332}
   nextDialogSpriteGameObject: {fileID: 8174450187337011283}
+  playerController: {fileID: 0}
   RandomizeCharacterPitch: 1
   defaultSprite: {fileID: -378928093, guid: a54a0b2ea1a8d54458a0e2cc0879108f, type: 3}
   onDialogStarted:
@@ -700,7 +701,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: _Scripts.Controllers.PlayerController, Assembly-CSharp
-        m_MethodName: ChangeActionMapTo
+        m_MethodName: ChangeActionMapToString
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -727,7 +728,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: _Scripts.Controllers.PlayerController, Assembly-CSharp
-        m_MethodName: ChangeActionMapTo
+        m_MethodName: ChangeActionMapToString
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
