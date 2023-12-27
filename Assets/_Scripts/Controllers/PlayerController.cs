@@ -1,7 +1,7 @@
 using System.Collections;
 using _Scripts.Controllers.Characters;
+using _Scripts.Controllers.Enemies.Interfaces;
 using _Scripts.Controllers.Interfaces;
-using _Scripts.Enemies.Interfaces;
 using _Scripts.Enums;
 using _Scripts.GameManagerSystem;
 using _Scripts.GameManagerSystem.Models;

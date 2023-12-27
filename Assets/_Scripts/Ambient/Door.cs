@@ -6,6 +6,7 @@ using _Scripts.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;
 using System.Linq;
+using _Scripts.Controllers.Enemies.Interfaces;
 using _Scripts.SoundsManagers;
 
 namespace _Scripts.Ambient
@@ -16,6 +17,7 @@ namespace _Scripts.Ambient
         [SerializeField] private SoundFXEmitter soundFXEmitter;
         
         [SerializeField] private Collider2D[] colliders;
+
         
         private bool isOpen = false;
 

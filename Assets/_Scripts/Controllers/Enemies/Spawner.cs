@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts.Enemies
+namespace _Scripts.Controllers.Enemies
 {
-    public class Spawner : MonoBehaviour
+    public class Spawner : Enemy
     {
         [SerializeField] private GameObject modelToSpawn;
 
@@ -17,16 +17,21 @@ namespace _Scripts.Enemies
         [SerializeField] private Vector2 spawnOffSet = new Vector2();
 
         private Queue<GameObject> _entities;
+        
+        [SerializeField] private bool isDamagable = true;
+        [SerializeField] private bool canMakeDamage = false;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             _entities = new Queue<GameObject>();
 
             for (int i = 0; i < maxEntities; i++)
             {
                 Vector2 entityPosition = (Vector2) transform.position + spawnOffSet;
                 
-                var entity = Instantiate(modelToSpawn, entityPosition, transform.rotation);
+                var entity = Instantiate(modelToSpawn, entityPosition, transform.rotation, transform.parent);
                 
                 entity.SetActive(false);
                 
@@ -46,7 +51,7 @@ namespace _Scripts.Enemies
             }
         }
 
-        public void SpawnAllOneShot()
+        private void SpawnAllOneShot()
         {
             while (_entities.Count > 0)
             {
@@ -70,6 +75,26 @@ namespace _Scripts.Enemies
             }
             
             yield break;
+        }
+        
+        public override void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
+        {
+            if(!isDamagable)
+                return;
+            
+            base.ReceiveDamage(impulseDirection, damageAmount);
+            
+            if (IsDead())
+            {
+                OnDead();
+            }
+        }
+        
+        protected override void AttackEntityOnCollider(Collider2D collider2D)
+        {
+            if(canMakeDamage)
+                base.AttackEntityOnCollider(collider2D);
+            
         }
         
     }

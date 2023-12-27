@@ -2,13 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
-namespace _Scripts.Enemies
+using UnityEngine.Events;
+
+namespace _Scripts.Controllers.Enemies
 {
     public class EnemiesManager : MonoBehaviour
     {
         [SerializeField] private Enemy[] enemiesOnScene;
         [SerializeField] private Spawner[] spawners;
+
+        public UnityEvent<int> onEnemiesCountUpdate;
         
         private List<Enemy> _enemyList;
 
@@ -20,7 +23,19 @@ namespace _Scripts.Enemies
         private void Start()
         {
             AddSpawnersEnemiesReferences();
+            SubscribeToDestroyEnemyEvents();
+            
+            onEnemiesCountUpdate?.Invoke(_enemyList.Count);
+            
             Debug.Log(_enemyList.Count);
+        }
+
+        private void SubscribeToDestroyEnemyEvents()
+        {
+            foreach (var enemy in _enemyList)
+            {
+                enemy.onDestroyEvent.AddListener(RemoveEnemyReference);
+            }
         }
 
         public void PauseAllEnemies()
@@ -55,6 +70,14 @@ namespace _Scripts.Enemies
                 _enemyList.AddRange(enemies);
             }
             
+        }
+
+        private void RemoveEnemyReference(Enemy enemy)
+        {
+            _enemyList.Remove(enemy);
+            onEnemiesCountUpdate?.Invoke(_enemyList.Count);
+            
+            Debug.Log("Enemies: " + _enemyList.Count);
         }
     }
 }

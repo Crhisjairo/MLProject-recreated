@@ -1,14 +1,14 @@
 using System;
 using System.Collections;
-using _Scripts.Controllers;
+using _Scripts.Controllers.Enemies.Interfaces;
 using _Scripts.Enemies.Interfaces;
 using _Scripts.Enemies.Specs;
 using _Scripts.Enums;
 using _Scripts.SoundsManagers;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Events;
 
-namespace _Scripts.Enemies
+namespace _Scripts.Controllers.Enemies
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(SoundFXEmitter))]
@@ -27,6 +27,8 @@ namespace _Scripts.Enemies
         protected BoxCollider2D BoxCollider2D;
 
         private bool _isVulnerable;
+
+        public UnityEvent<Enemy> onDestroyEvent;
         
         protected Vector2 _impulseDirection;
         protected bool _inImpulse = false;
@@ -99,7 +101,7 @@ namespace _Scripts.Enemies
             BoxCollider2D.enabled = false;
 
             //TODO: Add dead sound effect here.
-            
+            //onDestroyEvent?.Invoke(this);
             yield return new WaitForSeconds(autoDestroyTime);
             Destroy(gameObject);
         }
@@ -158,6 +160,11 @@ namespace _Scripts.Enemies
             Debug.Log(playerImpulseDir);
             
             playerController.ReceiveDamage(playerImpulseDir, baseSpecs.damage);
+        }
+
+        private void OnDestroy()
+        {
+            onDestroyEvent?.Invoke(this);
         }
     }
 }

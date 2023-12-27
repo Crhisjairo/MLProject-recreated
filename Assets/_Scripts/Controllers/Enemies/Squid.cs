@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using _Scripts.Controllers.Enemies;
 using _Scripts.Enums;
 using UnityEngine;
 using UnityEngine.Serialization;

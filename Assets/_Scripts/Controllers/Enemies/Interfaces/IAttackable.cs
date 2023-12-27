@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Scripts.Enemies.Interfaces
+namespace _Scripts.Controllers.Enemies.Interfaces
 {
     public interface IAttackable
     {
