@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using _Scripts.Controllers.Enemies.Interfaces;
-using _Scripts.Enemies.Interfaces;
 using _Scripts.Enemies.Specs;
 using _Scripts.Enums;
 using _Scripts.SoundsManagers;
