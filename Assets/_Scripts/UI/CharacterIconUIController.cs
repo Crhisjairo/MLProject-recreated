@@ -15,9 +15,14 @@ namespace _Scripts.UI
 
         private void Start()
         {
-            
+            CalculatePositions();
+        }
+
+        public void CalculatePositions()
+        {
             _initialPos = image.gameObject.transform.position;
             _finalPos = _initialPos + cameraShake;
+            
             _finalPosInversed = _initialPos - cameraShake;
         }
 
@@ -30,19 +35,18 @@ namespace _Scripts.UI
         //TODO: may produce a bug on UI when called for the first time the game loads (in editor).
         public void PlayLifeTakeAnimation()
         {
-            LeanTween.move(image.gameObject, _finalPosInversed, animationTime)
-                .setOnComplete(ResetIconProsition);
+            if (!LeanTween.isTweening(image.gameObject))
+            {
+                LeanTween.move(image.gameObject, _finalPosInversed, animationTime).setLoopPingPong(1);
+            }
         }
         
         public void PlayDamageAnimation()
         {
-            LeanTween.move(image.gameObject, _finalPos, animationTime)
-                .setOnComplete(ResetIconProsition);
-        }
-
-        private void ResetIconProsition()
-        {
-            LeanTween.move(image.gameObject, _initialPos, animationTime);
+            if (!LeanTween.isTweening(image.gameObject))
+            {
+                LeanTween.move(image.gameObject, _finalPos, animationTime).setLoopPingPong(1);
+            }
         }
         
     }

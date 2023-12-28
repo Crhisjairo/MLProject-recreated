@@ -86,16 +86,20 @@ namespace _Scripts.Controllers.Enemies
             
             if (IsDead())
             {
+                foreach (var entity in _entities)
+                {
+                    entity.SetActive(true);
+                    entity.GetComponent<Enemy>().OnDead();
+                }       
+                
                 OnDead();
             }
         }
-        
+
         protected override void AttackEntityOnCollider(Collider2D collider2D)
         {
             if(canMakeDamage)
                 base.AttackEntityOnCollider(collider2D);
-            
         }
-        
     }
 }

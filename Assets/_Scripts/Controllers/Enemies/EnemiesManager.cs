@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers.Enemies
 {
@@ -11,8 +12,11 @@ namespace _Scripts.Controllers.Enemies
         [SerializeField] private Enemy[] enemiesOnScene;
         [SerializeField] private Spawner[] spawners;
 
-        public UnityEvent<int> onEnemiesCountUpdate;
         
+        public UnityEvent<int> onEnemiesSet;
+        public UnityEvent<int> onEnemiesRemoveUpdate;
+        public UnityEvent onEnemiesEmpty;
+
         private List<Enemy> _enemyList;
 
         private void Awake()
@@ -25,7 +29,7 @@ namespace _Scripts.Controllers.Enemies
             AddSpawnersEnemiesReferences();
             SubscribeToDestroyEnemyEvents();
             
-            onEnemiesCountUpdate?.Invoke(_enemyList.Count);
+            onEnemiesSet?.Invoke(_enemyList.Count);
             
             Debug.Log(_enemyList.Count);
         }
@@ -75,7 +79,12 @@ namespace _Scripts.Controllers.Enemies
         private void RemoveEnemyReference(Enemy enemy)
         {
             _enemyList.Remove(enemy);
-            onEnemiesCountUpdate?.Invoke(_enemyList.Count);
+            onEnemiesRemoveUpdate?.Invoke(_enemyList.Count);
+
+            if (_enemyList.Count <= 0)
+            {
+                onEnemiesEmpty?.Invoke();
+            }
             
             Debug.Log("Enemies: " + _enemyList.Count);
         }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0fc904915ed7ebc44b66b8b69683c919
+guid: eb75d2fef9a3925449739dbc541e63cf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: health_0
+      name: heart pixel art 48x48_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d64a884d6ce4b6343bd604756b0034d9
-      internalID: 701481286
+      spriteID: 41b9fa9e48988b84fb46a3df1f437557
+      internalID: 1837770306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: health_1
+      name: heart pixel art 48x48_1
       rect:
         serializedVersion: 2
         x: 48
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea05c6343c17d074087e7a7dae3988ee
-      internalID: 1685189014
+      spriteID: 0a4f7bd849deee04385f2427bfd8ec64
+      internalID: -1194139136
       vertices: []
       indices: 
       edges: []
@@ -175,8 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      health_0: 701481286
-      health_1: 1685189014
+      heart pixel art 48x48_0: 1837770306
+      heart pixel art 48x48_1: -1194139136
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
