@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace _Scripts.Controllers.Enemies
+namespace _Scripts.UI
 {
     public class EnemyHealthBar : MonoBehaviour
     {
@@ -12,6 +11,8 @@ namespace _Scripts.Controllers.Enemies
         public Size size = Size.Small;
         public UnityEvent onSizeChanged;
 
+        public float fadeAnimationTime = 1;
+        
         private float _sizeMultiplier = 0.4f;
 
         private Vector3 baseScale = new Vector3(1, 1, 1);
@@ -35,14 +36,13 @@ namespace _Scripts.Controllers.Enemies
 
         public void SetHealthBarActive(bool isActive)
         {
-            // TODO: add a fade animation. 
             if (isActive)
             {
-                _canvasGroup.alpha = 1;
+                LeanTween.alphaCanvas(_canvasGroup, 1, fadeAnimationTime);
             }
             else
             {
-                _canvasGroup.alpha = 0;
+                LeanTween.alphaCanvas(_canvasGroup, 0, fadeAnimationTime);
             }
         }
 

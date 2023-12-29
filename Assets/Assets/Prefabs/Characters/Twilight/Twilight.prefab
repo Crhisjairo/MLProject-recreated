@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: speed
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: maxLife
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: runningSpeed
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3531238930602149870, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: characterSpecs.maxLife
