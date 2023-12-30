@@ -3,6 +3,7 @@ using System.Collections;
 using _Scripts.Controllers;
 using _Scripts.Enums;
 using _Scripts.Items.Specs;
+using _Scripts.Shared.Enums;
 using _Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Events;

@@ -5,6 +5,7 @@ using _Scripts.Controllers.Interfaces;
 using _Scripts.Enums;
 using _Scripts.GameManagerSystem;
 using _Scripts.GameManagerSystem.Models;
+using _Scripts.Shared.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;

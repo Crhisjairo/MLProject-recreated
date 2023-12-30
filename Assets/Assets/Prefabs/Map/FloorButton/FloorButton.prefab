@@ -147,37 +147,14 @@ MonoBehaviour:
   collidersToDisable:
   - {fileID: 6972271639459238651}
   enableTriggerColliders: 0
-  tagToCheckCollisions: 0
+  activatorsTag: 0
   onEntityCollides:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9019251619288284758}
-        m_TargetAssemblyTypeName: _Scripts.Ambient.ButtonOnFloor, Assembly-CSharp
-        m_MethodName: SetIsActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1877699228911053389}
-        m_TargetAssemblyTypeName: _Scripts.SoundsManagers.SoundFXEmitter, Assembly-CSharp
-        m_MethodName: PlayOneShot
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Pressed
-          m_BoolArgument: 1
-        m_CallState: 2
-  isActive: 0
+      m_Calls: []
   activeSprite: {fileID: 836498007, guid: 186c24f5782c60744953f72e5b3f1bf5, type: 3}
   inactiveSprite: {fileID: 1866005273, guid: 186c24f5782c60744953f72e5b3f1bf5, type: 3}
+  isToggle: 0
+  isActive: 0
 --- !u!114 &1877699228911053389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +170,7 @@ MonoBehaviour:
   _mixerGroup: {fileID: -6192578760746128693, guid: ff64427cd949f1a4ba99787cd4904e06, type: 2}
   _sounds:
   - clip: {fileID: 8300000, guid: ab4cd926ce3b62048a6792ef68c3d858, type: 3}
-    name: Pressed
+    name: Activated
     volume: 0.8
     pitch: 1
     spatialBlend: 0

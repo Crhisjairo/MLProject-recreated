@@ -7,32 +7,58 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using System.Linq;
 using _Scripts.Controllers.Enemies.Interfaces;
+using _Scripts.Shared.Enums;
 using _Scripts.SoundsManagers;
+using UnityEngine.Events;
 
 namespace _Scripts.Ambient
 {
     public class Door : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer spriteRenderer;
+        private const TransitionsAnimations OnOpenAnimTriggerName = TransitionsAnimations.Open;
+        private const TransitionsAnimations OnCloseAnimTriggerName = TransitionsAnimations.Close;
+        
         [SerializeField] private SoundFXEmitter soundFXEmitter;
         
         [SerializeField] private Collider2D[] colliders;
-
         
         private bool isOpen = false;
 
         [SerializeField] private Animator animator;
-        [SerializeField] private TransitionsAnimations onOpenAnimTriggerName, nameOnCloseAnimTrigger;
+        
         [SerializeField] private float waitTimeBeforeStartAnimation = 1f, waitTimeBeforeDisableAnimator = 1f;
 
         [SerializeField] private DoorActivator[] doorActivators;
 
         private void Start()
         {
-            animator.enabled = false;
+            foreach (var activator in doorActivators)
+            {
+                activator.onEntityCollides.AddListener(TryToOpen);
+            }
+            
+            if(animator != null)
+                animator.enabled = false;
         }
 
-        public void IsOpen(bool isOpen)
+        public void TryToOpen()
+        {
+            if (doorActivators.All(activator => activator.GetIsActive())
+                || doorActivators.Length == 0)
+            {
+                isOpen = true;
+             
+                PlayOpenAnimation();
+            }
+        }
+        
+        public virtual void Close()
+        {
+            throw new NotImplementedException();
+        }
+        
+        // TODO: must implement an animation to open the door.
+        protected virtual void PlayOpenAnimation()
         {
             StartCoroutine(ActiveAnimator(isOpen));
             
@@ -41,17 +67,7 @@ namespace _Scripts.Ambient
                 collider.enabled = !isOpen;
             }
             
-            soundFXEmitter.PlayOneShot("open-door");
-            
-            this.isOpen = isOpen;
-        }
-
-        public void TryToOpen()
-        {
-            if (doorActivators.All(activator => activator.GetIsActive()))
-            {
-                IsOpen(true);
-            }
+            //soundFXEmitter.PlayOneShot(SoundsFX.Open.ToString());
         }
 
         private IEnumerator ActiveAnimator(bool isOpen)
@@ -61,13 +77,21 @@ namespace _Scripts.Ambient
             animator.enabled = true;
             
             if(isOpen)
-                animator.SetTrigger(onOpenAnimTriggerName.ToString());
+                animator.SetTrigger(OnOpenAnimTriggerName.ToString());
             else
-                animator.SetTrigger(nameOnCloseAnimTrigger.ToString());
+                animator.SetTrigger(OnCloseAnimTriggerName.ToString());
             
             yield return new WaitForSecondsRealtime(waitTimeBeforeDisableAnimator);
 
             animator.enabled = false;
+        }
+
+        private void OnDisable()
+        {
+            foreach (var activator in doorActivators)
+            {
+                activator.onEntityCollides.RemoveListener(TryToOpen);
+            }
         }
     }
 }
