@@ -27,6 +27,9 @@ namespace _Scripts.UI
             _startAnimPosition = position - _startAnimOffset;
             _endAnimPosition = position;
             
+            
+            gameObject.transform.position = _startAnimPosition;
+            
             LeanTween.moveX(gameObject, _startAnimPosition.x, animationTime).setEaseInOutBack();
         }
 

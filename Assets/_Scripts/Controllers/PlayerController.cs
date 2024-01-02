@@ -275,6 +275,9 @@ namespace _Scripts.Controllers
             
             onDamageTaken?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
 
+            
+            Debug.Log("Current life: " + _characterManager.ActiveCharacter.GetCurrenLife());
+            
             //TODO: Temporal. Add a die screen
             if (_characterManager.ActiveCharacter.GetCurrenLife() <= 0)
             {

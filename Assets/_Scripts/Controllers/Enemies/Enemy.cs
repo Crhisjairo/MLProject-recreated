@@ -157,7 +157,7 @@ namespace _Scripts.Controllers.Enemies
             Vector2 playerImpulseDir = playerController.transform.position - transform.position;
             playerImpulseDir = playerImpulseDir.normalized * baseSpecs.forceImpulse;
 
-            Debug.Log(playerImpulseDir);
+//            Debug.Log(playerImpulseDir);
             
             playerController.ReceiveDamage(playerImpulseDir, baseSpecs.damage);
         }
