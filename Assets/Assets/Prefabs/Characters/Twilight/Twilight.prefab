@@ -106,11 +106,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4990669103003073988, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: textTypingDelay
-      value: 0.05
+      value: 0.035
       objectReference: {fileID: 0}
     - target: {fileID: 4990669103003073988, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: talkingAudio.pitch
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7382685490365112285, guid: 44c4194d7b493b343b5cfb3610c37e8f, type: 3}
       propertyPath: m_Controller

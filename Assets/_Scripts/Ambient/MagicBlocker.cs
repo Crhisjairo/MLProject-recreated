@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace _Scripts.Ambient
@@ -15,7 +16,14 @@ namespace _Scripts.Ambient
 
         protected override void PlayOpenAnimation()
         {
+            StartCoroutine(ActiveAnimation());
+        }
+
+        private IEnumerator ActiveAnimation()
+        {
+            yield return new WaitForSecondsRealtime(waitTimeBeforeStartAnimation);
             _particleSystem.Stop();
+            yield return new WaitForSecondsRealtime(waitTimeBeforeDisableAnimator);
         }
     }
 }

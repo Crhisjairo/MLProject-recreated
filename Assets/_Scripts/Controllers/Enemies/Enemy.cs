@@ -103,6 +103,9 @@ namespace _Scripts.Controllers.Enemies
             //TODO: Add dead sound effect here.
             //onDestroyEvent?.Invoke(this);
             yield return new WaitForSeconds(autoDestroyTime);
+            
+            onDestroyEvent?.Invoke(this);
+            
             Destroy(gameObject);
         }
         
@@ -162,9 +165,5 @@ namespace _Scripts.Controllers.Enemies
             playerController.ReceiveDamage(playerImpulseDir, baseSpecs.damage);
         }
 
-        private void OnDestroy()
-        {
-            onDestroyEvent?.Invoke(this);
-        }
     }
 }

@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 5285555784589462743}
   - component: {fileID: 2807793640561609251}
   - component: {fileID: 3332675353532770300}
+  - component: {fileID: 6321761403902010371}
   m_Layer: 0
   m_Name: Brain Camera
   m_TagString: MainCamera
@@ -277,6 +278,19 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6321761403902010371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5828120310344531964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b59e5cca164696b4f0282f09863629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultFocusTime: 3
 --- !u!1 &7837129644541958318
 GameObject:
   m_ObjectHideFlags: 0

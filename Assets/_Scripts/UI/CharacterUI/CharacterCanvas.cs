@@ -7,7 +7,7 @@ namespace _Scripts.UI.CharacterUI
     public class CharacterCanvas : MonoBehaviour
     {
         
-        private Vector3 _startAnimOffset = new Vector3(0, -110, 0);
+        private Vector3 _startAnimOffset = new Vector3(0, -200, 0);
         
         private Vector2 _startAnimPosition, _endAnimPosition;
         

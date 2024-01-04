@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using _Scripts.Controllers.Characters;
 using _Scripts.Controllers.Enemies.Interfaces;
@@ -411,10 +412,11 @@ namespace _Scripts.Controllers
             yield return new WaitForSeconds(time);
             
             StopCoroutine(flashing);
+            //Nos aseguramos de quedarnos blancos xd
+            _characterManager.ActiveSpriteRenderer.color = Color.white;
+            
             IsInvulnerable = false;
             
-            //Nos aseguramos de quedarnos blancos xd
-            _characterManager.ActiveSpriteRenderer.material.color = Color.white;
             
             //GameManager.Instance.CanPlayerInteract = true;
         }
@@ -512,11 +514,18 @@ namespace _Scripts.Controllers
         public void ChangeActionMapToString(string actionMapStr)
         {
             _playerInput.SwitchCurrentActionMap(actionMapStr);
+            Debug.Log(_playerInput.currentActionMap);
+        }
+
+        public PlayerActionMaps GetCurrentActionMap()
+        {
+            return Enum.Parse<PlayerActionMaps>(_playerInput.currentActionMap.name);
         }
         
         public void ChangeActionMapTo(PlayerActionMaps inputMap)
         {
             _playerInput.SwitchCurrentActionMap(inputMap.ToString());
+            Debug.Log(_playerInput.currentActionMap);
         }
 
         #region Debug

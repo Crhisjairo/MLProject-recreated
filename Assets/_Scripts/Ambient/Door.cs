@@ -17,6 +17,8 @@ namespace _Scripts.Ambient
     {
         private const TransitionsAnimations OnOpenAnimTriggerName = TransitionsAnimations.Open;
         private const TransitionsAnimations OnCloseAnimTriggerName = TransitionsAnimations.Close;
+
+        public UnityEvent onDoorOpen, onDoorClose;
         
         [SerializeField] private SoundFXEmitter soundFXEmitter;
         
@@ -26,7 +28,7 @@ namespace _Scripts.Ambient
 
         [SerializeField] private Animator animator;
         
-        [SerializeField] private float waitTimeBeforeStartAnimation = 1f, waitTimeBeforeDisableAnimator = 1f;
+        [SerializeField] protected float waitTimeBeforeStartAnimation = 1f, waitTimeBeforeDisableAnimator = 1f;
 
         [SerializeField] private DoorActivator[] doorActivators;
 
@@ -47,7 +49,8 @@ namespace _Scripts.Ambient
                 || doorActivators.Length == 0)
             {
                 isOpen = true;
-             
+                onDoorOpen?.Invoke();
+                
                 PlayOpenAnimation();
             }
         }
@@ -55,6 +58,7 @@ namespace _Scripts.Ambient
         public virtual void Close()
         {
             throw new NotImplementedException();
+            onDoorClose?.Invoke();
         }
         
         // TODO: must implement an animation to open the door.
