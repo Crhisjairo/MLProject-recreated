@@ -51,7 +51,7 @@ namespace _Scripts.UI.CharacterUI
             
             yield return new WaitForSeconds(onScreenTime);
             
-            LeanTween.moveY(gameObject, _startAnimPosition.y, animationTime).setEaseOutBack();
+            LeanTween.moveY(gameObject, _startAnimPosition.y, animationTime).setEaseInBack();
             
             yield return new WaitForSeconds(animationTime);
 

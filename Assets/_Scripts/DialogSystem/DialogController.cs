@@ -144,8 +144,6 @@ namespace _Scripts.DialogSystem
                 return;
             }
             
-            Debug.Log(sentencesSorted.Count);
-            
             if (sentencesSorted.Count == 0) 
             {
                 EndDialogue();

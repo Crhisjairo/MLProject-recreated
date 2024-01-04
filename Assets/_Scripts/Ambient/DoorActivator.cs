@@ -46,8 +46,6 @@ namespace _Scripts.Ambient
                 if(other.isTrigger && !detectTriggerColliders)
                     return;
                 
-                Debug.Log(other.gameObject.name);
-                
                 SetIsActive(true);
             }
             

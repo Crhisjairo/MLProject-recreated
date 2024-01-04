@@ -27,10 +27,26 @@ namespace _Scripts.Items
         public UnityEvent onItemGrabed;
 
         public bool isGrabable = false;
+        public bool useDefaultAnimation = false;
+        public float defaultOffsetAnimation = 0.2f;
+        public float defaultAnimationSpeed = 1f;
 
         private void Awake()
         {
             _soundFXEmitter = GetComponent<SoundFXEmitter>();
+        }
+
+        private void Start()
+        {
+            if (useDefaultAnimation)
+            {
+                var destAnimation = transform.position.y + defaultOffsetAnimation;
+                
+                LeanTween.moveY(gameObject, destAnimation, defaultAnimationSpeed)
+                    .setEaseInQuad()
+                    .setEaseOutSine()
+                    .setLoopPingPong();
+            }
         }
 
         private void GiveItemToPlayerInventory(PlayerController playerController)

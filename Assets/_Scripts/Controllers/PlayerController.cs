@@ -348,9 +348,6 @@ namespace _Scripts.Controllers
             if (collider)
             {
                 collider.gameObject.TryGetComponent(typeof(IInteractable), out interactuableComponent);
-
-                
-                Debug.Log(collider.gameObject.name);
                 
                 if (interactuableComponent)
                 {
@@ -467,8 +464,6 @@ namespace _Scripts.Controllers
                         // Vector opuesto para el enemigo
                         Vector2 enemyImpulseDir = enemyCollider.transform.position - transform.position;
                         enemyImpulseDir = enemyImpulseDir.normalized * _characterManager.ActiveCharacter.GetForceImpulse();
-                        
-                        Debug.Log(enemyImpulseDir);
                         
                         attackable?.ReceiveDamage(enemyImpulseDir, attackDamage);
                     }

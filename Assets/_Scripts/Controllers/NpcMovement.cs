@@ -80,7 +80,7 @@ namespace _Scripts.Controllers
                     if (!loopMovement)
                     {
                         PauseMovement();
-                        Debug.Log("no loopeamos. Paramos!");
+                        
                         return;
                     }
                     
@@ -191,7 +191,6 @@ namespace _Scripts.Controllers
             foreach (var transform in pointsToMove)
             {
                 _pointsToMoveList.Add(transform.position);
-                Debug.Log(transform);
             }
         }
 
