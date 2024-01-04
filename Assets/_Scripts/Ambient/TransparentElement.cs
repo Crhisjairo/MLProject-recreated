@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using _Scripts.Enums;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace _Scripts.Ambient
         [SerializeField] private float fadeSpeed = 0.2f;
         [SerializeField] private float fadeAmount = 0.5f;
 
+        private Color _initialColor, _finalColor;
+        
         [SerializeField] private string playerSortingLayer = "GameElements";
         [SerializeField] private int sortOrderToForeground = 9;
 
@@ -22,6 +25,10 @@ namespace _Scripts.Ambient
         private void Awake()
         {
             SetComponents();
+
+            _initialColor = _spriteRenderer.color;
+            _finalColor = _spriteRenderer.color;
+            _finalColor.a -= fadeAmount;
         }
 
         private void SetComponents()
@@ -40,10 +47,8 @@ namespace _Scripts.Ambient
             // Only change alpha value when the first entity collides.
             if (_entitiesOnCollider == 0)
             {
-                var finalColor = _spriteRenderer.color;
-                finalColor.a -= fadeAmount;
 
-                LeanTween.color(_spriteRenderer.gameObject, finalColor, fadeSpeed);
+                LeanTween.color(_spriteRenderer.gameObject, _finalColor, fadeSpeed);
         
                 _spriteRenderer.sortingLayerName = playerSortingLayer.ToString();
                 _spriteRenderer.sortingOrder = sortOrderToForeground;
@@ -61,16 +66,11 @@ namespace _Scripts.Ambient
             
             if (_entitiesOnCollider == 0)
             {
-                var startColor = _spriteRenderer.color;
-                startColor.a += fadeAmount;
-        
-                LeanTween.color(_spriteRenderer.gameObject, startColor, fadeSpeed);
+                LeanTween.color(_spriteRenderer.gameObject, _initialColor, fadeSpeed);
         
                 _spriteRenderer.sortingLayerName = _defaultSortingLayerName;
                 _spriteRenderer.sortingOrder = _defaultSortOrder;
-
             }
-        
         }
     }
 }

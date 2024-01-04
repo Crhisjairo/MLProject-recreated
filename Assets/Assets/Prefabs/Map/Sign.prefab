@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4690189008973104413}
   - component: {fileID: 1749545878421990652}
   - component: {fileID: 1021177730621891262}
+  - component: {fileID: 6221332156632820948}
+  - component: {fileID: 6530067714452162469}
   m_Layer: 7
   m_Name: Sign
   m_TagString: NPC
@@ -177,6 +179,74 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &6221332156632820948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4573711156293964816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b781061047483fa09c1fed3d1e2a4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6530067714452162469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4573711156293964816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cc63a2376042609a65971504d995ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogController: {fileID: 0}
+  cam: {fileID: 0}
+  dialogs:
+    firstDialog:
+      titles: []
+      sentences: []
+      spritesForSentences: []
+    defaultDialog:
+      titles:
+      - Title
+      sentences:
+      - ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC
+      - DEF
+      - END
+      spritesForSentences:
+      - {fileID: -4998827747838694048, guid: 6a9cbb50a306d0b4fabf807d2b2d3da1, type: 3}
+      - {fileID: 21300000, guid: 4a2d7b133a8cad74ea67343deaea70f1, type: 3}
+      - {fileID: 21300000, guid: 79d6b5ad90551c14e829ae05ca48460a, type: 3}
+    wrongCharacterDialog:
+      titles: []
+      sentences: []
+      spritesForSentences: []
+  _autoNextDialog: 0
+  _timeToWaitAutoNextDialog: 1
+  talkingAudio:
+    clip: {fileID: 0}
+    name: 
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    playOnAwake: 0
+  randomizeTalkingPitch: 0
+  zoomAmountOnDialog: 0
+  speedZoom: 0.5
+  textTypingDelay: 0.1
+  onAbleToInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnableToInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  interactSprite: {fileID: 2178762171254681106}
+  _animator: {fileID: 1930230169388633176}
 --- !u!1 &5344310815830948882
 GameObject:
   m_ObjectHideFlags: 0

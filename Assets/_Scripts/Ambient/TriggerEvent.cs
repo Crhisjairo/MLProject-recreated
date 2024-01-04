@@ -10,18 +10,17 @@ namespace _Scripts.Ambient
     public class TriggerEvent : MonoBehaviour
     {
         [SerializeField] private Collider2D[] collidersToDisable;
-        [SerializeField] private bool enableTriggerColliders = false;
+        [SerializeField] protected bool detectTriggerColliders = false;
         
-        
-        public Tags tagToCheckCollisions;
+        public Tags activatorsTag;
         
         public UnityEvent onEntityCollides;
         
-        private void OnTriggerEnter2D(Collider2D other)
+        protected virtual void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag(tagToCheckCollisions.ToString()))
+            if (other.CompareTag(activatorsTag.ToString()))
             {
-                if(other.isTrigger && !enableTriggerColliders)
+                if(other.isTrigger && !detectTriggerColliders)
                     return;
                 
                 onEntityCollides?.Invoke();
@@ -33,5 +32,6 @@ namespace _Scripts.Ambient
                 
             }
         }
+
     }
 }

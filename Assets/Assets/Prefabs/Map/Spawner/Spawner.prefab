@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3682153447837369119}
   - component: {fileID: 3750769151750445376}
   - component: {fileID: 7550742973302314430}
-  - component: {fileID: 8209998953370771329}
   - component: {fileID: 7652658517653856270}
   m_Layer: 0
   m_Name: Spawner
@@ -35,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 8670836939372104603}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &3682153447837369119
 BoxCollider2D:
@@ -121,32 +120,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf8ca6dad6041719f220d8ef6557f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpecs:
+    id: 0
+    name: Default Enemy Name
+    life: 5
+    damage: 1
+    forceImpulse: 500
+  flashingColor: {r: 1, g: 0, b: 0, a: 1}
+  autoDestroyTime: 1
+  EnemySpriteRenderer: {fileID: 9205946578605421374}
   modelToSpawn: {fileID: 9167668916615454215, guid: 02eef3e2545696a43b7bf17e62881f58, type: 3}
   spawnOneShot: 0
   waitTimeBeforeNextSpawn: 8
   maxEntities: 8
   spawnOffSet: {x: 0, y: -2}
---- !u!114 &8209998953370771329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4462090927143489584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4482681958d84dfb985c3c08045a12b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseSpecs:
-    id: 0
-    name: Default Enemy Name
-    life: 10
-    damage: 0
-    forceImpulse: 0
-  flashingColor: {r: 1, g: 0, b: 0, a: 1}
-  autoDestroyTime: 1
-  EnemySpriteRenderer: {fileID: 0}
+  isDamagable: 1
+  canMakeDamage: 0
 --- !u!114 &7652658517653856270
 MonoBehaviour:
   m_ObjectHideFlags: 0

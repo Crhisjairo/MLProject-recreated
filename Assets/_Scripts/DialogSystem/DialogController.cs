@@ -46,6 +46,8 @@ namespace _Scripts.DialogSystem
         string currentSentence;
         
         Coroutine _typingCoroutine;
+
+        private PlayerActionMaps _lastActionMap;
         
         void Awake()
         {
@@ -78,8 +80,10 @@ namespace _Scripts.DialogSystem
             
             _typingSpeed = typingSpeed;
             IsEnded = false;
-            
+
+            _lastActionMap = playerController.GetCurrentActionMap();
             playerController.ChangeActionMapTo(PlayerActionMaps.InDialog);
+            
             IsActiveNextDialogSprite(false);
             
             // limpiamos las frases que estan en el DialogController.
@@ -124,7 +128,7 @@ namespace _Scripts.DialogSystem
         {
             if (!inputContext.performed)
                 return;
-            Debug.Log("Icitte");
+            
             DisplayNextSentence();
         }
         
@@ -136,6 +140,7 @@ namespace _Scripts.DialogSystem
                 dialog.text = currentSentence;
                 IsActiveNextDialogSprite(true);
                 IsTyping = false;
+
                 return;
             }
             
@@ -226,6 +231,7 @@ namespace _Scripts.DialogSystem
             IsEnded = true;
             
             onDialogEnded?.Invoke();
+            playerController.ChangeActionMapTo(_lastActionMap);
             
             //Permitimos mover al personaje
             //GameManager.Instance.CanPlayerMove = true;

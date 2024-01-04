@@ -1,4 +1,4 @@
-namespace _Scripts.Enums
+namespace _Scripts.Shared.Enums
 {
     public enum SoundsFX
     {
@@ -7,5 +7,9 @@ namespace _Scripts.Enums
         Died,
         Taken,
         Used,
+        Activated,
+        Deactivated,
+        Open,
+        Close
     }
 }

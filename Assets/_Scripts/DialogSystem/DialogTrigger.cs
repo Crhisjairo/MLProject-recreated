@@ -97,34 +97,26 @@ namespace _Scripts.DialogSystem
                 return;
             }
 
-            
-            if (!_isDialogueTriggered)
+            //TODO: the dialog controller will control the camera zoom when needed.
+            //cam.m_Lens.OrthographicSize -= zoomAmountOnDialog; 
+         
+            //Si no hay frases de default, se pone el dialogo normal
+            if (_isFirstInteraction && dialogs.firstDialog.sentences.Length > 0)
             {
-                cam.m_Lens.OrthographicSize -= zoomAmountOnDialog; 
-             
-                //Si no hay frases de default, se pone el dialogo normal
-                if (_isFirstInteraction && dialogs.firstDialog.sentences.Length > 0)
-                {
-                    dialogController.SetDialogue(dialogs.firstDialog, textTypingDelay, true);
-                    
-                    _isFirstInteraction = false;
-                }
-                //Si no es la primera interacciôn y hay frases de default, se muestra solo el defaultDialogue
-                else if (dialogs.defaultDialog.sentences.Length > 0) 
-                {
-                    dialogController.SetDialogue(dialogs.defaultDialog, textTypingDelay, true);
-                }
+                dialogController.SetDialogue(dialogs.firstDialog, textTypingDelay, true);
                 
-                _isDialogueTriggered = true;
+                _isFirstInteraction = false;
             }
+            //Si no es la primera interacciôn y hay frases de default, se muestra solo el defaultDialogue
+            else if (dialogs.defaultDialog.sentences.Length > 0) 
+            {
+                dialogController.SetDialogue(dialogs.defaultDialog, textTypingDelay, true);
+            }
+            
+            //_isDialogueTriggered = true;
 
             dialogController.StartDialogs();
 
-            if (dialogController.IsEnded)
-            {
-                cam.m_Lens.OrthographicSize += zoomAmountOnDialog;
-                _isDialogueTriggered = false;
-            }
         }
         
         public void SetDialogs(DialogModifier dialogsModifier)

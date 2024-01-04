@@ -125,8 +125,6 @@ namespace _Scripts.GameManagerSystem
             _saveDataSlotSelected = slotSelected;
         }
 
-        
-
         public PlayerSaveData[] GetPlayerSaveDatas()
         {
             return _playerSavesData;

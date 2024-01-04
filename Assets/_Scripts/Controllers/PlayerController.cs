@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using _Scripts.Controllers.Characters;
+using _Scripts.Controllers.Enemies.Interfaces;
 using _Scripts.Controllers.Interfaces;
-using _Scripts.Enemies.Interfaces;
 using _Scripts.Enums;
 using _Scripts.GameManagerSystem;
 using _Scripts.GameManagerSystem.Models;
+using _Scripts.Shared.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -274,6 +276,9 @@ namespace _Scripts.Controllers
             
             onDamageTaken?.Invoke(_characterManager.ActiveCharacter.GetCurrenLife());
 
+            
+            Debug.Log("Current life: " + _characterManager.ActiveCharacter.GetCurrenLife());
+            
             //TODO: Temporal. Add a die screen
             if (_characterManager.ActiveCharacter.GetCurrenLife() <= 0)
             {
@@ -343,9 +348,6 @@ namespace _Scripts.Controllers
             if (collider)
             {
                 collider.gameObject.TryGetComponent(typeof(IInteractable), out interactuableComponent);
-
-                
-                Debug.Log(collider.gameObject.name);
                 
                 if (interactuableComponent)
                 {
@@ -407,10 +409,11 @@ namespace _Scripts.Controllers
             yield return new WaitForSeconds(time);
             
             StopCoroutine(flashing);
+            //Nos aseguramos de quedarnos blancos xd
+            _characterManager.ActiveSpriteRenderer.color = Color.white;
+            
             IsInvulnerable = false;
             
-            //Nos aseguramos de quedarnos blancos xd
-            _characterManager.ActiveSpriteRenderer.material.color = Color.white;
             
             //GameManager.Instance.CanPlayerInteract = true;
         }
@@ -462,8 +465,6 @@ namespace _Scripts.Controllers
                         Vector2 enemyImpulseDir = enemyCollider.transform.position - transform.position;
                         enemyImpulseDir = enemyImpulseDir.normalized * _characterManager.ActiveCharacter.GetForceImpulse();
                         
-                        Debug.Log(enemyImpulseDir);
-                        
                         attackable?.ReceiveDamage(enemyImpulseDir, attackDamage);
                     }
                 }
@@ -508,11 +509,18 @@ namespace _Scripts.Controllers
         public void ChangeActionMapToString(string actionMapStr)
         {
             _playerInput.SwitchCurrentActionMap(actionMapStr);
+            Debug.Log(_playerInput.currentActionMap);
+        }
+
+        public PlayerActionMaps GetCurrentActionMap()
+        {
+            return Enum.Parse<PlayerActionMaps>(_playerInput.currentActionMap.name);
         }
         
         public void ChangeActionMapTo(PlayerActionMaps inputMap)
         {
             _playerInput.SwitchCurrentActionMap(inputMap.ToString());
+            Debug.Log(_playerInput.currentActionMap);
         }
 
         #region Debug

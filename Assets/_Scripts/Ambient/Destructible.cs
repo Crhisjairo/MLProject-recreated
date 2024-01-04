@@ -1,39 +1,42 @@
-using System.Collections;
-using _Scripts.Enemies;
 using UnityEngine;
+using _Scripts.Controllers.Enemies.Interfaces;
+
 namespace _Scripts.Ambient
 {
-    public class Destructible : Enemy
+    public class Destructible: MonoBehaviour, IAttackable
     {
-        [SerializeField] private bool isDamagable = true;
-        [SerializeField] private bool canMakeDamage = false;
-        
-        public override void OnPauseAction()
+        [SerializeField] private int life;
+
+        public void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
         {
-            throw new System.NotImplementedException();
-        }
-        public override void OnResumeAction()
-        {
-            throw new System.NotImplementedException();
-        }
-        public override void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
-        {
-            if(!isDamagable)
-                return;
-            
-            base.ReceiveDamage(impulseDirection, damageAmount);
-            
             if (IsDead())
             {
                 OnDead();
             }
+
+            life -= damageAmount;
         }
 
-        protected override void AttackEntityOnCollider(Collider2D collider2D)
+        public bool IsVulnerable()
         {
-            if(canMakeDamage)
-                base.AttackEntityOnCollider(collider2D);
-            
+            // TODO: implement a destructible objet by the current character.
+            // e.g: a specific character can break a rock
+            throw new System.NotImplementedException();
+        }
+
+        public void SetIsVulnerable(bool isVulnerable)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool IsDead()
+        {
+            return life <= 0;
+        }
+
+        public void OnDead()
+        {
+            Destroy(gameObject);
         }
     }
 }
