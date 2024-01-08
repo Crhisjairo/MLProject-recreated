@@ -12,6 +12,8 @@ namespace _Scripts.UI
 
         public float animationTime = 0.5f, onScreenTime = 6f;
 
+        public bool ShowOnAwake = true;
+
         private Vector3 _startAnimOffset = new Vector3(240, 0, 0);
 
         private Vector2 _startAnimPosition, _endAnimPosition;
@@ -29,12 +31,17 @@ namespace _Scripts.UI
             
             
             gameObject.transform.position = _startAnimPosition;
-            
-            LeanTween.moveX(gameObject, _startAnimPosition.x, animationTime).setEaseInOutBack();
+
         }
 
         public void SetCoinsAmountTo(int amount)
         {
+            if (!ShowOnAwake)
+            {
+                ShowOnAwake = !ShowOnAwake;
+                return;
+            }
+            
             if (!_isPlayingAnimator)
             {
                 _startAnimationCoroutine = StartCoroutine(StartAnimation());

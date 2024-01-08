@@ -12,6 +12,8 @@ namespace _Scripts.UI.CharacterUI
         private Vector2 _startAnimPosition, _endAnimPosition;
         
         public float animationTime = 1f, onScreenTime = 13f;
+
+        public bool ShowOnAwake = true;
         
         private bool _isOnAnimation = false;
         
@@ -25,12 +27,17 @@ namespace _Scripts.UI.CharacterUI
             _endAnimPosition = position;
 
             gameObject.transform.position = _startAnimPosition;
-            
-            Show();
+
         }
         
         public void Show()
         {
+            if (!ShowOnAwake)
+            {
+                ShowOnAwake = !ShowOnAwake;
+                return;
+            }
+            
             if (!_isOnAnimation)
             {
                 _startAnimationCoroutine = StartCoroutine(StartAnimation());
@@ -40,7 +47,6 @@ namespace _Scripts.UI.CharacterUI
                 StopCoroutine(_startAnimationCoroutine);
                 _startAnimationCoroutine = StartCoroutine(StartAnimation());
             }
-            
         }
         
         private IEnumerator StartAnimation()
