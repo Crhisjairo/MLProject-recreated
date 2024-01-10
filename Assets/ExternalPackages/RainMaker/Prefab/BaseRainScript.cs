@@ -6,7 +6,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace DigitalRuby.RainMaker
+namespace ExternalPackages.RainMaker.Prefab
 {
     public class BaseRainScript : MonoBehaviour
     {

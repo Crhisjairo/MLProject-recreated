@@ -5,7 +5,7 @@
 
 using UnityEngine;
 
-namespace DigitalRuby.RainMaker
+namespace ExternalPackages.RainMaker.Prefab
 {
     public class RainScript2D : BaseRainScript
     {

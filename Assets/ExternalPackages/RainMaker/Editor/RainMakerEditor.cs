@@ -3,14 +3,15 @@
 // http://www.digitalruby.com
 //
 
+#if UNITY_EDITOR // => Ignore from here to next endif if not in editor
 using System;
-
-using UnityEngine;
+using ExternalPackages.RainMaker.Prefab;
 using UnityEditor;
+using UnityEngine;
 
-namespace DigitalRuby.RainMaker
+namespace ExternalPackages.RainMaker.Editor
 {
-    public class RainMakerEditor : Editor
+    public class RainMakerEditor : UnityEditor.Editor
     {
         private Texture2D logo;
 
@@ -61,3 +62,5 @@ namespace DigitalRuby.RainMaker
     {
     }
 }
+
+#endif

@@ -1,3 +1,16 @@
 {
-  "name": "ExternalPackages"
+    "name": "ExternalPackages",
+    "rootNamespace": "",
+    "references": [
+        "GUID:bd2461be96e5f744bbe6bdbc5276eb61"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
