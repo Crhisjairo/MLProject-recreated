@@ -1,4 +1,4 @@
-using UnityEngine.Serialization;
+
 namespace _Scripts.GameManagerSystem.Models
 {
     [System.Serializable]

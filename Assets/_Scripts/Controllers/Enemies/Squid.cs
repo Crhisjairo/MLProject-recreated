@@ -1,12 +1,10 @@
-using System;
 using System.Collections;
-using _Scripts.Controllers.Enemies;
-using _Scripts.Enums;
+using _Scripts.Shared.Enums;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-namespace _Scripts.Enemies
+
+namespace _Scripts.Controllers.Enemies
 {
     [RequireComponent(typeof(CircleCollider2D))]
     public class Squid : Enemy
@@ -25,9 +23,7 @@ namespace _Scripts.Enemies
         [SerializeField] private float nextDirectionTime = 1f;
 
         [SerializeField] private bool randomMove = true;
-
-
-        private CircleCollider2D _rangeCollider;
+        
         
         private Vector2 _startPoint, _nextDirection;
 
@@ -38,8 +34,6 @@ namespace _Scripts.Enemies
         protected override void Awake()
         {
             base.Awake();
-            
-            SetComponents();
             
             SetSliderValues();
 
@@ -60,9 +54,9 @@ namespace _Scripts.Enemies
             if (IsMovementPaused)
                 return;
             
-            if (_inImpulse)
+            if (InImpulse)
             {
-                Rb.AddForce(_impulseDirection, ForceMode2D.Force);
+                Rb.AddForce(ImpulseDirection, ForceMode2D.Force);
             }
             
 
@@ -162,9 +156,5 @@ namespace _Scripts.Enemies
             }
         }
         
-        private void SetComponents()
-        {
-            _rangeCollider = GetComponent<CircleCollider2D>();
-        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
-namespace _Scripts.Enums
+
+namespace _Scripts.Shared.Enums
 {
     [Serializable]
     public enum CharacterNames

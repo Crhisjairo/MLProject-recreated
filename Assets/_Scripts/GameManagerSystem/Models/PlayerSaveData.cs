@@ -1,4 +1,6 @@
-using _Scripts.Enums;
+using _Scripts.Shared.Enums;
+using UnityEngine.Serialization;
+
 namespace _Scripts.GameManagerSystem.Models
 {
     //TODO: Properties can be separate into many classes.
@@ -12,18 +14,18 @@ namespace _Scripts.GameManagerSystem.Models
         public ScenesNames lastSceneName = ScenesNames.Tutorial;
         public string zoneName = "Rebirth Cave";
 
-        public bool isAutoSaved = false;
+        public bool isAutoSaved;
         public PlayerPosition lastPlayerPosition;
         
         // Player inventory and status
-        public CharacterSaveData[] CharacterSaveData;
+        [FormerlySerializedAs("CharacterSaveData")] public CharacterSaveData[] characterSaveData;
         
-        public int coinsAmount = 0;
+        public int coinsAmount;
         
         // Player abilities
-        public bool isAbleToRun = false;
-        public bool isAbleToAttack = false;
-        public bool isAbleToOpenInventory = false;
+        public bool isAbleToRun;
+        public bool isAbleToAttack;
+        public bool isAbleToOpenInventory;
 
         // TODO: Enemies defeated
         

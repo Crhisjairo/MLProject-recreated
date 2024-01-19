@@ -1,5 +1,4 @@
 using System;
-using _Scripts.GameManagerSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,9 +8,9 @@ namespace _Scripts.UI
     {
         private Text _txt;
         
-        private float _frameCount = 0;
-        private double _dt = 0.0f;
-        private double _fps = 0.0f;
+        private float _frameCount;
+        private double _dt;
+        private double _fps;
         
         /// <summary>
         /// Updates per seconds.

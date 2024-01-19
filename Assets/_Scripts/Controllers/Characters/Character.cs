@@ -1,9 +1,8 @@
 ﻿using System;
-using _Scripts.Enums;
 using _Scripts.GameManagerSystem.Models;
 using _Scripts.Shared.Enums;
-using _Scripts.SoundsManagers;
-using _Scripts.Utils;
+using _Scripts.Shared.Utils;
+using SoundsManagers._Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,7 +11,7 @@ namespace _Scripts.Controllers.Characters
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Animator))]
     
-    [System.Serializable]
+    [Serializable]
     public abstract class Character: MonoBehaviour
     {
         public CharacterNames CharacterName;

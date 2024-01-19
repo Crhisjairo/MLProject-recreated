@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using _Scripts.Enums;
 using _Scripts.Shared.Enums;
-using _Scripts.Shared.Enums;
-using _Scripts.Utils;
+using _Scripts.Shared.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers
 {
@@ -20,10 +15,10 @@ namespace _Scripts.Controllers
 
         public float timeToWaitBeforeNextPoint = 2;
 
-        public bool lookAtFixedDirection = false;
+        public bool lookAtFixedDirection;
         public LookingDirection fixedLookingDirection = LookingDirection.Down;
 
-        public bool loopMovement = false;
+        public bool loopMovement;
         
         private Rigidbody2D _rb;
         [SerializeField] private Animator animator;
@@ -188,9 +183,9 @@ namespace _Scripts.Controllers
         {
             _pointsToMoveList.Add(transform.position);
 
-            foreach (var transform in pointsToMove)
+            foreach (var pointTransform in pointsToMove)
             {
-                _pointsToMoveList.Add(transform.position);
+                _pointsToMoveList.Add(pointTransform.position);
             }
         }
 

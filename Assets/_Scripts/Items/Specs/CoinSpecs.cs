@@ -1,6 +1,6 @@
 using _Scripts.Controllers;
 using UnityEngine;
-using UnityEngine.Serialization;
+
 namespace _Scripts.Items.Specs
 {
     [CreateAssetMenu(fileName = "Coin", menuName = "ItemsSpecs/Coin", order = 1)]

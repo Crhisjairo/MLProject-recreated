@@ -14,12 +14,12 @@ namespace _Scripts.Controllers.Enemies
 
         [SerializeField] private int maxEntities = 5;
 
-        [SerializeField] private Vector2 spawnOffSet = new Vector2();
+        [SerializeField] private Vector2 spawnOffSet;
 
         private Queue<GameObject> _entities;
         
         [SerializeField] private bool isDamagable = true;
-        [SerializeField] private bool canMakeDamage = false;
+        [SerializeField] private bool canMakeDamage;
 
         protected override void Awake()
         {
@@ -74,7 +74,6 @@ namespace _Scripts.Controllers.Enemies
                 yield return new WaitForSeconds(waitTimeBeforeNextSpawn);
             }
             
-            yield break;
         }
         
         public override void ReceiveDamage(Vector2 impulseDirection, int damageAmount)
@@ -96,10 +95,10 @@ namespace _Scripts.Controllers.Enemies
             }
         }
 
-        protected override void AttackEntityOnCollider(Collider2D collider2D)
+        protected override void AttackEntityOnCollider(Collider2D entityCollider)
         {
             if(canMakeDamage)
-                base.AttackEntityOnCollider(collider2D);
+                base.AttackEntityOnCollider(entityCollider);
         }
     }
 }

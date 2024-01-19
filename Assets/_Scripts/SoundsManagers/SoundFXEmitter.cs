@@ -1,15 +1,15 @@
 using System;
-using _Scripts.Utils;
+using _Scripts.Shared.Utils;
 using UnityEngine;
 using UnityEngine.Audio;
-using Random = UnityEngine.Random;
+using UnityEngine.Serialization;
 
-namespace _Scripts.SoundsManagers
+namespace SoundsManagers._Scripts.SoundsManagers
 {
     public class SoundFXEmitter : MonoBehaviour
     {
-        [SerializeField] private AudioMixerGroup _mixerGroup;
-        [SerializeField] private Sound[] _sounds;
+        [FormerlySerializedAs("_mixerGroup")] [SerializeField] private AudioMixerGroup mixerGroup;
+        [FormerlySerializedAs("_sounds")] [SerializeField] private Sound[] sounds;
         
         private AudioSource _currentAudioSource;
         
@@ -20,24 +20,24 @@ namespace _Scripts.SoundsManagers
 
         private void SetAudios()
         {
-            if (_sounds.Length == 0)
+            if (sounds.Length == 0)
                 return;
 
-            foreach (var sound in _sounds)
+            foreach (var sound in sounds)
             {
-                sound.SetAudioSource(gameObject.AddComponent<AudioSource>(), _mixerGroup);
+                sound.SetAudioSource(gameObject.AddComponent<AudioSource>(), mixerGroup);
             }
 
-            if (_sounds[0].playOnAwake)
+            if (sounds[0].playOnAwake)
             {
-                _currentAudioSource = _sounds[0].Source;
+                _currentAudioSource = sounds[0].Source;
                 _currentAudioSource.Play();
             }
         }
 
         public void PlayOneShot(string name)
         {
-            Sound sound = Array.Find(_sounds, sound => sound.name == name);
+            Sound sound = Array.Find(sounds, sound => sound.name == name);
             
             if (sound is null)
             {
@@ -50,7 +50,7 @@ namespace _Scripts.SoundsManagers
 
         public void PlayFirstOneShot()
         {
-            Sound sound = _sounds[0];
+            Sound sound = sounds[0];
 
             if (sound.Source is null)
                 return;

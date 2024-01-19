@@ -1,13 +1,11 @@
-using System;
 using System.Collections;
 using _Scripts.Controllers;
-using _Scripts.Enums;
 using _Scripts.Items.Specs;
 using _Scripts.Shared.Enums;
-using _Scripts.SoundsManagers;
+using SoundsManagers._Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
+
 namespace _Scripts.Items
 {
     [RequireComponent(typeof(SoundFXEmitter))]
@@ -26,8 +24,8 @@ namespace _Scripts.Items
 
         public UnityEvent onItemGrabed;
 
-        public bool isGrabable = false;
-        public bool useDefaultAnimation = false;
+        public bool isGrabable;
+        public bool useDefaultAnimation;
         public float defaultOffsetAnimation = 0.2f;
         public float defaultAnimationSpeed = 1f;
 

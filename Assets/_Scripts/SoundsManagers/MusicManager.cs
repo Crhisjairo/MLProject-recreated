@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
-using _Scripts.Utils;
+using _Scripts.Shared.Utils;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Serialization;
-namespace _Scripts.SoundsManagers
+
+namespace SoundsManagers._Scripts.SoundsManagers
 {
     public class MusicManager : MonoBehaviour
     {

@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using _Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
@@ -13,7 +11,7 @@ namespace _Scripts.Ambient
         [SerializeField] private float flashSpeed = 0.1f;
         [SerializeField] private float minIntensity = 0.6f, maxIntensity = 0.8f;
 
-        public bool isSmoothIntensityChange = false;
+        public bool isSmoothIntensityChange;
         
         private Light2D _light2D;
 
@@ -38,7 +36,7 @@ namespace _Scripts.Ambient
             while (true)
             {
                ChangeLightIntensityRandom();
-                yield return new WaitForSecondsRealtime(flashSpeed);
+               yield return new WaitForSecondsRealtime(flashSpeed);
             }
         }
 

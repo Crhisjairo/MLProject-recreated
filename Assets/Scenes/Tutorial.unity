@@ -5441,7 +5441,7 @@ GameObject:
   - component: {fileID: 837052718}
   m_Layer: 7
   m_Name: Rocks
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5480,8 +5480,8 @@ MonoBehaviour:
       titles: []
       sentences: []
       spritesForSentences: []
-  _autoNextDialog: 0
-  _timeToWaitAutoNextDialog: 1
+  autoNextDialog: 0
+  timeToWaitAutoNextDialog: 1
   talkingAudio:
     clip: {fileID: 0}
     name: 
@@ -5501,7 +5501,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactSprite: {fileID: 0}
-  _animator: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!212 &837052716
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12209,8 +12209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6530067714452162469, guid: 7c8a1f49f8dc0624f9bb273328736e86, type: 3}
       propertyPath: dialogs.defaultDialog.sentences.Array.data[5]
-      value: "\xA1As\xED que te dej\xE9 este letrerito!\n                            
-        Atte: Ta."
+      value: "\xA1As\xED que te dej\xE9 este letrerito!\nAtte: Ta."
       objectReference: {fileID: 0}
     - target: {fileID: 6530067714452162469, guid: 7c8a1f49f8dc0624f9bb273328736e86, type: 3}
       propertyPath: dialogs.defaultDialog.sentences.Array.data[6]

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.Serialization;
 
 namespace _Scripts.UI
 {
@@ -8,32 +9,32 @@ namespace _Scripts.UI
     [ExecuteInEditMode]
     public class OffScreenUICull : MonoBehaviour
     {
-        [SerializeField] RectTransform _viewportRectangle;
-        [SerializeField, Space(15)] RectTransform _ownRectTransform;
+        [FormerlySerializedAs("_viewportRectangle")] [SerializeField] RectTransform viewportRectangle;
+        [FormerlySerializedAs("_ownRectTransform")] [SerializeField, Space(15)] RectTransform ownRectTransform;
      
         //will be disabled if our GUI goes outside of wanted region
-        [SerializeField] public Graphic _localGraphicComponent;
-        [SerializeField] public GameObject[] _optionalGO_to_On_Off;
+        [FormerlySerializedAs("_localGraphicComponent")] [SerializeField] public Graphic localGraphicComponent;
+        [FormerlySerializedAs("_optionalGO_to_On_Off")] [SerializeField] public GameObject[] optionalGoToOnOff;
         
         void Reset() {
-            _ownRectTransform = transform as RectTransform;
+            ownRectTransform = transform as RectTransform;
         }
         
         void Start() {
-            if(_viewportRectangle == null) {
-                _viewportRectangle = (GetComponentInParent(typeof(Canvas)) as Canvas).transform as RectTransform;
+            if(viewportRectangle == null) {
+                viewportRectangle = (GetComponentInParent(typeof(Canvas)) as Canvas).transform as RectTransform;
             }
         }
         
         void Update() {
             #if UNITY_EDITOR
             //while in editor, this will discard null "optional game objects", automatically.
-            int prevLength = _optionalGO_to_On_Off.Length;
+            int prevLength = optionalGoToOnOff.Length;
      
-            _optionalGO_to_On_Off = _optionalGO_to_On_Off.Where(go => go != null)
+            optionalGoToOnOff = optionalGoToOnOff.Where(go => go != null)
                                                          .ToArray();
      
-            if(_optionalGO_to_On_Off.Length != prevLength) {
+            if(optionalGoToOnOff.Length != prevLength) {
                 UnityEditor.EditorUtility.SetDirty(this);
             }
      
@@ -44,11 +45,11 @@ namespace _Scripts.UI
         }
         
         void Cull() {
-            if(_viewportRectangle == null) { return ; }
+            if(viewportRectangle == null) { return ; }
      
-            bool overlaps = _ownRectTransform.rectTransfOverlaps_inScreenSpace(_viewportRectangle);
+            bool overlaps = ownRectTransform.rectTransfOverlaps_inScreenSpace(viewportRectangle);
      
-            if (overlaps == true) {
+            if (overlaps) {
                 toggleElements_ifNeeded(true);
             } else {
                 toggleElements_ifNeeded(false);
@@ -57,17 +58,17 @@ namespace _Scripts.UI
         
         void toggleElements_ifNeeded(bool requiredValue) {
      
-            for (int i = 0; i < _optionalGO_to_On_Off.Length; i++) {
-                GameObject optionalGO = _optionalGO_to_On_Off[i];
+            for (int i = 0; i < optionalGoToOnOff.Length; i++) {
+                GameObject optionalGo = optionalGoToOnOff[i];
      
-                if(optionalGO.activeSelf != requiredValue) {
-                    optionalGO.SetActive(requiredValue);
+                if(optionalGo.activeSelf != requiredValue) {
+                    optionalGo.SetActive(requiredValue);
                 }
             }//end for
      
      
-            if (_localGraphicComponent != null   &&  _localGraphicComponent.enabled != requiredValue) {
-                _localGraphicComponent.enabled = requiredValue;
+            if (localGraphicComponent != null   &&  localGraphicComponent.enabled != requiredValue) {
+                localGraphicComponent.enabled = requiredValue;
             }
      
         }

@@ -1,5 +1,4 @@
-using System;
-using _Scripts.Enums;
+using _Scripts.Shared.Enums;
 using TMPro;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace _Scripts.GameManagerSystem.SlotsManager
         public CharacterNames CharacterName;
         
         [SerializeField] private TextMeshProUGUI lifeAmountText;
-        [SerializeField] private bool isActive = false;
+        [SerializeField] private bool isActive;
 
         private void Awake()
         {

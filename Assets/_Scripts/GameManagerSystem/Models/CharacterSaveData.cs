@@ -1,9 +1,9 @@
 using System;
-using _Scripts.Enums;
-using UnityEngine.Serialization;
+using _Scripts.Shared.Enums;
+
 namespace _Scripts.GameManagerSystem.Models
 {
-    [System.Serializable]
+    [Serializable]
     public class CharacterSaveData
     {
         public CharacterNames characterName;

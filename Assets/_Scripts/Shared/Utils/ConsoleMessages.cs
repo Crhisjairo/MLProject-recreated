@@ -1,4 +1,4 @@
-namespace _Scripts.Utils
+namespace _Scripts.Shared.Utils
 {
     public abstract class ConsoleMessages
     {

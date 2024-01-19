@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
-using _Scripts.Enums;
 using TMPro;
 using UnityEngine;
+
 namespace _Scripts.UI
 {
     public class TutorialDisplay : MonoBehaviour
@@ -13,7 +12,7 @@ namespace _Scripts.UI
 
         [SerializeField] private float transitionSpeed = 1f;
 
-        [SerializeField] private bool startOnAwake = false;
+        [SerializeField] private bool startOnAwake;
         [SerializeField] private float startOnAwakeDelay = 1f;
         [SerializeField] private string startOnAwakeTitle;
 

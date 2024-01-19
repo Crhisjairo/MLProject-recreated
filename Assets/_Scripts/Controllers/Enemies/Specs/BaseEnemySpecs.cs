@@ -1,7 +1,5 @@
-using System;
-using UnityEngine;
 
-namespace _Scripts.Enemies.Specs
+namespace _Scripts.Controllers.Enemies.Specs
 {
     [System.Serializable]
     public class BaseEnemySpecs

@@ -1,8 +1,8 @@
 using System;
 using System.IO;
 using _Scripts.GameManagerSystem.Models;
-using _Scripts.Utils;
 using UnityEngine;
+
 namespace _Scripts.GameManagerSystem
 {
     public class SaveDataSystem : MonoBehaviour
@@ -14,7 +14,7 @@ namespace _Scripts.GameManagerSystem
         private const string SaveFileName = "MLProject_SaveData_{0}.sav";
         private const int MaxSavesDataSlots = 3;
 
-        private int _saveDataSlotSelected = 0;
+        private int _saveDataSlotSelected;
         private string _selectedSlotName = string.Empty;
         
         private const int MaxSlotNameSize = 14;

@@ -1,9 +1,6 @@
 using System;
-using _Scripts.Enums;
-using _Scripts.GameManagerSystem.Models;
-using _Scripts.Utils;
+using _Scripts.Shared.Enums;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 

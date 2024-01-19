@@ -1,16 +1,13 @@
-using System;
-using System.Linq;
-using _Scripts.Enums;
+using _Scripts.Shared.Enums;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace _Scripts.Ambient
 { 
     public class TriggerEvent : MonoBehaviour
     {
         [SerializeField] private Collider2D[] collidersToDisable;
-        [SerializeField] protected bool detectTriggerColliders = false;
+        [SerializeField] protected bool detectTriggerColliders;
         
         public Tags activatorsTag;
         

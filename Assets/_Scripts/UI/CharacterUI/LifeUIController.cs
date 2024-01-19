@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
-using _Scripts.Utils;
+using _Scripts.Shared.Utils;
 using UnityEngine;
 using UnityEngine.UI;
-namespace _Scripts.UI
+
+namespace _Scripts.UI.CharacterUI
 {
     public class LifeUIController : MonoBehaviour
     {

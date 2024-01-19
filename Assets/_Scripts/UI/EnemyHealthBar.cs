@@ -1,27 +1,26 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace _Scripts.UI
 {
     public class EnemyHealthBar : MonoBehaviour
     {
-        [SerializeField] private CanvasGroup _canvasGroup;
-        public bool showOnStart = false;
+        [FormerlySerializedAs("_canvasGroup")] [SerializeField] private CanvasGroup canvasGroup;
+        public bool showOnStart;
         
-        public Size size = Size.Small;
+        private Size _size = Size.Small;
         public UnityEvent onSizeChanged;
 
         public float fadeAnimationTime = 1;
         
         private float _sizeMultiplier = 0.4f;
 
-        private Vector3 baseScale = new Vector3(1, 1, 1);
+        private readonly Vector3 _baseScale = new Vector3(1, 1, 1);
         
         private void Start()
         {
             SetHealthBarActive(showOnStart);
-            
-            SetSize(size);
         }
 
         public void SetHealthSmallBarSize()
@@ -38,25 +37,25 @@ namespace _Scripts.UI
         {
             if (isActive)
             {
-                LeanTween.alphaCanvas(_canvasGroup, 1, fadeAnimationTime);
+                LeanTween.alphaCanvas(canvasGroup, 1, fadeAnimationTime);
             }
             else
             {
-                LeanTween.alphaCanvas(_canvasGroup, 0, fadeAnimationTime);
+                LeanTween.alphaCanvas(canvasGroup, 0, fadeAnimationTime);
             }
         }
 
         private void SetSize(Size newSize)
         {
-            this.size = newSize;
+            this._size = newSize;
             
-            if (size == Size.Small)
+            if (_size == Size.Small)
             {
                 Vector3 scale = new Vector3(transform.localScale.x - _sizeMultiplier, transform.localScale.y - _sizeMultiplier, transform.localScale.z);
                 transform.localScale = scale;
             } else
             {
-                transform.localScale = baseScale;
+                transform.localScale = _baseScale;
             }
             
             onSizeChanged?.Invoke();

@@ -1,21 +1,21 @@
-using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Scripts.UI.CharacterUI
 {
     public class CharacterCanvas : MonoBehaviour
     {
         
-        private Vector3 _startAnimOffset = new Vector3(0, -200, 0);
+        private Vector3 _startAnimOffset = new Vector3(0, -400, 0);
         
         private Vector2 _startAnimPosition, _endAnimPosition;
         
         public float animationTime = 1f, onScreenTime = 13f;
 
-        public bool ShowOnAwake = true;
+        [FormerlySerializedAs("ShowOnAwake")] public bool showOnAwake = true;
         
-        private bool _isOnAnimation = false;
+        private bool _isOnAnimation;
         
         private Coroutine _startAnimationCoroutine;
         
@@ -32,9 +32,9 @@ namespace _Scripts.UI.CharacterUI
         
         public void Show()
         {
-            if (!ShowOnAwake)
+            if (!showOnAwake)
             {
-                ShowOnAwake = !ShowOnAwake;
+                showOnAwake = !showOnAwake;
                 return;
             }
             

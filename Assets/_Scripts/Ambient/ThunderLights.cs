@@ -1,6 +1,5 @@
-using System;
 using System.Collections;
-using _Scripts.SoundsManagers;
+using SoundsManagers._Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
@@ -10,11 +9,11 @@ namespace _Scripts.Ambient
     [RequireComponent(typeof(SoundFXEmitter))]
     public class ThunderLights : MonoBehaviour
     {
-        private const int _minProbability = 0, _maxProbability = 100;
-        [Range(_minProbability, _maxProbability)] public int ThunderProbability = _maxProbability;
+        private const int MinProbability = 0, MaxProbability = 100;
+        [Range(MinProbability, MaxProbability)] public int ThunderProbability = MaxProbability;
 
-        private float randomNumberGeneratorInterval = 1f;
-        private float normalIntensity;
+        private readonly float _randomNumberGeneratorInterval = 1f;
+        private float _normalIntensity;
         [SerializeField] private float maxIntensity = 1f;
         [SerializeField] private float fadeDuration = 0.2f;
         private SoundFXEmitter _soundFXEmitter;
@@ -34,7 +33,7 @@ namespace _Scripts.Ambient
         
         private void Start()
         {
-            normalIntensity = _light2D.intensity;
+            _normalIntensity = _light2D.intensity;
             
             StartCoroutine(StartAnimation());
         }
@@ -44,9 +43,9 @@ namespace _Scripts.Ambient
         {
             while (true)
             {
-                int prob = Random.Range(_minProbability, _maxProbability);
+                int prob = Random.Range(MinProbability, MaxProbability);
 
-                yield return new WaitForSeconds(randomNumberGeneratorInterval);
+                yield return new WaitForSeconds(_randomNumberGeneratorInterval);
 
                 if (prob <= ThunderProbability)
                 {
@@ -61,7 +60,7 @@ namespace _Scripts.Ambient
 
                     yield return new WaitForSeconds(fadeDuration);
             
-                    LeanTween.value(_light2D.gameObject, _light2D.intensity, normalIntensity, fadeDuration)
+                    LeanTween.value(_light2D.gameObject, _light2D.intensity, _normalIntensity, fadeDuration)
                         .setEaseLinear()
                         .setOnUpdate(intensity =>
                         {

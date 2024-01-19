@@ -3,13 +3,13 @@ using System.Collections;
 using _Scripts.Controllers.Characters;
 using _Scripts.Controllers.Enemies.Interfaces;
 using _Scripts.Controllers.Interfaces;
-using _Scripts.Enums;
 using _Scripts.GameManagerSystem;
 using _Scripts.GameManagerSystem.Models;
 using _Scripts.Shared.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers
 {
@@ -21,15 +21,15 @@ namespace _Scripts.Controllers
         [SerializeField] LayerMask enemyLayers;
         [SerializeField] LayerMask interactorsLayers;
         
-        [SerializeField] GameObject[] _charactersModels;
-        [SerializeField] int startingCharacterIndex = 0;
+        [FormerlySerializedAs("_charactersModels")] [SerializeField] GameObject[] charactersModels;
+        [SerializeField] int startingCharacterIndex;
 
-        [SerializeField] float _defaultInvulnerabilityTime = 0.7f;
+        [FormerlySerializedAs("_defaultInvulnerabilityTime")] [SerializeField] float defaultInvulnerabilityTime = 0.7f;
 
         public float attackRate = 2f; // TODO maybe move that to Character class
         public float attackRange = 1f; // TODO maybe move that to Character class
         public Vector2 distanceAttackRange; // TODO maybe move that to Character class
-        public float _nextAttackTime; // TODO maybe move that to Character class
+        [FormerlySerializedAs("_nextAttackTime")] public float nextAttackTime; // TODO maybe move that to Character class
         public float interactionDistance = 0.5f;
 
         /// <summary>
@@ -80,18 +80,18 @@ namespace _Scripts.Controllers
 
         private Rigidbody2D _rb;
 
-        private const float diagonalLimiter = 0.99f; // 0.7 default
-        private Vector2 movement;
+        private const float DiagonalLimiter = 0.99f; // 0.7 default
+        private Vector2 _movement;
         private Vector2 _impulseDirection;
         
-        private float currentSpeed;
+        private float _currentSpeed;
 
-        private bool _inImpulse = false;
+        private bool _inImpulse;
         private const float ImpulseTime = .15f;
 
-        [SerializeField] private bool isAbleToRun = false;
-        [SerializeField] private bool isAbleToAttack = false;
-        [SerializeField] private bool isAbleToOpenInventory = false;
+        [SerializeField] private bool isAbleToRun;
+        [SerializeField] private bool isAbleToAttack;
+        [SerializeField] private bool isAbleToOpenInventory;
 
         private SaveDataSystem _saveDataSystem;
         
@@ -106,14 +106,14 @@ namespace _Scripts.Controllers
             
             LoadSavedPlayerData();
 
-            currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
+            _currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
             
             UpdaterAllPlayerUI();
         }
         
         void FixedUpdate()
         {
-            _rb.MovePosition(_rb.position + movement * (currentSpeed * Time.fixedDeltaTime));
+            _rb.MovePosition(_rb.position + _movement * (_currentSpeed * Time.fixedDeltaTime));
 
             if (_inImpulse)
             {
@@ -143,7 +143,7 @@ namespace _Scripts.Controllers
             
             //TODO: Set all values given by the save data system!
             
-            _characterManager.LoadCharacterSaveDatas(loadedData.CharacterSaveData);
+            _characterManager.LoadCharacterSaveDatas(loadedData.characterSaveData);
             _characterManager.CurrentCoins = loadedData.coinsAmount;
 
         }
@@ -161,7 +161,7 @@ namespace _Scripts.Controllers
                 ? new PlayerPosition(transform.position.x, transform.position.y) 
                 : null;
 
-            saveData.CharacterSaveData = _characterManager.BuildCharacterSaveDatas();
+            saveData.characterSaveData = _characterManager.BuildCharacterSaveDatas();
             saveData.coinsAmount = _characterManager.CurrentCoins;
             
             return saveData;
@@ -182,25 +182,25 @@ namespace _Scripts.Controllers
         {
             var inputMovement = inputContext.ReadValue<Vector2>();
             
-            movement.x = 0; 
-            movement.y = 0;
+            _movement.x = 0; 
+            _movement.y = 0;
                 
             // limit movement speed diagonally, so you move at 70% speed
             if (inputMovement.x != 0 && inputMovement.y != 0) 
             {
-                inputMovement.x *= diagonalLimiter;
-                inputMovement.y *= diagonalLimiter;
+                inputMovement.x *= DiagonalLimiter;
+                inputMovement.y *= DiagonalLimiter;
             }
                 
-            movement.x = inputMovement.x;
-            movement.y = inputMovement.y; 
+            _movement.x = inputMovement.x;
+            _movement.y = inputMovement.y; 
             
             var activeCharacter = _characterManager.ActiveCharacter;
             
-            activeCharacter.SetLookingDirection(movement);
-            activeCharacter.SetAnimationByIdleDirection(movement);
+            activeCharacter.SetLookingDirection(_movement);
+            activeCharacter.SetAnimationByIdleDirection(_movement);
             
-            activeCharacter.SetSpeedAnimationValueByMovement(movement);
+            activeCharacter.SetSpeedAnimationValueByMovement(_movement);
         }
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace _Scripts.Controllers
             if (!inputContext.performed || !isAbleToRun)
                 return;
             
-            currentSpeed = _characterManager.ActiveCharacter.GetRunningSpeed();
+            _currentSpeed = _characterManager.ActiveCharacter.GetRunningSpeed();
             _characterManager.ActiveAnimator.SetBool(CharacterAnimationStates.Running.ToString(), true);
         }
 
@@ -227,7 +227,7 @@ namespace _Scripts.Controllers
             if (!inputContext.canceled || !isAbleToRun)
                 return;
             
-            currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
+            _currentSpeed = _characterManager.ActiveCharacter.GetSpeed();
             _characterManager.ActiveAnimator.SetBool(CharacterAnimationStates.Running.ToString(), false);
         }
         
@@ -236,9 +236,9 @@ namespace _Scripts.Controllers
             if (!context.performed || !isAbleToAttack)
                 return;
 
-            if (Time.time >= _nextAttackTime)
+            if (Time.time >= nextAttackTime)
             {
-                _characterManager.ActiveAnimator.SetTrigger("Attack");
+                _characterManager.ActiveAnimator.SetTrigger(CharacterAnimationStates.Attack.ToString());
                 
                 Vector2 attackOffset = CalculateAttackOffset();
 
@@ -248,7 +248,7 @@ namespace _Scripts.Controllers
                 
                 AttackEnnemiesOnOverlapCircle(attackOffset);
                 
-                _nextAttackTime = Time.time + 1f / attackRate;
+                nextAttackTime = Time.time + 1f / attackRate;
             }
         }
 
@@ -270,7 +270,7 @@ namespace _Scripts.Controllers
             
             _characterManager.ActiveAnimator.SetTrigger(CharacterAnimationStates.Damaged.ToString());
             
-            ActivateInvulnerability(_defaultInvulnerabilityTime);
+            ActivateInvulnerability(defaultInvulnerabilityTime);
             
             _characterManager.ActiveCharacter.TakeDamage(damageAmount);
             
@@ -338,16 +338,15 @@ namespace _Scripts.Controllers
                 return;
             
             Vector2 origin = transform.position;
-            Vector2 lookingDirection = _characterManager.ActiveCharacter.GetLookingDirection();
             
             // The ~ operator inverts a bitmask, so it detects collide against everything except layer "Player"
-            Collider2D collider = Physics2D.OverlapCircle(origin, interactionDistance, interactorsLayers);
+            Collider2D overlapCirclecollider = Physics2D.OverlapCircle(origin, interactionDistance, interactorsLayers);
 
             Component interactuableComponent;
 
-            if (collider)
+            if (overlapCirclecollider)
             {
-                collider.gameObject.TryGetComponent(typeof(IInteractable), out interactuableComponent);
+                overlapCirclecollider.gameObject.TryGetComponent(typeof(IInteractable), out interactuableComponent);
                 
                 if (interactuableComponent)
                 {
@@ -502,7 +501,7 @@ namespace _Scripts.Controllers
         void SetComponents()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _characterManager = new CharactersManager(_charactersModels, startingCharacterIndex); // TODO: maybe move this line on Start method.
+            _characterManager = new CharactersManager(charactersModels, startingCharacterIndex); // TODO: maybe move this line on Start method.
             _playerInput = GetComponent<PlayerInput>();
         }
 

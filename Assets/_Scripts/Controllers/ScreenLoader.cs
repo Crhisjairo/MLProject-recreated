@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
-using _Scripts.Enums;
 using _Scripts.GameManagerSystem;
+using _Scripts.Shared.Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+
 namespace _Scripts.Controllers
 {
     [RequireComponent(typeof(Canvas))]
@@ -15,8 +15,8 @@ namespace _Scripts.Controllers
         [SerializeField] private Animator spinnerAnimator;
         [SerializeField] private Animator transitionAnimator;
 
-        [SerializeField] private float waitTimeBeforeLoading = 0;
-        [SerializeField] private float waitTimeAfterLoading = 0;
+        [SerializeField] private float waitTimeBeforeLoading;
+        [SerializeField] private float waitTimeAfterLoading;
         [SerializeField] private float waitTimeForSaving = 5f;
 
         [SerializeField] private Slider loadingSlider;
@@ -24,7 +24,7 @@ namespace _Scripts.Controllers
 
         private Animator _loadingScreenAnimator;
 
-        private Coroutine loadingScreenRoutine;
+        private Coroutine _loadingScreenRoutine;
         
         private void Awake()
         {
@@ -46,14 +46,14 @@ namespace _Scripts.Controllers
 
         public void StartLoadScreen(string sceneToLoad)
         {
-            Action saveDataAction = new Action(() =>
+            Action saveDataAction = () =>
             {
                 saveDataTrigger.SaveGame(true);
-            });
+            };
 
             // TODO: add saving animations
-            if(loadingScreenRoutine is null){
-                loadingScreenRoutine = StartCoroutine(
+            if(_loadingScreenRoutine is null){
+                _loadingScreenRoutine = StartCoroutine(
                     LoadScreenAsync(
                         sceneToLoad, saveDataAction
                     )
@@ -63,8 +63,8 @@ namespace _Scripts.Controllers
         
         public void StartLoadScreenWithoutSaving(string sceneToLoad)
         {
-            if(loadingScreenRoutine is null)
-                loadingScreenRoutine = StartCoroutine(LoadScreenAsync(sceneToLoad));
+            if(_loadingScreenRoutine is null)
+                _loadingScreenRoutine = StartCoroutine(LoadScreenAsync(sceneToLoad));
         }
         
         public void LoadScreenFromSelectedSlot()

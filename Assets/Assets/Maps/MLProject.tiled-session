@@ -3,14 +3,14 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "MainVille/MainVille.tmx",
+    "activeFile": "MainVille/Tutorial.tmx",
     "expandedProjectPaths": [
-        "MainVille",
         "Underground",
-        "Underground_zone_2",
-        ".",
         "MainVilleZone2",
         "TilesSet",
+        ".",
+        "MainVille",
+        "Underground_zone_2",
         "TestGroundRoom"
     ],
     "exportAsImage.drawTileGrid": false,
@@ -132,8 +132,8 @@
             "scale": 0.7293,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": -346.9079939668175,
-                "y": 561.4973262032086
+                "x": 2.7423556835320824,
+                "y": 815.1652269299328
             }
         },
         "MainVille/MainVille.tmx#bridge": {
@@ -143,11 +143,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 0.125,
+            "scale": 1.8698,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 1028,
-                "y": -2556
+                "x": 782.971440795807,
+                "y": -2198.3634613327627
             }
         },
         "MainVille/lamp-1-post-1-tall-single.tsx": {
@@ -218,7 +218,7 @@
             "scale": 0.25,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": -2558,
+                "x": -2556,
                 "y": -254
             }
         },
@@ -230,8 +230,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 0.6666666666666856,
-                "y": -511.3333333333333
+                "x": 1.3333333333333712,
+                "y": -511.33333333333326
             }
         },
         "forestTiles.tsx": {
@@ -267,13 +267,13 @@
     ],
     "project": "MLProject.tiled-project",
     "recentFiles": [
+        "MainVille/MainVille.tmx",
+        "Underground/Underground.tmx",
+        "Underground_zone_2/Underground_zone_2.tmx",
         "Underground/rocks.tsx",
         "TilesSet/Outside Objects.tsx",
         "forestTiles.tsx",
         "MainVille/Tutorial.tmx",
-        "Underground_zone_2/Underground_zone_2.tmx",
-        "Underground/Underground.tmx",
-        "MainVille/MainVille.tmx",
         "TilesSet/Twilight.tsx",
         "TilesSet/bridge.tsx",
         "MainVilleZone2/MainVille_Zone2.tmx",

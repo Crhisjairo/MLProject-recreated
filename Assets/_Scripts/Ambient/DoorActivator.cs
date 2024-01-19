@@ -1,5 +1,5 @@
 using _Scripts.Shared.Enums;
-using _Scripts.SoundsManagers;
+using SoundsManagers._Scripts.SoundsManagers;
 using UnityEngine;
 
 namespace _Scripts.Ambient
@@ -14,7 +14,7 @@ namespace _Scripts.Ambient
         //TODO: Maybe change this to an Animation.
         [SerializeField] private Sprite activeSprite;
         [SerializeField] private Sprite inactiveSprite;
-        public bool isToggle = false;
+        public bool isToggle;
         
         private void Awake()
         {
@@ -24,13 +24,13 @@ namespace _Scripts.Ambient
 
         [SerializeField] private bool isActive;
         
-        public void SetIsActive(bool isActive)
+        public void SetIsActive(bool doorActive)
         {
-            this.isActive = isActive;
+            this.isActive = doorActive;
             
-            _spriteRenderer.sprite = isActive ? activeSprite : inactiveSprite;
+            _spriteRenderer.sprite = doorActive ? activeSprite : inactiveSprite;
 
-            SoundsFX sfx = isActive ? SoundsFX.Activated : SoundsFX.Deactivated;
+            SoundsFX sfx = doorActive ? SoundsFX.Activated : SoundsFX.Deactivated;
             _soundFXEmitter.PlayOneShot(sfx.ToString());   
         }
         

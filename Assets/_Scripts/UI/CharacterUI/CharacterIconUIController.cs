@@ -9,7 +9,7 @@ namespace _Scripts.UI.CharacterUI
         [SerializeField] private Image image;
         [SerializeField] private Vector3 cameraShake = new Vector3(0, -10, 0);
 
-        [SerializeField] private float animationTime = 0.05f;
+        // [SerializeField] private float animationTime = 0.05f;
 
         private Vector3 _initialPos, _finalPos, _finalPosInversed;
 

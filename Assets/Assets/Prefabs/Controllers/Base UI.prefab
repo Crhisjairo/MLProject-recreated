@@ -1027,6 +1027,7 @@ GameObject:
   - component: {fileID: 6473731485974262169}
   - component: {fileID: 568483086816982236}
   - component: {fileID: 7006704099328964806}
+  - component: {fileID: 2213345704035445879}
   m_Layer: 5
   m_Name: EnemyUI
   m_TagString: Untagged
@@ -1064,7 +1065,7 @@ CanvasGroup:
   m_GameObject: {fileID: 1388686523211293066}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &7006704099328964806
@@ -1093,6 +1094,29 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!223 &2213345704035445879
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388686523211293066}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1390546076717870993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1174,7 @@ MonoBehaviour:
   dialogImage: {fileID: 1201841470980527332}
   nextDialogSpriteGameObject: {fileID: 8174450187337011283}
   playerController: {fileID: 0}
-  RandomizeCharacterPitch: 1
+  randomizeCharacterPitch: 1
   defaultSprite: {fileID: -378928093, guid: a54a0b2ea1a8d54458a0e2cc0879108f, type: 3}
   onDialogStarted:
     m_PersistentCalls:
@@ -5984,6 +6008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationTime: 1
   onScreenTime: 6
+  showOnAwake: 1
 --- !u!114 &1126587973662829143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6355,8 +6380,8 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -6385,7 +6410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6eca0aa59ed4027935f311e74b67821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 1748781704534898886}
+  canvasGroup: {fileID: 1748781704534898886}
   showOnStart: 0
   size: 1
   onSizeChanged:
@@ -6459,6 +6484,7 @@ MonoBehaviour:
   animator: {fileID: 5568039026366583729}
   animationTime: 0.5
   onScreenTime: 6
+  showOnAwake: 1
 --- !u!1 &5782058318203208224
 GameObject:
   m_ObjectHideFlags: 0
@@ -6837,7 +6863,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1524741675073974659}
   cameraShake: {x: 0, y: -10, z: 0}
-  animationTime: 0.05
 --- !u!1 &6369475896542517452
 GameObject:
   m_ObjectHideFlags: 0
@@ -7488,7 +7513,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 6712775973942752338}
   cameraShake: {x: 0, y: -8, z: 0}
-  animationTime: 0.08
 --- !u!1 &7270227051117464983
 GameObject:
   m_ObjectHideFlags: 0

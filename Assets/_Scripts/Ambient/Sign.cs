@@ -1,8 +1,8 @@
-using System;
 using _Scripts.Controllers;
 using _Scripts.Controllers.Interfaces;
 using _Scripts.DialogSystem;
 using UnityEngine;
+
 namespace _Scripts.Ambient
 {
     public class Sign : MonoBehaviour, IInteractable

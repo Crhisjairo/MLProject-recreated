@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Scripts.Controllers;
-using _Scripts.Enums;
-using _Scripts.SoundsManagers;
+using _Scripts.Shared.Enums;
+using SoundsManagers._Scripts.SoundsManagers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,6 +11,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+
 namespace _Scripts.DialogSystem
 {
     [RequireComponent(typeof(AudioSource))]
@@ -29,21 +30,21 @@ namespace _Scripts.DialogSystem
         
         private AudioSource _audioSource;
 
-        public bool RandomizeCharacterPitch = true;
+        [FormerlySerializedAs("RandomizeCharacterPitch")] public bool randomizeCharacterPitch = true;
         
         public Sprite defaultSprite;
         public bool IsEnded { private set; get; }
 
         public UnityEvent onDialogStarted, onDialogEnded;
 
-        Queue<string> titlesSorted;
-        Queue<string> sentencesSorted;
-        Queue<Sprite> spritesSorted;
+        Queue<string> _titlesSorted;
+        Queue<string> _sentencesSorted;
+        Queue<Sprite> _spritesSorted;
 
         bool IsTyping { set; get; }
         float _typingSpeed;
-        private string currentTitle;
-        string currentSentence;
+        private string _currentTitle;
+        string _currentSentence;
         
         Coroutine _typingCoroutine;
 
@@ -51,9 +52,9 @@ namespace _Scripts.DialogSystem
         
         void Awake()
         {
-            titlesSorted = new Queue<string>();
-            sentencesSorted = new Queue<string>();
-            spritesSorted = new Queue<Sprite>();
+            _titlesSorted = new Queue<string>();
+            _sentencesSorted = new Queue<string>();
+            _spritesSorted = new Queue<Sprite>();
             
             
             dialogCanvas.enabled = false; //Desactivamos el canvas grande
@@ -87,26 +88,26 @@ namespace _Scripts.DialogSystem
             IsActiveNextDialogSprite(false);
             
             // limpiamos las frases que estan en el DialogController.
-            titlesSorted.Clear();
-            sentencesSorted.Clear(); 
-            spritesSorted.Clear();
+            _titlesSorted.Clear();
+            _sentencesSorted.Clear(); 
+            _spritesSorted.Clear();
 
             if (dialogueSentences.titles != null)
             {
                 foreach (var title in dialogueSentences.titles)
-                    titlesSorted.Enqueue(title);
+                    _titlesSorted.Enqueue(title);
             }
             
             foreach (var sentence in dialogueSentences.sentences)
             {
-                sentencesSorted.Enqueue(sentence);
+                _sentencesSorted.Enqueue(sentence);
             }
 
             if (dialogueSentences.spritesForSentences != null)
             {
                 foreach (var sprite in dialogueSentences.spritesForSentences)
                 {
-                    spritesSorted.Enqueue(sprite);
+                    _spritesSorted.Enqueue(sprite);
                 }
             }
         }
@@ -116,7 +117,7 @@ namespace _Scripts.DialogSystem
             _audioSource.clip = soundFx.clip;
             _audioSource.pitch = soundFx.pitch;
 
-            RandomizeCharacterPitch = randomizePitch;
+            randomizeCharacterPitch = randomizePitch;
         }
 
         public void StartDialogs()
@@ -137,29 +138,29 @@ namespace _Scripts.DialogSystem
             if (IsTyping)
             {
                 StopCoroutine(_typingCoroutine);
-                dialog.text = currentSentence;
+                dialog.text = _currentSentence;
                 IsActiveNextDialogSprite(true);
                 IsTyping = false;
 
                 return;
             }
             
-            if (sentencesSorted.Count == 0) 
+            if (_sentencesSorted.Count == 0) 
             {
                 EndDialogue();
                 return;
             }
 
-            if (titlesSorted.Count != 0)
+            if (_titlesSorted.Count != 0)
             {
-                currentTitle = titlesSorted.Dequeue();
+                _currentTitle = _titlesSorted.Dequeue();
             }
             
-            currentSentence = sentencesSorted.Dequeue();
+            _currentSentence = _sentencesSorted.Dequeue();
             
-            if (spritesSorted.Count != 0)
+            if (_spritesSorted.Count != 0)
             {
-                defaultSprite = spritesSorted.Dequeue();
+                defaultSprite = _spritesSorted.Dequeue();
             }
             
             //Activamos el cuadro de dialogo
@@ -167,13 +168,13 @@ namespace _Scripts.DialogSystem
             
             //Debug.Log(sentence.Length);
 
-            _typingCoroutine = StartCoroutine(TypingEffect(currentSentence));
+            _typingCoroutine = StartCoroutine(TypingEffect(_currentSentence));
         }
 
         IEnumerator TypingEffect(string sentence)
         {
             IsTyping = true;
-            dialogTitle.text = currentTitle;
+            dialogTitle.text = _currentTitle;
             dialogImage.sprite = defaultSprite;
             IsActiveNextDialogSprite(false);
             
@@ -206,7 +207,7 @@ namespace _Scripts.DialogSystem
             if(_audioSource.clip is null)
                 return;
             
-            if (RandomizeCharacterPitch)
+            if (randomizeCharacterPitch)
                 RandomizePitchTalkingAudio();
                     
             _audioSource.PlayOneShot(_audioSource.clip);
@@ -224,7 +225,7 @@ namespace _Scripts.DialogSystem
             IsActiveNextDialogSprite(false);
             
             //limpiamos lastSentence
-            currentSentence = String.Empty;
+            _currentSentence = String.Empty;
             
             //ocultamos el cuadro de dialogo
             dialogCanvas.enabled = false;

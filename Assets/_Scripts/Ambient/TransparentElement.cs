@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using _Scripts.Enums;
 using UnityEngine;
 
 namespace _Scripts.Ambient
@@ -26,8 +23,8 @@ namespace _Scripts.Ambient
         {
             SetComponents();
 
-            _initialColor = _spriteRenderer.color;
-            _finalColor = _spriteRenderer.color;
+            _initialColor = _finalColor = _spriteRenderer.color;
+            
             _finalColor.a -= fadeAmount;
         }
 
@@ -50,7 +47,7 @@ namespace _Scripts.Ambient
 
                 LeanTween.color(_spriteRenderer.gameObject, _finalColor, fadeSpeed);
         
-                _spriteRenderer.sortingLayerName = playerSortingLayer.ToString();
+                _spriteRenderer.sortingLayerName = playerSortingLayer;
                 _spriteRenderer.sortingOrder = sortOrderToForeground;
             }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace _Scripts.SoundsManagers
+namespace SoundsManagers._Scripts.SoundsManagers
 {
     [System.Serializable]
     public class Sound
@@ -11,9 +11,9 @@ namespace _Scripts.SoundsManagers
 
         [Range(0f, 1f)] public float volume = 1f;
         [Range(.1f, 3f)] public float pitch = 1f;
-        public float spatialBlend = 0f;
-        public bool loop = false;
-        public bool playOnAwake = false;
+        public float spatialBlend;
+        public bool loop;
+        public bool playOnAwake;
 
         public AudioSource Source { get; private set; }
 

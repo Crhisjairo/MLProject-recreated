@@ -1,10 +1,8 @@
-using System;
 using System.Linq;
-using _Scripts.Enums;
 using _Scripts.GameManagerSystem.Models;
+using _Scripts.Shared.Enums;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _Scripts.GameManagerSystem.SlotsManager
@@ -19,14 +17,14 @@ namespace _Scripts.GameManagerSystem.SlotsManager
 
         [SerializeField] private CharacterSlotWrapper[] characterWrappers;
         
-        public void SetSlotName(string slotName)
+        public void SetSlotName(string newSlotName)
         {
-            this.slotName.text = slotName;
+            slotName.text = newSlotName;
         }
 
-        public void SetZoneName(string zoneName)
+        public void SetZoneName(string newZoneName)
         {
-            this.zoneName.text = zoneName;
+            zoneName.text = newZoneName;
         }
         
         public void SetCoinsAmount(int amount)

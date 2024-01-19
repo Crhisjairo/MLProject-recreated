@@ -1,14 +1,9 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using _Scripts.Enums;
-using _Scripts.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 using System.Linq;
-using _Scripts.Controllers.Enemies.Interfaces;
 using _Scripts.Shared.Enums;
-using _Scripts.SoundsManagers;
+using SoundsManagers._Scripts.SoundsManagers;
 using UnityEngine.Events;
 
 namespace _Scripts.Ambient
@@ -24,7 +19,7 @@ namespace _Scripts.Ambient
         
         [SerializeField] private Collider2D[] colliders;
         
-        private bool isOpen = false;
+        private bool _isOpen;
 
         [SerializeField] private Animator animator;
         
@@ -48,7 +43,7 @@ namespace _Scripts.Ambient
             if (doorActivators.All(activator => activator.GetIsActive())
                 || doorActivators.Length == 0)
             {
-                isOpen = true;
+                _isOpen = true;
                 onDoorOpen?.Invoke();
                 
                 PlayOpenAnimation();
@@ -58,17 +53,16 @@ namespace _Scripts.Ambient
         public virtual void Close()
         {
             throw new NotImplementedException();
-            onDoorClose?.Invoke();
         }
         
         // TODO: must implement an animation to open the door.
         protected virtual void PlayOpenAnimation()
         {
-            StartCoroutine(ActiveAnimator(isOpen));
+            StartCoroutine(ActiveAnimator(_isOpen));
             
-            foreach (var collider in colliders)
+            foreach (var objCollider in colliders)
             {
-                collider.enabled = !isOpen;
+                objCollider.enabled = !_isOpen;
             }
             
             //soundFXEmitter.PlayOneShot(SoundsFX.Open.ToString());

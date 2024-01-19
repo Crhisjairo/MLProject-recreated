@@ -1,12 +1,11 @@
-using System;
 using System.Collections;
 using _Scripts.Controllers.Enemies.Interfaces;
-using _Scripts.Enemies.Specs;
-using _Scripts.Enums;
+using _Scripts.Controllers.Enemies.Specs;
 using _Scripts.Shared.Enums;
-using _Scripts.SoundsManagers;
+using SoundsManagers._Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers.Enemies
 {
@@ -22,7 +21,7 @@ namespace _Scripts.Controllers.Enemies
         [SerializeField] private Color flashingColor = Color.red;
         public float autoDestroyTime = 1f;
 
-        [SerializeField] protected SpriteRenderer EnemySpriteRenderer;
+        [FormerlySerializedAs("EnemySpriteRenderer")] [SerializeField] protected SpriteRenderer enemySpriteRenderer;
         protected Rigidbody2D Rb;
         protected BoxCollider2D BoxCollider2D;
 
@@ -30,11 +29,11 @@ namespace _Scripts.Controllers.Enemies
 
         public UnityEvent<Enemy> onDestroyEvent;
         
-        protected Vector2 _impulseDirection;
-        protected bool _inImpulse = false;
+        protected Vector2 ImpulseDirection;
+        protected bool InImpulse;
         private const float ImpulseTime = .15f;
 
-        protected bool IsMovementPaused = false;
+        protected bool IsMovementPaused;
 
         protected virtual void Awake()
         {
@@ -84,7 +83,7 @@ namespace _Scripts.Controllers.Enemies
         
         public void OnDead()
         {
-            _inImpulse = false;
+            InImpulse = false;
             PlaySoundSfx(SoundsFX.Died);
             
             StartCoroutine(AutoDestroy());
@@ -97,7 +96,7 @@ namespace _Scripts.Controllers.Enemies
         
         private IEnumerator AutoDestroy()
         {
-            EnemySpriteRenderer.material.color = Color.red;
+            enemySpriteRenderer.material.color = Color.red;
             BoxCollider2D.enabled = false;
 
             //TODO: Add dead sound effect here.
@@ -113,7 +112,7 @@ namespace _Scripts.Controllers.Enemies
         {
             for (int i = 0; i < 4; i++)
             {
-                var material = EnemySpriteRenderer.material;
+                var material = enemySpriteRenderer.material;
                 
                 material.color = flashingColor;
                 yield return new WaitForSeconds(0.09f);
@@ -125,13 +124,13 @@ namespace _Scripts.Controllers.Enemies
         
         private IEnumerator ActivateImpulseCounter(Vector2 impulseDirection)
         {
-            _inImpulse = true;
-            _impulseDirection = impulseDirection;
+            InImpulse = true;
+            ImpulseDirection = impulseDirection;
             
             yield return new WaitForSeconds(ImpulseTime);
             
-            _inImpulse = false;
-            _impulseDirection = new Vector2(0,0);
+            InImpulse = false;
+            ImpulseDirection = new Vector2(0,0);
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -151,10 +150,10 @@ namespace _Scripts.Controllers.Enemies
             }
         }
 
-        protected virtual void AttackEntityOnCollider(Collider2D collider)
+        protected virtual void AttackEntityOnCollider(Collider2D entityCollider)
         {
             //TODO: play attacking animation when player collides
-            PlayerController playerController = collider.GetComponentInParent<PlayerController>();
+            PlayerController playerController = entityCollider.GetComponentInParent<PlayerController>();
                 
             //Vector opuesto para el jugador
             Vector2 playerImpulseDir = playerController.transform.position - transform.position;

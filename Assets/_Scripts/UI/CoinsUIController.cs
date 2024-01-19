@@ -1,7 +1,7 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Scripts.UI
 {
@@ -12,13 +12,13 @@ namespace _Scripts.UI
 
         public float animationTime = 0.5f, onScreenTime = 6f;
 
-        public bool ShowOnAwake = true;
+        [FormerlySerializedAs("ShowOnAwake")] public bool showOnAwake = true;
 
-        private Vector3 _startAnimOffset = new Vector3(240, 0, 0);
+        private Vector3 _startAnimOffset = new Vector3(400, 0, 0);
 
         private Vector2 _startAnimPosition, _endAnimPosition;
 
-        private bool _isPlayingAnimator = false;
+        private bool _isPlayingAnimator;
 
         private Coroutine _startAnimationCoroutine;
         
@@ -36,9 +36,9 @@ namespace _Scripts.UI
 
         public void SetCoinsAmountTo(int amount)
         {
-            if (!ShowOnAwake)
+            if (!showOnAwake)
             {
-                ShowOnAwake = !ShowOnAwake;
+                showOnAwake = !showOnAwake;
                 return;
             }
             

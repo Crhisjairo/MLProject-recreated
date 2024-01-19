@@ -1,12 +1,11 @@
-using System;
 using System.Collections;
 using _Scripts.Controllers;
-using _Scripts.Enums;
-using _Scripts.SoundsManagers;
-using _Scripts.Utils;
+using _Scripts.Shared.Utils;
 using Cinemachine;
+using SoundsManagers._Scripts.SoundsManagers;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace _Scripts.DialogSystem
 {
@@ -25,13 +24,13 @@ namespace _Scripts.DialogSystem
         [Header("Dialog attributes")]
         public DialogsSet dialogs;
 
-        public bool _autoNextDialog; // TODO: agregar un temporizador al autoNextDialog.
-        public float _timeToWaitAutoNextDialog = 1f;
+        [FormerlySerializedAs("_autoNextDialog")] public bool autoNextDialog; // TODO: agregar un temporizador al autoNextDialog.
+        [FormerlySerializedAs("_timeToWaitAutoNextDialog")] public float timeToWaitAutoNextDialog = 1f;
         
         public Sound talkingAudio;
         public bool randomizeTalkingPitch; 
         
-        public float zoomAmountOnDialog = 0;
+        public float zoomAmountOnDialog;
         public float speedZoom = 0.5f;
         
         [Range(0f, 0.3f)]
@@ -44,26 +43,24 @@ namespace _Scripts.DialogSystem
         [SerializeField] private UnityEvent onUnableToInteract;    
         
         [Space(10)]
-        
-        private PlayerActionMaps inDialogActionMapName = PlayerActionMaps.InDialog;
 
         [SerializeField] private SpriteRenderer interactSprite;
-        [SerializeField] private Animator _animator;
+        [FormerlySerializedAs("_animator")] [SerializeField] private Animator animator;
 
         bool _isFirstInteraction = true;
         bool _isDialogueTriggered;
         bool _canInteract;
         
-        bool _playerInRange = false;
+        bool _playerInRange;
 
-        float _currentCamZoom = 0f;
+        float _currentCamZoom;
 
         private void Awake()
         {
             CheckForOptionalComponents();
 
-            if (_animator != null)
-                _animator.enabled = false;
+            if (animator != null)
+                animator.enabled = false;
             if(interactSprite != null)
                 interactSprite.enabled = false;
         }
@@ -89,7 +86,7 @@ namespace _Scripts.DialogSystem
             
             dialogController.SetTalkingAudio(talkingAudio, randomizeTalkingPitch);
             //Si se trata de un dialogo de intervalos, solo se muestra el first dialog, no se usa defaultDialogue
-            if (_autoNextDialog)
+            if (autoNextDialog)
             {
                 dialogController.SetDialogue(dialogs.firstDialog, textTypingDelay, false);
                 
@@ -125,8 +122,8 @@ namespace _Scripts.DialogSystem
             dialogs.defaultDialog = dialogsModifier.dialogsSet.defaultDialog;
             dialogs.wrongCharacterDialog = dialogsModifier.dialogsSet.wrongCharacterDialog;
 
-            _autoNextDialog = dialogsModifier.autoNextDialog;
-            _timeToWaitAutoNextDialog = dialogsModifier.timeToWaitAutoNextDialog;
+            autoNextDialog = dialogsModifier.autoNextDialog;
+            timeToWaitAutoNextDialog = dialogsModifier.timeToWaitAutoNextDialog;
         }
         
         IEnumerator StartIntervalDialogue()
@@ -134,7 +131,7 @@ namespace _Scripts.DialogSystem
             while (true)
             {
                 //dialogController.StartDialogs();
-                yield return new WaitForSecondsRealtime(_timeToWaitAutoNextDialog);
+                yield return new WaitForSecondsRealtime(timeToWaitAutoNextDialog);
 
                 if (dialogController.IsEnded)
                 {
@@ -153,7 +150,7 @@ namespace _Scripts.DialogSystem
                 Debug.LogWarning(message);
             }
             
-            if (_animator is null)
+            if (animator is null)
             {
                 string message = string.Format(ConsoleMessages.OptionalComponentNotFound,
                     typeof(Animator), gameObject.name);
@@ -190,8 +187,8 @@ namespace _Scripts.DialogSystem
         {
             if(interactSprite != null)
                 interactSprite.enabled = isActive;
-            if(_animator != null)
-                _animator.enabled = isActive;
+            if(animator != null)
+                animator.enabled = isActive;
         }
         
     }

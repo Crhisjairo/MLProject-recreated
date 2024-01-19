@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using _Scripts.Controllers.Characters;
-using _Scripts.Enums;
 using _Scripts.GameManagerSystem.Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace _Scripts.Controllers
 {
@@ -20,8 +15,8 @@ namespace _Scripts.Controllers
         public ParticleSystem ActiveParticleSystem { private set; get; }
         public SpriteRenderer ActiveSpriteRenderer { private set; get; }
         
-        List<GameObject> _charactersGameObjects = new List<GameObject>();
-        int _characterIndex = 0;
+        List<GameObject> _charactersGameObjects;
+        int _characterIndex;
 
         public int CurrentCoins { set; get; }
         

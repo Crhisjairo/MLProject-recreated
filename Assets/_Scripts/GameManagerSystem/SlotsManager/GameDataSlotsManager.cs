@@ -1,15 +1,11 @@
-using System.Collections.Generic;
-using System.Linq;
-using _Scripts.Enums;
 using _Scripts.GameManagerSystem.Models;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Scripts.GameManagerSystem.SlotsManager
 {
     public class GameDataSlotsManager : MonoBehaviour
     {
-        private SaveDataSystem saveDataSystem;
+        private SaveDataSystem _saveDataSystem;
         
         public Slot[] slots;
 
@@ -17,14 +13,14 @@ namespace _Scripts.GameManagerSystem.SlotsManager
         
         private void Start()
         {
-            saveDataSystem = SaveDataSystem.Instance;
+            _saveDataSystem = SaveDataSystem.Instance;
 
             SetSlotsData();
         }
 
         private void SetSlotsData()
         {
-            PlayerSaveData[] saveDatas = saveDataSystem.GetPlayerSaveDatas();
+            PlayerSaveData[] saveDatas = _saveDataSystem.GetPlayerSaveDatas();
             
             for (int i = 0; i < slots.Length; i++)
             {
@@ -40,7 +36,7 @@ namespace _Scripts.GameManagerSystem.SlotsManager
                     slots[i].SetZoneName(currentSaveData.zoneName);
                     slots[i].SetCoinsAmount(currentSaveData.coinsAmount);
 
-                    slots[i].SetUnlockedCharacters(currentSaveData.CharacterSaveData);
+                    slots[i].SetUnlockedCharacters(currentSaveData.characterSaveData);
                 }
             }
         }
