@@ -87,7 +87,7 @@ namespace _Scripts.UI
         
         public void SetSfxVolume(float volume)
         {
-            SetAudioMixerVolume(AudioMixerGroupNames.Sfx.ToString(), volume);
+            SetAudioMixerVolume(AudioMixerGroupNames.SFX.ToString(), volume);
         }
         
         private void SetAudioMixerVolume(string audioMixerGroup, float volume)

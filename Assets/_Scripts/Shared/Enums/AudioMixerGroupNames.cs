@@ -4,6 +4,6 @@ namespace _Scripts.Shared.Enums
     {
         Master,
         Music,
-        Sfx
+        SFX
     }
 }
