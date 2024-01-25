@@ -24,7 +24,9 @@ Provide a detailed description of your game, including its theme, gameplay mecha
 ## Screenshots
 
 ![gameplay-2](https://drive.google.com/uc?export=view&id=1NFSIse0T3s0LdLRv0EL_nTAHAWby-93z)
-
+![gameplay-3](https://drive.google.com/uc?export=view&id=1euyBjHoZ10ZB1x9j6grUqlsIEa-DREXg)
+![gameplay-4](https://drive.google.com/uc?export=view&id=1ssukij1C51siESA1TGAhm8MHxDDgrFyN)
+![load-screen-1](https://drive.google.com/uc?export=view&id=1peok83IFFyuRsALP3boW3u1de-_7DcNe)
 
 ## Installation
 
