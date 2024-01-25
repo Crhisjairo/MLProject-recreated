@@ -1,10 +1,15 @@
 Character sprites: Pix3M and RadiantKitsune
-https://www.deviantart.com/nyaseiru/art/MLP-RPGM-Pinkie-8D-by-Pix3M-RadiantKitsune-480539908
-https://www.deviantart.com/nyaseiru/art/MLP-RPGM-Rainbow-8D-by-Pix3M-RadiantKitsune-480539917
-https://www.deviantart.com/nyaseiru/art/MLP-RPGM-Twilight-8D-by-Pix3M-RadiantKitsune-480539902
-https://www.deviantart.com/nyaseiru/art/MLP-RPGM-Fluttershy-8D-by-Pix3M-RadiantKitsune-480539905
-https://www.deviantart.com/nyaseiru/art/MLP-RPGM-Rarity-8D-by-Pix3M-RadiantKitsune-480539912
-https://www.deviantart.com/nyaseiru/art/MLP-RPGM-Applejack-8D-by-Pix3M-RadiantKitsune-480539922
+
+
+- [MLP-RPGM Twilight 8D](https://www.deviantart.com/nyaseiru/art/MLP-RPGM-Twilight-8D-by-Pix3M-RadiantKitsune-480539902) by [Pix3M](https://www.deviantart.com/pix3m)+[RadiantKitsune](https://radiantkitsune.deviantart.com/)
+- [MLP-RPGM Pinkie 8D](https://www.deviantart.com/nyaseiru/art/MLP-RPGM-Pinkie-8D-by-Pix3M-RadiantKitsune-480539908) by [Pix3M](https://www.deviantart.com/pix3m)+[RadiantKitsune](https://radiantkitsune.deviantart.com/)
+- [MLP-RPGM Rainbow 8D](https://www.deviantart.com/nyaseiru/art/MLP-RPGM-Rainbow-8D-by-Pix3M-RadiantKitsune-480539917) by [Pix3M](https://www.deviantart.com/pix3m)+[RadiantKitsune](https://radiantkitsune.deviantart.com/)
+- [MLP-RPGM Fluttershy 8D](https://www.deviantart.com/nyaseiru/art/MLP-RPGM-Fluttershy-8D-by-Pix3M-RadiantKitsune-480539905) by [Pix3M](https://www.deviantart.com/pix3m)+[RadiantKitsune](https://radiantkitsune.deviantart.com/)
+- [MLP-RPGM Rarity 8D](https://www.deviantart.com/nyaseiru/art/MLP-RPGM-Rarity-8D-by-Pix3M-RadiantKitsune-480539912) by [Pix3M](https://www.deviantart.com/pix3m)+[RadiantKitsune](https://radiantkitsune.deviantart.com/)
+- [MLP-RPGM Applejack 8D](https://www.deviantart.com/nyaseiru/art/MLP-RPGM-Applejack-8D-by-Pix3M-RadiantKitsune-480539922) by [Pix3M](https://www.deviantart.com/pix3m)+[RadiantKitsune](https://radiantkitsune.deviantart.com/)
+
+
+
 
 TileSetCollection:
 https://lpc.opengameart.org/forumtopic/bluecarrot16s-wip-lpc-tilesetscollections
