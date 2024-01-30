@@ -6,7 +6,8 @@ ML Project - Recreated is a fan-game made with the purpose of learning video gam
 
 ## Description
 
-Provide a detailed description of your game, including its theme, gameplay mechanics, story, and any other relevant details.
+---
+
 
 ## Features
 - Life system with animated user interface.
